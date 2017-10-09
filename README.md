@@ -7,6 +7,7 @@ This is a task in the course Software Engineering 2017, Tsinghua University.
 * Yining Cao, SE, THU, 2015;
 * Haotian Liu, EEA, THU, 2014;
 * Yizeng Han, DA, THU, 2014;
+* Zhixing Zhang, MSE, THU, 2015;
 
 ## Introduction
 TODO
