@@ -1,0 +1,125 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[noabs]{HaotianReport}
+
+\title{Competition \& Lecture Management System\\需求分析}
+\author{SigmaGo团队}
+\authorinfo{清华大学}
+\runninghead{Software Engineering 2017, Tsinghua University}
+\studytime{2017年10月}
+
+\begin{document}
+    \maketitle
+    \section{前言} % (fold)
+    \label{sec:前言}
+    \subsection{目的} % (fold)
+    \label{sub:目的}
+    本文是Competition \& Lecture Management System项目需求的文档说明，是需求分析的文档化产品，作为后继设计的基础。本文的读者包括参与本次软件设计、评价的相关人员及项目组的全体成员。
+    % subsection 目的 (end)
+    \subsection{范围} % (fold)
+    \label{sub:范围}
+    本文对系统的用户需求、功能需求进行了统一的描述。
+    % subsection 范围 (end)
+    % section 前言 (end)
+    \section{系统概述} % (fold)
+    \label{sec:系统概述}
+    \subsection{用户群体及特点} % (fold)
+    \label{sub:用户群体及特点}
+    \subsubsection{校内师生} % (fold)
+    \label{ssub:校内师生}
+    访问量大，要求响应较快。
+    % subsubsection 校内师生 (end)
+    \subsubsection{活动主办方} % (fold)
+    \label{ssub:活动主办方}
+    访问量小，要求严格的权限控制，但对响应速度要求很低。需要精确的统计以及友好的功能，使得主办方主动参与到本系统中。
+    % subsubsection 活动主办方 (end)
+    \subsubsection{管理员} % (fold)
+    \label{ssub:管理员}
+    访问量小，要求严格的权限控制，但对响应速度要求很低。为了降低维护成本，需要支持无编程基础的管理员。
+    % subsubsection 管理员 (end)
+    % subsection 用户群体及特点 (end)
+    \subsection{运行环境} % (fold)
+    \label{sub:运行环境}
+    \subsubsection{运行平台} % (fold)
+    \label{ssub:运行平台}
+    服务端运行于阿里云、腾讯云等主流云服务提供商的低端配置平台，严格控制运行成本；或运行于某校内服务器上。
+
+    平台采用Linux内核操作系统，如Ubuntu，以提高资源利用率和响应速度。
+    % subsubsection 运行平台 (end)
+    \subsubsection{目标平台} % (fold)
+    \label{ssub:目标平台}
+    应支持主流的用户操作系统，包括Windows 7、Windows 10、Mac OSX、Ubuntu等。
+    % subsubsection 目标平台 (end)
+    % subsection 运行环境 (end)
+    % section 系统概述 (end)
+    \section{用户需求} % (fold)
+    \label{sec:用户需求}
+    \subsection{获取活动信息} % (fold)
+    \label{sub:获取活动信息}
+    目前，比赛、讲座信息分散同学们没有方法获取。现在获取活动信息中缺少一些标准化的流程，比如赛事的进程和获奖等，又比如讲座的主办方、主讲人等。比赛推进的进程中也缺少跟进，现在只有推送说明，甚至部分主办方不发推送。
+
+    校内师生需要通过本平台获取最新的活动（包括比赛、讲座）信息，并方便地获取活动推进过程中各个环节的信息。
+    % subsection 获取活动信息 (end)
+    \subsection{活动推荐} % (fold)
+    \label{sub:活动推荐}
+    一方面，校内师生需要根据个人的情况，获得活动的推荐；另一方面，校内师生还需要获得近期热门的活动的推荐。
+    % subsection 活动推荐 (end)
+    \subsection{获奖信息统计} % (fold)
+    \label{sub:获奖信息统计}
+    特别针对比赛来说，目前获奖信息缺少一个统一的管理平台。各个主办方在颁发奖项后，无法随时对奖项的有效性进行验证。
+
+    活动主办方及管理员需要通过本系统，对赛事结果进行管理。特别的，可以与清华大学第二成绩单进行联动。
+    % subsection 获奖信息统计 (end)
+    % section 用户需求 (end)
+    \section{功能需求} % (fold)
+    \label{sec:功能需求}
+    \subsection{前端} % (fold)
+    \label{sub:前端}
+    \begin{enumerate}
+        \item 右上角登录、登陆的时候进行分支（用户登录或者组织登录，或者组织者单独账号）
+        \item 近期赛事信息、近期讲座信息、文素讲座信息、赛事列表
+        \item 上面有滚图的地方，下面有精简版的列表，了解更多
+        \item 每个比赛有单独的一页，有结构化的信息。其中部分信息就是功能稿之类的内容。
+        \item 尾段list 主要的内容是每一项赛事，可以加上一些指向推送的内容之类的。比赛的一些流程信息etc。加上比赛的结果的公布。可能加上一些切换的选项卡或者导航栏。
+        \item 根据你的院系、浏览习惯、年级推荐的比赛有。。。。。
+        \item 关注之后 在你的绑定的平台上提醒，或者给邮箱发邮件。关注就会推荐etc，也可以根据这个比赛的关键词进行推荐。
+        \item 公众号：微信有api，直接用接口就行。
+        \item 需要有的：绑定帐号、自动推比赛（所有的数据共享）、网站信息可以直接传在一台服务器上。
+        \item 微信功能：展示网页信息、直接推消息（要绑定用户etc, 智能算法推荐）直接挂网页（直接自适应或者单独做一个）。或者微信可以挂上一个小程序。
+    \end{enumerate}
+    % subsection 前端 (end)
+    \subsection{后端} % (fold)
+    \label{sub:后端}
+    \begin{enumerate}
+        \item 功能要全、需要将功能全部传上去。
+        \item 每个活动都有单独的活动的管理界面（介绍、获奖名单）; 获奖的名单可以给他们提供一个excel模版或者csv，让赛事负责人提供信息后上传。
+    \end{enumerate}
+    % subsection 后端 (end)
+    \subsection{活动信息上传} % (fold)
+    \label{sub:活动信息上传}
+    部分比赛让赛事管理人员直接把部分比赛信息放上来，然后放上一个相关推送、网站链接。并且希望有赛事管理人员把获奖信息提交上来进行获奖信息统计。
+    % subsection 活动信息上 (end)
+    \subsection{其他} % (fold)
+    \label{sub:其他}
+    \begin{enumerate}
+        \item 部分比赛让赛事管理人员直接把部分比赛信息放上来，然后放上一个相关的推送什么的。并且希望能够有赛事管理人员把获奖信息提交上来进行获奖信息统计。
+        \item 让大家进行比赛的关注，来看这个比赛的受关注程度。
+        \item 针对于个人功能：比赛讲座推荐、检索（主要就直接用列表构成），不需要对于已经听了的讲座或者获奖情况进行强行记录。
+    \end{enumerate}
+    % subsection 其他 (end)
+    % section 功能需求 (end)
+    \label{applastpage}
+    \newpage
+    \bibliography{report}
+    \bibliographystyle{unsrt}
+\iffalse
+\begin{itemize}[noitemsep,topsep=0pt]
+%no white space
+\end{itemize}
+\begin{enumerate}[label=\Roman{*}.,noitemsep,topsep=0pt]
+%use upper case roman
+\end{enumerate}
+\begin{multicols}{2}
+%two columns
+\end{multicols}
+\fi
+\end{document}

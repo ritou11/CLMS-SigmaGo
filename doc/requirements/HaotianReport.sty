@@ -1,0 +1,244 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Normal Report Template
+%% By Haotian, <ritou11@gmail.com>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{HaotianReport}[2017/04/05]
+\typeout{Normal Report Version 1.1}
+% packages
+\RequirePackage{ctex}
+\RequirePackage{xcolor}          % color image and color definition
+\RequirePackage{fancyhdr,fancybox}       % personalize page header
+\RequirePackage{graphicx}       % include graphics
+\RequirePackage{ifthen}         % logic options
+\RequirePackage{lastpage}       % refer to the number of last page
+\RequirePackage{listings}       % format source code
+\RequirePackage[toc,page,title,titletoc,header]{appendix}%附录制作
+\RequirePackage{paralist}
+%\RequirePackage[english]{isodate}
+%======数学公式===========
+\RequirePackage{amsthm,amsfonts}
+\RequirePackage{amsmath,bm}              % AMSLaTeX
+\RequirePackage{amssymb,mathrsfs}        % AMSLaTeX sym-bols
+\RequirePackage{latexsym}
+\RequirePackage{siunitx}
+
+\RequirePackage{longtable,multirow,hhline,tabularx,array} % Table
+\RequirePackage{flafter}
+\RequirePackage{pifont,calc}
+\RequirePackage{colortbl,booktabs}
+\RequirePackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}%0.75in
+\RequirePackage[T1]{fontenc}
+\RequirePackage[scaled]{berasans}
+\RequirePackage{lipsum}
+\RequirePackage{ulem}
+\RequirePackage{enumitem}
+\RequirePackage{tocloft}
+\RequirePackage{multicol}
+
+\definecolor{grey}{rgb}{0.91,0.91,0.91}
+% Declare Options
+\newif\if@sheet \@sheettrue
+\newif\if@abs \@abstrue
+\newif\if@toc \@toctrue
+\DeclareOption{nosheet}{\@sheetfalse}
+\DeclareOption{noabs}{\@absfalse}
+\DeclareOption{notoc}{\@tocfalse}
+
+% Process Options
+\ProcessOptions
+
+% if we are running pdflatex?
+\RequirePackage{ifpdf}
+
+% style: hyperlinked references
+\ifpdf
+\RequirePackage{epstopdf}
+\DeclareGraphicsExtensions{.pdf,.jpg,.jpeg,.png}
+\RequirePackage[bookmarks=true,%
+    colorlinks=true, %注释掉此项则交叉引用为彩色边框(将colorlinks和pdfborder同时注释掉)
+    pdfborder=001,   %注释掉此项则交叉引用为彩色边框
+    linkcolor=black,%
+    citecolor=black,%
+    urlcolor=black]{hyperref}
+\else
+\DeclareGraphicsExtensions{.eps,.ps}
+\RequirePackage[xetex,  %pdflatex,pdftex    这里决定运行文件的方式不同
+            pdfstartview=FitH,%
+            CJKbookmarks=true,%
+            bookmarksnumbered=true,%
+            bookmarksopen=true,%
+            colorlinks=true, %注释掉此项则交叉引用为彩色边框(将colorlinks和pdfborder同时注释掉)
+            pdfborder=001,   %注释掉此项则交叉引用为彩色边框
+            linkcolor=black,%
+            citecolor=black,%
+            urlcolor=black]{hyperref}
+\fi
+\usepackage{cleveref}
+
+\sisetup{per-mode=symbol,bracket-unit-denominator=false,qualifier-mode=text,list-separator={, },list-final-separator={, },list-pair-separator={, },separate-uncertainty,range-phrase={\ensuremath{\sim}}}
+
+\renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
+% 使整篇文章的首段都有缩进
+\let\@afterindentfalse\@afterindenttrue\@afterindenttrue
+% style: COMAP required header
+\lhead{\small \@runninghead}
+\rhead{\small Page \thepage\ of \pageref{LastPage}}
+\chead{}
+\lfoot{}
+\rfoot{}
+\cfoot{}
+
+\pagestyle{fancy}
+%define the table of contents
+\newcommand\newtableofcontents{%
+    \centerline{\normalfont\Large\bfseries\contentsname
+        \@mkboth{%
+           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+    \vskip 5ex%
+    \@starttoc{toc}%
+    }
+% style: float counter
+\setcounter{totalnumber}{6}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{3}
+%很多人发现缺省的浮动参数过于严格了。下面的命令
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.65}
+\renewcommand{\floatpagefraction}{0.60}
+%将浮动参数重新设置为更宽松的值。---选自《Using Import graphics in LATEX2e》
+\def\@maketitle{%
+  \if@sheet%
+  \makesheet%
+  \fi
+  \newcounter{apppage}
+  \setcounter{page}{1}
+  \null
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large \textbf{\@title} \par}%
+    \vskip 0.8em%
+    {\large \@author, \@authorinfo}%
+    \vskip 0.5em%
+    {\large \today}%    
+  \end{center}%
+  \if@abs
+  \make@abstract
+  \fi
+  \if@toc
+  \newtableofcontents
+  \fi
+}
+\def\@abstract{}%
+\newbox\@abstract%
+\setbox\@abstract\hbox{}%
+\long\def\abstract{\bgroup\global\setbox\@abstract\vbox\bgroup\hsize1\textwidth\leftskip0.5cm\rightskip0.5cm}%
+%\if@sheet\fontfamily{fvs}\fontseries{m}\selectfont\fi}
+\def\endabstract{\egroup\egroup}
+
+\def\keywordsname{\bf 关键字}
+
+\newbox\@keywords
+\setbox\@keywords\hbox{}
+\def\keywords{\bgroup\global\setbox\@keywords\vbox\bgroup\noindent\leftskip0cm}
+\def\endkeywords{\egroup\egroup}%
+
+\def\make@abstract{%
+\par%
+\centerline{\bf\abstractname}\vskip5pt\par%
+\noindent\usebox\@abstract\par%
+\indent\hskip0.5cm\keywordsname\ \usebox\@keywords%
+\vskip10pt%
+}
+
+% style: table & figure caption font size and face
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+
+% style: table vertical merged cells
+\newcommand{\thline}{\hline\par\hline\par\hline}
+
+% style: figure include path
+\graphicspath{{./}{./img/}{./fig/}{./image/}{./figure/}{./picture/}{./pic/}}
+
+%define the the bibliography like MCM collenction
+\newtheorem{Theorem}{Theorem}[section]%
+\newtheorem{Lemma}[Theorem]{Lemma}%
+\newtheorem{Corollary}[Theorem]{Corollary}%
+\newtheorem{Proposition}[Theorem]{Proposition}%
+\newtheorem{Definition}[Theorem]{Definition}%
+\newtheorem{Example}[Theorem]{Example}%
+% style: list typesetting
+\definecolor{grey}{rgb}{0.8,0.8,0.8}
+\definecolor{darkgreen}{rgb}{0,0.3,0}
+\definecolor{darkblue}{rgb}{0,0,0.3}
+\def\lstbasicfont{\fontfamily{pcr}\selectfont\footnotesize}
+\lstset{%
+% indexing
+   % numbers=left,
+   % numberstyle=\small,%
+% character display
+    showstringspaces=false,
+    showspaces=false,%
+    tabsize=4,%
+% style
+    frame=lines,%
+    basicstyle={\footnotesize\lstbasicfont},%
+    keywordstyle=\color{darkblue}\bfseries,%
+    identifierstyle=,%
+    commentstyle=\color{darkgreen},%\itshape,%
+    stringstyle=\color{black}%
+}
+\lstloadlanguages{C,C++,Java,Matlab,Mathematica}
+\lstdefinestyle{sharpc}{breaklines=true,language=[Sharp]C}
+\newcommand\crefpairgroupconjunction{和}\newcommand\crefmiddlegroupconjunction{、}\newcommand\creflastgroupconjunction{和}
+\newcommand\crefrangeconjunction{至}\newcommand\crefrangepreconjunction{}\newcommand\crefrangepostconjunction{}
+\newcommand\crefpairconjunction{和}\newcommand\crefmiddleconjunction{、}\newcommand\creflastconjunction{和}
+\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
+\crefname{listing}{程序}{程序}\Crefname{listing}{程序}{程序}
+\crefname{equation}{式}{式}\Crefname{equation}{式}{式}
+\crefname{section}{节}{节}\Crefname{section}{节}{节}
+\crefname{figure}{图}{图}\Crefname{figure}{图}{图}
+\crefname{table}{表}{表}\Crefname{table}{表}{表}
+\renewcommand{\lstlistingname}{程序}
+\catcode`\。= 13
+\def。{．}
+
+\setlist{noitemsep,topsep=0pt}
+
+\newcommand{\@authorinfo}[1]{}
+\newcommand{\authorinfo}[1]{\gdef\@authorinfo{#1}}
+\newcommand{\@runninghead}[1]{}
+\newcommand{\runninghead}[1]{\gdef\@runninghead{#1}}
+\newcommand{\@studytime}[1]{}
+\newcommand{\studytime}[1]{\gdef\@studytime{#1}}
+\newcommand{\@extrainfo}[2]{}{}
+\newcommand{\extrainfo}[2]{\gdef\@extrainfo{#1}{#2}}
+
+\def\makesheet{%
+  \begin{titlepage}
+      \newgeometry{left=1cm,right=1cm,bottom=1cm,top=1cm}
+      \thispagestyle{empty}%
+      \begin{flushleft}
+          \large \kaishu \@runninghead
+      \end{flushleft}
+      \begin{center}  
+          \kaishu     
+          \vfill \Huge
+          \@title \\
+          \vfill
+          \renewcommand{\ULthickness}{0.5pt}
+          \ULdepth=3pt  \LARGE
+          \makebox[38mm][s]{提交人姓名} \uline{\hfill \@author \hfill}
+          \vspace{1mm}
+          \\ \makebox[38mm][s]{提交人信息}\uline{\hfill \@authorinfo \hfill}
+          \vspace{1mm}
+          \\ \makebox[38mm][s]{调研时间}\uline{\hfill \@studytime \hfill}
+      \end{center}
+  \end{titlepage}
+  \newpage
+  \restoregeometry
+}
+\endinput
