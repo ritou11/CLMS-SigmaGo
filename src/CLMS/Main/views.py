@@ -1,8 +1,24 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from Main.models import Competition,Lecture
+from datetime import datetime
+from django.http import Http404
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 # Create your views here.
 
 
 
 def home(request):
-    return HttpResponse("There is nothing now.")
+    CompetitionList=Competition.objects.all()
+    if len(CompetitionList)>5:
+        CompetitionList=CompetitionList[0:4]
+    LectureList=Lecture.objects.all()
+    if len(LectureList)>5:
+        LectureList=LectureList[0:4]
+    return render(request,'home.html',{'CompetitionList':CompetitionList,'LectureList':LectureList})
+
+def competition():
+    pass
+
+def lecture():
+    pass
