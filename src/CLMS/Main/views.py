@@ -17,8 +17,20 @@ def home(request):
         LectureList=LectureList[0:4]
     return render(request,'home.html',{'CompetitionList':CompetitionList,'LectureList':LectureList})
 
-def competition():
+def competition(request,id):
     pass
 
-def lecture():
+def lecture(request,id):
+    pass
+
+def competitionList(request):
+    pass
+
+def lectureList(request):
+    pass
+
+def login(request):
+    pass
+
+def register(request):
     pass
