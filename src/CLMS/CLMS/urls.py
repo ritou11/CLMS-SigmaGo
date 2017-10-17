@@ -19,11 +19,11 @@ from Main import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.home,name='home'),
-    url(r'^Competition/(?P<id>\d+)/$',views.competition,name='Competition'),
-    url(r'^Lecture/(?P<id>\d+)/$',views.lecture,name='Lecture'),
-    url(r'^CompetitionList/$',views.competitionList,name='CompetitionList'),
-    url(r'^LectureList/$',views.lectureList,name='LectureList'),
-    url(r'^login/$',views.login,name='Login'),
-    url(r'^register/$',views.register,name='Register'),
+    url(r'^$', views.home, name='home'),
+    url(r'^Competition/(?P<id>\d+)/$', views.competition, name='Competition'),
+    url(r'^Lecture/(?P<id>\d+)/$', views.lecture, name='Lecture'),
+    url(r'^CompetitionList/$', views.competitionList, name='CompetitionList'),
+    url(r'^LectureList/$', views.lectureList, name='LectureList'),
+    url(r'^login/$', views.login, name='Login'),
+    url(r'^register/$', views.register, name='Register'),
 ]
