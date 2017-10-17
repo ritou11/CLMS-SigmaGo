@@ -12,5 +12,9 @@ This is a task in the course Software Engineering 2017, Tsinghua University.
 ## Introduction
 TODO
 
+## Environment
+Python: v3.6.2
+Django: v1.11.6
+
 ## License
 GPLv3
