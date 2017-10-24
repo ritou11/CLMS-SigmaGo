@@ -1,0 +1,334 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>HOME PAGE</title>
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
+  <link href="http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
+  <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" media="all">
+  <link rel="stylesheet" href={% static "css/main.css" %} />
+  <link rel="stylesheet" href={% static "css/magic.min.css" %} />
+  <link rel="stylesheet" type="text/css" href={% static "css/htmleaf-demo.css" %} media="all">
+  <link rel="stylesheet" type="text/css" href={% static "css/animate.css" %} media="all">
+</head>
+
+<body class="homepage">
+
+<div class="container">
+      <div class="col-md-12"></div>
+    <!--BANNER PART-->
+      <div class="col-md-1"></div>
+      <div class="col-md-3"><img class="wow bounceIn" src={% static "images/LOGO.png" %} width="420" height="450" alt=""/>&nbsp;</div>
+      <div class="col-md-5">&nbsp;</div>
+      <!--SCROLLING PART-->
+      <div class="col-md-12">
+      <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000" >
+	            <!-- Indicators -->
+	            <ol class="carousel-indicators">
+	                <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
+	                <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
+	                <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
+                </ol>
+
+	            <!-- Wrapper For Slides -->
+	            <div class="carousel-inner" role="listbox">
+	                <!-- First Slide -->
+	                <div class="item active">
+	                    <!-- Slide Background -->
+	                    <img src={% static "images/main.png" %} alt="Bootstrap Touch Slider"  class="slide-image"/>
+	                    <div class="bs-slider-overlay"></div>
+	                    <div class="container">
+	                        <div class="row">
+	                            <!-- Slide Text Layer -->
+	                            <div class="slide-text slide_style_left">
+	                                <h1 data-animation="animated zoomInRight">TITLE ONE</h1>
+	                                <p data-animation="animated fadeInLeft">INTRO INTRO INTRO INTRO.</p>
+	                                <a href="#" target="_blank"  class="btn btn-primary" data-animation="animated fadeInRight">KNOW MORE</a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <!-- End of Slide -->
+	                
+	                <!-- Second Slide -->
+	                <div class="item">
+	                    <!-- Slide Background -->
+	                    <img src={% static "images/exa1.png" %} alt="Bootstrap Touch Slider"  class="slide-image"/>
+	                    <div class="bs-slider-overlay"></div>
+	                    <!-- Slide Text Layer -->
+	                    <div class="slide-text slide_style_center">
+	                      <h1 data-animation="animated flipInX">TITLE TWO</h1>
+	                      <p>&nbsp;</p>
+							<p data-animation="animated lightSpeedIn">INTRO INTRO INTRO INTRO.</p>	                       
+	                        <a href="#" target="_blank"  class="btn btn-primary" data-animation="animated fadeInDown">KNOW MORE</a>
+	                    </div>
+	                </div>
+	                <!-- End of Slide -->
+
+	                <!-- Third Slide -->
+	                <div class="item">
+	                    <!-- Slide Background -->
+	                    <img src={% static "images/exa6.png" %} alt="Bootstrap Touch Slider"  class="slide-image"/>
+	                    <div class="bs-slider-overlay"></div>
+	                    <!-- Slide Text Layer -->
+	                    <div class="slide-text slide_style_right">
+	                        <h1 data-animation="animated zoomInLeft">TITLE THREE</h1>
+	                        <p data-animation="animated fadeInRight">INTRO INTRO INTRO INTRO INTRO</p>
+	                        <a href="#" target="_blank" class="btn btn-primary" data-animation="animated fadeInRight">KNOW MORE</a>
+	                    </div>
+	                </div>
+	                <!-- End of Slide -->
+	            </div><!-- End of Wrapper For Slides -->
+
+	            <!-- Left Control -->
+	            <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
+	                <span class="fa fa-angle-left" aria-hidden="true"></span>
+	                <span class="sr-only">Previous</span>
+	            </a>
+
+	            <!-- Right Control -->
+	            <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
+	                <span class="fa fa-angle-right" aria-hidden="true"></span>
+	                <span class="sr-only">Next</span>
+	            </a>
+
+     </div> 
+     </div><!-- End of Scrolling Part-->
+</div> <!--CLOSE CONTAINER-->
+
+
+<!--Competition Section-->  
+<div class="container competition_section">
+	    <div class="col-md-12">
+		  <h2 class="SubHeading wow fadeInUp">competition</h2>
+		</div>
+	   <!--pic 1-->	  
+		   <div class="col-md-4">
+		   <h2 class="PicTitle wow fadeInUp">This is A Title</h2>
+			<div class="box">
+				<div class="box-content">
+					<div class="box-wrapper">
+						COMP ONE<span class="name">INFOINFOINFO</span>
+						<div class="row">XXXlikes - XXXviews</div>					
+					</div>
+				</div>
+				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+					<img src={% static "images/exa1.png" %} class="size_clone" alt="" />
+				</div>
+				<a class="link" href="#" target="_blank"></a></div>
+			</div>
+	   <!--pic 2-->	
+		 <div class="col-md-4">
+		 <h2 class="PicTitle wow fadeInUp">This is A Title</h2>
+			<div class="box">
+				<div class="box-content">
+					<div class="box-wrapper">
+						COMP TWO<span class="name">INFOINFOINFO</span>
+						<div class="row">XXXlikes - XXX views</div>					
+					</div>
+				</div>
+				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+					<img src={% static "images/exa2.png" %} alt="" class="size_clone" />
+				</div>
+				<a class="link" href="#" target="_blank"></a>	
+			</div>
+			</div>
+	  <!--pic 3-->	
+		 <div class="col-md-4">
+		 <h2 class="PicTitle wow fadeInUp">This is A Title</h2>
+			<div class="box">
+				<div class="box-content">
+					<div class="box-wrapper">
+						COMP THREE<span class="name">INFOINFOINFO</span>
+						<div class="row">XXXlikes - XXXviews</div>					
+					</div>
+				</div>
+				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+					<img src={% static "images/exa6.png" %} alt="" class="size_clone"/>
+				</div>
+				<a class="link" href="#" target="_blank"></a>	
+			</div>	
+		</div>
+	  <!--pic 4-->		
+		  <div class="col-md-4">
+		  <h2 class="PicTitle wow fadeInUp">This is A Title</h2>
+			<div class="box">
+				<div class="box-content">
+					<div class="box-wrapper">
+						COMP FOUR<span class="name">INFOINFOINFO</span>
+						<div class="row">XXX likes - XXX views</div>					
+					</div>	
+				</div>
+				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+					<img src={% static "images/exa5.png" %} alt="" class="size_clone" />
+				</div>
+				<a class="link" href="#" target="_blank"></a>
+				</div>	
+		</div>
+	 <!--pic 5-->	
+		<div class="col-md-4">
+		<h2 class="PicTitle wow fadeInUp">This is A Title</h2>
+			<div class="box">
+				<div class="box-content">
+					<div class="box-wrapper">
+						COMP FIVE<span class="name">INFOINFOINFO</span>
+						<div class="row">XXX likes - XXX views</div>					
+					</div>	
+				</div>
+				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+					<img src={% static "images/main.png" %} alt="" class="size_clone" />
+				</div>
+				<a class="link" href="#" target="_blank"></a>		</div>	
+		</div>
+	 <!--more-->	
+		<div class="col-md-4 MoreBox">
+		  <a href="/">
+		      <h2 class="MoreButton wow fadeInUp"><span class="EnphasizeLetter">M</span>ore <br>Competition>>>></h2>
+		  </a>
+		</div>
+<div class="col-md-12">&nbsp</div>										
+</div><!-- End of Competition Section-->
+	
+
+<!--Lecture Section-->	
+<div class="container lecture_section">
+	    <div class="col-md-12">
+		  <h2 class="SubHeading2 wow fadeInUp">lecture</h2>
+		</div>
+	   
+		   <div class="col-md-4">
+		   <h2 class="PicTitle2">This is A Title</h2>
+			<div class="box">
+				<div class="box-content">
+					<div class="box-wrapper">
+						LEC ONE<span class="name">INFOINFOINFO</span>
+						<div class="row">XXXlikes - XXXviews</div>					
+					</div>
+				</div>
+				<div class="box-overlay magictime" data-hover="rotateRight" data-return="">
+					<img src={% static "images/exa1.png" %} class="size_clone" alt="" />
+				</div>
+				<a class="link" href="#" target="_blank"></a></div>
+			</div>
+			
+		 <div class="col-md-4">
+		 <h2 class="PicTitle2 wow fadeInUp">This is A Title</h2>
+			<div class="box">
+				<div class="box-content">
+					<div class="box-wrapper">
+						LEC TWO<span class="name">INFOINFOINFO</span>
+						<div class="row">XXXlikes - XXX views</div>					
+					</div>
+				</div>
+				<div class="box-overlay magictime" data-hover="rotateUp" data-return="">
+					<img src={% static "images/exa2.png" %} alt="" class="size_clone" />
+				</div>
+				<a class="link" href="#" target="_blank"></a>	
+			</div>
+			</div>
+		
+		 <div class="col-md-4">
+		 <h2 class="PicTitle2 wow fadeInUp">This is A Title</h2>
+			<div class="box">
+				<div class="box-content">
+					<div class="box-wrapper">
+						LEC THREE<span class="name">INFOINFOINFO</span>
+						<div class="row">XXXlikes - XXXviews</div>					
+					</div>
+				</div>
+				<div class="box-overlay magictime" data-hover="rotateLeft" data-return="">
+					<img src={% static "images/exa6.png" %} alt="" class="size_clone"/>
+				</div>
+				<a class="link" href="#" target="_blank"></a>	
+			</div>	
+		</div>
+			
+		  <div class="col-md-4">
+		  <h2 class="PicTitle2 wow fadeInUp">This is A Title</h2>
+			<div class="box">
+				<div class="box-content">
+					<div class="box-wrapper">
+						LEC FOUR<span class="name">INFOINFOINFO</span>
+						<div class="row">XXX likes - XXX views</div>					
+					</div>	
+				</div>
+				<div class="box-overlay magictime" data-hover="rotateRight" data-return="">
+					<img src={% static "images/exa5.png" %} alt="" class="size_clone" />
+				</div>
+				<a class="link" href="#" target="_blank"></a>				
+			</div>	
+		</div>
+		
+		<div class="col-md-4">
+		<h2 class="PicTitle2 wow fadeInUp">This is A Title</h2>
+			<div class="box">
+				<div class="box-content">
+					<div class="box-wrapper">
+						LEC FIVE<span class="name">INFOINFOINFO</span>
+						<div class="row">XXX likes - XXX views</div>					
+					</div>	
+				</div>
+				<div class="box-overlay magictime" data-hover="rotateDown" data-return="">
+					<img src={% static "images/main.png" %} alt="" class="size_clone" />
+				</div>
+				<a class="link" href="#" target="_blank"></a>							
+			</div>	
+		</div>
+		
+		   <!--more-->	
+		<div class="col-md-4 MoreBox">
+		  <a href="/">
+		      <h2 class="MoreButton2 wow fadeInUp" ><span class="EnphasizeLetter">M</span>ore <br>Lecture>>>></h2>
+		  </a>
+		</div>	
+<div class="col-md-12">&nbsp</div>						
+</div> <!-- End of Lecture Section-->
+
+<!--Footer-->
+<div class="container footer">
+   <div class="col-md-2">
+     <img src={% static "images/LOGO2.png" %} width="130"/>
+   </div>
+  <div class="col-md-9">&nbsp;</div>
+  <div class="pills col-md-2"><a href="https://info.tsinghua.edu.cn"><h6 class="pills">INFO&nbsp |</h6></a></div>
+  <div class="pills col-md-2"><a href="#"><h6 class="pills">清华地图  |</h6></a></div>
+  <div class="col-md-2 pills"><a href="#"><h6 class="pills">友情链接  |</h6></a></div>
+  <div class="col-md-2 pills"><a href="#"><h6 class="pills">关于我们</h6></a></div>
+  <div class="col-md-10">
+   	<h5>&nbsp &nbsp &nbsp &nbsp CopyRight 2017-2020 xxxxxx.com All Rights Reserved.
+  </div>  
+</div>
+
+<!--script-->
+    <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script><script>window.jQuery || document.write('<script src={% static "js/jquery-1.11.0.min.js" %}><\/script>')</script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+    <script src={% static "js/bootstrap-touch-slider.js" %}></script>
+    <script src={% static "js/main.js" %}></script>
+    <script src={% static "js/viewport-units-buggyfill.js" %}></script>
+    <script src={% static "js/wow.min.js" %}></script>
+    <script src={% static "js/midnight.jquery.min.js" %}></script>
+    <script type="text/javascript">
+            $('#bootstrap-touch-slider').bsTouchSlider();
+    </script>
+    <script src={% static "js/wow.min.js" %}></script>
+    <script>
+    $(document).ready(function(){
+      // vh fix
+      viewportUnitsBuggyfill.init();
+      $(window).resize(function(){
+        viewportUnitsBuggyfill.refresh();
+      });
+      // Start wow.js
+      new WOW().init();
+      var windowHeight = $(window).height();
+      $(window).trigger('resize');
+      });
+    </script>
+
+    
+</body>
+</html>
