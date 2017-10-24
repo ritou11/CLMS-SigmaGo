@@ -14,7 +14,7 @@ def home(request):
     LectureList = Lecture.objects.all()
     if len(LectureList) > 5:
         LectureList = LectureList[0:4]
-    return render(request, 'home.html', {'CompetitionList': CompetitionList, 'LectureList': LectureList})
+    return render(request, 'index.html', {'CompetitionList': CompetitionList, 'LectureList': LectureList})
 
 
 def competition(request, id):
