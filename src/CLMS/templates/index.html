@@ -137,87 +137,24 @@
 	    <div class="col-md-12">
 		  <h2 class="SubHeading2 wow fadeInUp">lecture</h2>
 		</div>
-	   
+	<!--lecture-->
+	   	{% for lecture in LectureList %}
 		   <div class="col-md-4">
-		   <h2 class="PicTitle2">This is A Title</h2>
+		   <h2 class="PicTitle2">{{lecture.title}}</h2>
 			<div class="box">
 				<div class="box-content">
 					<div class="box-wrapper">
-						LEC ONE<span class="name">INFOINFOINFO</span>
-						<div class="row">XXXlikes - XXXviews</div>					
+						LEC {{forloop.counter}}<span class="name">{{lecture.intro}}</span>
+						<div class="row">{{lecture.likes}} likes - {{lecture.views}} views</div>					
 					</div>
 				</div>
 				<div class="box-overlay magictime" data-hover="rotateRight" data-return="">
-					<img src={% static "images/exa1.png" %} class="size_clone" alt="" />
+					<img src={{lecture.image.url}} class="size_clone" alt="" />
 				</div>
 				<a class="link" href="#" target="_blank"></a></div>
 			</div>
-			
-		 <div class="col-md-4">
-		 <h2 class="PicTitle2 wow fadeInUp">This is A Title</h2>
-			<div class="box">
-				<div class="box-content">
-					<div class="box-wrapper">
-						LEC TWO<span class="name">INFOINFOINFO</span>
-						<div class="row">XXXlikes - XXX views</div>					
-					</div>
-				</div>
-				<div class="box-overlay magictime" data-hover="rotateUp" data-return="">
-					<img src={% static "images/exa2.png" %} alt="" class="size_clone" />
-				</div>
-				<a class="link" href="#" target="_blank"></a>	
-			</div>
-			</div>
-		
-		 <div class="col-md-4">
-		 <h2 class="PicTitle2 wow fadeInUp">This is A Title</h2>
-			<div class="box">
-				<div class="box-content">
-					<div class="box-wrapper">
-						LEC THREE<span class="name">INFOINFOINFO</span>
-						<div class="row">XXXlikes - XXXviews</div>					
-					</div>
-				</div>
-				<div class="box-overlay magictime" data-hover="rotateLeft" data-return="">
-					<img src={% static "images/exa6.png" %} alt="" class="size_clone"/>
-				</div>
-				<a class="link" href="#" target="_blank"></a>	
-			</div>	
-		</div>
-			
-		  <div class="col-md-4">
-		  <h2 class="PicTitle2 wow fadeInUp">This is A Title</h2>
-			<div class="box">
-				<div class="box-content">
-					<div class="box-wrapper">
-						LEC FOUR<span class="name">INFOINFOINFO</span>
-						<div class="row">XXX likes - XXX views</div>					
-					</div>	
-				</div>
-				<div class="box-overlay magictime" data-hover="rotateRight" data-return="">
-					<img src={% static "images/exa5.png" %} alt="" class="size_clone" />
-				</div>
-				<a class="link" href="#" target="_blank"></a>				
-			</div>	
-		</div>
-		
-		<div class="col-md-4">
-		<h2 class="PicTitle2 wow fadeInUp">This is A Title</h2>
-			<div class="box">
-				<div class="box-content">
-					<div class="box-wrapper">
-						LEC FIVE<span class="name">INFOINFOINFO</span>
-						<div class="row">XXX likes - XXX views</div>					
-					</div>	
-				</div>
-				<div class="box-overlay magictime" data-hover="rotateDown" data-return="">
-					<img src={% static "images/main.png" %} alt="" class="size_clone" />
-				</div>
-				<a class="link" href="#" target="_blank"></a>							
-			</div>	
-		</div>
-		
-		   <!--more-->	
+		{% endfor %}
+	<!--more-->	
 		<div class="col-md-4 MoreBox">
 		  <a href="/">
 		      <h2 class="MoreButton2 wow fadeInUp" ><span class="EnphasizeLetter">M</span>ore <br>Lecture>>>></h2>
