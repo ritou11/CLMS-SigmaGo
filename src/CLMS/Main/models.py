@@ -21,6 +21,8 @@ class Competition(models.Model):
     image = models.ImageField(
         upload_to='./Competition/images/', null=True, blank=True)
     tag = models.ManyToManyField(Tag)
+    likes = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
     result = models.FileField(
         upload_to='./Competition/result/', null=True, blank=True)
 
@@ -37,6 +39,8 @@ class Lecture(models.Model):
     intro = models.TextField(blank=True, null=True)
     content = models.TextField(blank=True, null=True)
     news = models.TextField(blank=True, null=True)
+    likes = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
     image = models.ImageField(
         upload_to='./Lecture/images/', null=True, blank=True)
     tag = models.ManyToManyField(Tag)

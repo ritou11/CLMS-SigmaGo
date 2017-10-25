@@ -105,84 +105,23 @@
 	    <div class="col-md-12">
 		  <h2 class="SubHeading wow fadeInUp">competition</h2>
 		</div>
-	   <!--pic 1-->	  
+	<!--competitions-->
+		{% for competition in CompetitionList %}
 		   <div class="col-md-4">
-		   <h2 class="PicTitle wow fadeInUp">This is A Title</h2>
+		   <h2 class="PicTitle wow fadeInUp">{{competition.title}}</h2>
 			<div class="box">
 				<div class="box-content">
 					<div class="box-wrapper">
-						COMP ONE<span class="name">INFOINFOINFO</span>
-						<div class="row">XXXlikes - XXXviews</div>					
+						COMP {{forloop.counter}}<span class="name">{{competition.intro}}</span>
+						<div class="row">{{competition.likes}} likes - {{competition.views}} views</div>					
 					</div>
 				</div>
 				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					<img src={% static "images/exa1.png" %} class="size_clone" alt="" />
+					<img src={{competition.image.url}} class="size_clone" alt="" />
 				</div>
 				<a class="link" href="#" target="_blank"></a></div>
 			</div>
-	   <!--pic 2-->	
-		 <div class="col-md-4">
-		 <h2 class="PicTitle wow fadeInUp">This is A Title</h2>
-			<div class="box">
-				<div class="box-content">
-					<div class="box-wrapper">
-						COMP TWO<span class="name">INFOINFOINFO</span>
-						<div class="row">XXXlikes - XXX views</div>					
-					</div>
-				</div>
-				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					<img src={% static "images/exa2.png" %} alt="" class="size_clone" />
-				</div>
-				<a class="link" href="#" target="_blank"></a>	
-			</div>
-			</div>
-	  <!--pic 3-->	
-		 <div class="col-md-4">
-		 <h2 class="PicTitle wow fadeInUp">This is A Title</h2>
-			<div class="box">
-				<div class="box-content">
-					<div class="box-wrapper">
-						COMP THREE<span class="name">INFOINFOINFO</span>
-						<div class="row">XXXlikes - XXXviews</div>					
-					</div>
-				</div>
-				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					<img src={% static "images/exa6.png" %} alt="" class="size_clone"/>
-				</div>
-				<a class="link" href="#" target="_blank"></a>	
-			</div>	
-		</div>
-	  <!--pic 4-->		
-		  <div class="col-md-4">
-		  <h2 class="PicTitle wow fadeInUp">This is A Title</h2>
-			<div class="box">
-				<div class="box-content">
-					<div class="box-wrapper">
-						COMP FOUR<span class="name">INFOINFOINFO</span>
-						<div class="row">XXX likes - XXX views</div>					
-					</div>	
-				</div>
-				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					<img src={% static "images/exa5.png" %} alt="" class="size_clone" />
-				</div>
-				<a class="link" href="#" target="_blank"></a>
-				</div>	
-		</div>
-	 <!--pic 5-->	
-		<div class="col-md-4">
-		<h2 class="PicTitle wow fadeInUp">This is A Title</h2>
-			<div class="box">
-				<div class="box-content">
-					<div class="box-wrapper">
-						COMP FIVE<span class="name">INFOINFOINFO</span>
-						<div class="row">XXX likes - XXX views</div>					
-					</div>	
-				</div>
-				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					<img src={% static "images/main.png" %} alt="" class="size_clone" />
-				</div>
-				<a class="link" href="#" target="_blank"></a>		</div>	
-		</div>
+		{% endfor %}
 	 <!--more-->	
 		<div class="col-md-4 MoreBox">
 		  <a href="/">
