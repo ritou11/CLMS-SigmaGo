@@ -1,0 +1,88 @@
+\documentclass[utf8, a4paper]{beamer}
+\usepackage{CJK}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath, amsfonts, epsfig, xspace}
+\usepackage{algorithm,algorithmic}
+\usepackage{pstricks,pst-node}
+\usepackage{multimedia}
+\usepackage[normal,tight,center]{subfigure}
+\setlength{\subfigcapskip}{-.5em}
+\usepackage{beamerthemesplit}
+
+\author[Software Engineering 2017, Tsinghua University]{SigmaGo}
+
+\title[Competition \& Lecture Management System\hspace{2em}\insertframenumber/\inserttotalframenumber]{Competition \& Lecture Management System
+}
+
+\institute{清华大学}
+
+\begin{document}
+
+\begin{CJK}{UTF8}{gbsn}
+\maketitle
+
+
+\begin{frame}
+    \frametitle{功能介绍\&需求分析}
+  %\pause
+    \begin{enumerate}
+        \item \textbf{获取活动信息}
+            \begin{itemize}
+            \item 目前，比赛、讲座信息分散同学们没有方法获取。现在获取活动信息中缺少一些标准化的流程，比如赛事的进程和获奖等，又比如讲座的主办方、主讲人等。比赛推进的进程中也缺少跟进，现在只有推送说明，甚至部分主办方不发推送。
+        
+            \item 校内师生需要通过本平台获取最新的活动（包括比赛、讲座）信息，并方便地获取活动推进过程中各个环节的信息。
+            \end{itemize}
+            \pause
+        \item \textbf{活动推荐}
+            \begin{itemize}
+            \item 一方面，校内师生需要根据个人的情况，获得活动的推荐；另一方面，校内师生还需要获得近期热门的活动的推荐。
+            \end{itemize}
+            
+            \pause
+        \item \textbf{获奖信息统计}
+            \begin{itemize}
+            \item 现代阶段比赛结果缺少一个统一的平台管理，无法对于获奖有效性进行验证。
+            \end{itemize}
+  \end{enumerate}
+ 
+  
+  
+\end{frame}
+
+\begin{frame}
+    \frametitle{用户群体}
+  
+    \begin{itemize}
+    \item \textbf{校内师生}
+  
+    访问量大，要求响应较快。
+  
+    \item \textbf{活动主办方}
+  
+    访问量小，要求严格的权限控制，但对响应速度要求很低。需要精确的统计以及友好的功能，使得主办方主动参与到本系统中。
+  
+    \item \textbf{管理员}
+  
+    访问量小，要求严格的权限控制，但对响应速度要求很低。为了降低维护成本，需要支持无编程基础的管理员。
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{现有平台}
+  
+    \begin{itemize}
+    %\item 第二成绩单
+    \item 各个院系科协或相关组织的公众号
+    \item info上文素讲座信息
+    
+    
+
+    \end{itemize}
+    \par
+    \textbf{以上信息需要进一步整合，现阶段缺少一个统一的平台进行组织和管理}
+\end{frame}
+
+\end{CJK}
+\end{document}
