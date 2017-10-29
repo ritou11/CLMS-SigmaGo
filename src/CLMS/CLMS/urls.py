@@ -22,8 +22,10 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^Competition/(?P<id>\d+)/$', views.competition, name='Competition'),
     url(r'^Lecture/(?P<id>\d+)/$', views.lecture, name='Lecture'),
+    url(r'^Slide/(?P<id>\d+)/$', views.slide, name='Slide'),
     url(r'^CompetitionList/$', views.competitionList, name='CompetitionList'),
     url(r'^LectureList/$', views.lectureList, name='LectureList'),
+
     url(r'^login/$', views.login, name='Login'),
     url(r'^register/$', views.register, name='Register'),
 ]
