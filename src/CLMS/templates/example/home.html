@@ -3,24 +3,24 @@
 
 {% block content %}
 <div class="posts">
-    {% for competition in CompetitionList %}
+    {% for slide in SlideList %}
         <section class="post">
             <header class="post-header">
-                <h2 class="post-title"><a href="{% url "Competition" id=competition.id %}">{{ competition.title }}</a></h2>
+                <h2 class="post-title"><a href="{% url "Slide" id=slide.id %}">{{ slide.title }}</a></h2>
 
                     <p class="post-meta">
-                        Time:  <a class="post-author" href="#">{{ competition.date_time |date:"Y /m /d"}}</a> 
+                        Time:  <a class="post-author" href="#">{{ slide.date_time |date:"Y /m /d"}}</a> 
 
                     </p>
             </header>
 
                 <div class="post-description">
-                    <img src=competition.img>
+                    <img src=slide.img>
                     <p>
-                        {{ competition.content|truncatewords_html:2 }}
+                        {{ slide.content|truncatewords_html:2 }}
                     </p>
                 </div>
-                <a class="pure-button" href="{% url "Competition" id=competition.id %}">Read More >>> </a>
+                <a class="pure-button" href="{% url "Slide" id=slide.id %}">Read More >>> </a>
         </section>
     {% endfor %}
 

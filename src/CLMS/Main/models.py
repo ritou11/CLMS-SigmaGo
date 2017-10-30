@@ -1,5 +1,5 @@
 from django.db import models
-
+from image_cropping import ImageRatioField
 # Create your models here.
 
 
@@ -20,6 +20,7 @@ class Competition(models.Model):
     award = models.TextField(blank=True, null=True)
     image = models.ImageField(
         upload_to='./Competition/images/', null=True, blank=True)
+    cropping = ImageRatioField('image', '640x480')
     tag = models.ManyToManyField(Tag)
     result = models.FileField(
         upload_to='./Competition/result/', null=True, blank=True)
@@ -39,6 +40,7 @@ class Lecture(models.Model):
     news = models.TextField(blank=True, null=True)
     image = models.ImageField(
         upload_to='./Lecture/images/', null=True, blank=True)
+    cropping = ImageRatioField('image', '640x480')
     tag = models.ManyToManyField(Tag)
 
     def __str__(self):
