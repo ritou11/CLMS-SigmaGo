@@ -36,51 +36,24 @@
 	            <!-- Wrapper For Slides -->
 	            <div class="carousel-inner" role="listbox">
 	                <!-- First Slide -->
+	                {% for slide in SlideList %}
 	                <div class="item active">
 	                    <!-- Slide Background -->
-	                    <img src={% static "images/main.png" %} alt="Bootstrap Touch Slider"  class="slide-image"/>
+	                    <img src={{slide.image.url}} alt="Bootstrap Touch Slider"  class="slide-image"/>
 	                    <div class="bs-slider-overlay"></div>
 	                    <div class="container">
 	                        <div class="row">
 	                            <!-- Slide Text Layer -->
 	                            <div class="slide-text slide_style_left">
-	                                <h1 data-animation="animated zoomInRight">TITLE ONE</h1>
-	                                <p data-animation="animated fadeInLeft">INTRO INTRO INTRO INTRO.</p>
+	                                <h1 data-animation="animated zoomInRight">{{slide.title}}</h1>
+	                                <p data-animation="animated fadeInLeft">{{slide.intro}}</p>
 	                                <a href="#" target="_blank"  class="btn btn-primary" data-animation="animated fadeInRight">KNOW MORE</a>
 	                            </div>
 	                        </div>
 	                    </div>
 	                </div>
-	                <!-- End of Slide -->
-	                
-	                <!-- Second Slide -->
-	                <div class="item">
-	                    <!-- Slide Background -->
-	                    <img src={% static "images/exa1.png" %} alt="Bootstrap Touch Slider"  class="slide-image"/>
-	                    <div class="bs-slider-overlay"></div>
-	                    <!-- Slide Text Layer -->
-	                    <div class="slide-text slide_style_center">
-	                      <h1 data-animation="animated flipInX">TITLE TWO</h1>
-	                      <p>&nbsp;</p>
-							<p data-animation="animated lightSpeedIn">INTRO INTRO INTRO INTRO.</p>	                       
-	                        <a href="#" target="_blank"  class="btn btn-primary" data-animation="animated fadeInDown">KNOW MORE</a>
-	                    </div>
-	                </div>
-	                <!-- End of Slide -->
-
-	                <!-- Third Slide -->
-	                <div class="item">
-	                    <!-- Slide Background -->
-	                    <img src={% static "images/exa6.png" %} alt="Bootstrap Touch Slider"  class="slide-image"/>
-	                    <div class="bs-slider-overlay"></div>
-	                    <!-- Slide Text Layer -->
-	                    <div class="slide-text slide_style_right">
-	                        <h1 data-animation="animated zoomInLeft">TITLE THREE</h1>
-	                        <p data-animation="animated fadeInRight">INTRO INTRO INTRO INTRO INTRO</p>
-	                        <a href="#" target="_blank" class="btn btn-primary" data-animation="animated fadeInRight">KNOW MORE</a>
-	                    </div>
-	                </div>
-	                <!-- End of Slide -->
+	                {% endfor %}
+	                <!-- End of Slide -->	                
 	            </div><!-- End of Wrapper For Slides -->
 
 	            <!-- Left Control -->
