@@ -37,6 +37,13 @@ cd src/CLMS
 python manage.py runserver localhost:8080
 ```
 
+### Fix after updates
+
+```bash
+cd src/CLMS
+python manage.py migrate --run-syncdb
+```
+
 ## License
 
 GPLv3
