@@ -44,6 +44,12 @@ cd src/CLMS
 python manage.py migrate --run-syncdb
 ```
 
+## Tips
+
+### Migrate Frontend Code
+
+Regex Replace ```src=((?!.*http)".+?")``` to ```src={% static $1 %}```.
+
 ## License
 
 GPLv3
