@@ -37,7 +37,7 @@
          <img src="images/user_c.png" class="bar">
          <h5 class="log" data-toggle="JDialog" data-target="dialog-1">LOG IN</h5>
          <h5 class="divider">/</h5>
-         <h5 class="sign">SIGN UP</h5>
+         <h5 class="sign" data-toggle="JDialog" data-target="dialog-2">SIGN UP</h5>
         <h5 class="contact">CONTACT US</h5>
       </div><!--end of userbar-->
       
@@ -68,6 +68,8 @@
        </div> <!--end of navbar-->
       </div><!--end of nav-->
      </div><!--end of function bar-->
+     
+   <!--log in-->
   <div class="jDialog" id="dialog-1">
       <div id="mainlogin">
           <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">LOG IN</h1>
@@ -79,7 +81,18 @@
          <div id="note"><a href="#">Forgot your password?</a></div>
       </div>
 </div>
-
+  <!--sign up-->
+  <div class="jDialog" id="dialog-2">
+      <div id="mainlogin2">
+          <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">SIGN UP</h1>
+          <form action="#">
+             <input type="text" placeholder="username or email" value="" required>
+             <input type="password" placeholder="password(>6 letters)" value="" required>
+             <input type="password" placeholder="password again" value="" required>
+             <button type="submit"><i class="fa fa-arrow-right"></i></button>
+         </form>
+      </div>
+</div>
 
   <!--SCROLLING PART-->
       <div class="col-md-12">
@@ -402,6 +415,11 @@ $(function() {
 	        skinClassName: 'demo',
 			allowOverlay:true,
 	        animationType: 'fade-in',
+	    });
+		$("#dialog-2").jDialog({
+	        skinClassName: 'demo',
+			allowOverlay:true,
+	        animationType:'fade-in',
 	    });
 	</script>
     
