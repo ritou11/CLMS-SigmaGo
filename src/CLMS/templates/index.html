@@ -3,156 +3,230 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title>HOME PAGE</title>
-  <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
-  <link href="http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
-  <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" media="all">
-  <link rel="stylesheet" href={% static "css/main.css" %} />
-  <link rel="stylesheet" href={% static "css/magic.min.css" %} />
-  <link rel="stylesheet" type="text/css" href={% static "css/htmleaf-demo.css" %} media="all">
-  <link rel="stylesheet" type="text/css" href={% static "css/animate.css" %} media="all">
+    <meta charset="utf-8">
+    <title>HOME PAGE</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
+    <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" media="all">
+    <link rel="stylesheet" href={% static "css/main.css" %} />
+    <link rel="stylesheet" href={% static "css/magic.min.css" %} />
+    <link rel="stylesheet" type="text/css" href={% static "css/htmleaf-demo.css" %} media="all">
+    <link rel="stylesheet" type="text/css" href={% static "css/animate.css" %} media="all">
+    <link rel="stylesheet" href={% static "css/jdialog.min.css" %} media="all">
+    <link rel="stylesheet" href={% static "css/dialog.css" %} media="all">
 </head>
 
 <body class="homepage">
-
-<div class="container">
-      <div class="col-md-12"></div>
-    <!--BANNER PART-->
-      <div class="col-md-1"></div>
-      <div class="col-md-3"><img class="wow bounceIn" src={% static "images/LOGO.png" %} width="420" height="450" alt=""/>&nbsp;</div>
-      <div class="col-md-5">&nbsp;</div>
-      <!--SCROLLING PART-->
-      <div class="col-md-12">
-      <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000" >
-	            <!-- Indicators -->
-	            <ol class="carousel-indicators">
-	                <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
-	                <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
-	                <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
+    <div class="container">
+        <div class="col-md-12"></div>
+        <!--BANNER PART-->
+        <div class="col-md-1"></div>
+        <!--logo-->
+        <div class="col-md-3 LogoContainer">
+            <img class="wow bounceIn TitleLogo" src={% static "images/LOGO.png" %} width="330" height="370" alt="" />&nbsp;
+        </div>
+        <!--title-->
+        <div class="col-md-6 TitleCon">
+            <img src={% static "images/TITLE.png" %} class="Title">
+        </div>
+        <!--function bar-->
+        <div class="BNContainer">
+            <!--user bar-->
+            <div class="col-md-6 BarContainer">
+                <img src={% static "images/user_c.png" %} class="bar">
+                <h5 class="log" data-toggle="JDialog" data-target="dialog-1">LOG IN</h5>
+                <h5 class="divider">/</h5>
+                <h5 class="sign" data-toggle="JDialog" data-target="dialog-2">SIGN UP</h5>
+                <h5 class="contact">CONTACT US</h5>
+            </div>
+            <!--end of userbar-->
+            <!--navlabel-->
+            <div class="col-md-6">
+                <div class="NavContainer">
+                    <!--home-->
+                    <a href="#">
+                        <div class="col-md-1 deplace">
+                            <img src={% static "images/home.png" %} class="NavLabel">
+                            <h5 class="NavName0"> HOME </h5>
+                        </div>
+                    </a>
+                    <!--comp-->
+                    <a href="#competition">
+                        <div class="col-md-1 deplace">
+                            <img src={% static "images/comp.png" %} class="NavLabel">
+                            <h5 class="NavName"> COMETITION </h5>
+                        </div>
+                    </a>
+                    <!--lec-->
+                    <a href="#lecture">
+                        <div class="col-md-1 deplace">
+                            <img src={% static "images/lec.png" %} class="NavLabel">
+                            <h5 class="NavName2"> LECTURE </h5>
+                        </div>
+                    </a>
+                </div>
+                <!--end of navbar-->
+            </div>
+            <!--end of nav-->
+        </div>
+        <!--end of function bar-->
+        <!--log in-->
+        <div class="jDialog" id="dialog-1">
+            <div id="mainlogin">
+                <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">LOG IN</h1>
+                <form action="#">
+                    <input type="text" placeholder="username or email" value="" required>
+                    <input type="password" placeholder="password" value="" required>
+                    <button type="submit"><i class="fa fa-arrow-right"></i></button>
+                </form>
+                <div id="note"><a href="#">Forgot your password?</a></div>
+            </div>
+        </div>
+        <!--sign up-->
+        <div class="jDialog" id="dialog-2">
+            <div id="mainlogin2">
+                <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">SIGN UP</h1>
+                <form action="#">
+                    <input type="text" placeholder="username or email" value="" required>
+                    <input type="password" placeholder="password(>6 letters)" value="" required>
+                    <input type="password" placeholder="password again" value="" required>
+                    <button type="submit"><i class="fa fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+        <!--SCROLLING PART-->
+        <div class="col-md-12">
+            <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
+                    <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
+                    <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
                 </ol>
-
-	            <!-- Wrapper For Slides -->
-	            <div class="carousel-inner" role="listbox">
-	                <!-- First Slide -->
-	                {% for slide in SlideList %}
-	                <div class="item active">
-	                    <!-- Slide Background -->
-	                    <img src={{slide.image.url}} alt="Bootstrap Touch Slider"  class="slide-image"/>
-	                    <div class="bs-slider-overlay"></div>
-	                    <div class="container">
-	                        <div class="row">
-	                            <!-- Slide Text Layer -->
-	                            <div class="slide-text slide_style_left">
-	                                <h1 data-animation="animated zoomInRight">{{slide.title}}</h1>
-	                                <p data-animation="animated fadeInLeft">{{slide.intro}}</p>
-	                                <a href="#" target="_blank"  class="btn btn-primary" data-animation="animated fadeInRight">KNOW MORE</a>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	                {% endfor %}
-	                <!-- End of Slide -->	                
-	            </div><!-- End of Wrapper For Slides -->
-
-	            <!-- Left Control -->
-	            <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
+                <!-- Wrapper For Slides -->
+                <div class="carousel-inner" role="listbox">
+                    <!-- First Slide -->
+                    {% for slide in SlideList %}
+                    <div class="item active">
+                        <!-- Slide Background -->
+                        <img src={{slide.image.url}} alt="Bootstrap Touch Slider" class="slide-image" />
+                        <div class="bs-slider-overlay"></div>
+                        <div class="container">
+                            <div class="row">
+                                <!-- Slide Text Layer -->
+                                <div class="slide-text slide_style_left">
+                                    <h1 data-animation="animated zoomInRight">{{slide.title}}</h1>
+                                    <p data-animation="animated fadeInLeft">{{slide.intro}}</p>
+                                    <a href="#" target="_blank" class="btn btn-primary" data-animation="animated fadeInRight">KNOW MORE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- End of Slide -->
+                </div>
+                <!-- End of Wrapper For Slides -->
+                <!-- Left Control -->
+                <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
 	                <span class="fa fa-angle-left" aria-hidden="true"></span>
 	                <span class="sr-only">Previous</span>
 	            </a>
-
-	            <!-- Right Control -->
-	            <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
+                <!-- Right Control -->
+                <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
 	                <span class="fa fa-angle-right" aria-hidden="true"></span>
 	                <span class="sr-only">Next</span>
 	            </a>
-
-     </div> 
-     </div><!-- End of Scrolling Part-->
-</div> <!--CLOSE CONTAINER-->
-
-
-<!--Competition Section-->  
-<div class="container competition_section">
-	    <div class="col-md-12">
-		  <h2 class="SubHeading wow fadeInUp">competition</h2>
-		</div>
-	<!--competitions-->
-		{% for competition in CompetitionList %}
-		   <div class="col-md-4">
-		   <h2 class="PicTitle wow fadeInUp">{{competition.title}}</h2>
-			<div class="box">
-				<div class="box-content">
-					<div class="box-wrapper">
-						COMP {{forloop.counter}}<span class="name">{{competition.intro}}</span>
-						<div class="row">{{competition.likes}} likes - {{competition.views}} views</div>					
-					</div>
-				</div>
-				<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					<img src={{competition.image.url}} class="size_clone" alt="" />
-				</div>
-				<a class="link" href="#" target="_blank"></a></div>
-			</div>
-		{% endfor %}
-	 <!--more-->	
-		<div class="col-md-4 MoreBox">
-		  <a href="/">
-		      <h2 class="MoreButton wow fadeInUp"><span class="EnphasizeLetter">M</span>ore <br>Competition>>>></h2>
-		  </a>
-		</div>
-<div class="col-md-12">&nbsp</div>										
-</div><!-- End of Competition Section-->
-	
-
-<!--Lecture Section-->	
-<div class="container lecture_section">
-	    <div class="col-md-12">
-		  <h2 class="SubHeading2 wow fadeInUp">lecture</h2>
-		</div>
-	<!--lecture-->
-	   	{% for lecture in LectureList %}
-		   <div class="col-md-4">
-		   <h2 class="PicTitle2">{{lecture.title}}</h2>
-			<div class="box">
-				<div class="box-content">
-					<div class="box-wrapper">
-						LEC {{forloop.counter}}<span class="name">{{lecture.intro}}</span>
-						<div class="row">{{lecture.likes}} likes - {{lecture.views}} views</div>					
-					</div>
-				</div>
-				<div class="box-overlay magictime" data-hover="rotateRight" data-return="">
-					<img src={{lecture.image.url}} class="size_clone" alt="" />
-				</div>
-				<a class="link" href="#" target="_blank"></a></div>
-			</div>
-		{% endfor %}
-	<!--more-->	
-		<div class="col-md-4 MoreBox">
-		  <a href="/">
-		      <h2 class="MoreButton2 wow fadeInUp" ><span class="EnphasizeLetter">M</span>ore <br>Lecture>>>></h2>
-		  </a>
-		</div>	
-<div class="col-md-12">&nbsp</div>						
-</div> <!-- End of Lecture Section-->
-
-<!--Footer-->
-<div class="container footer">
-   <div class="col-md-2">
-     <img src={% static "images/LOGO2.png" %} width="130"/>
-   </div>
-  <div class="col-md-9">&nbsp;</div>
-  <div class="pills col-md-2"><a href="https://info.tsinghua.edu.cn"><h6 class="pills">INFO&nbsp |</h6></a></div>
-  <div class="pills col-md-2"><a href="#"><h6 class="pills">清华地图  |</h6></a></div>
-  <div class="col-md-2 pills"><a href="#"><h6 class="pills">友情链接  |</h6></a></div>
-  <div class="col-md-2 pills"><a href="#"><h6 class="pills">关于我们</h6></a></div>
-  <div class="col-md-10">
-   	<h5>&nbsp &nbsp &nbsp &nbsp CopyRight 2017-2020 xxxxxx.com All Rights Reserved.
+            </div>
+        </div>
+        <!-- End of Scrolling Part-->
+    </div>
+    <!--CLOSE CONTAINER-->
+    <!--Competition Section-->
+    <a name="competition">
+        <div class="container competition_section">
+            <div class="col-md-12">
+                <h2 class="SubHeading wow fadeInUp">competition</h2>
+            </div>
+            <!--competitions-->
+            {% for competition in CompetitionList %}
+            <div class="col-md-4">
+                <h2 class="PicTitle wow fadeInUp">{{competition.title}}</h2>
+                <div class="box">
+                    <div class="box-content">
+                        <div class="box-wrapper">
+                            COMP {{forloop.counter}}<span class="name">{{competition.intro}}</span>
+                            <div class="row">{{competition.likes}} likes - {{competition.views}} views</div>
+                        </div>
+                    </div>
+                    <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                        <img src={{competition.image.url}} class="size_clone" alt="" />
+                    </div>
+                    <a class="link" href="#" target="_blank"></a></div>
+            </div>
+            {% endfor %}
+            <!--more-->
+            <div class="col-md-4 MoreBox">
+                <a href="/">
+                    <h2 class="MoreButton wow fadeInUp"><span class="EnphasizeLetter">M</span>ore <br>Competition>>>></h2>
+                </a>
+            </div>
+            <div class="col-md-12">&nbsp</div>
+        </div>
+        <!-- End of Competition Section-->
+    </a>
+    <!--Lecture Section-->
+    <a name="lecture">
+        <div class="container lecture_section">
+            <div class="col-md-12">
+                <h2 class="SubHeading2 wow fadeInUp">lecture</h2>
+            </div>
+            <!--lecture-->
+            {% for lecture in LectureList %}
+            <div class="col-md-4">
+                <h2 class="PicTitle2">{{lecture.title}}</h2>
+                <div class="box">
+                    <div class="box-content">
+                        <div class="box-wrapper">
+                            LEC {{forloop.counter}}<span class="name">{{lecture.intro}}</span>
+                            <div class="row">{{lecture.likes}} likes - {{lecture.views}} views</div>
+                        </div>
+                    </div>
+                    <div class="box-overlay magictime" data-hover="rotateRight" data-return="">
+                        <img src={{lecture.image.url}} class="size_clone" alt="" />
+                    </div>
+                    <a class="link" href="#" target="_blank"></a></div>
+            </div>
+            {% endfor %}
+            <!--more-->
+            <div class="col-md-4 MoreBox">
+                <a href="/">
+                    <h2 class="MoreButton2 wow fadeInUp"><span class="EnphasizeLetter">M</span>ore <br>Lecture>>>></h2>
+                </a>
+            </div>
+            <div class="col-md-12">&nbsp;</div>
+        </div>
+        <!-- End of Lecture Section-->
+    </a>
+    <!--Footer-->
+    <div class="container footer">
+        <div class="col-md-2">
+            <img src={% static "images/LOGO2.png" %} width="130" />
+        </div>
+        <div class="col-md-9">&nbsp;</div>
+        <div class="pills col-md-2"><a href="https://info.tsinghua.edu.cn"><h6 class="pills">INFO&nbsp |</h6></a></div>
+        <div class="pills col-md-2"><a href="#"><h6 class="pills">清华地图  |</h6></a></div>
+        <div class="col-md-2 pills"><a href="#"><h6 class="pills">友情链接  |</h6></a></div>
+        <div class="col-md-2 pills"><a href="#"><h6 class="pills">关于我们</h6></a></div>
+        <div class="col-md-10">
+            <h5>&nbsp; &nbsp; &nbsp; &nbsp; CopyRight 2017-2020 xxxxxx.com All Rights Reserved.
   </div>  
 </div>
 
 <!--script-->
-    <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script><script>window.jQuery || document.write('<script src={% static "js/jquery-1.11.0.min.js" %}><\/script>')</script>
+    <!-- <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script> -->
+	<script src={% static "js/jquery-1.11.3.min.js" %}></script>
+	<script>window.jQuery || document.write('<script src={% static "js/jquery-1.11.0.min.js" %}><\/script>')</script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
     <script src={% static "js/bootstrap-touch-slider.js" %}></script>
@@ -176,8 +250,25 @@
       var windowHeight = $(window).height();
       $(window).trigger('resize');
       });
+	$(function() {
+		$( "#Tabs1" ).tabs(); 
+	});
     </script>
-
+    
+    <!--dialog script-->
+    <script src={% static "js/jdialog.min.js" %}></script>
+	<script type="text/javascript">
+		$("#dialog-1").jDialog({
+	        skinClassName: 'demo',
+			allowOverlay:true,
+	        animationType: 'fade-in',
+	    });
+		$("#dialog-2").jDialog({
+	        skinClassName: 'demo',
+			allowOverlay:true,
+	        animationType:'fade-in',
+	    });
+	</script>
     
 </body>
 </html>

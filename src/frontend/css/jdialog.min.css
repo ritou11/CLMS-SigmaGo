@@ -1,0 +1,14 @@
+.jDialog{position:fixed;top:15%;left:50%;z-index:10000;-webkit-transform:translateX(-50%);transform:translateX(-50%);visibility:hidden}
+.jDialog.show{visibility:visible}
+.jDialog-content{background:#fff;border-radius:3px;box-shadow:0 0 5px rgba(0,0,0,.4)}
+.jDialog-overlay{position:fixed;top:0;bottom:0;left:0;right:0;z-index:9999;background:rgba(0,0,0,.4)}
+.fade-in .jDialog-content{opacity:0;-webkit-transform:scale(.7);transform:scale(.7);-webkit-transition:all .3s;transition:all .3s}
+.fade-in.jDialog.show .jDialog-content{opacity:1;-webkit-transform:scale(1);transform:scale(1)}
+.sticky-up.jDialog{top:0;-webkit-transform:translateX(-50%);transform:translateX(-50%)}
+.sticky-up.jDialog .jDialog-content{opacity:0;-webkit-transform:translateY(-200%);transform:translateY(-200%);-webkit-transition:all .3s;transition:all .3s}
+.sticky-up.jDialog.show .jDialog-content{opacity:1;border-radius:0 0 3px 3px;-webkit-transform:translateY(0);transform:translateY(0)}
+.slide-in.jDialog .jDialog-content{opacity:0;-webkit-transform:translateX(20%);transform:translateX(20%);-webkit-transition:all .3s cubic-bezier(.25,.5,.5,.9);transition:all .3s cubic-bezier(.25,.5,.5,.9)}
+.slide-in.jDialog.show .jDialog-content{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}
+.flip.jDialog{-webkit-perspective:1300px;perspective:1300px}
+.flip.jDialog .jDialog-content{opacity:0;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-transform:rotateY(-70deg);transform:rotateY(-70deg);-webkit-transition:all .3s;transition:all .3s}
+.flip.jDialog.show .jDialog-content{opacity:1;-webkit-transform:rotateY(0deg);transform:rotateY(0deg)}
