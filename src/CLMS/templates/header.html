@@ -1,0 +1,83 @@
+{% load static %}
+<head>
+  <link rel="stylesheet" href={% static "css/jdialog.min.css" %} media="all">
+  <link rel="stylesheet" href={% static "css/dialog.css" %} media="all">
+</head>
+<div class="container">
+      <div class="col-md-12"></div>
+    <!--BANNER PART-->
+      <div class="col-md-1"></div>
+      <!--logo-->
+      <div class="col-md-3 LogoContainer">
+          <img class="wow bounceIn TitleLogo" src={% static "images/LOGO.png" %} width="330" height="370" alt="" />&nbsp;
+      </div>
+      <!--title-->
+      <div class="col-md-6 TitleCon">
+          <img src={% static "images/TITLE.png" %} class="Title">
+      </div>
+      <!--function bar-->
+      <div class="BNContainer">
+          <!--user bar-->
+          <div class="col-md-6 BarContainer">
+              <img src={% static "images/user_c.png" %} class="bar">
+              <h5 class="log" data-toggle="JDialog" data-target="dialog-1">LOG IN</h5>
+              <h5 class="divider">/</h5>
+              <h5 class="sign" data-toggle="JDialog" data-target="dialog-2">SIGN UP</h5>
+              <h5 class="contact">CONTACT US</h5>
+          </div>
+          <!--end of userbar-->
+          <!--navlabel-->
+          <div class="col-md-6">
+              <div class="NavContainer">
+                  <!--home-->
+                  <a href="#">
+                      <div class="col-md-1 deplace">
+                          <img src={% static "images/home.png" %} class="NavLabel">
+                          <h5 class="NavName0"> HOME </h5>
+                      </div>
+                  </a>
+                  <!--comp-->
+                  <a href="#competition">
+                      <div class="col-md-1 deplace">
+                          <img src={% static "images/comp.png" %} class="NavLabel">
+                          <h5 class="NavName"> COMETITION </h5>
+                      </div>
+                  </a>
+                  <!--lec-->
+                  <a href="#lecture">
+                      <div class="col-md-1 deplace">
+                          <img src={% static "images/lec.png" %} class="NavLabel">
+                          <h5 class="NavName2"> LECTURE </h5>
+                      </div>
+                  </a>
+              </div>
+              <!--end of navbar-->
+          </div>
+          <!--end of nav-->
+      </div>
+      <!--end of function bar-->
+      <!--log in-->
+      <div class="jDialog" id="dialog-1">
+          <div id="mainlogin">
+              <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">LOG IN</h1>
+              <form action="#">
+                  <input type="text" placeholder="username or email" value="" required>
+                  <input type="password" placeholder="password" value="" required>
+                  <button type="submit"><i class="fa fa-arrow-right"></i></button>
+              </form>
+              <div id="note"><a href="#">Forgot your password?</a></div>
+          </div>
+      </div>
+      <!--sign up-->
+      <div class="jDialog" id="dialog-2">
+          <div id="mainlogin2">
+              <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">SIGN UP</h1>
+              <form action="#">
+                  <input type="text" placeholder="username or email" value="" required>
+                  <input type="password" placeholder="password(>6 letters)" value="" required>
+                  <input type="password" placeholder="password again" value="" required>
+                  <button type="submit"><i class="fa fa-arrow-right"></i></button>
+              </form>
+          </div>
+      </div>
+</div><!--CLOSE CONTAINER-->
