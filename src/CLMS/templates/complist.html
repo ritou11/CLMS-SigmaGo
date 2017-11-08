@@ -15,13 +15,7 @@
 </head>
 
 <body class="homepage">
-<div class="container">
-      <div class="col-md-12"></div>
-    <!--BANNER PART-->
-      <div class="col-md-1"></div>
-      <div class="col-md-3"><img class="wow bounceIn" src={% static "images/LOGO.png" %} width="420" height="450" alt=""/>&nbsp;</div>
-      <div class="col-md-5">&nbsp;</div>
-</div><!--CLOSE CONTAINER-->
+{% include "header.html" %}
 <div class="col-md-1">&nbsp;</div>
 <div class="col-md-10">
 <div class="keybox">
@@ -107,7 +101,7 @@
     <script type="text/javascript">
             $('#bootstrap-touch-slider').bsTouchSlider();
     </script>
-    <script src={% static "assets/js/wow.min.js" %}></script>
+    <script src={% static "js/wow.min.js" %}></script>
     <script>
     $(document).ready(function(){
       // vh fix

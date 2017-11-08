@@ -12,18 +12,12 @@
   <link rel="stylesheet" href={% static "css/magic.min.css" %} />
   <link rel="stylesheet" type="text/css" href={% static "css/htmleaf-demo.css" %} media="all">
   <link rel="stylesheet" type="text/css" href={% static "css/animate.css" %} media="all">
+  <link rel="stylesheet" href={% static "css/jdialog.min.css" %} media="all">
+  <link rel="stylesheet" href={% static "css/dialog.css" %} media="all">
 </head>
 
 <body class="homepage">
-<div class="container">
-      <div class="col-md-12"></div>
-    <!--BANNER PART-->
-      <div class="col-md-1"></div>
-      <div class="col-md-3"><img class="wow bounceIn" src={% static "images/LOGO.png" %} width="420" height="450" alt=""/>&nbsp;</div>
-      <div class="col-md-5">&nbsp;</div>
-</div><!--CLOSE CONTAINER-->
-
- 
+{% include "header.html" %}
 <div class="container IntroPart">
  <!--Title-->
   <div class="col-md-1">&nbsp;</div>
@@ -97,7 +91,7 @@
     <script type="text/javascript">
             $('#bootstrap-touch-slider').bsTouchSlider();
     </script>
-    <script src={% static "assets/js/wow.min.js" %}></script>
+    <script src={% static "js/wow.min.js" %}></script>
     <script>
     $(document).ready(function(){
       // vh fix
