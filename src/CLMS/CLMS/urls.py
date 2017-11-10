@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^CompetitionList/$', views.competitionList, name='CompetitionList'),
     url(r'^LectureList/$', views.lectureList, name='LectureList'),
 
+    url(r'^index/$', views.index, name='index4test'),
     url(r'^login/$', views.login, name='Login'),
     url(r'^register/$', views.register, name='Register'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
