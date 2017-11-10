@@ -66,6 +66,7 @@ def login(request):
             password = uf.cleaned_data['password']
             userPassJudge = User.objects.filter(username__exact=username,password__exact=password)
 
+            print(User.objects.all())
             if userPassJudge:
                 response = HttpResponseRedirect('/index/')
                 response.set_cookie('cookie_username',username,3600)
