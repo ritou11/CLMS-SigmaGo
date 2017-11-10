@@ -43,19 +43,29 @@ def home(request):
 
 
 def competition(request, id):
-    return render(request, 'single.html')
+    competition=Competition.objects.get(id=str(id))
+    return render(request, 'single.html',{'competition':competition})
 
 
 def lecture(request, id):
-    pass
+    lecture=Lecture.objects.get(id=str(id))
+    return render(request, 'single.html',{'lecture':lecture})
 
 
 def competitionList(request):
-    return render(request, 'complist.html')
+    listLen=4
+    CompetitionList = Competition.objects.all()
+    if len(CompetitionList) > 4:
+        CompetitionList = CompetitionList[0:3]
+    return render(request, 'complist.html',{'List':CompetitionList})
 
 
 def lectureList(request):
-    pass
+    listLen=4
+    lectureList = Lecture.objects.all()
+    if len(lectureList) > 4:
+        lectureList = lectureList[0:3]
+    return render(request, 'complist.html',{'List':CompetitionList})
 
 
 def login(request):
