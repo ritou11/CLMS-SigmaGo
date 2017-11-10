@@ -43,7 +43,7 @@ def home(request):
 
 
 def competition(request, id):
-    pass
+    return render(request, 'single.html')
 
 
 def lecture(request, id):
@@ -51,7 +51,7 @@ def lecture(request, id):
 
 
 def competitionList(request):
-    pass
+    return render(request, 'complist.html')
 
 
 def lectureList(request):
