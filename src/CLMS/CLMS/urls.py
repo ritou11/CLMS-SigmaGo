@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^Slide/(?P<id>\d+)/$', views.slide, name='Slide'),
     url(r'^CompetitionList/$', views.competitionList, name='CompetitionList'),
     url(r'^LectureList/$', views.lectureList, name='LectureList'),
+    url(r'^tag(?P<tag>\w+)/$',views.search_tag,name='search_tag'),
+    url(r'^search/$',views.search,name='search'),
 
     url(r'^index/$', views.index, name='index4test'),
     url(r'^login/$', views.login, name='Login'),

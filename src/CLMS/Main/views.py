@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
-from Main.models import Competition, Lecture, User, RegUserForm, LogUserForm
+from Main.models import *
 from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -30,11 +30,9 @@ def home(request):
             continue
         if (CompetitionList[CompetitionCnt].date_time > LectureList[LectureCnt].date_time):
             SlideList.append(CompetitionList[CompetitionCnt])
-            print(CompetitionList[CompetitionCnt].date_time)
             CompetitionCnt += 1
         else:
             SlideList.append(LectureList[LectureCnt])
-            print(LectureList[LectureCnt].date_time)
             LectureCnt += 1
     print(LectureCnt)
     print(CompetitionCnt)
@@ -53,19 +51,93 @@ def lecture(request, id):
 
 
 def competitionList(request):
-    listLen=4
+    listLen = 4
     CompetitionList = Competition.objects.all()
-    if len(CompetitionList) > 4:
+    if len(CompetitionList) > listlen:
         CompetitionList = CompetitionList[0:3]
-    return render(request, 'complist.html',{'List':CompetitionList})
+    TagList = Tag.objects.all()
+    return render(request, 'complist.html',{'List':CompetitionList,'Tag':TagList})
 
 
 def lectureList(request):
-    listLen=4
+    listLen = 4
     lectureList = Lecture.objects.all()
-    if len(lectureList) > 4:
+    if len(lectureList) > listlen:
         lectureList = lectureList[0:3]
-    return render(request, 'complist.html',{'List':CompetitionList})
+    TagList = Tag.objects.all()
+    return render(request, 'complist.html',{'List':CompetitionList,'Tag':TagList})
+
+def search_tag(request,tag):
+    try:
+        CompetitionList = Competition.objects.filter(tag__name=tag)
+    except Competition.DoesNotExist:
+        raise Http404
+    try:
+        LectureList = Lecture.objects.filter(tag__name=tag)
+    except Lecture.DoesNotExist:
+        raise Http404
+    listLen = 4
+    result_list = []
+    CompetitionCnt = 0
+    LectureCnt = 0 
+    for cnt in range(listLen):
+        if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
+            break
+        if (CompetitionCnt >= len(CompetitionList)):
+            result_list.append(LectureList[LectureCnt])
+            LectureCnt += 1
+            continue
+        if (LectureCnt >= len(LectureList)):
+            result_list.append(CompetitionList[CompetitionCnt])
+            CompetitionCnt += 1
+            continue
+        if (CompetitionList[CompetitionCnt].date_time > LectureList[LectureCnt].date_time):
+            result_list.append(CompetitionList[CompetitionCnt])
+            CompetitionCnt += 1
+        else:
+            result_list.append(LectureList[LectureCnt])
+            LectureCnt += 1
+    TagList = Tag.objects.all()
+    return render(request,'complist.html',{'result_list':result_list,'Tag':TagList})
+
+def search(request):
+    if 's' in request.GET:
+        s=request.GET['s']
+        if not s:
+            return render(request,'home.html')
+        else:
+            CompetitionList=Competition.objects.filter(title__icontains=s) | Competition.objects.filter(subtitle__icontains=s) | \
+                            Competition.objects.filter(intro__icontains=s) | Competition.objects.filter(content__icontains=s)  | \
+                            Competition.objects.filter(holder__icontains=s)
+            LectureList=Lecture.objects.filter(title__icontains=s) | Lecture.objects.filter(subtitle__icontains=s) | \
+                        Lecture.objects.filter(intro__icontains=s) | Lecture.objects.filter(content__icontains=s)  | \
+                        Lecture.objects.filter(holder__icontains=s)
+            CompetitionList.distinct()
+            LectureList.distinct()
+            listLen = 4
+            result_list = []
+            CompetitionCnt = 0
+            LectureCnt = 0 
+            for cnt in range(listLen):
+                if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
+                    break
+                if (CompetitionCnt >= len(CompetitionList)):
+                    result_list.append(LectureList[LectureCnt])
+                    LectureCnt += 1
+                    continue
+                if (LectureCnt >= len(LectureList)):
+                    result_list.append(CompetitionList[CompetitionCnt])
+                    CompetitionCnt += 1
+                    continue
+                if (CompetitionList[CompetitionCnt].date_time > LectureList[LectureCnt].date_time):
+                    result_list.append(CompetitionList[CompetitionCnt])
+                    CompetitionCnt += 1
+                else:
+                    result_list.append(LectureList[LectureCnt])
+                    LectureCnt += 1
+            TagList = Tag.objects.all()
+            return render(request,'complist.html',{'result_list':result_list,'Tag':TagList})
+    return HttpResponseRedirect('/')
 
 
 def login(request):
