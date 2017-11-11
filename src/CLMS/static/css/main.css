@@ -254,6 +254,7 @@ font-size:12px;
 }
 
 .Pagenav{
+	padding:0px 140px;
 	
 }
 .EventGroupContainer{
@@ -418,7 +419,6 @@ font-size:12px;
 .NavName:hover {
 	color:#3AA6C1;
 	opacity:1;
-	animation:bounce;
 }
 .deplace{
 	margin:1px 17px;	
@@ -426,7 +426,7 @@ font-size:12px;
 .deplace:hover .NavName{
 	color:#3AA6C1;
 	opacity:1;
-	animation:wow fadeInUp
+	
 }
 .deplace:hover .NavLabel {
 	opacity:1;
@@ -434,13 +434,11 @@ font-size:12px;
 .deplace:hover .NavName0{
 	color:#3AA6C1;
 	opacity:1;
-	animation:wow fadeInUp;
 
 }
 .deplace:hover .NavName2{
 	color:#3AA6C1;
 	opacity:1;
-	animation:wow fadeInUp
 }
 .log{
 	position:relative;
@@ -522,3 +520,44 @@ font-size:12px;
 	background-color:#A0A0A0;
 	opacity:0.75;
 }
+.dede_pages{ 
+	text-align:right;	
+}
+.dede_pages ul{
+	float:right;
+	padding:12px 0px 12px 16px;	
+}
+.dede_pages ul li{
+	float:left;
+	list-style: none;
+	font-family:Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
+	line-height:17px;
+	margin-right:6px;
+	border:1px solid #E9E9E9;
+}
+.dede_pages ul li a{
+	float:left;
+	padding:2px 4px 2px;
+	color:#555;
+	display:block;
+}
+.dede_pages ul li a:hover{
+	color:#F15272;
+	text-decoration:none;
+	padding:2px 4px 2px;
+}
+.dede_pages ul li.thisclass,.dede_pages ul li.thisclass a,.pagebox ul li.thisclass a:hover{
+	background-color:#F8F8F8;
+	padding:2px 4px 2px;
+	font-weight:bold;
+}
+.dede_pages .pageinfo{
+	line-height:21px;
+	padding:12px 10px 12px 16px;
+	color:#999;
+}
+.dede_pages .pageinfo strong{
+	color:#1693B6;
+	font-weight:normal;
+	margin:0px 2px;
+} 
