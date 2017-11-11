@@ -75,9 +75,10 @@
         <div class="jDialog" id="dialog-1">
             <div id="mainlogin">
                 <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">LOG IN</h1>
-                <form action="#">
-                    <input type="text" placeholder="username or email" value="" required>
-                    <input type="password" placeholder="password" value="" required>
+                <form action="login/" method="post">
+                    {% csrf_token %}
+                    {{login.username}}
+                    {{login.password}}
                     <button type="submit"><i class="fa fa-arrow-right"></i></button>
                 </form>
                 <div id="note"><a href="#">Forgot your password?</a></div>
@@ -85,12 +86,13 @@
         </div>
         <!--sign up-->
         <div class="jDialog" id="dialog-2">
-            <div id="mainlogin2">
+            <div id="mainlogin">
                 <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">SIGN UP</h1>
-                <form action="#">
-                    <input type="text" placeholder="username or email" value="" required>
-                    <input type="password" placeholder="password(>6 letters)" value="" required>
-                    <input type="password" placeholder="password again" value="" required>
+                <form action="register/" method="post">
+                    {% csrf_token %}
+                    {{reg.username}}
+                    {{reg.password1}}
+                    {{reg.password2}}
                     <button type="submit"><i class="fa fa-arrow-right"></i></button>
                 </form>
             </div>
