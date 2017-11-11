@@ -92,12 +92,12 @@
         <div class="jDialog" id="dialog-2">
             <div id="mainreg">
                 <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">SIGN UP</h1>
-                <form action="register/" method="post">
+                <form action="register/" method="post" id="frmRegister">
                     {% csrf_token %}
                     {{reg.username}}
                     {{reg.password1}}
                     {{reg.password2}}
-                    <button type="submit"><i class="fa fa-arrow-right"></i></button>
+                    <button type="button" onclick="doRegister()"><i class="fa fa-arrow-right"></i></button>
                 </form>
             </div>
         </div>

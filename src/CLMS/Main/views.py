@@ -63,7 +63,7 @@ def competitionList(request):
     competitionList = Competition.objects.all()
     if len(competitionList) > listLen:
         competitionList = competitionList[0:listLen - 1]
-    return render(request, 'complist.html', {'List': competitionList,'Tag':TagList})
+    return render(request, 'complist.html', {'List': competitionList, 'Tag': TagList})
 
 
 def lectureList(request):
@@ -73,10 +73,10 @@ def lectureList(request):
         lectureList = lectureList[0:listLen - 1]
     TagList = Tag.objects.all()
     return render(request, 'complist.html',
-                  {'List': lectureList,'Tag':TagList})
+                  {'List': lectureList, 'Tag': TagList})
 
 
-def search_tag(request,tag):
+def search_tag(request, tag):
     try:
         CompetitionList = Competition.objects.filter(tag__name=tag)
     except Competition.DoesNotExist:
@@ -88,7 +88,7 @@ def search_tag(request,tag):
     listLen = 4
     result_list = []
     CompetitionCnt = 0
-    LectureCnt = 0 
+    LectureCnt = 0
     for cnt in range(listLen):
         if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
             break
@@ -107,26 +107,27 @@ def search_tag(request,tag):
             result_list.append(LectureList[LectureCnt])
             LectureCnt += 1
     TagList = Tag.objects.all()
-    return render(request,'complist.html',{'result_list':result_list,'Tag':TagList})
+    return render(request, 'complist.html', {'result_list': result_list, 'Tag': TagList})
+
 
 def search(request):
     if 's' in request.GET:
-        s=request.GET['s']
+        s = request.GET['s']
         if not s:
-            return render(request,'home.html')
+            return render(request, 'home.html')
         else:
-            CompetitionList=Competition.objects.filter(title__icontains=s) | Competition.objects.filter(subtitle__icontains=s) | \
-                            Competition.objects.filter(intro__icontains=s) | Competition.objects.filter(content__icontains=s)  | \
-                            Competition.objects.filter(holder__icontains=s)
-            LectureList=Lecture.objects.filter(title__icontains=s) | Lecture.objects.filter(subtitle__icontains=s) | \
-                        Lecture.objects.filter(intro__icontains=s) | Lecture.objects.filter(content__icontains=s)  | \
-                        Lecture.objects.filter(holder__icontains=s)
+            CompetitionList = Competition.objects.filter(title__icontains=s) | Competition.objects.filter(subtitle__icontains=s) | \
+                Competition.objects.filter(intro__icontains=s) | Competition.objects.filter(content__icontains=s) | \
+                Competition.objects.filter(holder__icontains=s)
+            LectureList = Lecture.objects.filter(title__icontains=s) | Lecture.objects.filter(subtitle__icontains=s) | \
+                Lecture.objects.filter(intro__icontains=s) | Lecture.objects.filter(content__icontains=s) | \
+                Lecture.objects.filter(holder__icontains=s)
             CompetitionList.distinct()
             LectureList.distinct()
             listLen = 4
             result_list = []
             CompetitionCnt = 0
-            LectureCnt = 0 
+            LectureCnt = 0
             for cnt in range(listLen):
                 if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
                     break
@@ -145,7 +146,7 @@ def search(request):
                     result_list.append(LectureList[LectureCnt])
                     LectureCnt += 1
             TagList = Tag.objects.all()
-            return render(request,'complist.html',{'result_list':result_list,'Tag':TagList})
+            return render(request, 'complist.html', {'result_list': result_list, 'Tag': TagList})
     return HttpResponseRedirect('/')
 
 
@@ -176,38 +177,18 @@ def register(request):
             username = uf.cleaned_data['username']
             password1 = uf.cleaned_data['password1']
             password2 = uf.cleaned_data['password2']
+            if(len(password1) != 32):
+                return HttpResponse('Not valid')
             try:
                 registJudge = User.objects.filter(
                     username=username).get().username
-                return render_to_response('register.html',
-                                          {'registJudge': registJudge})
+                return HttpResponse('User existed')
             except:
-                if password1 != password2:
-                    return HttpResponse('两次密码不一样')
-
-                    registAdd = User.objects.create(
-                        username=username, password=password1)
-                    # for test, need to change later.
-                    return render_to_response('register.html',
-                                              {'registAdd': registAdd,
-                                               'username': username})
-                elif len(password1) < 7:
-                    return HttpResponse('Too short password')
-                elif password1 == username:
-                    return HttpResponse(
-                        'Username cannot be the same as password.')
-                else:
-                    registAdd = User.objects.create(
-                        username=username, password=password1)
-                    # for test, need to change later.
-                    return render_to_response('register.html',
-                                              {'registAdd': registAdd,
-                                               'username': username})
-
-    else:
-        uf = RegUserForm()
-    return render_to_response('register.html', {'uf': uf, 'Method': Method})
-
+                registAdd = User.objects.create(
+                    username=username, password=password1)
+                if registAdd:
+                    return HttpResponse('Success')
+    return HttpResponse('Not valid')
 # test login and logout
 
 
