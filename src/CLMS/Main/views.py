@@ -85,18 +85,15 @@ def login(request):
             password = uf.cleaned_data['password']
             userPassJudge = User.objects.filter(
                 username__exact=username, password__exact=password)
-
-            print(User.objects.all())
+            print(username)
+            print(password)
             if userPassJudge:
-                response = HttpResponseRedirect('/index/')
+                response = HttpResponse('Success')
                 response.set_cookie('cookie_username', username, 3600)
                 return response
             else:
                 return HttpResponse('No username or valid one')
-    else:
-        uf = LogUserForm()
-    # for test, need to change later.
-    return render_to_response('login.html', {'uf': uf})
+    return HttpResponse('Not valid')
 
 
 def register(request):

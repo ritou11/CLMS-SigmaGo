@@ -111,9 +111,11 @@ class LogUserForm(forms.Form):
     username = forms.CharField(label='用户名',
                                max_length=100,
                                widget=forms.TextInput(attrs={
-                                   'placeholder': 'username or email'
+                                   'placeholder': 'username or email',
+                                   'id': 'login_username'
                                }))
     password = forms.CharField(label='密码',
                                widget=forms.PasswordInput(attrs={
-                                   'placeholder': 'password'
+                                   'placeholder': 'password',
+                                   'id': 'login_password'
                                }))
