@@ -114,7 +114,7 @@
                 <div class="carousel-inner" role="listbox">
                     <!-- First Slide -->
                     {% for slide in SlideList %}
-                    <div class="item active">
+                    <div class="item {% if forloop.first %} active {% endif %}" >
                         <!-- Slide Background -->
                         <img src={{slide.image.url}} alt="Bootstrap Touch Slider" class="slide-image" />
                         <div class="bs-slider-overlay"></div>
