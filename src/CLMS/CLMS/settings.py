@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'image_cropping',
     'wechat',
-    'django.contrib.admin',
     'xadmin',
     'crispy_forms',
     'reversion',
