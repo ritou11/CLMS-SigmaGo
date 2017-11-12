@@ -33,4 +33,8 @@ urlpatterns = [
     url(r'^index/$', views.index, name='index4test'),
     url(r'^login/$', views.login, name='Login'),
     url(r'^register/$', views.register, name='Register'),
+    
+    url(r'^refresh_menu/', refresh_menu),
+    url(r'^refresh_actions/', refresh_actions),
+    url(r'^refresh_user/', refresh_user),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

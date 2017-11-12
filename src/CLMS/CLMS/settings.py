@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     'Main',
     'easy_thumbnails',
     'image_cropping',
+    'wechat',
+    'django.contrib.admin',
+    'xadmin',
+    'crispy_forms',
+    'reversion',
 ]
 
 
@@ -134,3 +139,11 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# token
+
+token = "**"
+APP_ID = "**"
+APP_SECRET = "**"
+
