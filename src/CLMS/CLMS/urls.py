@@ -18,6 +18,14 @@ from django.contrib import admin
 from Main import views
 from django.conf import settings
 from django.conf.urls.static import static
+#from wechat.menu.view import refresh as refresh_menu
+from wechat.actions.view import all_actions as refresh_actions
+from xadmin.plugins import xversion
+import xadmin
+xadmin.autodiscover()
+
+
+xversion.register_models()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -34,7 +42,7 @@ urlpatterns = [
     url(r'^login/$', views.login, name='Login'),
     url(r'^register/$', views.register, name='Register'),
     
-    url(r'^refresh_menu/', refresh_menu),
+    #url(r'^refresh_menu/', refresh_menu),
     url(r'^refresh_actions/', refresh_actions),
-    url(r'^refresh_user/', refresh_user),
+    #url(r'^refresh_user/', refresh_user),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

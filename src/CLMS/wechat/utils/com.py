@@ -1,5 +1,5 @@
 import ujson as json
-import urllib2
+import urllib.request
 import requests
 from django.http.response import HttpResponse
 
@@ -16,7 +16,7 @@ def get_api_data(url):
 
 def message_logger(fn):
     def wrapper(*args, **kwargs):
-        print kwargs["message"]["content"]
+        print (kwargs["message"]["content"])
         fn(*args, **kwargs)
         print('after')
 
