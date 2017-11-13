@@ -4,6 +4,8 @@ from Main.models import *
 from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.decorators.csrf import csrf_exempt
+from Main.wxapp import WxApp
 # Create your views here.
 
 
@@ -206,3 +208,10 @@ def logout(request):
 
 def slide(request):
     pass
+
+
+@csrf_exempt
+def wechat(request):
+    app = WxApp()
+    result = app.process(request.GET, request.body)
+    return HttpResponse(result)
