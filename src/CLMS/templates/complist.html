@@ -27,84 +27,44 @@
 	<div class="dede_pages ">
 	<ul class="pagelist">
 		<li>FRONT</li>
-		<li class="thisclass">1</li>
-		<li><a href='#'>2</a></li>
-		<li><a href='#'>3</a></li>
-		<li><a href='#'>4</a></li>
-		<li><a href='#'>5</a></li>
-		<li><a href='#'>6</a></li>
-		<li><a href='#'>7</a></li>
-		<li><a href='#'>8</a></li>
-		<li><a href='#'>9</a></li>
-		<li><a href='#'>10</a></li>
+    {% for p in pagelist %}
+      {% if forloop.counter == page %}
+        <li class="thisclass">{{page}}</li>
+      {% else %}
+        <li><a href='#'>{{p}}</a></li>
+      {% endif %}
+    {% endfor %}
 		<li><a href='#'>NEXT</a></li>
 		<li><a href='#'>BACK</a></li>
 		<li><select name='sldd' style='width:42px height:10px;' onchange='location.href=this.options[this.selectedIndex].value;'>
-			<option value='#' selected>1</option>
-			<option value='#'>2</option>
-			<option value='#'>3</option>
-			<option value='#'>4</option>
-			<option value='#'>5</option>
-			<option value='#'>6</option>
-			<option value='#'>7</option>
-			<option value='#'>8</option>
-			<option value='#'>9</option>
-			<option value='#'>10</option>
+      {% for p in pagelist %}
+        {% if forloop.counter == page %}
+          <option value='#' selected>{{page}}</option>
+        {% else %}
+          <option value='#'>{{p}}</option>
+        {% endif %}
+      {% endfor %}
 		</select></li>
-		<li><span class="pageinfo">Total <strong>10</strong>Pages<strong>335</strong>Records</span></li>
+		<li><span class="pageinfo">Total <strong>{{pagelist|length}}</strong>Pages<strong>{{total}}</strong>Records</span></li>
 	</ul>
 </div>
 </div>
 
 <div class="col-md-12 Pagenav">&nbsp;</div>
 <div class="container">
-<div class="col-md-12 EventGroupContainer">
-   <div class="col-md-1"></div>
-   <div class="col-md-10">
-           <div class="ImgContainer">
-               <img src={% static "images/exa6.png" %} class="ImgInclude wow fadeIn">
-               <img src={% static "images/Line.png" %} class="divider2 wow fadeInUpBig">
-               <div class="SectionBox">
-               </div>
-         </div>
-   </div>   
-</div>
-
-<div class="col-md-12 EventGroupContainer">
-   <div class="col-md-1"></div>
-   <div class="col-md-10">
-           <div class="ImgContainer">
-               <img src={% static "images/exa1.png" %} class="ImgInclude wow fadeIn">
-               <img src={% static "images/Line.png" %} class="divider2 wow fadeInUpBig">
-               <div class="SectionBox">
-               </div>
-         </div>
-   </div>   
-</div>
-
-<div class="col-md-12 EventGroupContainer">
-   <div class="col-md-1"></div>
-   <div class="col-md-10">
-           <div class="ImgContainer">
-               <img src={% static "images/exa2.png" %} class="ImgInclude wow fadeIn">
-               <img src={% static "images/Line.png" %} class="divider2 wow fadeInUpBig">
-               <div class="SectionBox">
-               </div>
-         </div>
-   </div>   
-</div>
-
-<div class="col-md-12 EventGroupContainer">
-   <div class="col-md-1"></div>
-   <div class="col-md-10">
-           <div class="ImgContainer">
-               <img src={% static "images/main.png" %} class="ImgInclude wow fadeIn">
-               <img src={% static "images/Line.png" %} class="divider2 wow fadeInUpBig">
-               <div class="SectionBox">
-               </div>
-         </div>
-   </div>   
-</div>
+  {% for comp in list %}
+  <div class="col-md-12 EventGroupContainer">
+     <div class="col-md-1"></div>
+     <div class="col-md-10">
+             <div class="ImgContainer">
+                 <img src={{comp.image.url}} class="ImgInclude wow fadeIn">
+                 <img src={% static "images/Line.png" %} class="divider2 wow fadeInUpBig">
+                 <div class="SectionBox">
+                 </div>
+           </div>
+     </div>   
+  </div>
+  {% endfor %}
 </div>
 <!--Footer-->
 <div class="container footer">
