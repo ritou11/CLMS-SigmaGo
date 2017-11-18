@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'image_cropping',
     'wechat',
-    'xadmin',
-    'crispy_forms',
-    'reversion',
+    #'xadmin',
+    #'crispy_forms',
+    #'reversion',
 ]
 
 
@@ -142,7 +142,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # token
 
-token = "7casQTKD6T8mQtMaNLmIOIjc8ATHBzW6M9j-N4xOKGy0Qb2gkAK44PCq6vW4WwX0RrgvS8JNiGGQII42new9MAQD7-g4zH5eazsXp8zFH525SjKAcRjrC0P06NJ1ErO1WXZaAIAGHJ"
-APP_ID = "wx9bb9add5460889d5"
-APP_SECRET = "951297bf8653eb70738ee7ff741a4782"
+WECHAT_TOKEN = "SigmaGo"
+WECHAT_APPID = "******"
+WECHAT_APPSECRET = "*******"
 
