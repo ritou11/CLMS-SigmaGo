@@ -27,9 +27,6 @@ class Competition(models.Model):
     method = models.TextField(blank=True, null=True)
     award = models.TextField(blank=True, null=True)
 
-    # for recommendation
-    #mainAudience = models.CharField(max_length=100)
-
     # image
     image = models.ImageField(
         upload_to='./media/Competition/images/', null=True, blank=True)
@@ -70,9 +67,6 @@ class Lecture(models.Model):
     likes = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
 
-    # for recommendation
-    # mainAudience = models.CharField(max_length=100)
-
     # image
     image = models.ImageField(
         upload_to='./media/Lecture/images/', null=True, blank=True)
@@ -93,9 +87,9 @@ class User(models.Model):
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
 
-    #stuType = models.CharField(max_length=30)   # Undergraduate or graduate student
-    #grade = models.IntegerField(default=0)
-    #interestTag = models.ManyToManyField(Tag)   # for recommendation
+    stuType = models.CharField(max_length=30)   # Undergraduate or graduate student
+    grade = models.IntegerField(default=0)
+    interestTag = models.ManyToManyField(Tag)   # for recommendation
     
     def __unicode__(self):
         return self.username
