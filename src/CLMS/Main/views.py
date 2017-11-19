@@ -4,7 +4,41 @@ from Main.models import *
 from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django import forms
+import hashlib
 # Create your views here.
+
+class RegUserForm(forms.Form):
+    username = forms.CharField(label='用户名',
+                               max_length=100,
+                               widget=forms.TextInput(attrs={
+                                   'placeholder': 'username or email',
+                                   'id': 'reg_username'
+                               }))
+    password1 = forms.CharField(label='密码',
+                                widget=forms.PasswordInput(attrs={
+                                    'placeholder': 'password(>6 letters)',
+                                    'id': 'reg_password1'
+                                }))
+    password2 = forms.CharField(label='请再输入密码',
+                                widget=forms.PasswordInput(attrs={
+                                    'placeholder': 'password again',
+                                    'id': 'reg_password2'
+                                }))
+
+
+class LogUserForm(forms.Form):
+    username = forms.CharField(label='用户名',
+                               max_length=100,
+                               widget=forms.TextInput(attrs={
+                                   'placeholder': 'username or email',
+                                   'id': 'login_username'
+                               }))
+    password = forms.CharField(label='密码',
+                               widget=forms.PasswordInput(attrs={
+                                   'placeholder': 'password',
+                                   'id': 'login_password'
+                               }))
 
 
 def home(request):
@@ -155,7 +189,7 @@ def login(request):
         uf = LogUserForm(request.POST)
         if uf.is_valid():
             username = uf.cleaned_data['username']
-            password = uf.cleaned_data['password']
+            password = hashlib.md5(uf.cleaned_data['password'].encode('utf-8')).hexdigest()
             userPassJudge = User.objects.filter(
                 username__exact=username, password__exact=password)
             print(username)
@@ -175,8 +209,8 @@ def register(request):
         uf = RegUserForm(request.POST)
         if uf.is_valid():
             username = uf.cleaned_data['username']
-            password1 = uf.cleaned_data['password1']
-            password2 = uf.cleaned_data['password2']
+            password1 = hashlib.md5(uf.cleaned_data['password1'].encode('utf-8')).hexdigest()
+            password2 = hashlib.md5(uf.cleaned_data['password2'].encode('utf-8')).hexdigest()
             if(len(password1) != 32):
                 return HttpResponse('Not valid')
             try:

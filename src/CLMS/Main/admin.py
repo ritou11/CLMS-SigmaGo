@@ -9,3 +9,4 @@ class MyModelAdmin(ImageCroppingMixin,admin.ModelAdmin):
 admin.site.register(models.Tag)
 admin.site.register(models.Competition)
 admin.site.register(models.Lecture)
+admin.site.register(models.User)

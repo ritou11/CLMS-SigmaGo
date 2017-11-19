@@ -90,35 +90,3 @@ class User(models.Model):
     def __unicode__(self):
         return self.username
 
-
-class RegUserForm(forms.Form):
-    username = forms.CharField(label='用户名',
-                               max_length=100,
-                               widget=forms.TextInput(attrs={
-                                   'placeholder': 'username or email',
-                                   'id': 'reg_username'
-                               }))
-    password1 = forms.CharField(label='密码',
-                                widget=forms.PasswordInput(attrs={
-                                    'placeholder': 'password(>6 letters)',
-                                    'id': 'reg_password1'
-                                }))
-    password2 = forms.CharField(label='请再输入密码',
-                                widget=forms.PasswordInput(attrs={
-                                    'placeholder': 'password again',
-                                    'id': 'reg_password2'
-                                }))
-
-
-class LogUserForm(forms.Form):
-    username = forms.CharField(label='用户名',
-                               max_length=100,
-                               widget=forms.TextInput(attrs={
-                                   'placeholder': 'username or email',
-                                   'id': 'login_username'
-                               }))
-    password = forms.CharField(label='密码',
-                               widget=forms.PasswordInput(attrs={
-                                   'placeholder': 'password',
-                                   'id': 'login_password'
-                               }))
