@@ -189,7 +189,7 @@ def login(request):
         uf = LogUserForm(request.POST)
         if uf.is_valid():
             username = uf.cleaned_data['username']
-            password = hashlib.md5(uf.cleaned_data['password'].encode('utf-8')).hexdigest()
+            password = uf.cleaned_data['password']
             userPassJudge = User.objects.filter(
                 username__exact=username, password__exact=password)
             print(username)
@@ -209,8 +209,8 @@ def register(request):
         uf = RegUserForm(request.POST)
         if uf.is_valid():
             username = uf.cleaned_data['username']
-            password1 = hashlib.md5(uf.cleaned_data['password1'].encode('utf-8')).hexdigest()
-            password2 = hashlib.md5(uf.cleaned_data['password2'].encode('utf-8')).hexdigest()
+            password1 = uf.cleaned_data['password1']
+            password2 = uf.cleaned_data['password2']
             if(len(password1) != 32):
                 return HttpResponse('Not valid')
             try:
