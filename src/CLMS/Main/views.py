@@ -4,7 +4,41 @@ from Main.models import *
 from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django import forms
+import hashlib
 # Create your views here.
+
+class RegUserForm(forms.Form):
+    username = forms.CharField(label='用户名',
+                               max_length=100,
+                               widget=forms.TextInput(attrs={
+                                   'placeholder': 'username or email',
+                                   'id': 'reg_username'
+                               }))
+    password1 = forms.CharField(label='密码',
+                                widget=forms.PasswordInput(attrs={
+                                    'placeholder': 'password(>6 letters)',
+                                    'id': 'reg_password1'
+                                }))
+    password2 = forms.CharField(label='请再输入密码',
+                                widget=forms.PasswordInput(attrs={
+                                    'placeholder': 'password again',
+                                    'id': 'reg_password2'
+                                }))
+
+
+class LogUserForm(forms.Form):
+    username = forms.CharField(label='用户名',
+                               max_length=100,
+                               widget=forms.TextInput(attrs={
+                                   'placeholder': 'username or email',
+                                   'id': 'login_username'
+                               }))
+    password = forms.CharField(label='密码',
+                               widget=forms.PasswordInput(attrs={
+                                   'placeholder': 'password',
+                                   'id': 'login_password'
+                               }))
 
 
 def home(request):
