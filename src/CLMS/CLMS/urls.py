@@ -27,11 +27,11 @@ urlpatterns = [
     url(r'^Slide/(?P<id>\d+)/$', views.slide, name='Slide'),
     url(r'^CompetitionList/$', views.competitionList, name='CompetitionList'),
     url(r'^LectureList/$', views.lectureList, name='LectureList'),
-    url(r'^tag(?P<tag>\w+)/$',views.search_tag,name='search_tag'),
-    url(r'^search/$',views.search,name='search'),
+    url(r'^tag(?P<tag>\w+)/$', views.search_tag, name='search_tag'),
+    url(r'^search/$', views.search, name='search'),
 
     url(r'^index/$', views.index, name='index4test'),
     url(r'^login/$', views.login, name='Login'),
     url(r'^register/$', views.register, name='Register'),
-    url(r'^wechat$', views.wechat, name='Wechat')
+    # url(r'^wechat$', views.wechat, name='Wechat')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
