@@ -11,16 +11,89 @@
   <link rel="stylesheet" href="css/magic.min.css" />
   <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css" media="all">
   <link rel="stylesheet" type="text/css" href="css/animate.css" media="all">
+  <link rel="stylesheet" href="css/jdialog.min.css" media="all">
+  <link rel="stylesheet" href="css/dialog.css" media="all">
 </head>
 
 <body class="homepage">
+<div class="col-md-12">
 <div class="container">
       <div class="col-md-12"></div>
-    <!--BANNER PART-->
+   <!--BANNER PART-->
       <div class="col-md-1"></div>
-      <div class="col-md-3"><img class="wow bounceIn" src="images/LOGO.png" width="420" height="450" alt=""/>&nbsp;</div>
-      <div class="col-md-5">&nbsp;</div>
-</div><!--CLOSE CONTAINER-->
+      <!--logo-->
+      <div class="col-md-3 LogoContainer">
+          <img class="wow bounceIn TitleLogo" src="images/LOGO.png" width="330" height="370" alt=""/>&nbsp;
+      </div>
+      <!--title-->
+      <div class="col-md-6 TitleCon">
+      	<img src="images/TITLE.png" class="Title">
+      </div>
+     <!--function bar-->  
+    <div class="BNContainer">
+     <!--user bar-->
+      <div class="col-md-6 BarContainer">
+         <img src="images/user_c.png" class="bar">
+         <h5 class="log" data-toggle="JDialog" data-target="dialog-1">LOG IN</h5>
+         <h5 class="divider">/</h5>
+         <h5 class="sign" data-toggle="JDialog" data-target="dialog-2">SIGN UP</h5>
+        <h5 class="contact">CONTACT US</h5>
+      </div><!--end of userbar-->
+      
+      <!--navlabel-->
+      <div class="col-md-6">
+        <div class="NavContainer">
+        <!--home-->
+        <a href="#">
+         <div class="col-md-1 deplace">
+            <img src="images/home.png" class="NavLabel">
+            <h5 class="NavName0"> HOME </h5>
+        </div> 
+        </a>
+        <!--comp-->
+         <a href="#competition">
+         <div class="col-md-1 deplace">
+            <img src="images/comp.png" class="NavLabel">
+            <h5 class="NavName"> COMETITION </h5>
+         </div> 
+         </a>
+         <!--lec-->
+         <a href="#lecture">
+          <div class="col-md-1 deplace">
+            <img src="images/lec.png" class="NavLabel">
+            <h5 class="NavName2"> LECTURE </h5>
+         </div> 
+         </a>
+       </div> <!--end of navbar-->
+      </div><!--end of nav-->
+     </div><!--end of function bar-->
+     
+   <!--log in-->
+  <div class="jDialog" id="dialog-1">
+      <div id="mainlogin">
+          <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">LOG IN</h1>
+          <form action="#">
+             <input type="text" placeholder="username or email" value="" required>
+             <input type="password" placeholder="password" value="" required>
+             <button type="submit"><i class="fa fa-arrow-right"></i></button>
+         </form>
+         <div id="note"><a href="#">Forgot your password?</a></div>
+      </div>
+</div>
+  <!--sign up-->
+  <div class="jDialog" id="dialog-2">
+      <div id="mainlogin2">
+          <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">SIGN UP</h1>
+          <form action="#">
+             <input type="text" placeholder="username or email" value="" required>
+             <input type="password" placeholder="password(>6 letters)" value="" required>
+             <input type="password" placeholder="password again" value="" required>
+             <button type="submit"><i class="fa fa-arrow-right"></i></button>
+         </form>
+      </div>
+</div>
+</div>
+
 <div class="col-md-1">&nbsp;</div>
 <div class="col-md-10">
 <div class="keybox">
@@ -29,7 +102,38 @@
 </div>
 <div class="col-md-12">&nbsp;</div>
 
-<div class="col-md-12 Pagenav">&nbsp;</div>
+<div class="col-md-12 Pagenav">
+	<div class="dede_pages ">
+	<ul class="pagelist">
+		<li>FRONT</li>
+		<li class="thisclass">1</li>
+		<li><a href='#'>2</a></li>
+		<li><a href='#'>3</a></li>
+		<li><a href='#'>4</a></li>
+		<li><a href='#'>5</a></li>
+		<li><a href='#'>6</a></li>
+		<li><a href='#'>7</a></li>
+		<li><a href='#'>8</a></li>
+		<li><a href='#'>9</a></li>
+		<li><a href='#'>10</a></li>
+		<li><a href='#'>NEXT</a></li>
+		<li><a href='#'>BACK</a></li>
+		<li><select name='sldd' style='width:42px height:10px;' onchange='location.href=this.options[this.selectedIndex].value;'>
+			<option value='#' selected>1</option>
+			<option value='#'>2</option>
+			<option value='#'>3</option>
+			<option value='#'>4</option>
+			<option value='#'>5</option>
+			<option value='#'>6</option>
+			<option value='#'>7</option>
+			<option value='#'>8</option>
+			<option value='#'>9</option>
+			<option value='#'>10</option>
+		</select></li>
+		<li><span class="pageinfo">Total <strong>10</strong>Pages<strong>335</strong>Records</span></li>
+	</ul>
+</div>
+</div>
 <div class="container">
 <div class="col-md-12 EventGroupContainer">
    <div class="col-md-1"></div>

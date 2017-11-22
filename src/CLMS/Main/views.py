@@ -92,12 +92,23 @@ def lecture(request, id):
     return render(request, 'single.html', {'lecture': lecture})
 
 
-def competitionList(request):
+def competitionList(request, page):
     listLen = 4
+    page = int(page)
     competitionList = Competition.objects.all()
-    if len(competitionList) > listLen:
-        competitionList = competitionList[0:listLen - 1]
-    return render(request, 'complist.html', {'List': competitionList, 'Tag': TagList})
+    pagecount = (len(competitionList) - 1) // listLen + 1
+    if page <= 0 or page > pagecount:
+        return HttpResponse('Error!')
+    if pagecount > listLen:
+        competitionList = competitionList[
+            (page - 1) * listLen: page * listLen]
+    TagList = Tag.objects.all()
+    return render(request, 'complist.html',
+                  {'list': competitionList,
+                   'taglist': TagList,
+                   'pagelist': range(1, pagecount + 1),
+                   'page': page,
+                   'total': len(competitionList)})
 
 
 def lectureList(request):
