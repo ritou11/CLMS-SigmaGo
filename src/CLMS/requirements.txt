@@ -1,0 +1,4 @@
+Django>1.10
+easy_thumbnails
+django-image-cropping
+Crypto

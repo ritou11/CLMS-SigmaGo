@@ -25,7 +25,10 @@ SECRET_KEY = '(nzt93l8bkon%wy5gse4!p*9&+u(q*+ctu*j1x6&4bx_ig=p2g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'cloud.nogeek.cn',
+    '*'
+]
 
 
 # Application definition
