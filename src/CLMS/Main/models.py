@@ -1,8 +1,32 @@
 from django.db import models
 from image_cropping import ImageRatioField
-from django.contrib import admin
-from django import forms
+from django.db.models.fields.files import ImageFieldFile
+import skimage.io
+from skimage.transform import resize
+import os
 # Create your models here.
+
+
+def make_thumb(path, thumb_path, size=(160, 120)):
+    image = skimage.io.imread(path)
+    height, width = image.shape[0], image.shape[1]
+
+    thumb = image
+
+    if (height / width) > (size[0] / size[1]):
+        new_height = width * size[0] / size[1]
+        height1 = (height - new_height) / 2
+        thumb = image[height1:height + new_height, 0:width]
+
+    if (height / width) < (size[0] / size[1]):
+        new_width = height * size[1] / size[0]
+        width1 = (width - new_width) / 2
+        thumb = image[0:height, width1:width1 + new_width]
+
+    thumb = resize(thumb, size)
+    print(thumb.shape)
+    skimage.io.imsave(thumb_path, thumb)
+    return thumb
 
 
 class Tag(models.Model):
@@ -29,7 +53,8 @@ class Competition(models.Model):
 
     # image
     image = models.ImageField(
-        upload_to='./media/Competition/images/', null=True, blank=True)
+        upload_to='./Competition/images/', null=True, blank=True)
+    thumb = models.ImageField(upload_to='./Competition/thumbs', blank=True)
     cropping = ImageRatioField('image', '640x480')
 
     tag = models.ManyToManyField(Tag)
@@ -42,6 +67,19 @@ class Competition(models.Model):
         upload_to='./Competition/result/', null=True, blank=True)
 
     date_time = models.DateTimeField(auto_now_add=True)
+
+    def save(self):
+        super(Competition, self).save()
+        # base, ext = os.path.splitext(os.path.basename(self.image.path))
+        thumb_path = os.path.join(
+            './media/Competition/thumbs/', os.path.basename(self.image.path))
+        make_thumb(self.image.path, thumb_path)
+
+        # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
+        thumb_path = os.path.join(
+            './Competition/thumbs/', os.path.basename(self.image.path))
+        self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
+        super(Competition, self).save()
 
     def __str__(self):
         return self.title
@@ -69,12 +107,26 @@ class Lecture(models.Model):
 
     # image
     image = models.ImageField(
-        upload_to='./media/Lecture/images/', null=True, blank=True)
+        upload_to='./Lecture/images/', null=True, blank=True)
+    thumb = models.ImageField(upload_to='./Lecture/thumbs', blank=True)
     cropping = ImageRatioField('image', '640x480')
 
     tag = models.ManyToManyField(Tag)
 
     date_time = models.DateTimeField(auto_now_add=True)
+
+    def save(self):
+        super(Lecture, self).save()
+        # base, ext = os.path.splitext(os.path.basename(self.image.path))
+        thumb_path = os.path.join(
+            './media/Lecture/thumbs/', os.path.basename(self.image.path))
+        make_thumb(self.image.path, thumb_path)
+
+        # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
+        thumb_path = os.path.join(
+            './Lecture/thumbs/', os.path.basename(self.image.path))
+        self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
+        super(Lecture, self).save()
 
     def __str__(self):
         return self.title
@@ -87,10 +139,10 @@ class User(models.Model):
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
 
-    stuType = models.CharField(max_length=30)   # Undergraduate or graduate student
+    # Undergraduate or graduate student
+    stuType = models.CharField(max_length=30)
     grade = models.IntegerField(default=0)
     interestTag = models.ManyToManyField(Tag)   # for recommendation
-    
+
     def __unicode__(self):
         return self.username
-
