@@ -106,7 +106,7 @@ class Lecture(models.Model):
     
     #image
     image = models.ImageField(
-        upload_to='./media/Lecture/images/', null=True, blank=True)
+        upload_to='./Lecture/images/', null=True, blank=True)
     thumb = models.ImageField(upload_to = './Lecture/thumbs', blank = True)
     cropping = ImageRatioField('image', '640x480')
     
