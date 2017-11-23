@@ -7,13 +7,13 @@ from wechat_sdk import WechatBasic
 from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import TextMessage, VoiceMessage, ImageMessage, \
     VideoMessage, LinkMessage, LocationMessage, EventMessage
-from CLMS.settings import WECHAT_APPID, WECHAT_APPSECRET, WECHAT_TOKEN
+from CLMS.settings import WECHAT_APPID, WECHAT_APPSECRET, WECHAT_TOKEN, HOME_URL
 
 wechat_instance = WechatBasic(
     token=WECHAT_TOKEN,
     appid=WECHAT_APPID,
     appsecret=WECHAT_APPSECRET)
-home_url = 'localhost:8080'
+home_url = HOME_URL
 
 @csrf_exempt
 def wechat(request):
@@ -68,7 +68,7 @@ def wechat(request):
             elif message.type == 'templatesendjobfinish':
                 reply_text = '模板消息'
             else:
-                reply_text = '功能还没有实现'
+                reply_text = '回复competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n'
 
         response = wechat_instance.response_text(content=reply_text)
         return HttpResponse(response, content_type="application/xml")
@@ -87,9 +87,9 @@ def comp_to_array(comp_list):
     for comp in comp_list:
         response.append({
             'title': comp.title,
-            'picurl': comp.image,
+            'picurl': comp.thumb,
             'description': comp.intro,
-            'url': home_url + '/' + str(comp.id)
+            'url': home_url + '/' + 'competition' + '/' + str(comp.id) + '/'
         })
     return response
 
@@ -107,8 +107,8 @@ def lec_to_array(lecs_list):
     for lec in lecs_list:
         response.append({
             'title': lec.title,
-            'picurl': lec.image,
+            'picurl': lec.thumb,
             'description': lec.intro,
-            'url':home_url + '/' + str(comp.id)
+            'url':home_url + '/' + 'lecture' + '/' + str(lec.id) + '/'
         })
     return response

@@ -144,7 +144,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # token
-
+HOME_URL = "******"
 WECHAT_TOKEN = "SigmaGo"
 WECHAT_APPID = "******"
 WECHAT_APPSECRET = "*******"
