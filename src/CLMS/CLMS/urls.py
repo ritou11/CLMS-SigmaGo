@@ -30,20 +30,23 @@ from wechat.views import wechat
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
-    url(r'^Competition/(?P<id>\d+)/$', views.competition, name='Competition'),
-    url(r'^Lecture/(?P<id>\d+)/$', views.lecture, name='Lecture'),
-    url(r'^Slide/(?P<id>\d+)/$', views.slide, name='Slide'),
-    url(r'^CompetitionList/$', views.competitionList, name='CompetitionList'),
-    url(r'^LectureList/$', views.lectureList, name='LectureList'),
-    url(r'^tag(?P<tag>\w+)/$',views.search_tag,name='search_tag'),
-    url(r'^search/$',views.search,name='search'),
+    url(r'^competition/(?P<id>\d+)/$', views.competition, name='Competition'),
+    url(r'^lecture/(?P<id>\d+)/$', views.lecture, name='Lecture'),
+    url(r'^slide/(?P<id>\d+)/$', views.slide, name='Slide'),
+    url(r'^competition-list/(?P<page>\d+)$',
+        views.competitionList, name='CompetitionList'),
+    url(r'^lecture-list/$', views.lectureList, name='LectureList'),
+    url(r'^tag(?P<tag>\w+)/$', views.search_tag, name='search_tag'),
+    url(r'^search/$', views.search, name='search'),
 
     url(r'^index/$', views.index, name='index4test'),
     url(r'^login/$', views.login, name='Login'),
     url(r'^register/$', views.register, name='Register'),
-    
+    url(r'^weixin', wechat, name='weixin'),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     #url(r'^refresh_menu/', refresh_menu),
     #url(r'^refresh_actions/', refresh_actions),
     #url(r'^refresh_user/', refresh_user),
-    url(r'^weixin', wechat, name='weixin'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+	
+	# url(r'^wechat$', views.wechat, name='Wechat')
+

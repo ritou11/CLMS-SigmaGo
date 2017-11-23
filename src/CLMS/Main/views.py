@@ -4,7 +4,44 @@ from Main.models import *
 from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django import forms
+import hashlib
+# from django.views.decorators.csrf import csrf_exempt
+# from Main.wxapp import WxApp
 # Create your views here.
+
+
+class RegUserForm(forms.Form):
+    username = forms.CharField(label='用户名',
+                               max_length=100,
+                               widget=forms.TextInput(attrs={
+                                   'placeholder': 'username or email',
+                                   'id': 'reg_username'
+                               }))
+    password1 = forms.CharField(label='密码',
+                                widget=forms.PasswordInput(attrs={
+                                    'placeholder': 'password(>6 letters)',
+                                    'id': 'reg_password1'
+                                }))
+    password2 = forms.CharField(label='请再输入密码',
+                                widget=forms.PasswordInput(attrs={
+                                    'placeholder': 'password again',
+                                    'id': 'reg_password2'
+                                }))
+
+
+class LogUserForm(forms.Form):
+    username = forms.CharField(label='用户名',
+                               max_length=100,
+                               widget=forms.TextInput(attrs={
+                                   'placeholder': 'username or email',
+                                   'id': 'login_username'
+                               }))
+    password = forms.CharField(label='密码',
+                               widget=forms.PasswordInput(attrs={
+                                   'placeholder': 'password',
+                                   'id': 'login_password'
+                               }))
 
 
 def home(request):
@@ -58,12 +95,23 @@ def lecture(request, id):
     return render(request, 'single.html', {'lecture': lecture})
 
 
-def competitionList(request):
+def competitionList(request, page):
     listLen = 4
+    page = int(page)
     competitionList = Competition.objects.all()
-    if len(competitionList) > listLen:
-        competitionList = competitionList[0:listLen - 1]
-    return render(request, 'complist.html', {'List': competitionList, 'Tag': TagList})
+    pagecount = (len(competitionList) - 1) // listLen + 1
+    if page <= 0 or page > pagecount:
+        return HttpResponse('Error!')
+    if pagecount > listLen:
+        competitionList = competitionList[
+            (page - 1) * listLen: page * listLen]
+    TagList = Tag.objects.all()
+    return render(request, 'complist.html',
+                  {'list': competitionList,
+                   'taglist': TagList,
+                   'pagelist': range(1, pagecount + 1),
+                   'page': page,
+                   'total': len(competitionList)})
 
 
 def lectureList(request):
@@ -206,3 +254,12 @@ def logout(request):
 
 def slide(request):
     pass
+
+
+"""
+@csrf_exempt
+def wechat(request):
+    app = WxApp()
+    result = app.process(request.GET, request.body)
+    return HttpResponse(result)
+"""

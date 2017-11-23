@@ -23,22 +23,22 @@
   <div class="col-md-1">&nbsp;</div>
   <div class="col-md-7">
 	<div class="TitleContainer">
-	  <h1 class="MainTitle wow fadeInDown"> This is A Title</h1>
-	  <h2 class="SubTitle wow fadeInUp"> This is the subtitle This is the subtitle</h2>
+	  <h1 class="MainTitle wow fadeInDown">{{competition.title}}</h1>
+	  <h2 class="SubTitle wow fadeInUp">{{competition.subtitle}}</h2>
 	</div>
   </div>
  <!--Basic Info-->
   <div class="col-md-3">
   	<div class="BasicInfo">
-  	   <h1 id="BasicInfo">BASIC INFO</H1>
+  	   <h1 id="BasicInfo">{{competition.intro}}</H1>
   	   <div class="Label">
-  	     <h4 class="Content">主办方：xxxxx</h4>
+  	     <h4 class="Content">主办方：{{competition.holder}}</h4>
   	   </div>
   	   <div class="Label">
-  	     <h4 class="Content">比赛时间：xxxxx</h4>
+  	     <h4 class="Content">比赛时间：{{competition.hold_time}}</h4>
   	   </div>
   	   <div class="Label">
-  	     <h4 class="Content">状态：xxxxx</h4>
+  	     <h4 class="Content">状态：{{competition.state}}</h4>
   	   </div>
   	</div>
   </div>
@@ -47,25 +47,51 @@
     <div class="col-md-1">&nbsp;</div>
      <div class="col-md-5 WordContainer">
         <p class="Introp wow fadeInUp">&nbsp;&nbsp;&nbsp;
-           Introduction Introduction Introduction Intr
-			oduction Introduction Introduction Introduc
-       tionoduction Introduction Introduction Introduction
-       tionoduction Introduction Introduction Introduction
-       tionoduction Introduction Introduction Introduction
-       tionoduction Introduction Introduction Introduction
-       tionoduction Introduction Introduction Introduction.
+           {{competition.intro}}
         </p>
      </div>
      <div class="col-md-5 PicContainer">
-       <img src={% static "images/main.png" %} width="520" class="wow fadeIn">
+       <img src={{competition.image.url}} width="520" class="wow fadeIn">
      </div>
   </div>
- 
 </div>
+
+<div class="col-md-12 detail">
+  <div class="col-md-12 tag">
+     <div class = "col-md-6">
+        <a href="#intro"> <h1 class="tagu">简介</h1></a>
+        <a href="#method"><h1 class="tagu"> 参赛方式 </h1></a>
+        <a href="#award"><h1 class="tagu">奖项和结果</h1></a>
+     </div>
+  </div>
+  <div class="col-md-12 ">
+    <div class="intro">
+     <a name="intro">
+        <img class="leftTitle wow fadeInUp" src={% static "images/intro.png" %}
+     </a>
+        <img src={% static "images/divider.png" %} class="divider3 wow fadeInUp">
+     </div>
+    
+    <div class="method">
+       <a name="method">
+        <img class="rightTitle wow fadeInUp" src={% static "images/method.png" %}>
+        </a>
+        <img src={% static "images/divider.png" %} class="divider4 wow fadeInUp">
+    </div>
+    <div class="award">
+       <a name="award">
+        <img class="leftTitle2 wow fadeInUp" src={% static "images/award.png" %}>
+        </a>
+        <img src={% static "images/divider.png" %} class="divider3 wow fadeInUp">
+    </div>
+  </div>
+</div> 
+<!--end of detail—->
+
 
 
 <!--Footer-->
-<div class="container footer">
+<div class=“col-md-12 footer2”>
    <div class="col-md-2">
      <img src={% static "images/LOGO2.png" %} width="130"/>
    </div>
