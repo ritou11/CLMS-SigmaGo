@@ -13,7 +13,7 @@ wechat_instance = WechatBasic(
     token=WECHAT_TOKEN,
     appid=WECHAT_APPID,
     appsecret=WECHAT_APPSECRET)
-
+home_url = 'localhost:8080'
 
 @csrf_exempt
 def wechat(request):
@@ -89,7 +89,7 @@ def comp_to_array(comp_list):
             'title': comp.title,
             'picurl': comp.image,
             'description': comp.intro,
-            # 'url': comp.url
+            'url': home_url + '/' + str(comp.id)
         })
     return response
 
@@ -109,6 +109,6 @@ def lec_to_array(lecs_list):
             'title': lec.title,
             'picurl': lec.image,
             'description': lec.intro,
-            # 'url':lec.url
+            'url':home_url + '/' + str(comp.id)
         })
     return response
