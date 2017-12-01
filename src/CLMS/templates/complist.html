@@ -1,4 +1,5 @@
 {% load static %}
+{% load cropping %}
 <!doctype html>
 <html>
 <head>
@@ -57,9 +58,10 @@
      <div class="col-md-1"></div>
      <div class="col-md-10">
              <div class="ImgContainer">
-                 <img src={{comp.image.url}} class="ImgInclude wow fadeIn">
+                 <img src={% cropped_thumbnail comp "cropping" scale=0.5 %} class="ImgInclude wow fadeIn">
                  <img src={% static "images/Line.png" %} class="divider2 wow fadeInUpBig">
                  <div class="SectionBox">
+                  {{comp.intro}}
                  </div>
            </div>
      </div>   
@@ -77,8 +79,8 @@
   <div class="col-md-2 pills"><a href="#"><h6 class="pills">友情链接  |</h6></a></div>
   <div class="col-md-2 pills"><a href="#"><h6 class="pills">关于我们</h6></a></div>
   <div class="col-md-10">
-   	<h5>&nbsp; &nbsp; &nbsp; &nbsp; CopyRight 2017-2020 xxxxxx.com All Rights Reserved.</h5>
-  </div>  
+   	<h5>&nbsp; &nbsp; &nbsp; &nbsp; CopyRight 2017-2020 SigmaGo.com All Rights Reserved.</h5>
+  </div>
 </div>
 
 <!--script-->
