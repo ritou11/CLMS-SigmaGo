@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^slide/(?P<id>\d+)/$', views.slide, name='Slide'),
     url(r'^competition-list/(?P<page>\d+)$',
         views.competitionList, name='CompetitionList'),
-    url(r'^lecture-list/$', views.lectureList, name='LectureList'),
+    url(r'^lecture-list/(?P<page>\d+)$', views.lectureList, name='LectureList'),
     url(r'^tag(?P<tag>\w+)/$', views.search_tag, name='search_tag'),
     url(r'^search/$', views.search, name='search'),
 

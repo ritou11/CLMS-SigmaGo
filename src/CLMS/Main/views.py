@@ -92,7 +92,7 @@ def competition(request, id):
 
 def lecture(request, id):
     lecture = Lecture.objects.get(id=str(id))
-    return render(request, 'single.html', {'lecture': lecture})
+    return render(request, 'single.html', {'competition': lecture})
 
 
 def competitionList(request, page):
@@ -114,14 +114,23 @@ def competitionList(request, page):
                    'total': len(competitionList)})
 
 
-def lectureList(request):
+def lectureList(request, page):
     listLen = 4
+    page = int(page)
     lectureList = Lecture.objects.all()
-    if len(lectureList) > listLen:
-        lectureList = lectureList[0:listLen - 1]
+    pagecount = (len(lectureList) - 1) // listLen + 1
+    if page <= 0 or page > pagecount:
+        return HttpResponse('Error!')
+    if pagecount > listLen:
+        lectureList = lectureList[
+            (page - 1) * listLen: page * listLen]
     TagList = Tag.objects.all()
     return render(request, 'complist.html',
-                  {'List': lectureList, 'Tag': TagList})
+                  {'list': lectureList,
+                   'taglist': TagList,
+                   'pagelist': range(1, pagecount + 1),
+                   'page': page,
+                   'total': len(lectureList)})
 
 
 def search_tag(request, tag):
@@ -254,7 +263,6 @@ def logout(request):
 
 def slide(request):
     pass
-
 
 """
 @csrf_exempt
