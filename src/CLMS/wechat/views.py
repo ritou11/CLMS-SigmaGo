@@ -21,7 +21,7 @@ def wechat(request):
         signature = request.GET.get('signature')
         timestamp = request.GET.get('timestamp')
         nonce = request.GET.get('nonce')
-        if not wechat_instance.check_signature(signature=signature, timestamp=timestamp, nounce=nounce):
+        if not wechat_instance.check_signature(signature=signature, timestamp=timestamp, nonce=nonce):
             return HTTPResponseBadRequest('Verify Failed')
         return HttpResponse(request.GET.get('echostr', ''), content_type="text/plain")
 
