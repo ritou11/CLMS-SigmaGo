@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PersonalInfo</title>
+</head>
+<body>
+Welcome {{ userinfo.username }}!<br />
+用户名 {{ userinfo.username }}<br />
+邮箱  <input type="text" name="email" value=userinfo.email/> <br />
+是否验证 {{ username }}<br />
+真实姓名  <input type="text" name="stuName" value=userinfo.stuName /> <br />
+  <form>
+年级<select name="grade">
+<option value="under_1">本科一年级</option>
+<option value="under_2">本科二年级</option>
+<option value="under_3">本科三年级</option>
+<option value="under_4">本科四年级</option>
+<option value="under_5">本科五年级及以上</option>
+<option value="grad_1">研究生一年级</option>
+<option value="grad_2">研究生二年级</option>
+<option value="grad_3">研究生三年级及以上</option>
+</select>
+</form>
+ <br />
+学号  <input type="text" name="stuNo" value=userinfo.stuNo/> <br />
+info用户名  <input type="text" name="infoUser" value=userinfo.infoUser/> <br />
+验证 {{ username }}<br />
+Tags 科学：<input type="checkbox" name="favor" value="science">
+文学：<input type="checkbox" name="favor" value="human">
+<br />
+
+
+<br>
+<a href="http://127.0.0.1:8000/inforenew">信息修改</a>
+<br>
+</body>
+</html>

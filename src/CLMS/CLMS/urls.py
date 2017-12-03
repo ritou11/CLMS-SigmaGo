@@ -34,5 +34,7 @@ urlpatterns = [
     url(r'^index/$', views.index, name='index4test'),
     url(r'^login/$', views.login, name='Login'),
     url(r'^register/$', views.register, name='Register'),
+    url(r'^infocheck/$', views.userInfoSearch, name='UserInfoSearch'),
+    url(r'^infocheck/inforenew/$', views.userInfoAlter, name='InfoRenew'),
     # url(r'^wechat$', views.wechat, name='Wechat')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -251,7 +251,40 @@ def register(request):
     return HttpResponse('Not valid')
 # test login and logout
 
+def userInfoSearch(request):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you search for personal info.")
+    else:
+        userinfo = User.objects.get(username=request.session['user_id'])
+        return render(request,'userinfo.html',{'userinfo':userinfo})
 
+def userInfoAlter(request):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you alter your personal info.")
+    else:
+        Method = request.method
+        userinfo = User.objects.get(username=request.session['user_id'])
+        print('success')
+        if Method == 'POST':
+            userinfo.email = request.POST.get('email')
+            userinfo.stuNo = request.POST.get('stuNo')
+            userinfo.stuName = request.POST.get('stuName')
+            userinfo.infoUser = request.POST.get('infoUser')
+            userinfo.infoPasswd = request.POST.get('infoPasswd')
+            userinfo.grade = request.POST.get('grade')
+            userinfo.save()
+            previousInterest = userinfo.interestTag.all()
+            for i in previousInterest:
+                userinfo.interestTag.remove(i)
+            for i in request.POST.getlist('interestTag'):
+                p = Tag(name=i)
+                p.save()
+                userinfo.interestTag.add(p)
+            userinfo.save()
+            return HttpResponse("Your information has been saved.")
+        else:
+            return render_to_response('inforenew.html',{'userinfo':userinfo})
+            
 def index(request):
     username = request.COOKIES.get('cookie_username', '')
     return render_to_response('index4test.html', {'username': username})
