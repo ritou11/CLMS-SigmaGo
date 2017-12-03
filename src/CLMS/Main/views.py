@@ -213,6 +213,8 @@ def login(request):
         if uf.is_valid():
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
+            if 'user_id' in request.session:
+                return HttpResponse("You've logged in, please do not loggin twice.")
             userPassJudge = User.objects.filter(
                 username__exact=username, password__exact=password)
             print(username)
@@ -220,6 +222,7 @@ def login(request):
             if userPassJudge:
                 response = HttpResponse('Success')
                 response.set_cookie('cookie_username', username, 3600)
+                request.session['user_id'] = username
                 return response
             else:
                 return HttpResponse('No username or valid one')
@@ -258,6 +261,10 @@ def logout(request):
     response = HttpResponse(
         'logout!<br><a href="127.0.0.1:8000/regist>register</a>"')
     response.delete_cookie('cookie_username')
+    try:
+        del request.session['user_id']
+    except KeyError:
+        pass
     return response
 
 
