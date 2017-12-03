@@ -277,8 +277,12 @@ def userInfoAlter(request):
             for i in previousInterest:
                 userinfo.interestTag.remove(i)
             for i in request.POST.getlist('interestTag'):
-                p = Tag(name=i)
-                p.save()
+                find_i = Tag.objects.filter(name=i)
+                if len(find_i) == 0:
+                    p = Tag(name=i)
+                    p.save()
+                else:
+                    p = find_i[0]
                 userinfo.interestTag.add(p)
             userinfo.save()
             return HttpResponse("Your information has been saved.")
