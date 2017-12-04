@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PersonalInfo</title>
+</head>
+<body>
+Welcome {{ userinfo.username }} to lecture info adding!<br />
+<form method = 'POST' enctype="multipart/form-data">
+title  <input type="text" name="title" value={{ lecture.title}}   ><br />
+subtitle  <input type="text" name="subtitle"value={{ lecture.subtitle}}  > <br />
+hold_time  <input type="date" ng-model="timeOps.test.a_time" name="hold_time"value={{ lecture.hold_time}}  > <br />
+holder  <input type="text" name="holder"value={{ lecture.holder}}  > <br />
+state<select name="state" value={{ lecture.state}}>
+<option value="进行中">进行中</option>
+<option value="未开始">未开始</option>
+<option value="已结束">已结束</option>
+</select>
+<br />
+intro  <input type="text" name="intro"value={{ lecture.intro}} > <br />
+content  <input type="text" name="content"value={{ lecture.content}}> <br />
+method  <input type="text" name="method" value={{ lecture.method}}> <br />      
+             
+image<input name="image" type="file" id="exampleInputFile"value={{ lecture.image}}>
+
+thumb  <input type="file" name="thumb" id="exampleInputFile2"value={{ lecture.thumb}}> <br />
+Tags 
+ <br />理科：<input type="checkbox" name="interestTag" value="science">
+人文：<input type="checkbox" name="interestTag" value="human">
+工程：<input type="checkbox" name="interestTag" value="engineer">
+
+<br>
+ <input type="submit" value="submit" id='photo' />
+<br>
+</form>
+</body>
+</html>

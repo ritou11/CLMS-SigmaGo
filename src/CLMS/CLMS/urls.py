@@ -36,9 +36,14 @@ urlpatterns = [
     url(r'^index/$', views.index, name='index4test'),
     url(r'^login/$', views.login, name='Login'),
     url(r'^register/$', views.register, name='Register'),
+    url(r'^infocheck/$', views.userInfoSearch, name='UserInfoSearch'),
+    url(r'^infocheck/inforenew/$', views.userInfoAlter, name='InfoRenew'),
+    url(r'^conAdd/$', views.contestAdd, name='contestInfo'),
+    url(r'^lecAdd/$', views.lectureAdd, name='lectureInfo'),
+    url(r'^manage/$', views.lecConManagement, name='adminmanage'),
+    url(r'^comtetitionManage/(\d+)/$', views.competitionManagement, name='adminmanage'),
+    url(r'^lectureManage/(\d+)/$', views.lectureManagement, name='adminmanage'),
     url(r'^weixin', wechat, name='weixin'),
-    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-	
-	# url(r'^wechat$', views.wechat, name='Wechat')
+    # url(r'^wechat$', views.wechat, name='Wechat')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
