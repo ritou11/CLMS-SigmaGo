@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Management</title>
+</head>
+<body>
+Welcome {{ userinfo.username }} to lecture info adding!<br />
+
+Comtetitions </br>
+<table border="1">
+    {% for item in Competitions %}
+        <tr>
+            <td><a href='/comtetitionManage/{{item.id}}'>{{ item.title }}</a></td>
+            <td>{{ item.hold_time }}</td>
+            <td>{{ item.state }}</td>
+            <td>{{ item.award }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+Lectures </br>
+<table border="1">
+    {% for item in Lectures %}
+        <tr>
+            <td><a href='/lectureManage/{{item.id}}'>{{ item.title }}</a></td>
+            <td>{{ item.hold_time }}</td>
+            <td>{{ item.state }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+</form>
+</body>
+</html>
