@@ -8,7 +8,7 @@ import os
 
 
 def make_thumb(path, thumb_path, size=(160, 120)):
-    image = skimage.io.imread(path)
+    image = skimage.io.imread(path) 
     height, width = image.shape[0], image.shape[1]
 
     thumb = image
@@ -136,13 +136,38 @@ class Lecture(models.Model):
 
 
 class User(models.Model):
+    
+    '''tagInterest = (
+        ('Science',(
+            ('Program','Programming'),
+            ('HardWare','Hardware'),
+            ('Arch','Building'),
+            )
+        ),
+        ('Humanity',(
+            ('Poem','Poems'),
+            ('Comp','Composition'),
+            )
+        ),
+    )'''
+
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
 
     # Undergraduate or graduate student
     stuType = models.CharField(max_length=30)
-    grade = models.IntegerField(default=0)
+    infoUser = models.CharField(max_length=30)
+    infoPasswd = models.CharField(max_length=30)
+    infoValid = models.BooleanField(default=False)
+    email = models.EmailField(max_length=40)
+    emailValid = models.BooleanField(default=False)
+    stuName = models.CharField(max_length=15)
+    stuNo = models.IntegerField(default=2000000000)
+    grade = models.CharField(max_length=20,default='-------')
     interestTag = models.ManyToManyField(Tag)   # for recommendation
-
+    
+    
     def __unicode__(self):
         return self.username
+    
+    

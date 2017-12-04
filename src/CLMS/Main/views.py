@@ -213,6 +213,8 @@ def login(request):
         if uf.is_valid():
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
+            if 'user_id' in request.session:
+                return HttpResponse("You've logged in, please do not loggin twice.")
             userPassJudge = User.objects.filter(
                 username__exact=username, password__exact=password)
             print(username)
@@ -220,6 +222,7 @@ def login(request):
             if userPassJudge:
                 response = HttpResponse('Success')
                 response.set_cookie('cookie_username', username, 3600)
+                request.session['user_id'] = username
                 return response
             else:
                 return HttpResponse('No username or valid one')
@@ -248,7 +251,44 @@ def register(request):
     return HttpResponse('Not valid')
 # test login and logout
 
+def userInfoSearch(request):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you search for personal info.")
+    else:
+        userinfo = User.objects.get(username=request.session['user_id'])
+        return render(request,'userinfo.html',{'userinfo':userinfo})
 
+def userInfoAlter(request):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you alter your personal info.")
+    else:
+        Method = request.method
+        userinfo = User.objects.get(username=request.session['user_id'])
+        print('success')
+        if Method == 'POST':
+            userinfo.email = request.POST.get('email')
+            userinfo.stuNo = request.POST.get('stuNo')
+            userinfo.stuName = request.POST.get('stuName')
+            userinfo.infoUser = request.POST.get('infoUser')
+            userinfo.infoPasswd = request.POST.get('infoPasswd')
+            userinfo.grade = request.POST.get('grade')
+            userinfo.save()
+            previousInterest = userinfo.interestTag.all()
+            for i in previousInterest:
+                userinfo.interestTag.remove(i)
+            for i in request.POST.getlist('interestTag'):
+                find_i = Tag.objects.filter(name=i)
+                if len(find_i) == 0:
+                    p = Tag(name=i)
+                    p.save()
+                else:
+                    p = find_i[0]
+                userinfo.interestTag.add(p)
+            userinfo.save()
+            return HttpResponse("Your information has been saved.")
+        else:
+            return render_to_response('inforenew.html',{'userinfo':userinfo})
+            
 def index(request):
     username = request.COOKIES.get('cookie_username', '')
     return render_to_response('index4test.html', {'username': username})
@@ -258,6 +298,10 @@ def logout(request):
     response = HttpResponse(
         'logout!<br><a href="127.0.0.1:8000/regist>register</a>"')
     response.delete_cookie('cookie_username')
+    try:
+        del request.session['user_id']
+    except KeyError:
+        pass
     return response
 
 

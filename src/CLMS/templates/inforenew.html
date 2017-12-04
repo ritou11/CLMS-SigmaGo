@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PersonalInfo</title>
+</head>
+<body>
+Welcome {{ userinfo.username }}!<br />
+<form method = 'POST'>
+用户名 {{ userinfo.username }}<br />
+邮箱  <input type="text" name="email" value= {{ userinfo.email }} > <br />
+真实姓名  <input type="text" name="stuName" value={{ userinfo.stuName}} > <br />
+年级<select name="grade">
+<option value="本科一年级">本科一年级</option>
+<option value="本科二年级">本科二年级</option>
+<option value="本科三年级">本科三年级</option>
+<option value="本科四年级">本科四年级</option>
+<option value="本科五年级及以上">本科五年级及以上</option>
+<option value="研究生一年级">研究生一年级</option>
+<option value="研究生二年级">研究生二年级</option>
+<option value="研究生三年级及以上">研究生三年级及以上</option>
+</select>
+<br />
+学号  <input type="text" name="stuNo" value={{ userinfo.stuNo}}> <br />
+info用户名  <input type="text" name="infoUser" value={{ userinfo.infoUser}}> <br />
+info密码	  <input type="password" name="infoPasswd" value={{ userinfo.infoPasswd}}> <br />
+Tags 
+ <br />理科：<input type="checkbox" name="interestTag" value="science">
+人文：<input type="checkbox" name="interestTag" value="human">
+工程：<input type="checkbox" name="interestTag" value="engineer">
+
+<br>
+ <input type="submit" value="submit" />
+<br>
+</form>
+</body>
+</html>
