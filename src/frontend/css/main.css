@@ -1,4 +1,7 @@
-
+.contentbox{
+	display: inline;
+	width:100px
+}
 
 .container {
 	width: 100%;
