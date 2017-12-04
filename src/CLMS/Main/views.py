@@ -5,6 +5,7 @@ from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django import forms
+from PIL import Image
 import hashlib
 # from django.views.decorators.csrf import csrf_exempt
 # from Main.wxapp import WxApp
@@ -273,7 +274,7 @@ def userInfoAlter(request):
             userinfo.infoPasswd = request.POST.get('infoPasswd')
             userinfo.grade = request.POST.get('grade')
             userinfo.save()
-            previousInterest = userinfo.interestTag.all()
+            previousInterest = Tag.objects.all()
             for i in previousInterest:
                 userinfo.interestTag.remove(i)
             for i in request.POST.getlist('interestTag'):
@@ -288,6 +289,84 @@ def userInfoAlter(request):
             return HttpResponse("Your information has been saved.")
         else:
             return render_to_response('inforenew.html',{'userinfo':userinfo})
+
+# add new contest
+def contestAdd(request):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you add a contest.")
+    else:
+        Method = request.method
+        contestInfo = Competition()
+        print('success')
+        if Method == 'POST':
+            #print(request.FILES)
+            contestInfo.title = request.POST.get('title')
+            contestInfo.subtitle = request.POST.get('subtitle')
+            contestInfo.hold_time = request.POST.get('hold_time')
+            contestInfo.holder = request.POST.get('holder')
+            contestInfo.state = request.POST.get('state')
+            contestInfo.intro = request.POST.get('intro')
+            contestInfo.content = request.POST.get('content')
+            contestInfo.method = request.POST.get('method')
+            contestInfo.award = request.POST.get('award')
+            contestInfo.image = request.FILES.get('image')
+            contestInfo.thumb = request.FILES.get('thumb')
+            #contestInfo.cropping = request.FILES.get('image')
+            contestInfo.save()
+            #previousInterest = Tag.objects.all()
+            #for i in previousInterest:
+            #    contestInfo.Tag.remove(i)
+            for i in request.POST.getlist('interestTag'):
+                find_i = Tag.objects.filter(name=i)
+                if len(find_i) == 0:
+                    p = Tag(name=i)
+                    p.save()
+                else:
+                    p = find_i[0]
+                contestInfo.tag.add(p)
+            contestInfo.save()
+            return HttpResponse("Contest info has been saved.")
+        else:
+            contestInfo = Competition()
+            return render_to_response('contestInfo.html',{'contestInfo':contestInfo})
+
+# add new lecture
+def lectureAdd(request):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you add a contest.")
+    else:
+        Method = request.method
+        lectureInfo = Lecture()
+        print('success')
+        if Method == 'POST':
+            lectureInfo.title = request.POST.get('title')
+            lectureInfo.subtitle = request.POST.get('subtitle')
+            lectureInfo.hold_time = request.POST.get('hold_time')
+            lectureInfo.holder = request.POST.get('holder')
+            lectureInfo.state = request.POST.get('state')
+            lectureInfo.intro = request.POST.get('intro')
+            lectureInfo.content = request.POST.get('content')
+            lectureInfo.method = request.POST.get('method')
+            lectureInfo.image = request.FILES.get('image')
+            lectureInfo.thumb = request.FILES.get('thumb')
+            #lectureInfo.cropping = request.FILES.get('cropping')
+            lectureInfo.save()
+            #previousInterest = Tag.objects.all()
+            #for i in previousInterest:
+            #    lectureInfo.interestTag.remove(i)
+            for i in request.POST.getlist('interestTag'):
+                find_i = Tag.objects.filter(name=i)
+                if len(find_i) == 0:
+                    p = tag(name=i)
+                    p.save()
+                else:
+                    p = find_i[0]
+                lectureInfo.tag.add(p)
+            lectureInfo.save()
+            return HttpResponse("lecture info has been saved.")
+        else:
+            lectureInfo = Lecture()
+            return render_to_response('lectureInfo.html',{'lectureInfo':lectureInfo})
             
 def index(request):
     username = request.COOKIES.get('cookie_username', '')

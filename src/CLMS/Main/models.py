@@ -21,7 +21,7 @@ def make_thumb(path, thumb_path, size=(160, 120)):
     if (height / width) < (size[0] / size[1]):
         new_width = height * size[1] / size[0]
         width1 = (width - new_width) / 2
-        thumb = image[0:height, width1:width1 + new_width]
+        thumb = image[0:int(height), int(width1):int(width1 + new_width)]
 
     thumb = resize(thumb, size)
     print(thumb.shape)

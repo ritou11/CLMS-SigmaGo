@@ -36,5 +36,7 @@ urlpatterns = [
     url(r'^register/$', views.register, name='Register'),
     url(r'^infocheck/$', views.userInfoSearch, name='UserInfoSearch'),
     url(r'^infocheck/inforenew/$', views.userInfoAlter, name='InfoRenew'),
+    url(r'^conAdd/$', views.contestAdd, name='contestInfo'),
+    url(r'^lecAdd/$', views.lectureAdd, name='lectureInfo'),
     # url(r'^wechat$', views.wechat, name='Wechat')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

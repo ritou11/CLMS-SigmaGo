@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PersonalInfo</title>
+</head>
+<body>
+Welcome {{ userinfo.username }} to contest info adding!<br />
+<form method = 'POST' enctype="multipart/form-data">
+title  <input type="text" name="title"  ><br />
+subtitle  <input type="text" name="subtitle"  > <br />
+hold_time  <input type="date" ng-model="timeOps.test.a_time" name="hold_time"  > <br />
+holder  <input type="text" name="holder"  > <br />
+state<select name="state">
+<option value="进行中">进行中</option>
+<option value="未开始">未开始</option>
+<option value="已结束">已结束</option>
+</select>
+<br />
+intro  <input type="text" name="intro" > <br />
+content  <input type="text" name="content"> <br />
+method  <input type="text" name="method" > <br />      
+             
+image<input name="image" type="file" id="exampleInputFile">
+
+thumb  <input type="file" name="thumb" id="exampleInputFile2"> <br />
+Tags 
+ <br />理科：<input type="checkbox" name="interestTag" value="science">
+人文：<input type="checkbox" name="interestTag" value="human">
+工程：<input type="checkbox" name="interestTag" value="engineer">
+
+<br>
+ <input type="submit" value="submit" id='photo' />
+<br>
+</form>
+</body>
+</html>
