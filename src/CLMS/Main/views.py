@@ -5,6 +5,7 @@ from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django import forms
+from PIL import Image
 import hashlib
 # from django.views.decorators.csrf import csrf_exempt
 # from Main.wxapp import WxApp
@@ -273,11 +274,11 @@ def userInfoAlter(request):
             userinfo.infoPasswd = request.POST.get('infoPasswd')
             userinfo.grade = request.POST.get('grade')
             userinfo.save()
-            previousInterest = userinfo.interestTag.all()
+            previousInterest = Tag.objects.all()
             for i in previousInterest:
                 userinfo.interestTag.remove(i)
             for i in request.POST.getlist('interestTag'):
-                find_i = Tag.objects.filter(name=i)
+                find_i = Tag.objects.filter(name__exact=i)
                 if len(find_i) == 0:
                     p = Tag(name=i)
                     p.save()
@@ -288,6 +289,184 @@ def userInfoAlter(request):
             return HttpResponse("Your information has been saved.")
         else:
             return render_to_response('inforenew.html',{'userinfo':userinfo})
+
+# add new contest
+def contestAdd(request):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you add a contest.")
+    else:
+        userinfo = User.objects.get(username=request.session['user_id'])
+        if userinfo.adminAuth == False:
+            return HttpResponse("Sorry, but you are not admin user, please contact xxx@xxx.xxx")
+        Method = request.method
+        contestInfo = Competition()
+        print('success')
+        if Method == 'POST':
+            contestInfo.title = request.POST.get('title')
+            contestInfo.subtitle = request.POST.get('subtitle')
+            contestInfo.hold_time = request.POST.get('hold_time')
+            contestInfo.holder = request.POST.get('holder')
+            contestInfo.state = request.POST.get('state')
+            contestInfo.intro = request.POST.get('intro')
+            contestInfo.content = request.POST.get('content')
+            contestInfo.method = request.POST.get('method')
+            contestInfo.award = request.POST.get('award')
+            contestInfo.image = request.FILES.get('image')
+            contestInfo.thumb = request.FILES.get('thumb')
+            contestInfo.adminUser = request.session['user_id']
+            if contestInfo.title == '':
+                return HttpResponse("contest NAME CANNOT BE NULL!")
+            if contestInfo.hold_time == '':
+                return HttpResponse("contest HOLD TIME CANNOT BE NULL!")
+            if contestInfo.holder == '':
+                return HttpResponse("contest HOLDER TIME CANNOT BE NULL!")
+            if contestInfo.intro == '':
+                return HttpResponse("contest INTRO TIME CANNOT BE NULL!")
+            if contestInfo.image == '':
+                return HttpResponse("contest image TIME CANNOT BE NULL!")
+            if contestInfo.thumb == '':
+                return HttpResponse("contest thumb TIME CANNOT BE NULL!")
+            conCheck = Lecture.objects.filter(title=contestInfo.title,
+                                              hold_time=contestInfo.hold_time
+                                               )
+            if len(conCheck) > 0:
+                return HttpResponse("Lecture Already exists.")
+            for i in request.POST.getlist('interestTag'):
+                find_i = Tag.objects.filter(name__exact=i)
+                if len(find_i) == 0:
+                    p = Tag(name=i)
+                    p.save()
+                else:
+                    p = find_i[0]
+                contestInfo.tag.add(p)
+            contestInfo.save()
+            return HttpResponse("Contest info has been saved.")
+        else:
+            contestInfo = Competition()
+            return render_to_response('contestInfo.html',{'contestInfo':contestInfo})
+
+# add new lecture
+def lectureAdd(request):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you add a contest.")
+    else:
+        userinfo = User.objects.get(username=request.session['user_id'])
+        if userinfo.adminAuth == False:
+            return HttpResponse("Sorry, but you are not admin user, please contact xxx@xxx.xxx")
+        Method = request.method
+        lectureInfo = Lecture()
+        print('success')
+        if Method == 'POST':
+            lectureInfo.title = request.POST.get('title')
+            lectureInfo.subtitle = request.POST.get('subtitle')
+            lectureInfo.hold_time = request.POST.get('hold_time')
+            lectureInfo.holder = request.POST.get('holder')
+            lectureInfo.state = request.POST.get('state')
+            lectureInfo.intro = request.POST.get('intro')
+            lectureInfo.content = request.POST.get('content')
+            lectureInfo.method = request.POST.get('method')
+            lectureInfo.image = request.FILES.get('image')
+            lectureInfo.thumb = request.FILES.get('thumb')
+            lectureInfo.adminUser = request.session['user_id']
+            if lectureInfo.title == '':
+                return HttpResponse("LECTURE NAME CANNOT BE NULL!")
+            if lectureInfo.hold_time == '':
+                return HttpResponse("LECTURE HOLD TIME CANNOT BE NULL!")
+            if lectureInfo.holder == '':
+                return HttpResponse("LECTURE HOLDER TIME CANNOT BE NULL!")
+            if lectureInfo.intro == '':
+                return HttpResponse("LECTURE INTRO TIME CANNOT BE NULL!")
+            if lectureInfo.image == '':
+                return HttpResponse("LECTURE image TIME CANNOT BE NULL!")
+            if lectureInfo.thumb == '':
+                return HttpResponse("LECTURE thumb TIME CANNOT BE NULL!")
+            lecCheck = Lecture.objects.filter(title=lectureInfo.title,
+                                              hold_time=lectureInfo.hold_time
+                                               )
+            if len(lecCheck) > 0:
+                return HttpResponse("Lecture Already exists.")
+            for i in request.POST.getlist('interestTag'):
+                find_i = Tag.objects.filter(name__exact=i)
+                if len(find_i) == 0:
+                    p = Tag(name=i)
+                    p.save()
+                else:
+                    p = find_i[0]
+                lectureInfo.tag.add(p)
+            lectureInfo.save()
+            return HttpResponse("lecture info has been saved.")
+        else:
+            lectureInfo = Lecture()
+            return render_to_response('lectureInfo.html',{'lectureInfo':lectureInfo})
+            
+def lecConManagement(request):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you add a contest.")
+    userinfo = User.objects.get(username=request.session['user_id'])
+    if userinfo.adminAuth == False:
+        return HttpResponse("Sorry, but you are not admin user, please contact xxx@xxx.xxx")
+    lectureList = Lecture.objects.filter(adminUser__exact=request.session['user_id'])
+    contestList = Competition.objects.filter(adminUser__exact=request.session['user_id'])
+    return render_to_response('adminManage.html',{'Competitions':contestList,'Lectures':lectureList})
+    
+def lectureManagement(request,lectureId):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you add a contest.")
+    try:
+        lecture = Lecture.objects.get(id=lectureId,adminUser=request.session['user_id'])
+    except:
+        return HttpResponse("Nothing found here.....")
+    #if len(lecture) < 1:
+    #    return HttpResponse("Nothing found here.....")
+    if request.method != 'POST':
+        return render_to_response('lectureInfoRenew.html',{'lecture':lecture})
+    else:
+        Lecture.objects.filter(id__exact=lectureId,
+            adminUser__exact=request.session['user_id']).update(
+                title = request.POST.get('title'),
+                subtitle = request.POST.get('subtitle'),
+                hold_time = request.POST.get('hold_time'),
+                holder = request.POST.get('holder'),
+                state = request.POST.get('state'),
+                intro = request.POST.get('intro'),
+                content = request.POST.get('content'),
+                method = request.POST.get('method'),
+                image = request.FILES.get('image'),
+                thumb = request.FILES.get('thumb')
+            )
+        #To do: many to many tag
+        return HttpResponse("Success.")
+    
+
+def competitionManagement(request,conId):
+    if 'user_id' not in request.session:
+        return HttpResponse("Error! Please login before you add a contest.")
+    try:
+        contest = Competition.objects.get(id=conId,adminUser=request.session['user_id'])
+    except:
+        return HttpResponse("Nothing found here.....")
+    print(contest)
+    #if len(contest) < 1:
+    #    return HttpResponse("Nothing found here.....")
+    if request.method != 'POST':
+        return render_to_response('contestInfoRenew.html',{'contest':contest})
+    else:
+        Competition.objects.filter(id__exact=conId,
+            adminUser__exact=request.session['user_id']).update(
+                title = request.POST.get('title'),
+                subtitle = request.POST.get('subtitle'),
+                hold_time = request.POST.get('hold_time'),
+                holder = request.POST.get('holder'),
+                state = request.POST.get('state'),
+                intro = request.POST.get('intro'),
+                award = request.POST.get('award'),
+                content = request.POST.get('content'),
+                method = request.POST.get('method'),
+                image = request.FILES.get('image'),
+                thumb = request.FILES.get('thumb')
+            )
+        #To do: many to many tag
+        return HttpResponse("Success.")
             
 def index(request):
     username = request.COOKIES.get('cookie_username', '')
