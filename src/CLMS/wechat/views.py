@@ -40,18 +40,18 @@ def wechat(request):
         elif content == 'Lecture' or content == '讲座':
             return HttpResponse(wechat_instance.response_news(get_new_lecs(request)), content_type="application/xml")
         elif content == 'function' or '功能':
-            reply_text = ('回复competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
         elif content:
             pass
     else:
         if isinstance(message, VoiceMessage) or isinstance(message, ImageMessage):
-            reply_text = ('回复competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
         elif isinstance(message, VideoMessage) or isinstance(message, LinkMessage):
-            reply_text = ('回复competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
         elif isinstance(message, LocationMessage):
-            reply_text = ('回复competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
         elif isinstance(message, EventMessage):
             if message.type == 'subscribe':
                 reply_text = '感谢您的到来!回复“功能”返回使用指南'
@@ -68,7 +68,7 @@ def wechat(request):
             elif message.type == 'templatesendjobfinish':
                 reply_text = '模板消息'
             else:
-                reply_text = '回复competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n'
+                reply_text = '回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n'
 
         response = wechat_instance.response_text(content=reply_text)
         return HttpResponse(response, content_type="application/xml")
