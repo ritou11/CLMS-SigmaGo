@@ -91,6 +91,13 @@ def comp_to_array(comp_list):
             'description': comp.intro,
             'url': home_url + '/' + 'competition' + '/' + str(comp.id) + '/'
         })
+    if not response:
+        response.append({
+            'title': "home",
+            'picurl':"",
+            'description': "home",
+            'url': home_url
+            })
     return response
 
 
@@ -111,4 +118,11 @@ def lec_to_array(lecs_list):
             'description': lec.intro,
             'url':home_url + '/' + 'lecture' + '/' + str(lec.id) + '/'
         })
+    if not response:
+        response.append({
+            'title': "home",
+            'picurl':"",
+            'description': "home",
+            'url': home_url
+            })
     return response
