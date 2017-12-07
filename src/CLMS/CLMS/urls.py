@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^lecture-list/(?P<page>\d+)$', views.lectureList, name='LectureList'),
     url(r'^tag(?P<tag>\w+)/$', views.search_tag, name='search_tag'),
     url(r'^search/$', views.search, name='search'),
+    url(r'^recommend/(?P<user_name>\S+)/$', views.recommend, name='recommend'),
 
     url(r'^index/$', views.index, name='index4test'),
     url(r'^login/$', views.login, name='Login'),

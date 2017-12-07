@@ -167,6 +167,46 @@ def search_tag(request, tag):
     TagList = Tag.objects.all()
     return render(request, 'complist.html', {'result_list': result_list, 'Tag': TagList})
 
+def recommend(request,user_name):
+    user = User.objects.get(username=str(user_name))
+    if not user:
+        return Http404
+    CompetitionList = Competition.objects.filter(tag__name='a tag you will never use')
+    LectureList = Lecture.objects.filter(tag__name='a tag you will never use')
+    for tag in user.interestTag.all():
+        try:
+            CompetitionList = CompetitionList | Competition.objects.filter(tag__name=str(tag))
+        except Competition.DoesNotExist:
+            raise Http404
+        try:
+            LectureList = LectureList | Lecture.objects.filter(tag__name=(tag))
+        except Lecture.DoesNotExist:
+            raise Http404
+    CompetitionList.distinct()
+    LectureList.distinct()
+    listLen = 4
+    result_list = []
+    CompetitionCnt = 0
+    LectureCnt = 0
+    for cnt in range(listLen):
+        if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
+            break
+        if (CompetitionCnt >= len(CompetitionList)):
+            result_list.append(LectureList[LectureCnt])
+            LectureCnt += 1
+            continue
+        if (LectureCnt >= len(LectureList)):
+            result_list.append(CompetitionList[CompetitionCnt])
+            CompetitionCnt += 1
+            continue
+        if (CompetitionList[CompetitionCnt].date_time > LectureList[LectureCnt].date_time):
+            result_list.append(CompetitionList[CompetitionCnt])
+            CompetitionCnt += 1
+        else:
+            result_list.append(LectureList[LectureCnt])
+            LectureCnt += 1
+    TagList = Tag.objects.all()
+    return render(request, 'complist.html', {'result_list': result_list, 'Tag': TagList})
 
 def search(request):
     if 's' in request.GET:
