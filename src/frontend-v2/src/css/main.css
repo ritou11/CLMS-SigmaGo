@@ -954,3 +954,12 @@ img {
 	-webkit-animation-delay: 1.2s;
 }
 
+.team-leader-box2{
+	width:27%;
+	margin-left: 3%;
+	margin-right: 3%;
+	height: 190px;
+	overflow:hidden;
+	text-align: center;
+	float: left;
+}
