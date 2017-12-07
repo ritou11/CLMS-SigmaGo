@@ -1,3 +1,16 @@
+.keybox{
+	border-radius:20px;
+	padding:18px 30px;
+	height:350px;
+	width:100%;
+	background-color: dimgray;
+	opacity:0.8;
+}
+
+.TitleInBox{
+	font-size:16px;
+}
+
 .ImgContainer{
 	height:200px;
 	padding:0px;
@@ -21,10 +34,14 @@
 	background:darkgray;
 	height:185px;
 	left:300px;
-	width:735px;
+	width:640px;
 	opacity:0.6;
+	padding:50px;
+	padding-top:20px;
+	word-wrap:break-word;  
+    word-break:break-all;
 	top:-6px;
-	
+	color: black;
 }
 .TitleContainer{
 	background-color:;
