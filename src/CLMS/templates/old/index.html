@@ -1,0 +1,596 @@
+{% load static %}
+{% load cropping %}
+{% load clms_extras %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>HOME PAGE</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,800italic,700italic,600italic,400italic,300italic,800,700,600"
+    rel="stylesheet" type="text/css">
+
+  <link href={% static "css/bootstrap.css" %} rel="stylesheet" type="text/css">
+  <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
+  <link href={% static "css/main.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/font-awesome.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/response.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
+  
+  <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+  <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
+  <script type="text/javascript" src={% static "js/ScrollingFixed.js" %}></script>
+  <script type="text/javascript" src={% static "js/wow.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/main.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap-touch-slider-min.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
+  <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
+  <script src={% static "contactform/contactform.js" %}></script>
+
+</head>
+
+<body>  
+  <!--header-start-->
+  <header class="header" id="header">
+    <div class="container">
+      <figure class="logo animated fadeInDown delay-07s">
+        <a href="#">
+          <img src={% static "images/LOGO4.png" %} alt="">
+        </a>
+      </figure>
+
+      <ul class="we-create animated fadeInUp delay-1s">
+        <li><img src={% static "images/TITLE.png" %} style="width:60%"></li>
+        <br>
+        <li>start your journey browsing WONDERFUL comp. & lec. in THU.</li>
+      </ul>
+      <ul class="we-create animated fadeInUp delay-1s">
+        <li><h5 class="log" data-toggle="JDialog" data-target="dialog-1">LOG IN</h5></li>
+        <li>&nbsp;&nbsp;&nbsp;</li>
+        <li><h5 class="log" data-toggle="JDialog" data-target="dialog-2">SIGN UP</h5></li>
+        <li>&nbsp;</li>
+        <li><h5 class="log">DISCOVER</h5></li>
+      </ul>
+      
+    </div>
+  </header>
+  <!--header-end-->
+    <!--log in-->
+    <div class="jDialog" id="dialog-1">
+        <div id="mainlogin">
+            <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px;color:#000000">LOG IN</h1>
+            <form action="login/" method="post" id="frmLogin">
+                {% csrf_token %}
+                {{login.username}}
+                {{login.password}} 
+                <button type="button" onclick="doLogin()"><i class="fa fa-arrow-right"></i></button>
+            </form>
+            <div id="note"><a href="#">Forgot your password?</a></div>
+        </div>
+    </div>
+    <!--sign up-->
+    <div class="jDialog" id="dialog-2">
+        <div id="mainlogin2">
+            <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">SIGN UP</h1>
+            <form action="register/" method="post" id="frmRegister">
+                {% csrf_token %}
+                {{reg.username}}
+                {{reg.password1}}
+                {{reg.password2}}
+                <button type="button" onclick="doRegister()"><i class="fa fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+
+
+  <!--nav-start-->
+  <nav class="main-nav-outer" id="test" >
+    <div class="container">
+      <ul class="main-nav">
+        <li>
+          <a href="#recommanded">RECOMMEND</a>
+        </li>
+        <li>
+          <a href="#competition">COMPETITION</a>
+        </li>
+        <li class="small-logo">
+          <a href="#header">
+            <img class="navLogo" src={% static "images/LOGO.png" %} alt="">
+          </a>
+        </li>
+        <li>
+          <a href="#lecture">LECTURE</a>
+        </li>
+        <li>
+          <a href="#team">ABOUT US</a>
+        </li>
+      </ul>
+      <a class="res-nav_click" href="#">
+        <i class="fa-bars"></i>
+      </a>
+    </div>
+  </nav>
+  <!--nav-end-->
+  
+  
+  <!--recommand-section-start-->
+ <div style="background:url(images/BG1.png) position:fixed">
+  <section class="main-section" id="recommanded">
+    <div class="container">
+      <h2>Recommand</h2>
+      <h6>Hey these are recommanded for you :) &nbsp; Your taste ?</h6>
+      <br>
+      <div >
+        <!--SCROLLING PART-->
+      <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000" >
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
+                    <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
+                    <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper For Slides -->
+                <div class="carousel-inner" role="listbox">
+                    <!-- First Slide -->
+                    {% if SlideList|length >= 1%}
+                    {% with slide=SlideList.0 %}
+                    <div class="item active">
+                        <!-- Slide Background -->
+                        <img src={{slide.image.url}} alt="Bootstrap Touch Slider"  class="slide-image"/>
+                        <div class="bs-slider-overlay"></div>
+                        <div class="container">
+                            <div class="row">
+                                <!-- Slide Text Layer -->
+                                <div class="slide-text slide_style_left">
+                                    <h1 data-animation="animated zoomInRight">{{slide.title}}</h1>
+                                    <p data-animation="animated fadeInLeft">{{slide.intro}}</p>
+                                    <a href="{% if slide|to_class_name == 'Competition'%}/competition/{% else %}lecture/{% endif %}{{slide.id}}" target="_blank"  class="btn btn-primary fix" data-animation="animated fadeInRight">KNOW MORE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endwith %}
+                    {% endif %}
+                    <!-- End of Slide -->
+                    
+                    <!-- Second Slide -->
+                    {% if SlideList|length >= 2%}
+                    {% with slide=SlideList.1 %}
+                    <div class="item">
+                        <!-- Slide Background -->
+                        <img src={{slide.image.url}} alt="Bootstrap Touch Slider"  class="slide-image"/>
+                        <div class="bs-slider-overlay"></div>
+                        <!-- Slide Text Layer -->
+                        <div class="slide-text slide_style_center">
+                          <h1 data-animation="animated flipInX">{{slide.title}}</h1>
+                          <p>&nbsp;</p>
+                            <p data-animation="animated lightSpeedIn">{{slide.intro}}</p>                         
+                            <a href="{% if slide|to_class_name == 'Competition'%}/competition/{% else %}lecture/{% endif %}{{slide.id}}" target="_blank"  class="btn btn-primary" data-animation="animated fadeInDown">KNOW MORE</a>
+                        </div>
+                    </div>
+                    {% endwith %}
+                    {% endif %}
+                    <!-- End of Slide -->
+
+                    <!-- Third Slide -->
+                    {% if SlideList|length >= 3%}
+                    {% with slide=SlideList.2 %}
+                    <div class="item">
+                        <!-- Slide Background -->
+                        <img src={{slide.image.url}} alt="Bootstrap Touch Slider"  class="slide-image"/>
+                        <div class="bs-slider-overlay"></div>
+                        <!-- Slide Text Layer -->
+                        <div class="slide-text slide_style_right">
+                            <h1 data-animation="animated zoomInLeft">{{slide.title}}</h1>
+                            <p data-animation="animated fadeInRight">{{slide.intro}}</p>
+                            <a href="{% if slide|to_class_name == 'Competition'%}/competition/{% else %}lecture/{% endif %}{{slide.id}}" target="_blank" class="btn btn-primary fix" data-animation="animated fadeInRight">KNOW MORE</a>
+                        </div>
+                    </div>
+                    {% endwith %}
+                    {% endif %}
+                    <!-- End of Slide -->
+
+                </div><!-- End of Wrapper For Slides -->
+
+                <!-- Left Control -->
+                <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
+                    <span class="fa fa-angle-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+
+                <!-- Right Control -->
+                <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
+                    <span class="fa fa-angle-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+
+     </div><!-- End of Scrolling Part-->
+      </div>
+    </div>
+  </section>
+  <!--recommand-section-end-->
+  
+  <!-- competition-section-begin -->
+  <section class="main-section paddind" id="competition">
+    <div class="container">
+      <h2 style="color:black">Competition</h2>
+      <h6>See what is going on and find your place here !</h6>
+      <!-- <div class="portfolioFilter"> -->
+     <!--Competition Section-->  
+     <div class="container" style="padding-top:13px;">
+         <a name="competition"> </a>
+         <!--competitions-->
+            {% for competition in CompetitionList %}
+            <div class="col-md-4">
+           <h2 class="PicTitle wow fadeInUp">{{competition.title}}</h2>
+            <div class="box">
+                <div class="box-content">
+                    <div class="box-wrapper">
+                        COMP {{forloop.counter}}<span class="name">{{competition.intro}}</span>
+                        <div class="row">{{competition.likes}} likes - {{competition.views}} views</div>                  
+                    </div>
+                    <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                       <img src={% cropped_thumbnail competition "cropping" scale=0.5 %} class="size_clone" alt="" />
+                    </div>
+                </div>
+                <a class="inlink" href="competition/{{competition.id}}"  target="_blank"></a>
+            </div>
+            </div>
+            {% endfor %}
+     <!--more-->    
+        <div class="col-md-4 ">
+          <a href="/competition-list/1" class="MoreButton wow fadeInUp">
+              More <br>Competition>>>
+          </a>
+        </div>
+<div class="col-md-12">&nbsp;</div>                                     
+</div>  
+    </div>
+    </div>
+  </section>
+<!-- End of Competition Section-->
+
+<!--lecture-section-begin -->
+  <section class="main-section2 paddind" id="lecture">
+    <div class="container">
+      <h2 style="color:white">Lecture</h2>
+      <h6 style="color:white">See what is going on and find your place here !</h6>
+      <!-- <div class="portfolioFilter"> -->
+     <!--Competition Section-->  
+     <div class="container" style="padding-top:13px;">
+         <a name="competition"> </a>
+       <!--pic 1-->   
+       {% for lecture in LectureList %}
+            <div class="col-md-4">
+           <h2 class="PicTitle wow fadeInUp">{{lecture.title}}</h2>
+            <div class="box">
+                <div class="box-content">
+                    <div class="box-wrapper">
+                        LEC {{forloop.counter}}<span class="name">{{lecture.intro}}</span>
+                        <div class="row">{{lecture.likes}} likes - {{lecture.views}} views</div>
+                    </div>
+                    <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                       <img src={% cropped_thumbnail lecture "cropping" scale=0.5 %} class="size_clone" alt="" />
+                    </div>
+                </div>
+                <a class="inlink" href="lecture/{{lecture.id}}" target="_blank"></a>
+            </div>
+            </div>
+        {% endfor %}
+     <!--more-->    
+        <div class="col-md-4 ">
+          <a href="/lecture-list/1" class="MoreButton wow fadeInUp" style="color:white;">
+              More <br>Lecture>>>
+          </a>
+        </div>
+<div class="col-md-12">&nbsp;</div>                                     
+</div>  
+    </div>
+    </div>
+  </section>
+<!-- End of Competition Section-->
+
+  <!-- team-section-begin -->
+  <section class="main-section team" id="team">
+    <!--main-section team-start-->
+    <div class="container">
+      <h2>team</h2>
+      <h6>Take a closer look into our amazing team. We won’t bite.</h6>
+      <div class="team-leader-block clearfix">
+        
+        <div class="team-leader-box">
+          <div class="team-leader  wow fadeInDown delay-06s">
+            <div class="team-leader-shadow">
+            </div>
+            <img src={% static "images/leader_CYN.jpeg" %} alt="">
+            <ul>
+              <li>
+                <a href="#" class="fa-github"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-wechat"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-weibo"></a>
+              </li>
+            </ul>
+          </div>
+           <h3 class="wow fadeInDown delay-03s">Cao Yining</h3>
+          <span class="wow fadeInDown delay-03s">DUTY</span>
+          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+        </div>
+
+        <div class="team-leader-box">
+          <div class="team-leader wow fadeInDown delay-09s">
+            <div class="team-leader-shadow">
+            </div>
+            <img src={% static "images/leader_HYZ.jpeg" %} alt="">
+            <ul>
+              <li>
+                <a href="#" class="fa-github"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-wechat"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-weibo"></a>
+              </li>
+            </ul>
+          </div>
+          <h3 class="wow fadeInDown delay-09s">Han Yizeng</h3>
+          <span class="wow fadeInDown delay-03s">DUTY</span>
+          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+        </div>
+        
+        <div class="team-leader-box">
+          <div class="team-leader wow fadeInDown delay-03s">
+            <div class="team-leader-shadow">
+            </div>
+            <img src={% static "images/leader_HWF.jpeg" %} alt="">
+            <ul>
+              <li>
+                <a href="#" class="fa-github"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-wechat"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-weibo"></a>
+              </li>
+            </ul>
+          </div>
+          <h3 class="wow fadeInDown delay-03s">Huang Xiufeng</h3>
+          <span class="wow fadeInDown delay-03s">DUTY</span>
+          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+        </div>
+        
+        <div class="team-leader-box">
+          <div class="team-leader  wow fadeInDown delay-06s">
+            <div class="team-leader-shadow">
+            </div>
+            <img src={% static "images/leader_LHT.jpeg" %} alt="">
+            <ul>
+              <li>
+                <a href="#" class="fa-github"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-wechat"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-weibo"></a>
+              </li>
+            </ul>
+          </div>
+           <h3 class="wow fadeInDown delay-03s">Liu Haotian</h3>
+          <span class="wow fadeInDown delay-03s">DUTY</span>
+          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+        </div>
+
+        <div class="team-leader-box">
+          <div class="team-leader  wow fadeInDown delay-06s">
+            <div class="team-leader-shadow">
+            </div>
+            <img src={% static "images/leader_ZZX.jpeg" %} alt="">
+            <ul>
+              <li>
+                <a href="#" class="fa-github"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-wechat"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-weibo"></a>
+              </li>
+            </ul>
+          </div>
+           <h3 class="wow fadeInDown delay-03s">Zhang Zhixing</h3>
+          <span class="wow fadeInDown delay-03s">DUTY</span>
+          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+        </div>
+
+         <div class="team-leader-box">
+          <div class="team-leader  wow fadeInDown delay-06s">
+            <div class="team-leader-shadow">
+            </div>
+            <img src={% static "images/leader_ZHD.jpeg" %} alt="">
+            <ul>
+              <li>
+                <a href="#" class="fa-github"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-wechat"></a>
+              </li>
+              <li>
+                <a href="#" class="fa-weibo"></a>
+              </li>
+            </ul>
+          </div>
+           <h3 class="wow fadeInDown delay-03s">Zhu Haidong</h3>
+          <span class="wow fadeInDown delay-03s">DUTY</span>
+          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <!-- team-section-end -->
+
+  <!--Footer-begin-->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">
+        <a href="#">
+          <img src={% static "images/LOGO2.png" %} alt="">
+        </a>
+      </div>
+      <span class="copyright">Copyright &copy; 2017 SIGMAGO. All Rights Reserved.</span>
+    </div>
+  </footer>
+  <!--Footer-end-->
+</div>
+<script>
+    $(function() {
+    $( "#Tabs1" ).tabs(); 
+});
+    
+
+        $("#dialog-1").jDialog({
+            skinClassName: 'demo',
+            allowOverlay:true,
+            animationType: 'fade-in',
+        });
+        $("#dialog-2").jDialog({
+            skinClassName: 'demo',
+            allowOverlay:true,
+            animationType:'fade-in',
+        });
+</script>
+
+<script>
+    $(document).ready(function(){
+      // vh fix
+      viewportUnitsBuggyfill.init();
+      $(window).resize(function(){
+        viewportUnitsBuggyfill.refresh();
+      });
+      // Start wow.js
+      new WOW().init();
+      var windowHeight = $(window).height();
+      $(window).trigger('resize');
+      });
+</script>
+
+<script>
+$(function() {
+    $( "#Tabs1" ).tabs(); 
+});
+</script>
+
+<script>
+    $('#bootstrap-touch-slider').bsTouchSlider();
+</script>
+
+<!-- --------------------------------------------------------------------- -->
+
+  <script type="text/javascript">
+    $(document).ready(function (e) {
+      $('#test').scrollToFixed();
+      $('.res-nav_click').click(function () {
+        $('.main-nav').slideToggle();
+        return false
+
+      });
+
+    });
+  </script>
+
+  <script>
+    wow = new WOW({
+      animateClass: 'animated',
+      offset: 100
+    });
+    wow.init();
+  </script>
+
+
+  <script type="text/javascript">
+    $(window).load(function () {
+
+      $('.main-nav li a, .servicelink').bind('click', function (event) {
+        var $anchor = $(this);
+
+        $('html, body').stop().animate({
+          scrollTop: $($anchor.attr('href')).offset().top - 102
+        }, 1500, 'easeInOutExpo');
+                /*
+                if you don't want to use the easing effects:
+                $('html, body').stop().animate({
+                    scrollTop: $($anchor.attr('href')).offset().top
+                }, 1000);
+                */
+        if ($(window).width() < 768) {
+          $('.main-nav').hide();
+        }
+        event.preventDefault();
+      });
+    })
+  </script>
+
+  <script type="text/javascript">
+    $(window).load(function () {
+
+
+      var $container = $('.portfolioContainer'),
+        $body = $('body'),
+        colW = 375,
+        columns = null;
+
+
+      $container.isotope({
+        // disable window resizing
+        resizable: true,
+        masonry: {
+          columnWidth: colW
+        }
+      });
+
+      $(window).smartresize(function () {
+        // check if columns has changed
+        var currentColumns = Math.floor(($body.width() - 30) / colW);
+        if (currentColumns !== columns) {
+          // set new column count
+          columns = currentColumns;
+          // apply width to container manually, then trigger relayout
+          $container.width(columns * colW)
+            .isotope('reLayout');
+        }
+
+      }).smartresize(); // trigger resize to set container width
+      $('.portfolioFilter a').click(function () {
+        $('.portfolioFilter .current').removeClass('current');
+        $(this).addClass('current');
+
+        var selector = $(this).attr('data-filter');
+        $container.isotope({
+
+          filter: selector,
+        });
+        return false;
+      });
+
+    });
+  </script>
+
+
+</body>
+</html>

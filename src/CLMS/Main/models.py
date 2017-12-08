@@ -8,7 +8,7 @@ import os
 
 
 def make_thumb(path, thumb_path, size=(160, 120)):
-    image = skimage.io.imread(path) 
+    image = skimage.io.imread(path)
     height, width = image.shape[0], image.shape[1]
 
     thumb = image
@@ -44,9 +44,9 @@ class Competition(models.Model):
     hold_time = models.DateTimeField()
     holder = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
-    
+
     # admin info
-    adminUser = models.CharField(max_length=50)
+    adminUser = models.CharField(max_length=50, blank=True)
 
     # text
     intro = models.TextField(blank=True, null=True)
@@ -60,7 +60,7 @@ class Competition(models.Model):
     thumb = models.ImageField(upload_to='./Competition/thumbs', blank=True)
     cropping = ImageRatioField('image', '640x480')
 
-    tag = models.ManyToManyField(Tag,blank=True)
+    tag = models.ManyToManyField(Tag, blank=True)
 
     # what is this?
     likes = models.IntegerField(default=0)
@@ -102,7 +102,7 @@ class Lecture(models.Model):
 
     # admin info
     adminUser = models.CharField(max_length=50)
-    
+
     # text
     intro = models.TextField(blank=True, null=True)
     content = models.TextField(blank=True, null=True)
@@ -117,7 +117,7 @@ class Lecture(models.Model):
     thumb = models.ImageField(upload_to='./Lecture/thumbs', blank=True)
     cropping = ImageRatioField('image', '640x480')
 
-    tag = models.ManyToManyField(Tag,blank=True)
+    tag = models.ManyToManyField(Tag, blank=True)
 
     date_time = models.DateTimeField(auto_now_add=True)
 
@@ -142,7 +142,7 @@ class Lecture(models.Model):
 
 
 class User(models.Model):
-    
+
     '''tagInterest = (
         ('Science',(
             ('Program','Programming'),
@@ -161,21 +161,19 @@ class User(models.Model):
     password = models.CharField(max_length=50)
 
     # Undergraduate or graduate student
-    stuType = models.CharField(max_length=30,blank=True)
-    infoUser = models.CharField(max_length=30,blank=True)
-    infoPasswd = models.CharField(max_length=30,blank=True)
+    stuType = models.CharField(max_length=30, blank=True)
+    infoUser = models.CharField(max_length=30, blank=True)
+    infoPasswd = models.CharField(max_length=30, blank=True)
     infoValid = models.BooleanField(default=False)
-    email = models.EmailField(max_length=40,blank=True)
+    email = models.EmailField(max_length=40, blank=True)
     emailValid = models.BooleanField(default=False)
-    stuName = models.CharField(max_length=15,blank=True)
+    stuName = models.CharField(max_length=15, blank=True)
     stuNo = models.IntegerField(default=2000000000)
-    grade = models.CharField(max_length=20,default='-------')
-    interestTag = models.ManyToManyField(Tag,blank=True)   # for recommendation
+    grade = models.CharField(max_length=20, default='-------')
+    interestTag = models.ManyToManyField(
+        Tag, blank=True)   # for recommendation
     adminAuth = models.BooleanField(default=True)
     #adminAuth = models.BooleanField(default=False)
-    
-    
+
     def __unicode__(self):
         return self.username
-    
-    
