@@ -1,0 +1,78 @@
+.cube__side,
+.no-js .cube {
+	border: 0.8vw solid #37B3D4 ;
+	outline: 1px ;
+	background:url(../../Sigmagov-2/src/images/BG1.png);
+	opacity:1;
+}
+
+.cube:not(.cube--inactive):nth-child(2n) .cube__side,
+.no-js .cube:not(.cube--inactive):nth-child(2n) {
+}
+
+.cube:not(.cube--inactive):nth-child(3n) .cube__side,
+.no-js .cube:not(.cube--inactive):nth-child(3n) {
+}
+
+.cube--inactive .cube__side,
+.no-js .cube--inactive {
+	background: #e1e0e0;
+	opacity:0.3;
+}
+
+
+/* With JS we insert a number span into the cube */
+
+.cube__number{
+	font-family:Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
+	font-weight: 700;
+	font-size:16px;
+	line-height: 2.5;
+	width: 2em;
+	height: 2em;
+	padding: 0 0 0 0.25em;
+	text-align: center;
+	color:#F48787;
+	border-radius: 100% 0 0 0;
+}
+.no-js .cube::after {
+	font-family:Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
+	font-weight: 700;
+	line-height: 2.5;
+	width: 2em;
+	height: 2em;
+	padding: 0 0 0 0.25em;
+	text-align: center;
+	letter-spacing: -0.05em;
+	color:#F48787;
+	border-radius: 100% 0 0 0;
+}
+
+.cube:nth-child(2n):not(.cube--inactive) .cube__number,
+.no-js .cube:nth-child(2n):not(.cube--inactive)::after {
+	
+}
+
+.cube:nth-child(3n):not(.cube--inactive) .cube__number,
+.no-js .cube:nth-child(3n):not(.cube--inactive)::after {
+
+}
+
+.cube--inactive .cube__number,
+.no-js .cube--inactive::after {
+
+}
+
+.js .content__block {
+	text-align: center;
+}
+
+.content__number {
+	font-family:Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
+	font-size: 40vw;
+	line-height: 0.5;
+	right: 0;
+	bottom: 30vh;
+	text-indent: -0.175em;
+	color: #fff;
+}
