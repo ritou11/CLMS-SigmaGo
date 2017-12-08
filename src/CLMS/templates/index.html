@@ -1,825 +1,677 @@
-{% load static %}
-{% load cropping %}
-{% load clms_extras %}
+{% load static %} {% load cropping %} {% load clms_extras %}
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>HOME PAGE</title>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,800italic,700italic,600italic,400italic,300italic,800,700,600"
-    rel="stylesheet" type="text/css">
-
-  <link href={% static "css/bootstrap.css" %} rel="stylesheet" type="text/css">
-  <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
-  <link href={% static "css/main.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/font-awesome.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/response.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
-  
-  <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
-  <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
-  <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
-  <script type="text/javascript" src={% static "js/ScrollingFixed.js" %}></script>
-  <script type="text/javascript" src={% static "js/wow.min.js" %}></script>
-  <script type="text/javascript" src={% static "js/main.js" %}></script>
-  <script type="text/javascript" src={% static "js/bootstrap-touch-slider-min.js" %}></script>
-  <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
-  <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
-  <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
-  <!--<script src={% static "contactform/contactform.js" %}></script>-->
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HOME PAGE</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,800italic,700italic,600italic,400italic,300italic,800,700,600" rel="stylesheet" type="text/css">
+    <link href={% static "css/bootstrap.css" %} rel="stylesheet" type="text/css">
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href={% static "css/main.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/font-awesome.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/response.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
+    <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
+    <script type="text/javascript" src={% static "js/ScrollingFixed.js" %}></script>
+    <script type="text/javascript" src={% static "js/wow.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/main.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap-touch-slider-min.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
+    <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
+    <script type="text/javascript" src={% static "js/jquery.form.js" %}></script>
+    <script type="text/javascript" src={% static "js/md5.js" %}></script>
+    <script type="text/javascript" src={% static "js/user.js" %}></script>
+    <!--<script src={% static "contactform/contactform.js" %}></script>-->
 </head>
-<body>  
-<div>
-  <!--________________________________header-start________________________________-->
-  <header class="header" id="header">
-    <div class="container">
-      <figure class="logo animated fadeInDown delay-07s">
-        <a href="#">
+
+<body>
+    <!--________________________________header-start________________________________-->
+    <header class="header" id="header">
+        <div class="container">
+            <figure class="logo animated fadeInDown delay-07s">
+                <a href="#">
           <img src={% static "images/LOGO4.png" %} alt="">
         </a>
-      </figure>
-
-      <ul class="we-create animated fadeInUp delay-1s">
-        <li><img src={% static "images/TITLE.png" %} style="width:60%"></li>
-        <br>
-        <li>start your journey browsing WONDERFUL comp. & lec. in THU.</li>
-      </ul>
-      <ul class="we-create animated fadeInUp delay-1s">
-        <li><h5 class="log" data-toggle="JDialog" data-target="dialog-1">LOG IN</h5></li>
-        <li>&nbsp;&nbsp;&nbsp;</li>
-        <li><h5 class="log" data-toggle="JDialog" data-target="dialog-2">SIGN UP</h5></li>
-        <li>&nbsp;</li>
-        <li><h5 class="log">DISCOVER</h5></li>
-      </ul>
-      
+            </figure>
+            <ul class="we-create animated fadeInUp delay-1s">
+                <li><img src={% static "images/TITLE.png" %} style="width:60%"></li>
+                <br>
+                <li>start your journey browsing WONDERFUL comp. & lec. in THU.</li>
+            </ul>
+            <ul class="we-create animated fadeInUp delay-1s">
+                <li>
+                    <h5 class="log" data-toggle="JDialog" data-target="dialog-1">LOG IN</h5></li>
+                <li>&nbsp;&nbsp;&nbsp;</li>
+                <li>
+                    <h5 class="log" data-toggle="JDialog" data-target="dialog-2">SIGN UP</h5></li>
+                <li>&nbsp;</li>
+                <li>
+                    <h5 class="log">DISCOVER</h5></li>
+            </ul>
+        </div>
+    </header>
+    <!--________________________________header-end________________________________-->
+    <!--________________________________log in________________________________-->
+    <div class="jDialog" id="dialog-1">
+        <div id="mainlogin">
+            <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px;color:#000000">LOG IN</h1>
+            <form action="login/" method="post" id="frmLogin">
+                {% csrf_token %} {{login.username}} {{login.password}}
+                <button type="button" onclick="doLogin()"><i class="fa fa-arrow-right"></i></button>
+            </form>
+            <div id="note"><a href="#">Forgot your password?</a></div>
+        </div>
     </div>
-  </header>
-  <!--________________________________header-end________________________________-->
-   <!--________________________________log in________________________________-->
-  <div class="jDialog" id="dialog-1">
-      <div id="mainlogin">
-          <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px;color:#000000">LOG IN</h1>
-          <form action="#">
-             <input type="text" placeholder="username or email" value="" required>
-             <input type="password" placeholder="password" value="" required>
-             <button type="submit"><i class="fa fa-arrow-right"></i></button>
-         </form>
-         <div id="note"><a href="#">Forgot your password?</a></div>
-      </div>
-</div>
-  <!--________________________________sign up________________________________-->
-  <div class="jDialog" id="dialog-2">
-      <div id="mainlogin2">
-          <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">SIGN UP</h1>
-          <form action="#">
-             <input type="text" placeholder="username or email" value="" required>
-             <input type="password" placeholder="password(>6 letters)" value="" required>
-             <input type="password" placeholder="password again" value="" required>
-             <button type="submit"><i class="fa fa-arrow-right"></i></button>
-         </form>
-      </div>
-</div>
-  
-
-  <!--________________________________nav-start________________________________-->
-  <nav class="main-nav-outer" id="test" >
-    <div class="container">
-      <ul class="main-nav">
-        <li>
-          <a href="#recom">RECOMMEND</a>
-        </li>
-        <li>
-          <a href="#competition">COMPETITION</a>
-        </li>
-        <li class="small-logo">
-          <a href="#header">
+    <!--________________________________sign up________________________________-->
+    <div class="jDialog" id="dialog-2">
+        <div id="mainlogin2">
+            <h1 style="font-size:20px;font-family:Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';letter-spacing:2px;text-align:center;position:relative;top:-4px">SIGN UP</h1>
+            <form action="register/" method="post" id="frmRegister">
+                {% csrf_token %} {{reg.username}} {{reg.password1}} {{reg.password2}}
+                <button type="button" onclick="doRegister()"><i class="fa fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+    <!--________________________________nav-start________________________________-->
+    <nav class="main-nav-outer" id="test">
+        <div class="container">
+            <ul class="main-nav">
+                <li>
+                    <a href="#recom">RECOMMEND</a>
+                </li>
+                <li>
+                    <a href="#competition">COMPETITION</a>
+                </li>
+                <li class="small-logo">
+                    <a href="#header">
             <img class="navLogo" src={% static "images/LOGO.png" %} alt="">
           </a>
-        </li>
-        <li>
-          <a href="#lecture">LECTURE</a>
-        </li>
-        <li>
-          <a href="#team">ABOUT US</a>
-        </li>
-      </ul>
-      <a class="res-nav_click" href="#">
+                </li>
+                <li>
+                    <a href="#lecture">LECTURE</a>
+                </li>
+                <li>
+                    <a href="#team">ABOUT US</a>
+                </li>
+            </ul>
+            <a class="res-nav_click" href="#">
         <i class="fa-bars"></i>
       </a>
-    </div>
-  </nav>
-  <!--________________________________nav-end________________________________-->
-  
-  
-  <!--________________________________recommand-section-start________________________________-->
-  <section class="main-section" id="demo">
-   <a name="recom"></a>
-    <div class="container">
-      <h2>Recommand</h2>
-      <h6>Hey these are recommanded for you :) &nbsp; Your taste ?</h6>
-      <br>
-      <div >
-        <!--SCROLLING PART-->
-      <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000" >
-	            <!-- Indicators -->
-	            <ol class="carousel-indicators">
-	                <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
-	                <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
-	                <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
-                </ol>
-
-	            <!-- Wrapper For Slides -->
-	            <div class="carousel-inner" role="listbox">
-	                <!-- First Slide -->
-	                <div class="item active">
-	                    <!-- Slide Background -->
-	                    <img src={% static "images/exa1.png" %} alt="Bootstrap Touch Slider"  class="slide-image"/>
-	                    <div class="bs-slider-overlay"></div>
-	                    <div class="container">
-	                        <div class="row">
-	                            <!-- Slide Text Layer -->
-	                            <div class="slide-text slide_style_left">
-	                                <h1 data-animation="animated zoomInRight">TITLE ONE</h1>
-	                                <p data-animation="animated fadeInLeft">INTRO INTRO INTRO INTRO.</p>
-	                                <a href="#" target="_blank"  class="btn btn-primary fix" data-animation="animated fadeInRight">KNOW MORE</a>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	                <!-- End of Slide -->
-	                
-	                <!-- Second Slide -->
-	                <div class="item">
-	                    <!-- Slide Background -->
-	                    <img src={% static "images/main.png" %} alt="Bootstrap Touch Slider"  class="slide-image"/>
-	                    <div class="bs-slider-overlay"></div>
-	                    <!-- Slide Text Layer -->
-	                    <div class="slide-text slide_style_center">
-	                      <h1 data-animation="animated flipInX">TITLE TWO</h1>
-	                      <p>&nbsp;</p>
-							<p data-animation="animated lightSpeedIn">INTRO INTRO INTRO INTRO.</p>	                       
-	                        <a href="#" target="_blank"  class="btn btn-primary" data-animation="animated fadeInDown">KNOW MORE</a>
-	                    </div>
-	                </div>
-	                <!-- End of Slide -->
-
-	                <!-- Third Slide -->
-	                <div class="item">
-	                    <!-- Slide Background -->
-	                    <img src={% static "images/exa6.png" %} alt="Bootstrap Touch Slider"  class="slide-image"/>
-	                    <div class="bs-slider-overlay"></div>
-	                    <!-- Slide Text Layer -->
-	                    <div class="slide-text slide_style_right">
-	                        <h1 data-animation="animated zoomInLeft">TITLE THREE</h1>
-	                        <p data-animation="animated fadeInRight">INTRO INTRO INTRO INTRO INTRO</p>
-	                        <a href="#" target="_blank" class="btn btn-primary fix" data-animation="animated fadeInRight">KNOW MORE</a>
-	                    </div>
-	                </div>
-	                <!-- End of Slide -->
-	            </div><!-- End of Wrapper For Slides -->
-
-	            <!-- Left Control -->
-	            <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
-	                <span class="fa fa-angle-left" aria-hidden="true"></span>
-	                <span class="sr-only">Previous</span>
-	            </a>
-
-	            <!-- Right Control -->
-	            <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
-	                <span class="fa fa-angle-right" aria-hidden="true"></span>
-	                <span class="sr-only">Next</span>
-	            </a>
-
-     </div><!-- End of Scrolling Part-->
-      </div>
-    </div>
-  </section>
-  <!--________________________________recommand-section-end________________________________-->
-  
-  
-<!--________________________________ competition-section-begin _______________________________________-->
-<section>
-   <!--section banner-->
-<a name="competition"></a>
-<div class="container">
-      <h2>COMPETITION</h2>
-      <h6>Something marvelous is always happening.</h6>
- <div class="event-list-container"> 
-   <table style="width:100%;">
-    <tr>
-  <!--BOX FOR ONE EVENT-->
-    <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none">
-        <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					   <img src={% static "images/exa2.png" %} alt="" />  
-				    </div>
-				    <div class="box-content">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR ONE EVENT ___________________________ -->
-    <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none">
-       <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					   <img src={% static "images/exa2.png" %} alt="" />  
-				    </div>
-				    <div class="box-content">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR ONE EVENT ___________________________ -->
-     <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none">
-       <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					   <img src={% static "images/exa2.png" %} alt="" />  
-				    </div>
-				    <div class="box-content">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR ONE EVENT ___________________________ -->
-  </tr>
- 
- <tr style="position:relative;top:-20px;">
-     <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none">
-       <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					   <img src={% static "images/exa2.png" %} alt="" />  
-				    </div>
-				    <div class="box-content">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR ONE EVENT ___________________________ -->
-    <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none">
-       <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					   <img src={% static "images/exa2.png" %} alt="" />  
-				    </div>
-				    <div class="box-content">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR MORE ___________________________ -->
-    <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none;opacity:0">
-       <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-					   <img src={% static "images/more.jpg" %} alt="" />  
-				    </div>
-				    <div class="box-content" style="opacity: 0;">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR MORE ___________________________ -->
-  </tr>
-</table>
-    
-          
-     </div>    
-       
-   </section>
- <!--________________________________ competition-section-end _______________________________________-->
- 
- 
-  
-  <!--________________________________ lecture-section-begin _______________________________________-->
-<section>
-  <a name="lecture"></a>
-   <!-- ____________________section banner______________________________ -->
-<div class="container" >
-      <h2>LECTURE</h2>
-      <h6>A realm of gee-whiz wisdom. CANNOT MISS IT!</h6>
- <div class="event-list-container"> 
-   <table style="width:100%;">
-    <tr>
-  <!-- ______________________BOX FOR ONE EVENT ___________________________ -->
-    <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none">
-       <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="rotateRight" data-return="">
-					   <img src={% static "images/exa2.png" %} alt="" />  
-				    </div>
-				    <div class="box-content">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR ONE EVENT ___________________________ -->
-    <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none">
-        <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="rotateUp" data-return="">
-					   <img src={% static "images/exa2.png" %} alt="" />  
-				    </div>
-				    <div class="box-content">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR ONE EVENT ___________________________ -->
-     <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none">
-       <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="rotateLeft" data-return="">
-					   <img src={% static "images/exa2.png" %} alt="" />  
-				    </div>
-				    <div class="box-content">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR ONE EVENT ___________________________ -->
-  </tr>
- 
- <tr style="position:relative;top:-20px;">
-     <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none">
-       <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="rotateRight" data-return="">
-					   <img src={% static "images/exa2.png" %} alt="" />  
-				    </div>
-				    <div class="box-content">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR ONE EVENT ___________________________ -->
-    <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none">
-       <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="rotateDown" data-return="">
-					   <img src={% static "images/exa2.png" %} alt="" />  
-				    </div>
-				    <div class="box-content">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR MORE___________________________ -->
-    <th style="margin-left:5%;height:200px">
-      <h3 style="font-size:17px;text-decoration: none;opacity: 0;">
-       <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
-         这是标题
-      </h3>
-      <div class="event-box">
-          <div class="event">
-                <a href="#"></a>
-                 <div class="box">
-				    <div class="box-overlay magictime" data-hover="rotateLeft" data-return="">
-					   <img src={% static "images/more.jpg" %} alt="" />  
-				    </div>
-				    <div class="box-content" style="opacity: 0;">
-	                   <h3>TITLE</h3>
-                       <span>introintrointrointrointintroint</span>
-                       <p>XXXVIEWS  XXXLIKES</p>
-                    </div>
-			     </div>
-	       </div>
-      </div> 
-     </th>
-  <!-- ______________________BOX FOR MORE ___________________________ -->
-  </tr>
-</table>
-    
-          
-     </div>    
-       
-   </section>
- <!--________________________________ lecture-section-end _______________________________________-->
-  
-  
-
-  <!-- ________________________________team-section-begin________________________________ -->
-  <section class="main-section team" id="team">
-   <a name="team"></a>
-    <!--main-section team-start-->
-    <div class="container">
-      <h2>team</h2>
-      <h6>Take a closer look into our amazing team. We won’t bite.</h6>
-      <div class="team-leader-block clearfix">
-        <div class="team-leader-box">
-          <div class="team-leader wow fadeInDown delay-03s">
-            <div class="team-leader-shadow">
-              <a href="#"></a>
-            </div>
-            <img src={% static "images/leader_HWF.jpeg" %} alt="">
-            <ul>
-              <li>
-                <a href="" class="fa-github"></a>
-              </li>
-              <li>
-                <a href="" class="fa-wechat"></a>
-              </li>
-              <li>
-                <a href="" class="fa-weibo"></a>
-              </li>
-            </ul>
-          </div>
-          <h3 class="wow fadeInDown delay-03s">Huang Xiufeng</h3>
-          <span class="wow fadeInDown delay-03s">DUTY</span>
-          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
         </div>
-        
-        <div class="team-leader-box">
-          <div class="team-leader  wow fadeInDown delay-06s">
-            <div class="team-leader-shadow">
-              <a href="#"></a>
+    </nav>
+    <!--________________________________nav-end________________________________-->
+    <!--________________________________recommand-section-start________________________________-->
+    <section class="main-section" id="demo">
+        <a name="recom"></a>
+        <div class="container">
+            <h2>Recommand</h2>
+            <h6>Hey these are recommanded for you :) &nbsp; Your taste ?</h6>
+            <br>
+            <div>
+                <!--SCROLLING PART-->
+                <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
+                        <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
+                        <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
+                    </ol>
+                    <!-- Wrapper For Slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <!-- First Slide -->
+                        {% if SlideList|length >= 1%} {% with slide=SlideList.0 %}
+                        <div class="item active">
+                            <!-- Slide Background -->
+                            <img src={{slide.image.url}} alt="Bootstrap Touch Slider" class="slide-image" />
+                            <div class="bs-slider-overlay"></div>
+                            <div class="container">
+                                <div class="row">
+                                    <!-- Slide Text Layer -->
+                                    <div class="slide-text slide_style_left">
+                                        <h1 data-animation="animated zoomInRight">{{slide.title}}</h1>
+                                        <p data-animation="animated fadeInLeft">{{slide.intro}}</p>
+                                        <a href="{% if slide|to_class_name == 'Competition'%}/competition/{% else %}lecture/{% endif %}{{slide.id}}" target="_blank" class="btn btn-primary fix" data-animation="animated fadeInRight">KNOW MORE</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endwith %} {% endif %}
+                        <!-- End of Slide -->
+                        <!-- Second Slide -->
+                        {% if SlideList|length >= 2%} {% with slide=SlideList.1 %}
+                        <div class="item">
+                            <!-- Slide Background -->
+                            <img src={{slide.image.url}} alt="Bootstrap Touch Slider" class="slide-image" />
+                            <div class="bs-slider-overlay"></div>
+                            <!-- Slide Text Layer -->
+                            <div class="slide-text slide_style_center">
+                                <h1 data-animation="animated flipInX">{{slide.title}}</h1>
+                                <p>&nbsp;</p>
+                                <p data-animation="animated lightSpeedIn">{{slide.intro}}</p>
+                                <a href="{% if slide|to_class_name == 'Competition'%}/competition/{% else %}lecture/{% endif %}{{slide.id}}" target="_blank" class="btn btn-primary" data-animation="animated fadeInDown">KNOW MORE</a>
+                            </div>
+                        </div>
+                        {% endwith %} {% endif %}
+                        <!-- End of Slide -->
+                        <!-- Third Slide -->
+                        {% if SlideList|length >= 3%} {% with slide=SlideList.2 %}
+                        <div class="item">
+                            <!-- Slide Background -->
+                            <img src={{slide.image.url}} alt="Bootstrap Touch Slider" class="slide-image" />
+                            <div class="bs-slider-overlay"></div>
+                            <!-- Slide Text Layer -->
+                            <div class="slide-text slide_style_right">
+                                <h1 data-animation="animated zoomInLeft">{{slide.title}}</h1>
+                                <p data-animation="animated fadeInRight">{{slide.intro}}</p>
+                                <a href="{% if slide|to_class_name == 'Competition'%}/competition/{% else %}lecture/{% endif %}{{slide.id}}" target="_blank" class="btn btn-primary fix" data-animation="animated fadeInRight">KNOW MORE</a>
+                            </div>
+                        </div>
+                        {% endwith %} {% endif %}
+                        <!-- End of Slide -->
+                    </div>
+                    <!-- End of Wrapper For Slides -->
+                    <!-- Left Control -->
+                    <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
+                  <span class="fa fa-angle-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+              </a>
+                    <!-- Right Control -->
+                    <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
+                  <span class="fa fa-angle-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+              </a>
+                </div>
+                <!-- End of Scrolling Part-->
             </div>
-            <img src={% static "images/leader_LHT.jpeg" %} alt="">
-            <ul>
-              <li>
-                <a href="" class="fa-github"></a>
-              </li>
-              <li>
-                <a href="" class="fa-wechat"></a>
-              </li>
-              <li>
-                <a href="" class="fa-weibo"></a>
-              </li>
-            </ul>
-          </div>
-           <h3 class="wow fadeInDown delay-03s">Liu Haotian</h3>
-          <span class="wow fadeInDown delay-03s">DUTY</span>
-          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
         </div>
-        
-        <div class="team-leader-box">
-          <div class="team-leader wow fadeInDown delay-09s">
-            <div class="team-leader-shadow">
-              <a href="#"></a>
+    </section>
+    <!--________________________________recommand-section-end________________________________-->
+    <!--________________________________ competition-section-begin _______________________________________-->
+    <section>
+        <!--section banner-->
+        <a name="competition"></a>
+        <div class="container">
+            <h2>COMPETITION</h2>
+            <h6>Something marvelous is always happening.</h6>
+            <div class="event-list-container">
+                <table style="width:100%;">
+                    <tr>
+                        <!--BOX FOR ONE EVENT-->
+                        {% for competition in CompetitionList|slice:":3" %}
+                        <th style="margin-left:5%;height:200px">
+                            <h3 style="font-size:17px;text-decoration: none">
+                            {% if competition.state == "进行中"%}
+                            <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
+                            {% else %}
+                            <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
+                            {% endif%}{{competition.title}}
+                            </h3>
+                            <div class="event-box">
+                                <div class="event">
+                                    <div class="box">
+                                        <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                            <img src={% cropped_thumbnail competition "cropping" scale=0.5 %} alt="" />
+                                        </div>
+                                        <div class="box-content">
+                                            <h3>{{competition.title}}</h3>
+                                            <span>{{competition.intro}}</span>
+                                            <p>{{competition.likes}} likes - {{competition.views}} views</p>
+                                        </div>
+                                        <a class="inlink" href="competition/{{competition.id}}" target="_blank"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        {% endfor %}
+                        {% if CompetitionList|length < 3 %} <!-- ______________________BOX FOR MORE ___________________________ -->
+                            <th style="margin-left:5%;height:200px">
+                                <div class="event-box">
+                                    <div class="event">
+                                        <div class="box">
+                                            <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                                <img src={% static "images/more.jpg" %} alt="" />
+                                            </div>
+                                            <a class="inlink" href="competition-list/1" target="_blank"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                            {% endif %}
+                    </tr>
+                    <tr style="position:relative;top:-20px;">
+                        {% for competition in CompetitionList|slice:"3:5" %}
+                        <th style="margin-left:5%;height:200px">
+                            <h3 style="font-size:17px;text-decoration: none">
+                            {% if competition.state == "进行中"%}
+                            <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
+                            {% else %}
+                            <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
+                            {% endif %}{{competition.title}}
+                            </h3>
+                            <div class="event-box">
+                                <div class="event">
+                                    <div class="box">
+                                        <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                            <img src={% cropped_thumbnail competition "cropping" scale=0.5 %} alt="" />
+                                        </div>
+                                        <div class="box-content">
+                                            <h3>{{competition.title}}</h3>
+                                            <span>{{competition.intro}}</span>
+                                            <p>{{competition.likes}} likes - {{competition.views}} views</p>
+                                        </div>
+                                        <a class="inlink" href="competition/{{competition.id}}" target="_blank"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        {% endfor %}
+                        {% if CompetitionList|length >= 3 %}
+                        <!-- ______________________BOX FOR MORE ___________________________ -->
+                        <th style="margin-left:5%;height:200px">
+                            <div class="event-box">
+                                <div class="event">
+                                    <div class="box">
+                                        <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                            <img src={% static "images/more.jpg" %} alt="" />
+                                        </div>
+                                        <a class="inlink" href="competition-list/1" target="_blank"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        {% endif %}
+                    </tr>
+                </table>
             </div>
-            <img src={% static "images/leader_HYZ.jpeg" %} alt="">
-            <ul>
-              <li>
-                <a href="" class="fa-github"></a>
-              </li>
-              <li>
-                <a href="" class="fa-wechat"></a>
-              </li>
-              <li>
-                <a href="" class="fa-weibo"></a>
-              </li>
-            </ul>
-          </div>
-          <h3 class="wow fadeInDown delay-09s">Han Yizeng</h3>
-          <span class="wow fadeInDown delay-03s">DUTY</span>
-          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
-        </div>
-        
-         <div class="team-leader-box">
-          <div class="team-leader  wow fadeInDown delay-06s">
-            <div class="team-leader-shadow">
-              <a href="#"></a>
+    </section>
+    <!--________________________________ competition-section-end _______________________________________-->
+    <!--________________________________ lecture-section-begin _______________________________________-->
+    <section>
+        <a name="lecture"></a>
+        <!-- ____________________section banner______________________________ -->
+        <div class="container">
+            <h2>LECTURE</h2>
+            <h6>A realm of gee-whiz wisdom. CANNOT MISS IT!</h6>
+            <div class="event-list-container">
+                <table style="width:100%;">
+                    <tr>
+                        <!--BOX FOR ONE EVENT-->
+                        {% for lecture in LectureList|slice:":3" %}
+                        <th style="margin-left:5%;height:200px">
+                            <h3 style="font-size:17px;text-decoration: none">
+                            {% if lecture.state == "进行中"%}
+                            <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
+                            {% else %}
+                            <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
+                            {% endif %}{{lecture.title}}
+                            </h3>
+                            <div class="event-box">
+                                <div class="event">
+                                    <a href="#"></a>
+                                    <div class="box">
+                                        <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                            <img src={% cropped_thumbnail lecture "cropping" scale=0.5 %} alt="" />
+                                        </div>
+                                        <div class="box-content">
+                                            <h3>{{lecture.title}}</h3>
+                                            <span>{{lecture.intro}}</span>
+                                            <p>{{lecture.likes}} likes - {{lecture.views}} views</p>
+                                        </div>
+                                        <a class="inlink" href="lecture/{{lecture.id}}" target="_blank"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        {% endfor %} 
+                        {% if LectureList|length < 3 %} <!-- ______________________BOX FOR MORE ___________________________ -->
+                            <th style="margin-left:5%;height:200px">
+                                <div class="event-box">
+                                    <div class="event">
+                                        <a href="#"></a>
+                                        <div class="box">
+                                            <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                                <img src={% static "images/more.jpg" %} alt="" />
+                                            </div>
+                                            <a class="inlink" href="lecture-list/1" target="_blank"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                            {% endif %}
+                    </tr>
+                    <tr style="position:relative;top:-20px;">
+                        {% for lecture in LectureList|slice:"3:5" %}
+                        <th style="margin-left:5%;height:200px">
+                            <h3 style="font-size:17px;text-decoration: none">
+                            {% if lecture.state == "进行中"%}
+                            <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
+                            {% else %}
+                            <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
+                            {% endif%}{{lecture.title}}
+                            </h3>
+                            <div class="event-box">
+                                <div class="event">
+                                    <a href="#"></a>
+                                    <div class="box">
+                                        <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                            <img src={% cropped_thumbnail lecture "cropping" scale=0.5 %} alt="" />
+                                        </div>
+                                        <div class="box-content">
+                                            <h3>{{lecture.title}}</h3>
+                                            <span>{{lecture.intro}}</span>
+                                            <p>{{lecture.likes}} likes - {{lecture.views}} views</p>
+                                        </div>
+                                        <a class="inlink" href="lecture/{{lecture.id}}" target="_blank"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        {% endfor %}
+                        {% if LectureList|length >= 3 %}
+                        <!-- ______________________BOX FOR MORE ___________________________ -->
+                        <th style="margin-left:5%;height:200px">
+                            <div class="event-box">
+                                <div class="event">
+                                    <a href="#"></a>
+                                    <div class="box">
+                                        <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                            <img src={% static "images/more.jpg" %} alt="" />
+                                        </div>
+                                        <a class="inlink" href="lecture-list/1" target="_blank"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        {% endif %}
+                    </tr>                    
+                </table>
             </div>
-            <img src={% static "images/leader_ZHD.jpeg" %} alt="">
-            <ul>
-              <li>
-                <a href="" class="fa-github"></a>
-              </li>
-              <li>
-                <a href="" class="fa-wechat"></a>
-              </li>
-              <li>
-                <a href="" class="fa-weibo"></a>
-              </li>
-            </ul>
-          </div>
-           <h3 class="wow fadeInDown delay-03s">Zhu Haidong</h3>
-          <span class="wow fadeInDown delay-03s">DUTY</span>
-          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
-        </div>
-        
-         <div class="team-leader-box">
-          <div class="team-leader  wow fadeInDown delay-06s">
-            <div class="team-leader-shadow">
-              <a href="#"></a>
+    </section>
+    <!--________________________________ lecture-section-end _______________________________________-->
+    <!-- team-section-begin -->
+    <section class="main-section team" id="team">
+        <!--main-section team-start-->
+        <div class="container">
+            <h2>team</h2>
+            <h6>Take a closer look into our amazing team. We won’t bite.</h6>
+            <div class="team-leader-block clearfix">
+                <div class="team-leader-box">
+                    <div class="team-leader  wow fadeInDown delay-06s">
+                        <div class="team-leader-shadow">
+                        </div>
+                        <img src={% static "images/leader_CYN.jpeg" %} alt="">
+                        <ul>
+                            <li>
+                                <a href="#" class="fa-github"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-wechat"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-weibo"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="wow fadeInDown delay-03s">Cao Yining</h3>
+                    <span class="wow fadeInDown delay-03s">DUTY</span>
+                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                </div>
+                <div class="team-leader-box">
+                    <div class="team-leader wow fadeInDown delay-09s">
+                        <div class="team-leader-shadow">
+                        </div>
+                        <img src={% static "images/leader_HYZ.jpeg" %} alt="">
+                        <ul>
+                            <li>
+                                <a href="#" class="fa-github"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-wechat"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-weibo"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="wow fadeInDown delay-09s">Han Yizeng</h3>
+                    <span class="wow fadeInDown delay-03s">DUTY</span>
+                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                </div>
+                <div class="team-leader-box">
+                    <div class="team-leader wow fadeInDown delay-03s">
+                        <div class="team-leader-shadow">
+                        </div>
+                        <img src={% static "images/leader_HWF.jpeg" %} alt="">
+                        <ul>
+                            <li>
+                                <a href="#" class="fa-github"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-wechat"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-weibo"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="wow fadeInDown delay-03s">Huang Xiufeng</h3>
+                    <span class="wow fadeInDown delay-03s">DUTY</span>
+                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                </div>
+                <div class="team-leader-box">
+                    <div class="team-leader  wow fadeInDown delay-06s">
+                        <div class="team-leader-shadow">
+                        </div>
+                        <img src={% static "images/leader_LHT.jpeg" %} alt="">
+                        <ul>
+                            <li>
+                                <a href="#" class="fa-github"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-wechat"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-weibo"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="wow fadeInDown delay-03s">Liu Haotian</h3>
+                    <span class="wow fadeInDown delay-03s">DUTY</span>
+                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                </div>
+                <div class="team-leader-box">
+                    <div class="team-leader  wow fadeInDown delay-06s">
+                        <div class="team-leader-shadow">
+                        </div>
+                        <img src={% static "images/leader_ZZX.jpeg" %} alt="">
+                        <ul>
+                            <li>
+                                <a href="#" class="fa-github"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-wechat"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-weibo"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="wow fadeInDown delay-03s">Zhang Zhixing</h3>
+                    <span class="wow fadeInDown delay-03s">DUTY</span>
+                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                </div>
+                <div class="team-leader-box">
+                    <div class="team-leader  wow fadeInDown delay-06s">
+                        <div class="team-leader-shadow">
+                        </div>
+                        <img src={% static "images/leader_ZHD.jpeg" %} alt="">
+                        <ul>
+                            <li>
+                                <a href="#" class="fa-github"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-wechat"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa-weibo"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="wow fadeInDown delay-03s">Zhu Haidong</h3>
+                    <span class="wow fadeInDown delay-03s">DUTY</span>
+                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                </div>
             </div>
-            <img src={% static "images/leader_ZZX.jpeg" %} alt="">
-            <ul>
-              <li>
-                <a href="" class="fa-github"></a>
-              </li>
-              <li>
-                <a href="" class="fa-wechat"></a>
-              </li>
-              <li>
-                <a href="" class="fa-weibo"></a>
-              </li>
-            </ul>
-          </div>
-           <h3 class="wow fadeInDown delay-03s">Zhang Zhixing</h3>
-          <span class="wow fadeInDown delay-03s">DUTY</span>
-          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
         </div>
-        
-         <div class="team-leader-box">
-          <div class="team-leader  wow fadeInDown delay-06s">
-            <div class="team-leader-shadow">
-              <a href="#"></a>
-            </div>
-            <img src={% static "images/leader_CYN.jpeg" %} alt="">
-            <ul>
-              <li>
-                <a href="" class="fa-github"></a>
-              </li>
-              <li>
-                <a href="" class="fa-wechat"></a>
-              </li>
-              <li>
-                <a href="" class="fa-weibo"></a>
-              </li>
-            </ul>
-          </div>
-           <h3 class="wow fadeInDown delay-03s">Cao Yining</h3>
-          <span class="wow fadeInDown delay-03s">DUTY</span>
-          <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-  <!-- ________________________________team-section-end________________________________ -->
-  
-  
-
-  <!--________________________________Footer-begin________________________________-->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-logo">
-        <a href="#">
+    </section>
+    <!-- team-section-end -->
+    <!--________________________________Footer-begin________________________________-->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <a href="#">
           <img src={% static "images/LOGO2.png" %} alt="">
         </a>
-      </div>
-      <span class="copyright">Copyright &copy; 2017 SIGMAGO. All Rights Reserved.</span>
+            </div>
+            <span class="copyright">Copyright &copy; 2017 SIGMAGO. All Rights Reserved.</span>
+        </div>
+    </footer>
+    <!--________________________________Footer-end________________________________-->
     </div>
-  </footer>
-  <!--________________________________Footer-end________________________________-->
-</div>
+    <!-- ___________________________________script______________________________---- -->
+    <script>
+    $(function() {
+        $("#Tabs1").tabs();
+    });
 
 
-<!-- ___________________________________script______________________________---- -->
-<script>
-	$(function() {
-	$( "#Tabs1" ).tabs(); 
-});
-    
+    $("#dialog-1").jDialog({
+        skinClassName: 'demo',
+        allowOverlay: true,
+        animationType: 'fade-in',
+    });
+    $("#dialog-2").jDialog({
+        skinClassName: 'demo',
+        allowOverlay: true,
+        animationType: 'fade-in',
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        // vh fix
+        viewportUnitsBuggyfill.init();
+        $(window).resize(function() {
+            viewportUnitsBuggyfill.refresh();
+        });
+        // Start wow.js
+        new WOW().init();
+        var windowHeight = $(window).height();
+        $(window).trigger('resize');
+    });
+    </script>
+    <script>
+    $(function() {
+        $("#Tabs1").tabs();
+    });
+    </script>
+    <script>
+    $('#bootstrap-touch-slider').bsTouchSlider();
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(e) {
+        $('#test').scrollToFixed();
+        $('.res-nav_click').click(function() {
+            $('.main-nav').slideToggle();
+            return false
 
-		$("#dialog-1").jDialog({
-	        skinClassName: 'demo',
-			allowOverlay:true,
-	        animationType: 'fade-in',
-	    });
-		$("#dialog-2").jDialog({
-	        skinClassName: 'demo',
-			allowOverlay:true,
-	        animationType:'fade-in',
-	    });
-</script>
-
-<script>
-	$(document).ready(function(){
-      // vh fix
-      viewportUnitsBuggyfill.init();
-      $(window).resize(function(){
-        viewportUnitsBuggyfill.refresh();
-      });
-      // Start wow.js
-      new WOW().init();
-      var windowHeight = $(window).height();
-      $(window).trigger('resize');
-      });
-</script>
-
-<script>
-$(function() {
-	$( "#Tabs1" ).tabs(); 
-});
-</script>
-
-<script>
-	$('#bootstrap-touch-slider').bsTouchSlider();
-</script>
-
-  <script type="text/javascript">
-    $(document).ready(function (e) {
-      $('#test').scrollToFixed();
-      $('.res-nav_click').click(function () {
-        $('.main-nav').slideToggle();
-        return false
-
-      });
+        });
 
     });
-  </script>
-
-  <script>
+    </script>
+    <script>
     wow = new WOW({
-      animateClass: 'animated',
-      offset: 100
+        animateClass: 'animated',
+        offset: 100
     });
     wow.init();
-  </script>
+    </script>
+    <script type="text/javascript">
+    $(window).load(function() {
 
+        $('.main-nav li a, .servicelink').bind('click', function(event) {
+            var $anchor = $(this);
 
-  <script type="text/javascript">
-    $(window).load(function () {
-
-      $('.main-nav li a, .servicelink').bind('click', function (event) {
-        var $anchor = $(this);
-
-        $('html, body').stop().animate({
-          scrollTop: $($anchor.attr('href')).offset().top - 102
-        }, 1500, 'easeInOutExpo');
-				/*
-				if you don't want to use the easing effects:
-				$('html, body').stop().animate({
-					scrollTop: $($anchor.attr('href')).offset().top
-				}, 1000);
-				*/
-        if ($(window).width() < 768) {
-          $('.main-nav').hide();
-        }
-        event.preventDefault();
-      });
-    })
-  </script>
-
-  <script type="text/javascript">
-    $(window).load(function () {
-
-
-      var $container = $('.portfolioContainer'),
-        $body = $('body'),
-        colW = 375,
-        columns = null;
-
-
-      $container.isotope({
-        // disable window resizing
-        resizable: true,
-        masonry: {
-          columnWidth: colW
-        }
-      });
-
-      $(window).smartresize(function () {
-        // check if columns has changed
-        var currentColumns = Math.floor(($body.width() - 30) / colW);
-        if (currentColumns !== columns) {
-          // set new column count
-          columns = currentColumns;
-          // apply width to container manually, then trigger relayout
-          $container.width(columns * colW)
-            .isotope('reLayout');
-        }
-
-      }).smartresize(); // trigger resize to set container width
-      $('.portfolioFilter a').click(function () {
-        $('.portfolioFilter .current').removeClass('current');
-        $(this).addClass('current');
-
-        var selector = $(this).attr('data-filter');
-        $container.isotope({
-
-          filter: selector,
+            $('html, body').stop().animate({
+                scrollTop: $($anchor.attr('href')).offset().top - 102
+            }, 1500, 'easeInOutExpo');
+            /*
+            if you don't want to use the easing effects:
+            $('html, body').stop().animate({
+              scrollTop: $($anchor.attr('href')).offset().top
+            }, 1000);
+            */
+            if ($(window).width() < 768) {
+                $('.main-nav').hide();
+            }
+            event.preventDefault();
         });
-        return false;
-      });
+    })
+    </script>
+    <script type="text/javascript">
+    $(window).load(function() {
+
+
+        var $container = $('.portfolioContainer'),
+            $body = $('body'),
+            colW = 375,
+            columns = null;
+
+
+        $container.isotope({
+            // disable window resizing
+            resizable: true,
+            masonry: {
+                columnWidth: colW
+            }
+        });
+
+        $(window).smartresize(function() {
+            // check if columns has changed
+            var currentColumns = Math.floor(($body.width() - 30) / colW);
+            if (currentColumns !== columns) {
+                // set new column count
+                columns = currentColumns;
+                // apply width to container manually, then trigger relayout
+                $container.width(columns * colW)
+                    .isotope('reLayout');
+            }
+
+        }).smartresize(); // trigger resize to set container width
+        $('.portfolioFilter a').click(function() {
+            $('.portfolioFilter .current').removeClass('current');
+            $(this).addClass('current');
+
+            var selector = $(this).attr('data-filter');
+            $container.isotope({
+
+                filter: selector,
+            });
+            return false;
+        });
 
     });
-  </script>
-
-
+    </script>
 </body>
+
 </html>
