@@ -18,6 +18,8 @@ from django.contrib import admin
 from Main import views
 from django.conf import settings
 from django.conf.urls.static import static
+from wechat.views import wechat
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -41,5 +43,7 @@ urlpatterns = [
     url(r'^manage/$', views.lecConManagement, name='adminmanage'),
     url(r'^comtetitionManage/(\d+)/$', views.competitionManagement, name='adminmanage'),
     url(r'^lectureManage/(\d+)/$', views.lectureManagement, name='adminmanage'),
+    url(r'^weixin', wechat, name='weixin'),
     # url(r'^wechat$', views.wechat, name='Wechat')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

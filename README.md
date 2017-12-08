@@ -20,6 +20,7 @@ This is a task in the course Software Engineering 2017, Tsinghua University.
 ```bash
 pip install django
 pip install easy_thumbnails django-image-cropping
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple wechat-sdk
 ```
 
 ### Before launch
