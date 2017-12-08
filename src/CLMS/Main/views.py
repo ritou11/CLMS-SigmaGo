@@ -403,6 +403,7 @@ def contestAdd(request):
                                               )
             if len(conCheck) > 0:
                 return HttpResponse("Lecture Already exists.")
+            contestInfo.save()
             for i in request.POST.getlist('interestTag'):
                 find_i = Tag.objects.filter(name__exact=i)
                 if len(find_i) == 0:
@@ -429,7 +430,6 @@ def lectureAdd(request):
             return HttpResponse("Sorry, but you are not admin user, please contact xxx@xxx.xxx")
         Method = request.method
         lectureInfo = Lecture()
-        print('success')
         if Method == 'POST':
             lectureInfo.title = request.POST.get('title')
             lectureInfo.subtitle = request.POST.get('subtitle')
@@ -459,6 +459,7 @@ def lectureAdd(request):
                                               )
             if len(lecCheck) > 0:
                 return HttpResponse("Lecture Already exists.")
+            lectureInfo.save()
             for i in request.POST.getlist('interestTag'):
                 find_i = Tag.objects.filter(name__exact=i)
                 if len(find_i) == 0:

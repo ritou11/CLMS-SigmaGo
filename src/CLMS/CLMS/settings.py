@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'Main',
     'easy_thumbnails',
     'image_cropping',
+    'wechat',
+    #'xadmin',
+    #'crispy_forms',
+    #'reversion',
 ]
 
 
@@ -137,3 +141,11 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# token
+HOME_URL = "******"
+WECHAT_TOKEN = "SigmaGo"
+WECHAT_APPID = "******"
+WECHAT_APPSECRET = "*******"
+
