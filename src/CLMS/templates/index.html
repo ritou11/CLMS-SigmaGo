@@ -51,10 +51,20 @@
             </ul>
             <ul class="we-create animated fadeInUp delay-1s">
                 <li>
-                    <h5 class="log" data-toggle="JDialog" data-target="dialog-1">LOG IN</h5></li>
+                    {% if logged %}
+                    <h5 class="log"><a href="/userinfo">{{user.username}}</a></h5>
+                    {% else %}
+                    <h5 class="log" data-toggle="JDialog" data-target="dialog-1">LOG IN</h5>
+                    {% endif %}
+                </li>
                 <li>&nbsp;&nbsp;&nbsp;</li>
                 <li>
-                    <h5 class="log" data-toggle="JDialog" data-target="dialog-2">SIGN UP</h5></li>
+                    {% if logged %}
+                    <h5 class="log"><a href="/logout">LOG OUT</a></h5>
+                    {% else %}
+                    <h5 class="log" data-toggle="JDialog" data-target="dialog-2">SIGN UP</h5>
+                    {% endif %}
+                </li>
                 <li>&nbsp;</li>
                 <li>
                     <h5 class="log">DISCOVER</h5></li>

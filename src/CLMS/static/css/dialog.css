@@ -169,5 +169,7 @@ background:#555555;
 border-radius:3px;
 }
 
-
+h5.log{
+    cursor: default;
+}
 

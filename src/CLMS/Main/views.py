@@ -77,13 +77,21 @@ def home(request):
 
     login = LogUserForm()
     reg = RegUserForm()
+    logged = True
+    try:
+        userinfo = User.objects.get(username=request.session['user_id'])
+    except:
+        logged = False
 
-    return render(request, 'index.html',
-                  {'SlideList': SlideList,
+    render_dict = {'SlideList': SlideList,
                    'CompetitionList': CompetitionList,
                    'LectureList': LectureList,
                    'login': login,
-                   'reg': reg})
+                   'reg': reg,
+                   'logged': logged}
+    if logged:
+        render_dict['user'] = userinfo
+    return render(request, 'index.html', render_dict)
 
 
 def competition(request, id):
@@ -570,8 +578,7 @@ def index(request):
 
 
 def logout(request):
-    response = HttpResponse(
-        'logout!<br><a href="127.0.0.1:8000/regist>register</a>"')
+    response = HttpResponseRedirect('/')
     response.delete_cookie('cookie_username')
     try:
         del request.session['user_id']

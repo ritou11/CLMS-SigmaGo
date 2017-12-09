@@ -36,6 +36,7 @@ urlpatterns = [
 
     url(r'^index/$', views.index, name='index4test'),
     url(r'^login/$', views.login, name='Login'),
+    url(r'^logout/$', views.logout, name='Logout'),
     url(r'^register/$', views.register, name='Register'),
     url(r'^userinfo/$', views.userInfoSearch, name='UserInfoSearch'),
     url(r'^infocheck/inforenew/$', views.userInfoAlter, name='InfoRenew'),

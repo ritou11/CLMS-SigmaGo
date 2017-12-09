@@ -35,7 +35,7 @@
   <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
   <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
   <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
-  <script src={% static "contactform/contactform.js" %}></script>
+  <!--<script src={% static "contactform/contactform.js" %}></script>-->
 
 </head>
 
@@ -75,6 +75,15 @@
 <div class="col-md-10">
 <div class="keybox">
    <img src={% static "images/SelectIdc.png" %} class="wow fadeInLeft" width="300">
+   <div style="margin-top: 20px">
+    {% for tag in taglist %}
+      <a href="/tag/{{tag.name}}">
+        <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:100px;height:40px;padding:1.2%;margin:20px;display: inline;">
+            <span style="color:white">{{tag.name}}</span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
 </div>
 </div>
 <div class="col-md-12">&nbsp;</div>

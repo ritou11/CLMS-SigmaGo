@@ -85,8 +85,11 @@
         <br>
         <br>
         {% for tag in user.interestTag.all %}
+        <a href="/tag/{{tag.name}}">
         <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:100px;height:40px;padding:1.2%;margin:20px;display: inline;">
-            <span style="color:white">{{tag.name}}<span></div>
+            <span style="color:white">{{tag.name}}</span>
+        </div>
+        </a>
         {% endfor %}
   </div>
   <!--_______________________________banner__________________________________-->
