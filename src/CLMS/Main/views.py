@@ -48,10 +48,10 @@ class LogUserForm(forms.Form):
 def home(request):
     CompetitionList = Competition.objects.all()
     if len(CompetitionList) > 5:
-        CompetitionList = CompetitionList[0:4]
+        CompetitionList = CompetitionList[0:5]
     LectureList = Lecture.objects.all()
     if len(LectureList) > 5:
-        LectureList = LectureList[0:4]
+        LectureList = LectureList[0:5]
     CompetitionCnt = 0
     LectureCnt = 0
     SlideList = []
@@ -120,6 +120,7 @@ def lectureList(request, page):
     listLen = 4
     page = int(page)
     lectureList = Lecture.objects.all()
+    total = len(lectureList)
     pagecount = (len(lectureList) - 1) // listLen + 1
     if page <= 0 or page > pagecount:
         return HttpResponse('Error!')
@@ -132,23 +133,28 @@ def lectureList(request, page):
                    'taglist': TagList,
                    'pagelist': range(1, pagecount + 1),
                    'page': page,
-                   'total': len(lectureList)})
+                   'total': total})
+
 
 
 def search_tag(request, tag, page):
     try:
         CompetitionList = Competition.objects.filter(tag__name=tag)
     except Competition.DoesNotExist:
-        raise Http404
+        pass
     try:
         LectureList = Lecture.objects.filter(tag__name=tag)
     except Lecture.DoesNotExist:
-        raise Http404
+        pass
     listLen = 4
     result_list = []
     CompetitionCnt = 0
     LectureCnt = 0
-    page = int(page)
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+
     for cnt in range(listLen * page):
         if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
             break
@@ -166,8 +172,11 @@ def search_tag(request, tag, page):
         else:
             result_list.append(LectureList[LectureCnt])
             LectureCnt += 1
+
     if len(result_list) <= listLen * (page - 1):
         raise Http404
+
+    total = len(CompetitionList) + len(LectureList)
     result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
     return render(request, 'List.html',
@@ -175,7 +184,7 @@ def search_tag(request, tag, page):
                    'taglist': TagList,
                    'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
                    'page': page,
-                   'total': len(result_list)})
+                   'total': total})
 
 
 def recommend(request, user_name, page):

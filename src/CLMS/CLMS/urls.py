@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^competition-list/(?P<page>\d+)$',
         views.competitionList, name='CompetitionList'),
     url(r'^lecture-list/(?P<page>\d+)$', views.lectureList, name='LectureList'),
-    url(r'^tag(?P<tag>\w+)/(?P<page>\d+)/$', views.search_tag, name='search_tag'),
+    url(r'^tag/(?P<tag>\w+)/(?P<page>\d*)$', views.search_tag, name='search_tag'),
     url(r'^search/$', views.search, name='search'),
     url(r'^recommend/(?P<user_name>\S+)/(?P<page>\d+)/$', views.recommend, name='recommend'),
 

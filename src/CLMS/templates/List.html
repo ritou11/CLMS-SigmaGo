@@ -1,5 +1,6 @@
 {% load static %}
 {% load cropping %}
+{% load clms_extras %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -112,7 +113,7 @@
      <div class="col-md-1"></div>
      <div class="col-md-10">
              <div class="ImgContainer">
-                 <a href="/competition/{{comp.id}}"><img src={% cropped_thumbnail comp "cropping" scale=0.5 %} class="ImgInclude wow fadeIn"></a>
+                 <a href="/{% if comp|to_class_name == 'Competition'%}competition{% else %}lecture{% endif %}/{{comp.id}}"><img src={% cropped_thumbnail comp "cropping" scale=0.5 %} class="ImgInclude wow fadeIn"></a>
                  <img src={% static "images/Line.png" %} class="divider2 wow fadeInUpBig">
                  <div class="SectionBox">
                   <p>名称：{{comp.title}}</p>
@@ -120,7 +121,7 @@
                   <p>主办方：{{comp.holder}}</p>
                   <p>启动时间：{{comp.hold_time}}</p>
                   <p>状态：{{comp.state}}</p>
-                  <p><a href="/competition/{{comp.id}}">More Info</a></p>
+                  <p><a href="/{% if comp|to_class_name == 'Competition'%}competition{% else %}lecture{% endif %}/{{comp.id}}">More Info</a></p>
                  </div>
            </div>
      </div>   
