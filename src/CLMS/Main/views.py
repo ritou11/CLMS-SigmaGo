@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django import forms
 from PIL import Image
 import hashlib
+from Main.utils import recommend_list
 # from django.views.decorators.csrf import csrf_exempt
 # from Main.wxapp import WxApp
 # Create your views here.
@@ -72,8 +73,14 @@ def home(request):
         else:
             SlideList.append(LectureList[LectureCnt])
             LectureCnt += 1
-    print(LectureCnt)
-    print(CompetitionCnt)
+    
+    try:
+        print(request.session[user_id])
+    except:
+        pass
+    recommendList = recommend_list(request, 3)
+    if not recommendList:
+        recommendList = SlideList
 
     login = LogUserForm()
     reg = RegUserForm()
@@ -86,6 +93,7 @@ def home(request):
     render_dict = {'SlideList': SlideList,
                    'CompetitionList': CompetitionList,
                    'LectureList': LectureList,
+                   'RecommendList': recommendList,
                    'login': login,
                    'reg': reg,
                    'logged': logged}
@@ -96,11 +104,15 @@ def home(request):
 
 def competition(request, id):
     competition = Competition.objects.get(id=str(id))
+    competition.views += 1
+    competition.save()
     return render(request, 'Single.html', {'item': competition})
 
 
 def lecture(request, id):
     lecture = Lecture.objects.get(id=str(id))
+    lecture.views += 1
+    lecture.save()
     return render(request, 'Single.html', {'item': lecture})
 
 
@@ -195,48 +207,12 @@ def search_tag(request, tag, page):
                    'total': total})
 
 
-def recommend(request, user_name, page):
-    try:
-        user = User.objects.get(username=str(user_name))
-    except:
-        raise Http404
-    CompetitionList = Competition.objects.filter(
-        tag__name='a tag you will never use')
-    LectureList = Lecture.objects.filter(tag__name='a tag you will never use')
-    for tag in user.interestTag.all():
-        try:
-            CompetitionList = CompetitionList | Competition.objects.filter(
-                tag__name=str(tag))
-        except Competition.DoesNotExist:
-            raise Http404
-        try:
-            LectureList = LectureList | Lecture.objects.filter(tag__name=(tag))
-        except Lecture.DoesNotExist:
-            raise Http404
-    CompetitionList.distinct()
-    LectureList.distinct()
+def recommend(request, page):
     listLen = 4
-    result_list = []
-    CompetitionCnt = 0
-    LectureCnt = 0
     page = int(page)
-    for cnt in range(listLen * page):
-        if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
-            break
-        if (CompetitionCnt >= len(CompetitionList)):
-            result_list.append(LectureList[LectureCnt])
-            LectureCnt += 1
-            continue
-        if (LectureCnt >= len(LectureList)):
-            result_list.append(CompetitionList[CompetitionCnt])
-            CompetitionCnt += 1
-            continue
-        if (CompetitionList[CompetitionCnt].date_time > LectureList[LectureCnt].date_time):
-            result_list.append(CompetitionList[CompetitionCnt])
-            CompetitionCnt += 1
-        else:
-            result_list.append(LectureList[LectureCnt])
-            LectureCnt += 1
+    result_list,totalLen = recommend_list(request, listLen*page)
+    if not result_list:
+        raise Http404
     if len(result_list) <= listLen * (page - 1):
         raise Http404
     result_list = result_list[listLen * (page - 1):]
@@ -244,7 +220,7 @@ def recommend(request, user_name, page):
     return render(request, 'List.html',
                   {'list': result_list,
                    'taglist': TagList,
-                   'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
+                   'pagelist': range(1, (totalLen - 1) // listLen + 2),
                    'page': page,
                    'total': len(result_list)})
 
@@ -585,6 +561,63 @@ def logout(request):
     except KeyError:
         pass
     return response
+
+def likeCompetition(request,id):
+    pwd = request.get_full_path().replace('competition-like','competition')
+    try:
+        competition = Competition.objects.get(id=str(id))
+        competition.views -= 1
+        competition.save()
+    except:
+        raise Http404
+    try:
+        user = User.objects.get(username=request.session['user_id'])
+    except:
+        return HttpResponseRedirect(pwd)
+   
+    exist = user.CompetitionList.filter(id=str(id))
+
+    if len(exist)==0:
+        
+        competition.likes += 1
+        competition.save()
+        user.CompetitionList.add(competition)
+    else:
+        competition.likes -=1
+        competition.save()
+        user.CompetitionList.remove(competition)
+    return HttpResponseRedirect(pwd)
+
+def likeLecture(request,id):
+    pwd = request.get_full_path().replace('lecture-like','lecture')
+    try:
+        lecture = Lecture.objects.get(id=str(id))
+        lecture.views -= 1
+        lecture.save()
+    except:
+        raise Http404
+    try:
+        user = User.objects.get(username=request.session['user_id'])
+    except:
+        return HttpResponseRedirect(pwd)
+
+    exist = user.LectureList.filter(id=str(id))
+
+    if len(exist)==0:
+        
+        lecture.likes += 1
+        lecture.save()
+        user.LectureList.add(lecture)
+    else:
+        lecture.likes -=1
+        lecture.save()
+        user.LectureList.remove(lecture)
+    return HttpResponseRedirect(pwd)
+
+
+
+
+
 
 
 def slide(request):

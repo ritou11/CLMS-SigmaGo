@@ -4,30 +4,9 @@ from django.db.models.fields.files import ImageFieldFile
 import skimage.io
 from skimage.transform import resize
 import os
+
+from Main.utils import make_thumb
 # Create your models here.
-
-
-def make_thumb(path, thumb_path, size=(160, 120)):
-    image = skimage.io.imread(path)
-    height, width = image.shape[0], image.shape[1]
-
-    thumb = image
-
-    if (height / width) > (size[0] / size[1]):
-        new_height = width * size[0] / size[1]
-        height1 = (height - new_height) / 2
-        thumb = image[height1:height + new_height, 0:width]
-
-    if (height / width) < (size[0] / size[1]):
-        new_width = height * size[1] / size[0]
-        width1 = (width - new_width) / 2
-        thumb = image[0:int(height), int(width1):int(width1 + new_width)]
-
-    thumb = resize(thumb, size)
-    print(thumb.shape)
-    skimage.io.imsave(thumb_path, thumb)
-    return thumb
-
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
@@ -71,6 +50,8 @@ class Competition(models.Model):
 
     date_time = models.DateTimeField(auto_now_add=True)
 
+    adminUser = models.CharField(max_length=30)
+
     def save(self):
         super(Competition, self).save()
         # base, ext = os.path.splitext(os.path.basename(self.image.path))
@@ -101,7 +82,7 @@ class Lecture(models.Model):
     state = models.CharField(max_length=100)
 
     # admin info
-    adminUser = models.CharField(max_length=50)
+    adminUser = models.CharField(max_length=30)
 
     # text
     intro = models.TextField(blank=True, null=True)
@@ -173,6 +154,10 @@ class User(models.Model):
     interestTag = models.ManyToManyField(
         Tag, blank=True)   # for recommendation
     adminAuth = models.BooleanField(default=True)
+
+    # The competitons and lectures user like
+    CompetitionList = models.ManyToManyField(Competition, blank=True,null=True)
+    LectureList = models.ManyToManyField(Lecture,blank=True,null=True)
     #adminAuth = models.BooleanField(default=False)
 
     def __unicode__(self):
