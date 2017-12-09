@@ -10,7 +10,9 @@ function doLogin() {
 	$('#login_password')[0].value = hex_md5(password);
 	//TODO: Some condition
 	$('#frmLogin').ajaxSubmit(function(data) {
-		alert(data);
+		if(data=='Success'){
+			self.location.href = '/userinfo'
+		}
 		$('#login_password')[0].value = '';
 	});
 }

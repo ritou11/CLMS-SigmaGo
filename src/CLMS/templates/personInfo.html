@@ -1,105 +1,93 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>HOME PAGE</title>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,800italic,700italic,600italic,400italic,300italic,800,700,600"
-    rel="stylesheet" type="text/css">
-
-  <link href="src/css/bootstrap.css" rel="stylesheet" type="text/css">
-  <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
-  <link href="src/css/main.css" rel="stylesheet" type="text/css">
-  <link href="src/css/font-awesome.css" rel="stylesheet" type="text/css">
-  <link href="src/css/response.css" rel="stylesheet" type="text/css">
-  <link href="src/css/animate.css" rel="stylesheet" type="text/css">
-  <link href="src/css/bootstrap-touch-slider.css" rel="stylesheet" type="text/css">
-  <link href="src/css/dialog.css" rel="stylesheet" type="text/css">
-  <link href="src/css/magic.min.css" rel="stylesheet" type="text/css">
-  <link href="src/css/jdialog.min.css" rel="stylesheet" type="text/css">
-  
-  <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
-  <script type="text/javascript" src="src/js/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="src/js/bootstrap.js"></script>
-  <script type="text/javascript" src="src/js/ScrollingFixed.js"></script>
-  <script type="text/javascript" src="src/js/wow.min.js"></script>
-  <script type="text/javascript" src="src/js/main.js"></script>
-  <script type="text/javascript" src="src/js/bootstrap-touch-slider-min.js"></script>
-  <script type="text/javascript" src="src/js/bootstrap-touch-slider.js"></script>
-  <script type="text/javascript" src="src/js/jdialog.min.js"></script>
-  <script type="text/javascript" src="src/js/viewport-units-buggyfill.js"></script>
-  <script src="contactform/contactform.js"></script>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HOME PAGE</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,800italic,700italic,600italic,400italic,300italic,800,700,600" rel="stylesheet" type="text/css">
+    <link href={% static "css/bootstrap.css" %} rel="stylesheet" type="text/css">
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href={% static "css/main.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/font-awesome.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/response.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
+    <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
+    <script type="text/javascript" src={% static "js/ScrollingFixed.js" %}></script>
+    <script type="text/javascript" src={% static "js/wow.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/main.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap-touch-slider-min.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
+    <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
+    <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
+    <script src={% static "contactform/contactform.js" %}></script>
 </head>
-<body style="background:url(src/images/BG1.png);background-position:fixed">
-  <!--________________________________nav-start________________________________-->
-  <nav class="main-nav-outer" id="test" >
-    <div class="container">
-      <ul class="main-nav">
-        <li class="small-logo">
-          <a href="#header">
-            <img class="navLogo" src="src/images/LOGO.png" alt="">
+
+<body style="background:url({% static "/images/BG1.png" %});background-position:fixed">
+    <!--nav-start-->
+    <nav class="main-nav-outer" id="test">
+        <div class="container">
+            <ul class="main-nav">
+                <li>
+                    <a href="/#recom">RECOMMEND</a>
+                </li>
+                <li>
+                    <a href="/competition-list/1">COMPETITION</a>
+                </li>
+                <li class="small-logo">
+                    <a href="/">
+            <img class="navLogo" src={% static "images/LOGO.png" %} alt="">
           </a>
-        </li>
-       
-        <li>
-          <a href="#recom">RECOMMEND</a>
-        </li>
-        <li>
-          <a href="#competition">COMPETITION</a>
-        </li>
-        
-        <li>
-          <a href="#lecture">LECTURE</a>
-        </li>
-        <li>
-          <a href="#team">ABOUT US</a>
-        </li>
-      </ul>
-      <a class="res-nav_click" href="#">
+                </li>
+                <li>
+                    <a href="/lecture-list/1">LECTURE</a>
+                </li>
+                <li>
+                    <a href="/#team">ABOUT US</a>
+                </li>
+            </ul>
+            <a class="res-nav_click" href="#">
         <i class="fa-bars"></i>
       </a>
-    </div>
-  </nav>
-  <!--________________________________nav-end________________________________-->
-  <!--_______________________________banner__________________________________-->
-  <div class="container"style="padding-top:100px;">
-     <div style="width:50%;margin-left:23%">
-        <div class="team-leader-box2" style="padding-top:60px;">
-            <img src="src/images/user.png" alt="">
         </div>
-        
-        <div class="team-leader-box2">
-          <div class="team-leader  wow fadeInDown delay-06s">
-            <div class="team-leader-shadow">
-              <a href="#"></a>
+    </nav>
+    <!--nav-end-->
+    <!--_______________________________banner__________________________________-->
+    <div class="container" style="padding-top:100px;">
+        <div style="width:50%;margin-left:25%">
+            <div class="team-leader-box2" style="padding-top:60px;">
+                <img src={% static "images/user.png" %} alt="">
             </div>
-            <img src="src/images/leader_HWF.jpeg" alt="">
-          </div>
+            <div class="team-leader-box2">
+                <div class="team-leader  wow fadeInDown delay-06s">
+                    <div class="team-leader-shadow">
+                        <a href="#"></a>
+                    </div>
+                    <img src={% static "images/leader_HWF.jpeg" %} alt="">
+                </div>
+            </div>
+            <div class="team-leader-box2" style="padding-top:60px;">
+                <img src={% static "images/user.png" %} alt="">
+            </div>
         </div>
-   
-        <div class="team-leader-box2" style="padding-top:60px;">
-            <img src="src/images/user.png" alt="">
-        </div>
-       
-	  </div>
-	  
-  </div>
-   <div class="container" style="padding:20px;background-color: white;opacity:0.7;border-radius: 10px;min-height:120px;z-index: -1;background-clip:padding-box;text-align: center">
-	  <h2 style="font-size: 20px;">my tags</h2>
-	  <br>
-	  <br>
-	   <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:100px;height:40px;padding:1.2%;margin:20px;display: inline;">
-	     <span style="color:white">xxxxx<span></div>
-	   <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:150px;height:40px;padding:1.2%;margin:20px;display: inline;">
-	     <span style="color:white">xxxxx<span></div>
-	      <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:150px;height:40px;padding:1.2%;margin:20px;display: inline;">
-	     <span style="color:white">xxxxx<span></div>
-	      <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:150px;height:40px;padding:1.2%;margin:20px;display: inline;">
-	     <span style="color:white">xxxxx<span></div>
+    </div>
+    <div class="container" style="padding:20px;background-color: white;opacity:0.7;border-radius: 10px;min-height:120px;z-index: -1;background-clip:padding-box;text-align: center">
+        <h2 style="font-size: 20px;">my tags</h2>
+        <br>
+        <br>
+        {% for tag in user.interestTag.all %}
+        <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:100px;height:40px;padding:1.2%;margin:20px;display: inline;">
+            <span style="color:white">{{tag.name}}<span></div>
+        {% endfor %}
   </div>
   <!--_______________________________banner__________________________________-->
   <br>
@@ -110,70 +98,64 @@
             <div class="col-md-10">
              <div class="col-md-3" style="padding-top:5px;">
               <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;"> 用户名</span> <br> <span style="font-size:16px;opacity:0.6">user name </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
+          <span style="font-size:27px;"> 用户名</span>
+            <br> <span style="font-size:16px;opacity:0.6">user name </span></h2>
+        </div>
+        <div class="col-md-3" style="margin-left:150px;padding:20px;">
+            <p style="color:#F8EE97;font-size:20px;">{{user.username}}</p>
+        </div>
+    </div>
+    <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;">
+        <div class="col-md-10">
+            <div class="col-md-3" style="padding-top:5px;">
+                <h2 style="color:white;font-size: 20px;"> 
+          <span style="font-size:27px;"> 邮箱</span> <br> <span style="font-size:16px;opacity:0.6">e-mail </span></h2>
             </div>
-             
-            <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
+            <div class="col-md-3" style="margin-left:150px;padding:20px;">
+                <p style="color:#F8EE97;font-size:20px;">{{user.email}}</p>
+            </div>
+        </div>
+        <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;">
             <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;"> 邮箱</span> <br> <span style="font-size:16px;opacity:0.6">e-mail </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
+                <div class="col-md-3" style="padding-top:5px;">
+                    <h2 style="color:white;font-size: 20px;"> 
+          <span style="font-size:27px;"> 真实姓名</span> <br> <span style="font-size:16px;opacity:0.6">real name </span></h2>
+                </div>
+                <div class="col-md-3" style="margin-left:150px;padding:20px;">
+                    <p style="color:#F8EE97;font-size:20px;">{{user.stuName}}</p>
+                </div>
             </div>
-             
-             <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;"> 真实姓名</span> <br> <span style="font-size:16px;opacity:0.6">real name </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
-            </div>
-             
-             
-            <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;"> 年级</span> <br> <span style="font-size:16px;opacity:0.6">grade </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
-            </div>
-             
-             <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;"> 学号</span> <br> <span style="font-size:16px;opacity:0.6">student ID </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
-            </div>
-             
-             <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;">Info 账户</span> <br> <span style="font-size:16px;opacity:0.6">Info account </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
-            </div>
-              
-  </div>
-
+            <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;">
+                <div class="col-md-10">
+                    <div class="col-md-3" style="padding-top:5px;">
+                        <h2 style="color:white;font-size: 20px;"> 
+          <span style="font-size:27px;"> 年级</span> <br> <span style="font-size:16px;opacity:0.6">grade </span></h2>
+                    </div>
+                    <div class="col-md-3" style="margin-left:150px;padding:20px;">
+                        <p style="color:#F8EE97;font-size:20px;">{{user.grade}}</p>
+                    </div>
+                </div>
+                <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;">
+                    <div class="col-md-10">
+                        <div class="col-md-3" style="padding-top:5px;">
+                            <h2 style="color:white;font-size: 20px;"> 
+          <span style="font-size:27px;"> 学号</span> <br> <span style="font-size:16px;opacity:0.6">student ID </span></h2>
+                        </div>
+                        <div class="col-md-3" style="margin-left:150px;padding:20px;">
+                            <p style="color:#F8EE97;font-size:20px;">{{user.stuNo}}</p>
+                        </div>
+                    </div>
+                    <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;">
+                        <div class="col-md-10">
+                            <div class="col-md-3" style="padding-top:5px;">
+                                <h2 style="color:white;font-size: 20px;"> 
+          <span style="font-size:27px;">Info 账户</span> <br> <span style="font-size:16px;opacity:0.6">Info account </span></h2>
+                            </div>
+                            <div class="col-md-3" style="margin-left:150px;padding:20px;">
+                                <p style="color:#F8EE97;font-size:20px;">{{user.infoUser}}</p>
+                            </div>
+                        </div>
+                        </div>
 </body>
+
 </html>

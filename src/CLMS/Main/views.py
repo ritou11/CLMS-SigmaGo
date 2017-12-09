@@ -331,7 +331,7 @@ def userInfoSearch(request):
         return HttpResponse("Error! Please login before you search for personal info.")
     else:
         userinfo = User.objects.get(username=request.session['user_id'])
-        return render(request, 'userinfo.html', {'userinfo': userinfo})
+        return render(request, 'personInfo.html', {'user': userinfo})
 
 
 def userInfoAlter(request):
