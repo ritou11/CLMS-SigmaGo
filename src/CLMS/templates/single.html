@@ -1,3 +1,5 @@
+{% load static %}
+{% load cropping %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,34 +7,34 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>HOME PAGE</title>
+<title>{{item.title}}</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,800italic,700italic,600italic,400italic,300italic,800,700,600"
     rel="stylesheet" type="text/css">
 
-  <link href="src/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href={% static "css/bootstrap.css" %} rel="stylesheet" type="text/css">
   <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
-  <link href="src/css/main.css" rel="stylesheet" type="text/css">
-  <link href="src/css/font-awesome.css" rel="stylesheet" type="text/css">
-  <link href="src/css/response.css" rel="stylesheet" type="text/css">
-  <link href="src/css/animate.css" rel="stylesheet" type="text/css">
-  <link href="src/css/bootstrap-touch-slider.css" rel="stylesheet" type="text/css">
-  <link href="src/css/list.css" rel="stylesheet" type="text/css">
-  <link href="src/css/dialog.css" rel="stylesheet" type="text/css">
-  <link href="src/css/magic.min.css" rel="stylesheet" type="text/css">
-  <link href="src/css/jdialog.min.css" rel="stylesheet" type="text/css">
+  <link href={% static "css/main.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/font-awesome.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/response.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/list.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
   
   <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
-  <script type="text/javascript" src="src/js/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="src/js/bootstrap.js"></script>
-  <script type="text/javascript" src="src/js/ScrollingFixed.js"></script>
-  <script type="text/javascript" src="src/js/wow.min.js"></script>
-  <script type="text/javascript" src="src/js/main.js"></script>
-  <script type="text/javascript" src="src/js/bootstrap-touch-slider-min.js"></script>
-  <script type="text/javascript" src="src/js/bootstrap-touch-slider.js"></script>
-  <script type="text/javascript" src="src/js/jdialog.min.js"></script>
-  <script type="text/javascript" src="src/js/viewport-units-buggyfill.js"></script>
-  <script src="contactform/contactform.js"></script>
+  <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
+  <script type="text/javascript" src={% static "js/ScrollingFixed.js" %}></script>
+  <script type="text/javascript" src={% static "js/wow.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/main.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap-touch-slider-min.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
+  <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
+  <script src={% static "contactform/contactform.js" %}></script>
 
 </head>
 
@@ -42,21 +44,21 @@
     <div class="container">
       <ul class="main-nav">
         <li>
-          <a href="#demo">RECOMMEND</a>
+          <a href="/#recom">RECOMMEND</a>
         </li>
         <li>
-          <a href="#download">COMPETITION</a>
+          <a href="/competition-list/1">COMPETITION</a>
         </li>
         <li class="small-logo">
-          <a href="#header">
-            <img class="navLogo" src="src/images/LOGO.png" alt="">
+          <a href="/">
+            <img class="navLogo" src={% static "images/LOGO.png" %} alt="">
           </a>
         </li>
         <li>
-          <a href="#team">LECTURE</a>
+          <a href="/lecture-list/1">LECTURE</a>
         </li>
         <li>
-          <a href="#contact">ABOUT US</a>
+          <a href="/#team">ABOUT US</a>
         </li>
       </ul>
       <a class="res-nav_click" href="#">
@@ -70,8 +72,8 @@
   <div class="col-md-1">&nbsp;</div>
   <div class="col-md-7">
 	<div class="TitleContainer">
-	  <h1 class="MainTitle wow fadeInDown"> This is A Title</h1>
-	  <h2 class="SubTitle wow fadeInUp"> This is the subtitle This is the subtitle</h2>
+	  <h1 class="MainTitle wow fadeInDown">{{item.title}}</h1>
+	  <h2 class="SubTitle wow fadeInUp">{{item.subtitle}}</h2>
 	</div>
   </div>
  <!--Basic Info-->
@@ -79,13 +81,13 @@
   	<div class="BasicInfo">
   	   <h1 id="BasicInfo">BASIC INFO</H1>
   	   <div class="Label">
-  	     <h4 class="Content">主办方：xxxxx</h4>
+  	     <h4 class="Content">主办方：{{item.holder}}</h4>
   	   </div>
   	   <div class="Label">
-  	     <h4 class="Content">比赛时间：xxxxx</h4>
+  	     <h4 class="Content">比赛时间：{{item.hold_time}}</h4>
   	   </div>
   	   <div class="Label">
-  	     <h4 class="Content">状态：xxxxx</h4>
+  	     <h4 class="Content">状态：{{item.state}}</h4>
   	   </div>
   	</div>
   </div>
@@ -93,18 +95,12 @@
   <div class="col-md-12"> 
     <div class="col-md-1">&nbsp;</div>
      <div class="col-md-5 WordContainer">
-        <p class="Introp wow fadeInUp">&nbsp;&nbsp;&nbsp;
-           Introduction Introduction Introduction Intr
-			oduction Introduction Introduction Introduc
-       tionoduction Introduction Introduction Introduction
-       tionoduction Introduction Introduction Introduction
-       tionoduction Introduction Introduction Introduction
-       tionoduction Introduction Introduction Introduction
-       tionoduction Introduction Introduction Introduction.
+        <p class="Introp wow fadeInUp">
+           {{item.intro}}
         </p>
      </div>
      <div class="col-md-5 PicContainer">
-       <img src="src/images/main.png" width="520" class="wow fadeIn">
+       <img src={% cropped_thumbnail item "cropping" width=520 %} width="520" class="wow fadeIn">
      </div>
   </div>
 </div>
@@ -120,11 +116,11 @@
   <div class="col-md-12 ">
     <div class="intro">
      <a name="intro">
-        <img class="leftTitle wow fadeInUp" src="src/images/intro.png">
+        <img class="leftTitle wow fadeInUp" src={% static "images/intro.png" %}>
       </a>
-        <img src="src/images/divider.png" class="divider3 wow fadeInUp">
+        <img src={% static "images/divider.png" %} class="divider3 wow fadeInUp">
         <div class="content-box">
-            &nbsp;&nbsp;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            &nbsp;&nbsp;{{item.intro}}
            
         </div>
      </div>
@@ -132,21 +128,21 @@
     <div class="method">
        <a name="method">
        <div class="content-box2">
-            &nbsp;&nbsp;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   
+            &nbsp;&nbsp;{{item.method}}
         </div>
-        <img class="rightTitle wow fadeInUp" src="src/images/method.png">
+        <img class="rightTitle wow fadeInUp" src={% static "images/method.png" %}>
         </a>
-        <img src="src/images/divider.png" class="divider4 wow fadeInUp">
+        <img src={% static "images/divider.png" %} class="divider4 wow fadeInUp">
     </div>
   
     <div class="award">
       
        <a name="award">
-        <img class="leftTitle2 wow fadeInUp" src="src/images/award.png">
+        <img class="leftTitle2 wow fadeInUp" src={% static "images/award.png" %}>
         </a>
-        <img src="src/images/divider.png" class="divider3 wow fadeInUp">
+        <img src={% static "images/divider.png" %} class="divider3 wow fadeInUp">
         <div class="content-box">
-            &nbsp;&nbsp;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            &nbsp;&nbsp;{{item.award}}
         </div>
     </div>
   </div>
@@ -161,7 +157,7 @@
     <div class="container">
       <div class="footer-logo">
         <a href="#">
-          <img src="src/images/LOGO2.png" alt="">
+          <img src={% static "images/LOGO2.png" %} alt="">
         </a>
       </div>
       <span class="copyright">Copyright &copy; 2017 SIGMAGO. All Rights Reserved.</span>

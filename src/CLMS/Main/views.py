@@ -88,12 +88,12 @@ def home(request):
 
 def competition(request, id):
     competition = Competition.objects.get(id=str(id))
-    return render(request, 'single.html', {'competition': competition})
+    return render(request, 'Single.html', {'item': competition})
 
 
 def lecture(request, id):
     lecture = Lecture.objects.get(id=str(id))
-    return render(request, 'single.html', {'competition': lecture})
+    return render(request, 'Single.html', {'item': lecture})
 
 
 def competitionList(request, page):
@@ -170,7 +170,7 @@ def search_tag(request, tag, page):
         raise Http404
     result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
-    return render(request, 'complist.html',
+    return render(request, 'List.html',
                   {'list': result_list,
                    'taglist': TagList,
                    'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
@@ -224,7 +224,7 @@ def recommend(request, user_name, page):
         raise Http404
     result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
-    return render(request, 'complist.html',
+    return render(request, 'List.html',
                   {'list': result_list,
                    'taglist': TagList,
                    'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
@@ -272,7 +272,7 @@ def search(request):
                 raise Http404
             result_list = result_list[listLen * (page - 1):]
             TagList = Tag.objects.all()
-            return render(request, 'complist.html',
+            return render(request, 'List.html',
                           {'list': result_list,
                            'taglist': TagList,
                            'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
