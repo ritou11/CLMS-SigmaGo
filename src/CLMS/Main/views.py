@@ -100,19 +100,20 @@ def competitionList(request, page):
     listLen = 4
     page = int(page)
     competitionList = Competition.objects.all()
+    total = len(competitionList)
     pagecount = (len(competitionList) - 1) // listLen + 1
     if page <= 0 or page > pagecount:
         return HttpResponse('Error!')
     if len(competitionList) > listLen:
         competitionList = competitionList[
-            (page - 1) * listLen: min(len(competitionList),page * listLen)]
+            (page - 1) * listLen: min(len(competitionList), page * listLen)]
     TagList = Tag.objects.all()
-    return render(request, 'complist.html',
+    return render(request, 'List.html',
                   {'list': competitionList,
                    'taglist': TagList,
                    'pagelist': range(1, pagecount + 1),
                    'page': page,
-                   'total': len(competitionList)})
+                   'total': total})
 
 
 def lectureList(request, page):
@@ -124,9 +125,9 @@ def lectureList(request, page):
         return HttpResponse('Error!')
     if len(lectureList) > listLen:
         lectureList = lectureList[
-            (page - 1) * listLen: min(lectureList,page * listLen)]
+            (page - 1) * listLen: min(len(lectureList), page * listLen)]
     TagList = Tag.objects.all()
-    return render(request, 'complist.html',
+    return render(request, 'List.html',
                   {'list': lectureList,
                    'taglist': TagList,
                    'pagelist': range(1, pagecount + 1),
@@ -134,7 +135,7 @@ def lectureList(request, page):
                    'total': len(lectureList)})
 
 
-def search_tag(request,tag,page):
+def search_tag(request, tag, page):
     try:
         CompetitionList = Competition.objects.filter(tag__name=tag)
     except Competition.DoesNotExist:
@@ -148,7 +149,7 @@ def search_tag(request,tag,page):
     CompetitionCnt = 0
     LectureCnt = 0
     page = int(page)
-    for cnt in range(listLen*page):
+    for cnt in range(listLen * page):
         if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
             break
         if (CompetitionCnt >= len(CompetitionList)):
@@ -165,27 +166,30 @@ def search_tag(request,tag,page):
         else:
             result_list.append(LectureList[LectureCnt])
             LectureCnt += 1
-    if len(result_list) <= listLen*(page-1):
+    if len(result_list) <= listLen * (page - 1):
         raise Http404
-    result_list = result_list[listLen*(page-1):]
+    result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
     return render(request, 'complist.html',
-              {'list': result_list,
-               'taglist': TagList,
-               'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
-               'page': page,
-               'total': len(result_list)})
+                  {'list': result_list,
+                   'taglist': TagList,
+                   'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
+                   'page': page,
+                   'total': len(result_list)})
 
-def recommend(request,user_name,page):
+
+def recommend(request, user_name, page):
     try:
         user = User.objects.get(username=str(user_name))
     except:
         raise Http404
-    CompetitionList = Competition.objects.filter(tag__name='a tag you will never use')
+    CompetitionList = Competition.objects.filter(
+        tag__name='a tag you will never use')
     LectureList = Lecture.objects.filter(tag__name='a tag you will never use')
     for tag in user.interestTag.all():
         try:
-            CompetitionList = CompetitionList | Competition.objects.filter(tag__name=str(tag))
+            CompetitionList = CompetitionList | Competition.objects.filter(
+                tag__name=str(tag))
         except Competition.DoesNotExist:
             raise Http404
         try:
@@ -199,7 +203,7 @@ def recommend(request,user_name,page):
     CompetitionCnt = 0
     LectureCnt = 0
     page = int(page)
-    for cnt in range(listLen*page):
+    for cnt in range(listLen * page):
         if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
             break
         if (CompetitionCnt >= len(CompetitionList)):
@@ -216,16 +220,17 @@ def recommend(request,user_name,page):
         else:
             result_list.append(LectureList[LectureCnt])
             LectureCnt += 1
-    if len(result_list) <= listLen*(page-1):
+    if len(result_list) <= listLen * (page - 1):
         raise Http404
-    result_list = result_list[listLen*(page-1):]
+    result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
     return render(request, 'complist.html',
-              {'list': result_list,
-               'taglist': TagList,
-               'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
-               'page': page,
-               'total': len(result_list)})
+                  {'list': result_list,
+                   'taglist': TagList,
+                   'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
+                   'page': page,
+                   'total': len(result_list)})
+
 
 def search(request):
     if 's' in request.GET:
@@ -246,7 +251,7 @@ def search(request):
             result_list = []
             CompetitionCnt = 0
             LectureCnt = 0
-            for cnt in range(listLen*page):
+            for cnt in range(listLen * page):
                 if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
                     break
                 if (CompetitionCnt >= len(CompetitionList)):
@@ -263,16 +268,16 @@ def search(request):
                 else:
                     result_list.append(LectureList[LectureCnt])
                     LectureCnt += 1
-            if len(result_list) <= listLen*(page-1):
+            if len(result_list) <= listLen * (page - 1):
                 raise Http404
-            result_list = result_list[listLen*(page-1):]
+            result_list = result_list[listLen * (page - 1):]
             TagList = Tag.objects.all()
             return render(request, 'complist.html',
-                      {'list': result_list,
-                       'taglist': TagList,
-                       'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
-                       'page': page,
-                       'total': len(result_list)})
+                          {'list': result_list,
+                           'taglist': TagList,
+                           'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
+                           'page': page,
+                           'total': len(result_list)})
     return HttpResponseRedirect('/')
 
 
