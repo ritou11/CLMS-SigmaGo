@@ -396,7 +396,7 @@ def contestAdd(request):
             contestInfo.method = request.POST.get('method')
             contestInfo.award = request.POST.get('award')
             contestInfo.image = request.FILES.get('image')
-            contestInfo.thumb = request.FILES.get('thumb')
+            #contestInfo.thumb = request.FILES.get('thumb')
             contestInfo.adminUser = request.session['user_id']
             if contestInfo.title == '':
                 return HttpResponse("contest NAME CANNOT BE NULL!")                         # HTTP response: error info adding as follows
@@ -408,8 +408,8 @@ def contestAdd(request):
                 return HttpResponse("contest INTRO TIME CANNOT BE NULL!")
             if contestInfo.image == '':
                 return HttpResponse("contest image TIME CANNOT BE NULL!")
-            if contestInfo.thumb == '':
-                return HttpResponse("contest thumb TIME CANNOT BE NULL!")
+            #if contestInfo.thumb == '':
+            #    return HttpResponse("contest thumb TIME CANNOT BE NULL!")
             conCheck = Lecture.objects.filter(title=contestInfo.title,
                                               hold_time=contestInfo.hold_time
                                               )
@@ -456,7 +456,7 @@ def lectureAdd(request):
             lectureInfo.content = request.POST.get('content')
             lectureInfo.method = request.POST.get('method')
             lectureInfo.image = request.FILES.get('image')
-            lectureInfo.thumb = request.FILES.get('thumb')
+            #lectureInfo.thumb = request.FILES.get('thumb')
             lectureInfo.adminUser = request.session['user_id']
             if lectureInfo.title == '':
                 return HttpResponse("LECTURE NAME CANNOT BE NULL!")
@@ -468,8 +468,8 @@ def lectureAdd(request):
                 return HttpResponse("LECTURE INTRO TIME CANNOT BE NULL!")
             if lectureInfo.image == '':
                 return HttpResponse("LECTURE image TIME CANNOT BE NULL!")
-            if lectureInfo.thumb == '':
-                return HttpResponse("LECTURE thumb TIME CANNOT BE NULL!")
+            #if lectureInfo.thumb == '':
+            #    return HttpResponse("LECTURE thumb TIME CANNOT BE NULL!")
             lecCheck = Lecture.objects.filter(title=lectureInfo.title,
                                               hold_time=lectureInfo.hold_time
                                               )
@@ -526,6 +526,14 @@ def lectureManagement(request, lectureId):
     if request.method != 'POST':
         return render_to_response('lectureInfoRenew.html', {'lecture': lecture})
     else:
+        thumb_path = os.path.join(
+            './media/Lecture/thumbs/', os.path.basename(request.FILES.get('image')))
+        make_thumb(request.FILES.get('image'), thumb_path)
+
+        # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
+        thumb_path = os.path.join(
+            './Lecture/thumbs/', os.path.basename(request.FILES.get('image')))
+        self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
         Lecture.objects.filter(id__exact=lectureId,
                                adminUser__exact=request.session['user_id']).update(
             title=request.POST.get('title'),
@@ -537,7 +545,7 @@ def lectureManagement(request, lectureId):
             content=request.POST.get('content'),
             method=request.POST.get('method'),
             image=request.FILES.get('image'),
-            thumb=request.FILES.get('thumb')
+            thumb=self.thumb
         )
         # To do: many to many tag
         return HttpResponse("Success.")
@@ -560,7 +568,15 @@ def competitionManagement(request, conId):
     #    return HttpResponse("Nothing found here.....")
     if request.method != 'POST':
         return render_to_response('contestInfoRenew.html', {'contest': contest})
-    else:
+    else:   
+        thumb_path = os.path.join(
+            './media/Competition/thumbs/', os.path.basename(request.FILES.get('image')))
+        make_thumb(request.FILES.get('image'), thumb_path)
+
+        # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
+        thumb_path = os.path.join(
+            './Competition/thumbs/', os.path.basename(request.FILES.get('image')))
+        self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
         Competition.objects.filter(id__exact=conId,
                                    adminUser__exact=request.session['user_id']).update(
             title=request.POST.get('title'),
@@ -573,7 +589,7 @@ def competitionManagement(request, conId):
             content=request.POST.get('content'),
             method=request.POST.get('method'),
             image=request.FILES.get('image'),
-            thumb=request.FILES.get('thumb')
+            thumb=self.thumb
         )
         # To do: many to many tag
         return HttpResponse("Success.")

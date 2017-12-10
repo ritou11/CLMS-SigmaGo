@@ -64,7 +64,21 @@ class Competition(models.Model):
             './Competition/thumbs/', os.path.basename(self.image.path))
         self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
         super(Competition, self).save()
+        
+    '''def update(self):
+        super(Competition, self).update()
+        # base, ext = os.path.splitext(os.path.basename(self.image.path))
+        thumb_path = os.path.join(
+            './media/Competition/thumbs/', os.path.basename(self.image.path))
+        make_thumb(self.image.path, thumb_path)
 
+        # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
+        thumb_path = os.path.join(
+            './Competition/thumbs/', os.path.basename(self.image.path))
+        self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
+        super(Competition, self).save()'''
+
+        
     def __str__(self):
         return self.title
 
