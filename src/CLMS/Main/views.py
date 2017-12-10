@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django import forms
 from PIL import Image
 import hashlib
+import time
 from Main.utils import recommend_list
 # from django.views.decorators.csrf import csrf_exempt
 # from Main.wxapp import WxApp
@@ -290,6 +291,7 @@ def login(request):
                 response = HttpResponse('Success')
                 response.set_cookie('cookie_username', username, 3600)
                 request.session['user_id'] = username
+                request.session['login_time'] = time.time()
                 return response
             else:
                 return HttpResponse('No username or valid one')
@@ -323,6 +325,10 @@ def userInfoSearch(request):
     if 'user_id' not in request.session:
         return HttpResponse("Error! Please login before you search for personal info.")
     else:
+        if time.time()-request.session['login_time']>3600:
+            logout(request)
+            return HttpResponse("Please login again.")
+        request.session['login_time'] = time.time()
         userinfo = User.objects.get(username=request.session['user_id'])
         return render(request, 'personInfo.html', {'user': userinfo})
 
@@ -331,6 +337,10 @@ def userInfoAlter(request):
     if 'user_id' not in request.session:
         return HttpResponse("Error! Please login before you alter your personal info.")
     else:
+        if time.time()-request.session['login_time']>3600:
+            logout(request)
+            return HttpResponse("Please login again.")
+        request.session['login_time'] = time.time()
         Method = request.method
         userinfo = User.objects.get(username=request.session['user_id'])
         print('success')
@@ -365,6 +375,10 @@ def contestAdd(request):
     if 'user_id' not in request.session:
         return HttpResponse("Error! Please login before you add a contest.")
     else:
+        if time.time()-request.session['login_time']>3600:
+            logout(request)
+            return HttpResponse("Please login again.")
+        request.session['login_time'] = time.time()
         userinfo = User.objects.get(username=request.session['user_id'])
         if userinfo.adminAuth == False:
             return HttpResponse("Sorry, but you are not admin user, please contact xxx@xxx.xxx")
@@ -423,6 +437,10 @@ def lectureAdd(request):
     if 'user_id' not in request.session:
         return HttpResponse("Error! Please login before you add a contest.")
     else:
+        if time.time()-request.session['login_time']>3600:
+            logout(request)
+            return HttpResponse("Please login again.")
+        request.session['login_time'] = time.time()
         userinfo = User.objects.get(username=request.session['user_id'])
         if userinfo.adminAuth == False:
             return HttpResponse("Sorry, but you are not admin user, please contact xxx@xxx.xxx")
@@ -476,6 +494,11 @@ def lectureAdd(request):
 def lecConManagement(request):
     if 'user_id' not in request.session:
         return HttpResponse("Error! Please login before you add a contest.")
+    else:
+        if time.time()-request.session['login_time']>3600:
+            logout(request)
+            return HttpResponse("Please login again.")
+        request.session['login_time'] = time.time()
     userinfo = User.objects.get(username=request.session['user_id'])
     if userinfo.adminAuth == False:
         return HttpResponse("Sorry, but you are not admin user, please contact xxx@xxx.xxx")
@@ -489,6 +512,10 @@ def lecConManagement(request):
 def lectureManagement(request, lectureId):
     if 'user_id' not in request.session:
         return HttpResponse("Error! Please login before you add a contest.")
+    if time.time()-request.session['login_time']>3600:
+        logout(request)
+        return HttpResponse("Please login again.")
+    request.session['login_time'] = time.time()
     try:
         lecture = Lecture.objects.get(
             id=lectureId, adminUser=request.session['user_id'])
@@ -519,6 +546,10 @@ def lectureManagement(request, lectureId):
 def competitionManagement(request, conId):
     if 'user_id' not in request.session:
         return HttpResponse("Error! Please login before you add a contest.")
+    if time.time()-request.session['login_time']>3600:
+        logout(request)
+        return HttpResponse("Please login again.")
+    request.session['login_time'] = time.time()
     try:
         contest = Competition.objects.get(
             id=conId, adminUser=request.session['user_id'])
@@ -558,6 +589,7 @@ def logout(request):
     response.delete_cookie('cookie_username')
     try:
         del request.session['user_id']
+        del request.session['login_time']
     except KeyError:
         pass
     return response
