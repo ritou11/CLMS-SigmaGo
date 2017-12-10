@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django import forms
 from PIL import Image
 import hashlib
-from Main.utils import recommend_list
+from Main.recommend import recommend_list
 # from django.views.decorators.csrf import csrf_exempt
 # from Main.wxapp import WxApp
 # Create your views here.
@@ -73,12 +73,12 @@ def home(request):
         else:
             SlideList.append(LectureList[LectureCnt])
             LectureCnt += 1
-    
+
     try:
         print(request.session[user_id])
     except:
         pass
-    recommendList = recommend_list(request, 3)
+    recommendList, recommendLen = recommend_list(request, 3)
     if not recommendList:
         recommendList = SlideList
 
@@ -90,10 +90,10 @@ def home(request):
     except:
         logged = False
 
-    render_dict = {'SlideList': SlideList,
+    render_dict = {'SlideList': recommendList,
                    'CompetitionList': CompetitionList,
                    'LectureList': LectureList,
-                   'RecommendList': recommendList,
+                   # 'RecommendList': recommendList,
                    'login': login,
                    'reg': reg,
                    'logged': logged}
@@ -106,19 +106,22 @@ def competition(request, id):
     competition = Competition.objects.get(id=str(id))
     competition.views += 1
     competition.save()
-    return render(request, 'Single.html', {'item': competition})
+    return render(request, 'single.html', {'item': competition})
 
 
 def lecture(request, id):
     lecture = Lecture.objects.get(id=str(id))
     lecture.views += 1
     lecture.save()
-    return render(request, 'Single.html', {'item': lecture})
+    return render(request, 'single.html', {'item': lecture})
 
 
 def competitionList(request, page):
     listLen = 4
-    page = int(page)
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
     competitionList = Competition.objects.all()
     total = len(competitionList)
     pagecount = (len(competitionList) - 1) // listLen + 1
@@ -138,7 +141,10 @@ def competitionList(request, page):
 
 def lectureList(request, page):
     listLen = 4
-    page = int(page)
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
     lectureList = Lecture.objects.all()
     total = len(lectureList)
     pagecount = (len(lectureList) - 1) // listLen + 1
@@ -154,7 +160,6 @@ def lectureList(request, page):
                    'pagelist': range(1, pagecount + 1),
                    'page': page,
                    'total': total})
-
 
 
 def search_tag(request, tag, page):
@@ -209,8 +214,11 @@ def search_tag(request, tag, page):
 
 def recommend(request, page):
     listLen = 4
-    page = int(page)
-    result_list,totalLen = recommend_list(request, listLen*page)
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+    result_list, totalLen = recommend_list(request, listLen * page)
     if not result_list:
         raise Http404
     if len(result_list) <= listLen * (page - 1):
@@ -562,8 +570,9 @@ def logout(request):
         pass
     return response
 
-def likeCompetition(request,id):
-    pwd = request.get_full_path().replace('competition-like','competition')
+
+def likeCompetition(request, id):
+    pwd = request.get_full_path().replace('competition-like', 'competition')
     try:
         competition = Competition.objects.get(id=str(id))
         competition.views -= 1
@@ -574,22 +583,23 @@ def likeCompetition(request,id):
         user = User.objects.get(username=request.session['user_id'])
     except:
         return HttpResponseRedirect(pwd)
-   
+
     exist = user.CompetitionList.filter(id=str(id))
 
-    if len(exist)==0:
-        
+    if len(exist) == 0:
+
         competition.likes += 1
         competition.save()
         user.CompetitionList.add(competition)
     else:
-        competition.likes -=1
+        competition.likes -= 1
         competition.save()
         user.CompetitionList.remove(competition)
     return HttpResponseRedirect(pwd)
 
-def likeLecture(request,id):
-    pwd = request.get_full_path().replace('lecture-like','lecture')
+
+def likeLecture(request, id):
+    pwd = request.get_full_path().replace('lecture-like', 'lecture')
     try:
         lecture = Lecture.objects.get(id=str(id))
         lecture.views -= 1
@@ -603,31 +613,13 @@ def likeLecture(request,id):
 
     exist = user.LectureList.filter(id=str(id))
 
-    if len(exist)==0:
-        
+    if len(exist) == 0:
+
         lecture.likes += 1
         lecture.save()
         user.LectureList.add(lecture)
     else:
-        lecture.likes -=1
+        lecture.likes -= 1
         lecture.save()
         user.LectureList.remove(lecture)
     return HttpResponseRedirect(pwd)
-
-
-
-
-
-
-
-def slide(request):
-    pass
-
-
-"""
-@csrf_exempt
-def wechat(request):
-    app = WxApp()
-    result = app.process(request.GET, request.body)
-    return HttpResponse(result)
-"""
