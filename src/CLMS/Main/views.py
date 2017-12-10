@@ -282,19 +282,19 @@ def login(request):
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
             if 'user_id' in request.session:
-                return HttpResponse("You've logged in, please do not loggin twice.")
+                return HttpResponse("You've logged in, please do not loggin twice.")             # HTTP response: have login before
             userPassJudge = User.objects.filter(
                 username__exact=username, password__exact=password)
             print(username)
             print(password)
             if userPassJudge:
-                response = HttpResponse('Success')
+                response = HttpResponse('Success')                                               # HTTP response: success log in.
                 response.set_cookie('cookie_username', username, 3600)
                 request.session['user_id'] = username
                 request.session['login_time'] = time.time()
                 return response
             else:
-                return HttpResponse('No username or valid one')
+                return HttpResponse('No username or valid one')                                  # HTTP response: invalid username.
     return HttpResponse('Not valid')
 
 
@@ -307,27 +307,27 @@ def register(request):
             password1 = uf.cleaned_data['password1']
             password2 = uf.cleaned_data['password2']
             if(len(password1) != 32):
-                return HttpResponse('Not valid')
+                return HttpResponse('Not valid')                # HTTP respose: not valid password
             try:
                 registJudge = User.objects.filter(
                     username=username).get().username
-                return HttpResponse('User existed')
+                return HttpResponse('User existed')             # HTTP response: username existed
             except:
                 registAdd = User.objects.create(
                     username=username, password=password1)
                 if registAdd:
-                    return HttpResponse('Success')
+                    return HttpResponse('Success')              # HTTP response: register success
     return HttpResponse('Not valid')
 # test login and logout
 
 
 def userInfoSearch(request):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you search for personal info.")
+        return HttpResponse("Error! Please login before you search for personal info.")             # HTTP response: need login auth.
     else:
         if time.time()-request.session['login_time']>3600:
             logout(request)
-            return HttpResponse("Please login again.")
+            return HttpResponse("Please login again.")                                              # HTTP response: session-id invalid.
         request.session['login_time'] = time.time()
         userinfo = User.objects.get(username=request.session['user_id'])
         return render(request, 'personInfo.html', {'user': userinfo})
@@ -335,7 +335,7 @@ def userInfoSearch(request):
 
 def userInfoAlter(request):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you alter your personal info.")
+        return HttpResponse("Error! Please login before you alter your personal info.")             # HTTP response: need login auth.
     else:
         if time.time()-request.session['login_time']>3600:
             logout(request)
@@ -364,7 +364,7 @@ def userInfoAlter(request):
                     p = find_i[0]
                 userinfo.interestTag.add(p)
             userinfo.save()
-            return HttpResponse("Your information has been saved.")
+            return HttpResponse("Your information has been saved.")                     # HTTP response: info saved successfully
         else:
             return render_to_response('inforenew.html', {'userinfo': userinfo})
 
@@ -373,7 +373,7 @@ def userInfoAlter(request):
 
 def contestAdd(request):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you add a contest.")
+        return HttpResponse("Error! Please login before you add a contest.")             # HTTP response: need login auth.
     else:
         if time.time()-request.session['login_time']>3600:
             logout(request)
@@ -399,7 +399,7 @@ def contestAdd(request):
             contestInfo.thumb = request.FILES.get('thumb')
             contestInfo.adminUser = request.session['user_id']
             if contestInfo.title == '':
-                return HttpResponse("contest NAME CANNOT BE NULL!")
+                return HttpResponse("contest NAME CANNOT BE NULL!")                         # HTTP response: error info adding as follows
             if contestInfo.hold_time == '':
                 return HttpResponse("contest HOLD TIME CANNOT BE NULL!")
             if contestInfo.holder == '':
@@ -414,7 +414,7 @@ def contestAdd(request):
                                               hold_time=contestInfo.hold_time
                                               )
             if len(conCheck) > 0:
-                return HttpResponse("Lecture Already exists.")
+                return HttpResponse("Lecture Already exists.")                              # HTTP response: lecture already have
             contestInfo.save()
             for i in request.POST.getlist('interestTag'):
                 find_i = Tag.objects.filter(name__exact=i)
@@ -435,7 +435,7 @@ def contestAdd(request):
 
 def lectureAdd(request):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you add a contest.")
+        return HttpResponse("Error! Please login before you add a contest.")             # HTTP response: need login auth.
     else:
         if time.time()-request.session['login_time']>3600:
             logout(request)
@@ -493,7 +493,7 @@ def lectureAdd(request):
 
 def lecConManagement(request):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you add a contest.")
+        return HttpResponse("Error! Please login before you add a contest.")             # HTTP response: need login auth.
     else:
         if time.time()-request.session['login_time']>3600:
             logout(request)
@@ -511,7 +511,7 @@ def lecConManagement(request):
 
 def lectureManagement(request, lectureId):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you add a contest.")
+        return HttpResponse("Error! Please login before you add a contest.")            # HTTP response: need login auth.
     if time.time()-request.session['login_time']>3600:
         logout(request)
         return HttpResponse("Please login again.")
@@ -545,7 +545,7 @@ def lectureManagement(request, lectureId):
 
 def competitionManagement(request, conId):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you add a contest.")
+        return HttpResponse("Error! Please login before you add a contest.")             # HTTP response: need login auth.
     if time.time()-request.session['login_time']>3600:
         logout(request)
         return HttpResponse("Please login again.")
