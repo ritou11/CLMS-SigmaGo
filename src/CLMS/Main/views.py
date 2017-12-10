@@ -526,14 +526,13 @@ def lectureManagement(request, lectureId):
     if request.method != 'POST':
         return render_to_response('lectureInfoRenew.html', {'lecture': lecture})
     else:
-        thumb_path = os.path.join(
-            './media/Lecture/thumbs/', os.path.basename(request.FILES.get('image')))
-        make_thumb(request.FILES.get('image'), thumb_path)
+        print(str(request.FILES.get('image')))
+        thumb_path = os.path.join('./media/Lecture/thumbs/', os.path.basename(str(request.FILES.get('image'))))
+        thumb = make_thumb(request.FILES.get('image'), thumb_path)
 
         # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
-        thumb_path = os.path.join(
-            './Lecture/thumbs/', os.path.basename(request.FILES.get('image')))
-        self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
+        thumb_path = os.path.join('./Lecture/thumbs/', os.path.basename(str(request.FILES.get('image'))))
+        #thumb = ImageFieldFile(thumb, thumb_path)
         Lecture.objects.filter(id__exact=lectureId,
                                adminUser__exact=request.session['user_id']).update(
             title=request.POST.get('title'),
@@ -543,11 +542,11 @@ def lectureManagement(request, lectureId):
             state=request.POST.get('state'),
             intro=request.POST.get('intro'),
             content=request.POST.get('content'),
-            method=request.POST.get('method'),
-            image=request.FILES.get('image'),
-            thumb=self.thumb
         )
         # To do: many to many tag
+        lecture = Lecture.objects.get(id=lectureId,adminUser=request.session['user_id'])
+        lecture.image = request.FILES.get('image')
+        lecture.save()
         return HttpResponse("Success.")
 
 
@@ -576,7 +575,7 @@ def competitionManagement(request, conId):
         # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
         thumb_path = os.path.join(
             './Competition/thumbs/', os.path.basename(request.FILES.get('image')))
-        self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
+        #self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
         Competition.objects.filter(id__exact=conId,
                                    adminUser__exact=request.session['user_id']).update(
             title=request.POST.get('title'),
@@ -588,10 +587,13 @@ def competitionManagement(request, conId):
             award=request.POST.get('award'),
             content=request.POST.get('content'),
             method=request.POST.get('method'),
-            image=request.FILES.get('image'),
-            thumb=self.thumb
+            #image=request.FILES.get('image'),
+            #thumb=self.thumb
         )
         # To do: many to many tag
+        complist = Competition.objects.get(id=conId,adminUser=request.session['user_id'])
+        complist.image = request.FILES.get('image')
+        complist.save()
         return HttpResponse("Success.")
 
 

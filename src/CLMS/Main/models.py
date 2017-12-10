@@ -121,6 +121,7 @@ class Lecture(models.Model):
         # base, ext = os.path.splitext(os.path.basename(self.image.path))
         thumb_path = os.path.join(
             './media/Lecture/thumbs/', os.path.basename(self.image.path))
+        print(self.image.path)
         make_thumb(self.image.path, thumb_path)
 
         # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
