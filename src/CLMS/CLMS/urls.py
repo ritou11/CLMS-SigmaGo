@@ -28,13 +28,12 @@ urlpatterns = [
     url(r'^competition-like/(?P<id>\d+)/$', views.likeCompetition, name='CompetitionLike'),
     url(r'^lecture/(?P<id>\d+)/$', views.lecture, name='Lecture'),
     url(r'^lecture-like/(?P<id>\d+)/$', views.likeLecture, name='LectureLike'),
-    url(r'^slide/(?P<id>\d+)/$', views.slide, name='Slide'),
-    url(r'^competition-list/(?P<page>\d+)$',
+    url(r'^competition-list/(?P<page>\d*)$',
         views.competitionList, name='CompetitionList'),
-    url(r'^lecture-list/(?P<page>\d+)$', views.lectureList, name='LectureList'),
+    url(r'^lecture-list/(?P<page>\d*)$', views.lectureList, name='LectureList'),
     url(r'^tag/(?P<tag>\w+)/(?P<page>\d*)$', views.search_tag, name='search_tag'),
     url(r'^search/$', views.search, name='search'),
-    url(r'^recom/(?P<page>\d+)/$', views.recommend, name='recommend'),
+    url(r'^recom/(?P<page>\d*)$', views.recommend, name='recommend'),
 
     url(r'^index/$', views.index, name='index4test'),
     url(r'^login/$', views.login, name='Login'),
@@ -50,4 +49,3 @@ urlpatterns = [
     url(r'^weixin', wechat, name='weixin'),
     # url(r'^wechat$', views.wechat, name='Wechat')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
