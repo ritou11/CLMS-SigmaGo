@@ -50,7 +50,7 @@ python manage.py migrate --run-syncdb
 ### Migrate Frontend Code
 
 Regex replace ```src=((?!.*http)".+?")``` to ```src={% static $1 %}```.
-Regex replace ```href=((?!.*(\#|http)".+?")``` to ```href={% static $1 %}```.
+Regex replace ```href=((?!.*(\#|http))".+?")``` to ```href={% static $1 %}```.
 
 ## License
 

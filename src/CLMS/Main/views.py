@@ -1,9 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from Main.models import *
-from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.datastructures import MultiValueDictKeyError
 from django import forms
 from django.db import models
@@ -12,9 +10,6 @@ import hashlib
 import time
 import datetime
 from Main.recommend import recommend_list
-# from django.views.decorators.csrf import csrf_exempt
-# from Main.wxapp import WxApp
-# Create your views here.
 
 
 class RegUserForm(forms.Form):
