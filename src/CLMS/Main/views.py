@@ -363,7 +363,11 @@ def userInfoAlter(request):
             userinfo.infoUser = request.POST.get('infoUser')
             userinfo.infoPasswd = request.POST.get('infoPasswd')
             userinfo.grade = request.POST.get('grade')
-            userinfo.save()
+            #lecture = Lecture.objects.get(id=lectureId,adminUser=request.session['user_id'])
+            userinfo.userImage = request.FILES.get('image')
+            if not userinfo.userImage:
+                return HttpResponse("Image cannot be null.")
+            userinfo.save_with_photo()
             previousInterest = Tag.objects.all()
             for i in previousInterest:
                 userinfo.interestTag.remove(i)
@@ -375,7 +379,7 @@ def userInfoAlter(request):
                 else:
                     p = find_i[0]
                 userinfo.interestTag.add(p)
-            userinfo.save()
+            userinfo.save_with_photo()
             return HttpResponse("Your information has been saved.")                     # HTTP response: info saved successfully
         else:
             return render_to_response('inforenew.html', {'userinfo': userinfo})

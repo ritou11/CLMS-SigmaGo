@@ -152,10 +152,11 @@ class User(models.Model):
             )
         ),
     )'''
-
+    usericon = models.ImageField(upload_to='./Users/images', blank=True, null=True)
+    userImage = models.ImageField(upload_to='./Users/thumbs', blank=True, null=True)
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=50)
-
+   
     # Undergraduate or graduate student
     stuType = models.CharField(max_length=30, blank=True)
     infoUser = models.CharField(max_length=30, blank=True)
@@ -174,6 +175,41 @@ class User(models.Model):
     CompetitionList = models.ManyToManyField(Competition, blank=True,null=True)
     LectureList = models.ManyToManyField(Lecture,blank=True,null=True)
     #adminAuth = models.BooleanField(default=False)
+    
+    def save_with_photo(self):
+        super(User, self).save()
+        if self.usericon is None:
+            super(User, self).save()
+            return
+        # base, ext = os.path.splitext(os.path.basename(self.image.path))
+        thumb_path = os.path.join(
+            './media/Users/thumbs/', os.path.basename(self.usericon.path))
+        make_thumb(self.userImage.path, thumb_path,size=(100,100)),
+
+        # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
+        thumb_path = os.path.join(
+            './Users/thumbs/', os.path.basename(self.usericon.path))
+        self.usericon = ImageFieldFile(self, self.usericon, thumb_path)
+        super(User, self).save()
+
+    
+    '''def save(self):
+        super(User, self).save()
+        print(self.usericon.avatar())
+        
+        if self.usericon is None:
+            super(User, self).save()
+            return
+        # base, ext = os.path.splitext(os.path.basename(self.image.path))
+        thumb_path = os.path.join(
+            './media/Users/thumbs/', os.path.basename(self.usericon.path))
+        make_thumb(self.usericon.path, thumb_path,size=(100,100)),
+
+        # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
+        thumb_path = os.path.join(
+            './Users/thumbs/', os.path.basename(self.usericon.path))
+        self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
+        super(User, self).save()'''
 
     def __unicode__(self):
         return self.username
