@@ -19,7 +19,7 @@
     <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
-    <link href={% static "css/common-topbar.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/common-searchbar.css" %} rel="stylesheet" type="text/css">
     <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
     <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
@@ -120,18 +120,14 @@
                 <i class="fa-bars"></i>
             </a>
         </div>
+        <div id="sb-search" class="sb-search">
+            <form>
+                <input class="sb-search-input" placeholder="Enter your search term..." type="text" value="">
+                <span class="sb-icon-search"></span>
+            </form>
+        </div>
     </nav>
     <!--________________________________nav-end________________________________-->
-
-    <div id="sb-search" class="sb-search">
-                        <form>
-                            <input class="sb-search-input" placeholder="Enter your search term..." type="text" value="" name="search" id="search">
-                            <input class="sb-search-submit" type="submit" value="">
-                            <span class="sb-icon-search"></span>
-                        </form>
-                    </div>
-
-
     <!--________________________________recommand-section-start________________________________-->
     <section class="main-section" id="demo">
         <a name="recom"></a>
