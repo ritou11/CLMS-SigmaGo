@@ -6,9 +6,11 @@ from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.datastructures import MultiValueDictKeyError
 from django import forms
+from django.db import models
 from PIL import Image
 import hashlib
 import time
+import datetime
 from Main.recommend import recommend_list
 # from django.views.decorators.csrf import csrf_exempt
 # from Main.wxapp import WxApp
@@ -55,6 +57,17 @@ def home(request):
     LectureList = Lecture.objects.all()
     if len(LectureList) > 5:
         LectureList = LectureList[0:5]
+    for i in range(len(CompetitionList)):
+        if CompetitionList[i].hold_time > CompetitionList[i].date_time:
+            CompetitionList[i].finished = False
+        else:
+            CompetitionList[i].finished = True
+        print(CompetitionList[i].finished)
+    for i in range(len(LectureList)):
+        if LectureList[i].hold_time > datetime[i].date_time:
+            LectureList[i].finished = False
+        else:
+            LectureList[i].finished = True
     CompetitionCnt = 0
     LectureCnt = 0
     SlideList = []
