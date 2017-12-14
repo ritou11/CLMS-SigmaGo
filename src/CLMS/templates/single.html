@@ -23,9 +23,9 @@
   <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
   <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
   <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
-  
-  <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+
   <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
+  <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
   <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
   <script type="text/javascript" src={% static "js/ScrollingFixed.js" %}></script>
   <script type="text/javascript" src={% static "js/wow.min.js" %}></script>
@@ -34,7 +34,7 @@
   <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
   <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
   <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
-  <script src={% static "contactform/contactform.js" %}></script>
+  <!--<script src={% static "contactform/contactform.js" %}></script>-->
 
 </head>
 
@@ -149,9 +149,6 @@
 </div>
 	</div>
 
-<div class="col-md-12">&nbsp;</div>
-<div class="col-md-12" style="padding-bottom: 100px;">&nbsp;</div>
-
   <!--Footer-begin-->
   <footer class="footer">
     <div class="container">
@@ -164,13 +161,7 @@
     </div>
   </footer>
   <!--Footer-end-->
-</div>
 <script>
-	$(function() {
-	$( "#Tabs1" ).tabs(); 
-});
-    
-
 		$("#dialog-1").jDialog({
 	        skinClassName: 'demo',
 			allowOverlay:true,
@@ -195,12 +186,6 @@
       var windowHeight = $(window).height();
       $(window).trigger('resize');
       });
-</script>
-
-<script>
-$(function() {
-	$( "#Tabs1" ).tabs(); 
-});
 </script>
 
 <script>

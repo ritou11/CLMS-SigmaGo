@@ -140,7 +140,8 @@ jQuery(document).ready(function($){
       });
 
     });
-  
+
+/*
 $('#bootstrap-touch-slider').bsTouchSlider();
 
 $(document).ready(function(){
@@ -154,10 +155,11 @@ $(document).ready(function(){
       var windowHeight = $(window).height();
       $(window).trigger('resize');
       });
+
 $(function() {
 	$( "#Tabs1" ).tabs(); 
 });
-    
+
 
 		$("#dialog-1").jDialog({
 	        skinClassName: 'demo',
@@ -169,3 +171,4 @@ $(function() {
 			allowOverlay:true,
 	        animationType:'fade-in',
 	    });
+*/
