@@ -1,4 +1,6 @@
-Django>1.10
+Django>1.1<2.0
 easy_thumbnails
 django-image-cropping
 Crypto
+scikit-image
+wechat-sdk
