@@ -1,0 +1,78 @@
+@charset "UTF-8";
+/* CSS Document */
+.infocontainer{
+	padding-left:12vw;
+	padding-right:12vw;
+	opacity:0.7;
+	border-radius: 10px;
+	min-height:120px;
+	z-index: -1;
+	background-clip:padding-box;
+	text-align: center
+}
+.infowrapper{
+	padding-top:0 !important;
+   	padding:5vm;
+	opacity:0.7;
+	border-radius: 10px;
+	background-color:black;
+}
+ .wrapper {
+    	height: auto !important;
+    	margin: 0 auto;
+    	overflow: hidden;
+	    padding-top:40px;
+    }
+.inputbox{
+	padding-left:10vw;
+	padding-right:10vw;
+	padding-top:1vh !important;
+	display:flex;
+	margin-top:5vh;
+}
+.innerbox{
+	width:160%;
+	display: inline;
+}
+
+.inputbox h2{
+	margin-right:7vw;
+	position:relative;
+	font-size: 1.4vw;
+	top:10px;
+	color:white;
+	opacity:1 !important;
+}
+.bl_form {
+      margin:0;
+    }
+    
+    .bl_form input {
+      padding-top: 15px;
+      background: rgba(255,255,255,0.10);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+    }
+
+
+    .lb_wrap .lb_label.top, .lb_wrap .lb_label.bottom {
+      left: 15px !important;
+    }
+
+    .lb_wrap .lb_label.left {
+      left: 0;
+    }
+
+    .lb_label {
+      font-weight: bold;
+      color: #999;
+    }
+
+    .lb_label.active {
+      color: #FFF;
+    }
