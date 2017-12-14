@@ -76,21 +76,21 @@ def home(request):
             SlideList.append(LectureList[LectureCnt])
             LectureCnt += 1
 
+    logged = True
     try:
-        print(request.session[user_id])
-    except:
-        pass
-    recommendList, recommendLen = recommend_list(request, 3)
-    if not recommendList:
+        userinfo = User.objects.get(username=request.session['user_id'])
+    except (User.DoesNotExist, KeyError):
+        logged = False
+
+    if logged:
+        recommendList, recommendLen = recommend_list(request, 3)
+        if not recommendList:
+            recommendList = SlideList
+    else:
         recommendList = SlideList
 
     login = LogUserForm()
     reg = RegUserForm()
-    logged = True
-    try:
-        userinfo = User.objects.get(username=request.session['user_id'])
-    except:
-        logged = False
 
     render_dict = {'SlideList': recommendList,
                    'CompetitionList': CompetitionList,
