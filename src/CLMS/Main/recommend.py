@@ -18,7 +18,8 @@ def recommend_list(request, maxlen):
     else:
         tag = 'graduate'
 
-    try:CompetitionList = CompetitionList | Competition.objects.filter(tag__name=tag)
+    try:
+        CompetitionList = CompetitionList | Competition.objects.filter(tag__name=tag)
     except Competition.DoesNotExist:
         pass
     try:
@@ -37,8 +38,8 @@ def recommend_list(request, maxlen):
         except Lecture.DoesNotExist:
             pass
 
-    CompetitionList.distinct()
-    LectureList.distinct()
+    CompetitionList = CompetitionList.distinct()
+    LectureList = LectureList.distinct()
     result_list = list()
     CompetitionCnt = 0
     LectureCnt = 0
