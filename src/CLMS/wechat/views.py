@@ -7,13 +7,13 @@ from wechat_sdk import WechatBasic
 from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import TextMessage, VoiceMessage, ImageMessage, \
     VideoMessage, LinkMessage, LocationMessage, EventMessage
-from CLMS.settings import WECHAT_APPID, WECHAT_APPSECRET, WECHAT_TOKEN, HOME_URL
-
+from secret import Secret
 wechat_instance = WechatBasic(
-    token=WECHAT_TOKEN,
-    appid=WECHAT_APPID,
-    appsecret=WECHAT_APPSECRET)
-home_url = HOME_URL
+    token=Secret.SECRET_TOKEN,
+    appid=Secret.APP_ID,
+    appsecret=Secret.ENCODING_AES_KEY)
+home_url = Secret.HOME_URL
+
 
 @csrf_exempt
 def wechat(request):
@@ -40,18 +40,22 @@ def wechat(request):
         elif content == 'Lecture' or content == '讲座':
             return HttpResponse(wechat_instance.response_news(get_new_lecs(request)), content_type="application/xml")
         elif content == 'function' or '功能':
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' +
+                          '回复Lecture或‘讲座’查看最新讲座信息\n')
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
         elif content:
             pass
     else:
         if isinstance(message, VoiceMessage) or isinstance(message, ImageMessage):
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' +
+                          '回复Lecture或‘讲座’查看最新讲座信息\n')
         elif isinstance(message, VideoMessage) or isinstance(message, LinkMessage):
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' +
+                          '回复Lecture或‘讲座’查看最新讲座信息\n')
         elif isinstance(message, LocationMessage):
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n')
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' +
+                          '回复Lecture或‘讲座’查看最新讲座信息\n')
         elif isinstance(message, EventMessage):
             if message.type == 'subscribe':
                 reply_text = '感谢您的到来!回复“功能”返回使用指南'
@@ -94,10 +98,10 @@ def comp_to_array(comp_list):
     if not response:
         response.append({
             'title': "home",
-            'picurl':"",
+            'picurl': "",
             'description': "home",
             'url': home_url
-            })
+        })
     return response
 
 
@@ -116,13 +120,13 @@ def lec_to_array(lecs_list):
             'title': lec.title,
             'picurl': lec.thumb,
             'description': lec.intro,
-            'url':home_url + '/' + 'lecture' + '/' + str(lec.id) + '/'
+            'url': home_url + '/' + 'lecture' + '/' + str(lec.id) + '/'
         })
     if not response:
         response.append({
             'title': "home",
-            'picurl':"",
+            'picurl': "",
             'description': "home",
             'url': home_url
-            })
+        })
     return response
