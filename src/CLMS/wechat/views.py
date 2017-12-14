@@ -7,12 +7,24 @@ from wechat_sdk import WechatBasic
 from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import TextMessage, VoiceMessage, ImageMessage, \
     VideoMessage, LinkMessage, LocationMessage, EventMessage
-from secret import Secret
+# from secret import Secret
+import os
+
+HOME_URL = "******"
+WECHAT_TOKEN = "SigmaGo"
+WECHAT_APPID = "******"
+WECHAT_APPSECRET = "*******"
 wechat_instance = WechatBasic(
-    token=Secret.SECRET_TOKEN,
-    appid=Secret.APP_ID,
-    appsecret=Secret.ENCODING_AES_KEY)
-home_url = Secret.HOME_URL
+    token=WECHAT_TOKEN,
+    appid=WECHAT_APPID,
+    appsecret=WECHAT_APPSECRET)
+home_url = HOME_URL
+
+# wechat_instance = WechatBasic(
+#     token=Secret.SECRET_TOKEN,
+#     appid=Secret.APP_ID,
+#     appsecret=Secret.ENCODING_AES_KEY)
+# home_url = Secret.HOME_URL
 
 
 @csrf_exempt
@@ -39,8 +51,19 @@ def wechat(request):
             return HttpResponse(wechat_instance.response_news(get_new_comps(request)), content_type="application/xml")
         elif content == 'Lecture' or content == '讲座':
             return HttpResponse(wechat_instance.response_news(get_new_lecs(request)), content_type="application/xml")
+        elif content == 'Tags' or content == '订阅标签':
+            TagList = Tag.objects.all()
+            reply_text = ''
+            for tag in TagList:
+                reply_text += '回复“tag:' + tag + '“查看该标签下最新动态\n'
+            response = wechat_instance.response_text(content=reply_text)
+            return HttpResponse(response, content_type="application/xml")
+        elif content[:4] == 'tag:':
+            tag = content[4:]
+            return tagProcess(tag)
+
         elif content == 'function' or '功能':
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' +
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
                           '回复Lecture或‘讲座’查看最新讲座信息\n')
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
@@ -48,13 +71,13 @@ def wechat(request):
             pass
     else:
         if isinstance(message, VoiceMessage) or isinstance(message, ImageMessage):
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' +
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
                           '回复Lecture或‘讲座’查看最新讲座信息\n')
         elif isinstance(message, VideoMessage) or isinstance(message, LinkMessage):
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' +
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
                           '回复Lecture或‘讲座’查看最新讲座信息\n')
         elif isinstance(message, LocationMessage):
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' +
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
                           '回复Lecture或‘讲座’查看最新讲座信息\n')
         elif isinstance(message, EventMessage):
             if message.type == 'subscribe':
@@ -72,7 +95,8 @@ def wechat(request):
             elif message.type == 'templatesendjobfinish':
                 reply_text = '模板消息'
             else:
-                reply_text = '回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Lecture或‘讲座’查看最新讲座信息\n'
+                reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
+                          '回复Lecture或‘讲座’查看最新讲座信息\n')
 
         response = wechat_instance.response_text(content=reply_text)
         return HttpResponse(response, content_type="application/xml")
@@ -91,7 +115,7 @@ def comp_to_array(comp_list):
     for comp in comp_list:
         response.append({
             'title': comp.title,
-            'picurl': comp.thumb,
+            'picurl': os.path.join(home_url, comp.thumb_path),
             'description': comp.intro,
             'url': home_url + '/' + 'competition' + '/' + str(comp.id) + '/'
         })
@@ -118,7 +142,7 @@ def lec_to_array(lecs_list):
     for lec in lecs_list:
         response.append({
             'title': lec.title,
-            'picurl': lec.thumb,
+            'picurl': os.path.join(home_url, lec.thumb_path),
             'description': lec.intro,
             'url': home_url + '/' + 'lecture' + '/' + str(lec.id) + '/'
         })
@@ -130,3 +154,61 @@ def lec_to_array(lecs_list):
             'url': home_url
         })
     return response
+
+
+def tagProcess(tag):
+    try:
+        CompetitionList = Competition.objects.filter(tag__name=tag)
+    except Competition.DoesNotExist:
+        reply_text = "Content does not exit, try again please!"
+        response = wechat_instance.response_text(content=reply_text)
+        return HttpResponse(response, content_type="application/xml")
+    try:
+        LectureList = Lecture.objects.filter(tag__name=tag)
+    except Lecture.DoesNotExist:
+        reply_text = "Content does not exit, try again please!"
+        response = wechat_instance.response_text(content=reply_text)
+        return HttpResponse(response, content_type="application/xml")
+    listLen = 2
+    response = []
+    if len(CompetitionList) <= listLen:
+        for comp in CompetitionList:
+            response.append({
+                'title' : comp.title,
+                'picurl' : os.path.join(home_url, comp.thumb_path),
+                'description' : comp.intro,
+                'url' : home_url + '/' + 'competition' + '/' + str(comp.id) + '/'
+            })
+    else:
+        for comp in CompetitionList[:listLen]:
+            response.append({
+                'title' : comp.title,
+                'picurl' : os.path.join(home_url, comp.thumb_path),
+                'description' : comp.intro,
+                'url' : home_url + '/' + 'competition' + '/' + str(comp.id) + '/'
+            })
+    if  len(LectureList) <= listLen:
+        for lec in LectureList:
+            response.append({
+                'title' : lec.title,
+                'picurl' : os.path.join(home_url, lec.thumb_path),
+                'description' : lec.intro,
+                'url' : home_url + '/' + 'competition' + '/' + str(lec.id) + '/'
+                })
+    else:
+        for lec in LectureList[:listLen]:
+            response.append({
+                'title' : lec.title,
+                'picurl' : os.path.join(home_url, lec.thumb_path),
+                'description' : lec.intro,
+                'url' : home_url + '/' + 'competition' + '/' + str(lec.id) + '/'
+                })
+    if not response:
+        response.append({
+            'title': "home",
+            'picurl': "",
+            'description': "home",
+            'url': home_url
+        })
+    return HttpResponse(wechat_instance.response_news(response), content_type="application/xml")
+
