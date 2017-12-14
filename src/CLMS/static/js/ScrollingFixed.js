@@ -545,6 +545,7 @@
         limit : 0,
         bottom : -1,
         zIndex : 1000,
+        dontSetWidth : true,
         baseClassName: 'scroll-to-fixed-fixed'
     };
 
