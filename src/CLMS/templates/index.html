@@ -19,6 +19,7 @@
     <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/common-topbar.css" %} rel="stylesheet" type="text/css">
     <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
     <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
@@ -105,8 +106,8 @@
                 </li>
                 <li class="small-logo">
                     <a href="#header">
-            <img class="navLogo" src={% static "images/LOGO.png" %} alt="">
-          </a>
+                        <img class="navLogo" src={% static "images/LOGO.png" %} alt="">
+                    </a>
                 </li>
                 <li>
                     <a href="#lecture">LECTURE</a>
@@ -116,11 +117,21 @@
                 </li>
             </ul>
             <a class="res-nav_click" href="#">
-        <i class="fa-bars"></i>
-      </a>
+                <i class="fa-bars"></i>
+            </a>
         </div>
     </nav>
     <!--________________________________nav-end________________________________-->
+
+    <div id="sb-search" class="sb-search">
+                        <form>
+                            <input class="sb-search-input" placeholder="Enter your search term..." type="text" value="" name="search" id="search">
+                            <input class="sb-search-submit" type="submit" value="">
+                            <span class="sb-icon-search"></span>
+                        </form>
+                    </div>
+
+
     <!--________________________________recommand-section-start________________________________-->
     <section class="main-section" id="demo">
         <a name="recom"></a>
@@ -434,7 +445,7 @@
                         </ul>
                     </div>
                     <h3 class="wow fadeInDown delay-03s">Cao Yining</h3>
-                    <span class="wow fadeInDown delay-03s">DUTY</span>
+                    <span class="wow fadeInDown delay-03s">Frontend Dalao</span>
                     <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
                 </div>
                 <div class="team-leader-box">
@@ -444,19 +455,16 @@
                         <img src={% static "images/leader_HYZ.jpeg" %} alt="">
                         <ul>
                             <li>
-                                <a href="#" class="fa-github"></a>
+                                <a href="https://github.com/thuallen" class="fa-github"></a>
                             </li>
                             <li>
-                                <a href="#" class="fa-wechat"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="fa-weibo"></a>
+                                <a href="https://weibo.com/Allen_Hanyz" class="fa-weibo"></a>
                             </li>
                         </ul>
                     </div>
                     <h3 class="wow fadeInDown delay-09s">Han Yizeng</h3>
-                    <span class="wow fadeInDown delay-03s">DUTY</span>
-                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                    <span class="wow fadeInDown delay-03s">Algorithm Dalao</span>
+                    <p class="wow fadeInDown delay-03s">I may know a little about GOP(Google Oriented Programming).</p>
                 </div>
                 <div class="team-leader-box">
                     <div class="team-leader wow fadeInDown delay-03s">
@@ -465,19 +473,13 @@
                         <img src={% static "images/leader_HWF.jpeg" %} alt="">
                         <ul>
                             <li>
-                                <a href="#" class="fa-github"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="fa-wechat"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="fa-weibo"></a>
+                                <a href="https://github.com/huangxf14" class="fa-github"></a>
                             </li>
                         </ul>
                     </div>
                     <h3 class="wow fadeInDown delay-03s">Huang Xiufeng</h3>
-                    <span class="wow fadeInDown delay-03s">DUTY</span>
-                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                    <span class="wow fadeInDown delay-03s">Backend Salted Fish</span>
+                    <p class="wow fadeInDown delay-03s">I know nothing except BOP(Baidu Oriented Programming).</p>
                 </div>
                 <div class="team-leader-box">
                     <div class="team-leader  wow fadeInDown delay-06s">
@@ -486,19 +488,16 @@
                         <img src={% static "images/leader_LHT.jpeg" %} alt="">
                         <ul>
                             <li>
-                                <a href="#" class="fa-github"></a>
+                                <a href="https://github.com/ritou11" class="fa-github"></a>
                             </li>
                             <li>
-                                <a href="#" class="fa-wechat"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="fa-weibo"></a>
+                                <a href="https://weibo.com/ritou11" class="fa-weibo"></a>
                             </li>
                         </ul>
                     </div>
                     <h3 class="wow fadeInDown delay-03s">Liu Haotian</h3>
-                    <span class="wow fadeInDown delay-03s">DUTY</span>
-                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                    <span class="wow fadeInDown delay-03s">Frontend Salted Fish</span>
+                    <p class="wow fadeInDown delay-03s">I'm an expert in COP(Clipboard Oriented Programming).</p>
                 </div>
                 <div class="team-leader-box">
                     <div class="team-leader  wow fadeInDown delay-06s">
@@ -507,19 +506,13 @@
                         <img src={% static "images/leader_ZZX.jpeg" %} alt="">
                         <ul>
                             <li>
-                                <a href="#" class="fa-github"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="fa-wechat"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="fa-weibo"></a>
+                                <a href="https://github.com/zhang-zx" class="fa-github"></a>
                             </li>
                         </ul>
                     </div>
                     <h3 class="wow fadeInDown delay-03s">Zhang Zhixing</h3>
-                    <span class="wow fadeInDown delay-03s">DUTY</span>
-                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                    <span class="wow fadeInDown delay-03s">Wechat Dalao</span>
+                    <p class="wow fadeInDown delay-03s">I may also know a little about BOP.</p>
                 </div>
                 <div class="team-leader-box">
                     <div class="team-leader  wow fadeInDown delay-06s">
@@ -528,19 +521,13 @@
                         <img src={% static "images/leader_ZHD.jpeg" %} alt="">
                         <ul>
                             <li>
-                                <a href="#" class="fa-github"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="fa-wechat"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="fa-weibo"></a>
+                                <a href="https://github.com/PersuesJohnson" class="fa-github"></a>
                             </li>
                         </ul>
                     </div>
                     <h3 class="wow fadeInDown delay-03s">Zhu Haidong</h3>
-                    <span class="wow fadeInDown delay-03s">DUTY</span>
-                    <p class="wow fadeInDown delay-03s">introintrointrointrointro.</p>
+                    <span class="wow fadeInDown delay-03s">Backend Dalao</span>
+                    <p class="wow fadeInDown delay-03s">Familiar with MOP(Mirror Oriented Programming).</p>
                 </div>
             </div>
         </div>
@@ -560,6 +547,7 @@
     <!--________________________________Footer-end________________________________-->
     </div>
     <!-- ___________________________________script______________________________---- -->
+    <script type="text/javascript" src={% static "js/uisearch.js" %}></script>
     <script>
     $(function() {
         $("#Tabs1").tabs();

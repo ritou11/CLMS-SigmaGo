@@ -8,7 +8,6 @@ from django import forms
 from PIL import Image
 import hashlib
 import time
-#from Main.utils import recommend_list
 from Main.recommend import recommend_list
 # from django.views.decorators.csrf import csrf_exempt
 # from Main.wxapp import WxApp
