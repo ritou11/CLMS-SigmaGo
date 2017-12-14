@@ -7,6 +7,12 @@ def recommend_list(request, maxlen):
     except User.DoesNotExist:
         return None, 0
 
+    CompetitionList_by_grade = Competition.objects.filter(tag__name='a tag you will never use')
+    LectureList_by_grade = Lecture.objects.filter(tag__name='a tag you will never use')
+
+    CompetitionList_by_interest = Competition.objects.filter(tag__name='a tag you will never use')
+    LectureList_by_interest = Lecture.objects.filter(tag__name='a tag you will never use')
+
     CompetitionList = Competition.objects.filter(tag__name='a tag you will never use')
     LectureList = Lecture.objects.filter(tag__name='a tag you will never use')
 
@@ -19,25 +25,31 @@ def recommend_list(request, maxlen):
         tag = 'graduate'
 
     try:
-        CompetitionList = CompetitionList | Competition.objects.filter(tag__name=tag)
+        CompetitionList_by_grade = CompetitionList_by_grade | Competition.objects.filter(tag__name=tag)
     except Competition.DoesNotExist:
         pass
     try:
-        LectureList = LectureList | Lecture.objects.filter(tag__name=tag)
+        LectureList_by_grade = LectureList_by_grade | Lecture.objects.filter(tag__name=tag)
     except Lecture.DoesNotExist:
         pass
 
     for tag in user.interestTag.all():              # 按interestTag搜
         try:
-            CompetitionList = CompetitionList | Competition.objects.filter(
+            CompetitionList_by_interest = CompetitionList_by_interest | Competition.objects.filter(
                 tag__name=str(tag))
         except Competition.DoesNotExist:
             pass
         try:
-            LectureList = LectureList | Lecture.objects.filter(tag__name=(tag))
+            LectureList_by_interest = LectureList_by_interest | Lecture.objects.filter(tag__name=(tag))
         except Lecture.DoesNotExist:
             pass
 
+    CompetitionList = CompetitionList_by_grade & CompetitionList_by_interest
+    LectureList = LectureList_by_grade & LectureList_by_interest
+
+    CompetitionList = CompetitionList | CompetitionList_by_grade | CompetitionList_by_interest
+    LectureList = LectureList | LectureList_by_grade | LectureList_by_interest
+    
     CompetitionList = CompetitionList.distinct()
     LectureList = LectureList.distinct()
     result_list = list()
