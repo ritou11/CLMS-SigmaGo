@@ -1,12 +1,10 @@
 from django.db import models
 from image_cropping import ImageRatioField
 from django.db.models.fields.files import ImageFieldFile
-import skimage.io
-from skimage.transform import resize
 import os
 
 from Main.utils import make_thumb
-# Create your models here.
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
@@ -71,7 +69,6 @@ class Competition(models.Model):
         thumb_path = os.path.join(
             './media/Competition/thumbs/', os.path.basename(self.image.path))
         make_thumb(self.image.path, thumb_path)
-
         # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
         thumb_path = os.path.join(
             './Competition/thumbs/', os.path.basename(self.image.path))
