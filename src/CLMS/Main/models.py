@@ -1,12 +1,10 @@
 from django.db import models
 from image_cropping import ImageRatioField
 from django.db.models.fields.files import ImageFieldFile
-import skimage.io
-from skimage.transform import resize
 import os
 
 from Main.utils import make_thumb
-# Create your models here.
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
