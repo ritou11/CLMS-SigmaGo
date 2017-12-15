@@ -270,7 +270,7 @@
                         {% for competition in CompetitionList|slice:"3:5" %}
                         <th style="margin-left:5%;height:200px">
                             <h3 style="font-size:17px;text-decoration: none">
-                            {% if competition.state == "进行中"%}
+                            {% if competition.finished == True%}
                             <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
                             {% else %}
                             <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
@@ -371,7 +371,7 @@
                         {% for lecture in LectureList|slice:"3:5" %}
                         <th style="margin-left:5%;height:200px">
                             <h3 style="font-size:17px;text-decoration: none">
-                            {% if lecture.state == "进行中"%}
+                            {% if lecture.finished == True%}
                             <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
                             {% else %}
                             <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>

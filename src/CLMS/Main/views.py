@@ -8,7 +8,7 @@ from django.db import models
 from PIL import Image
 import hashlib
 import os
-import time
+from datetime import datetime
 from Main.recommend import recommend_list
 
 
