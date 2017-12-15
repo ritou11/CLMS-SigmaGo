@@ -7,24 +7,24 @@ from wechat_sdk import WechatBasic
 from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import TextMessage, VoiceMessage, ImageMessage, \
     VideoMessage, LinkMessage, LocationMessage, EventMessage
-# from secret import Secret
+from secret import Secret
 import os
 
-HOME_URL = "******"
-WECHAT_TOKEN = "SigmaGo"
-WECHAT_APPID = "******"
-WECHAT_APPSECRET = "*******"
-wechat_instance = WechatBasic(
-    token=WECHAT_TOKEN,
-    appid=WECHAT_APPID,
-    appsecret=WECHAT_APPSECRET)
-home_url = HOME_URL
-
+# HOME_URL = "******"
+# WECHAT_TOKEN = "SigmaGo"
+# WECHAT_APPID = "******"
+# WECHAT_APPSECRET = "*******"
 # wechat_instance = WechatBasic(
-#     token=Secret.SECRET_TOKEN,
-#     appid=Secret.APP_ID,
-#     appsecret=Secret.ENCODING_AES_KEY)
-# home_url = Secret.HOME_URL
+#     token=WECHAT_TOKEN,
+#     appid=WECHAT_APPID,
+#     appsecret=WECHAT_APPSECRET)
+# home_url = HOME_URL
+
+wechat_instance = WechatBasic(
+    token=Secret.SECRET_TOKEN,
+    appid=Secret.APP_ID,
+    appsecret=Secret.ENCODING_AES_KEY)
+home_url = Secret.HOME_URL
 
 
 @csrf_exempt
@@ -56,6 +56,8 @@ def wechat(request):
             reply_text = ''
             for tag in TagList:
                 reply_text += '回复“tag:' + tag + '“查看该标签下最新动态\n'
+            if not reply_text:
+                reply_text += 'no tag'
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
         elif content[:4] == 'tag:':
