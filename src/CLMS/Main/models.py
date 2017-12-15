@@ -69,7 +69,6 @@ class Competition(models.Model):
         thumb_path = os.path.join(
             './media/Competition/thumbs/', os.path.basename(self.image.path))
         make_thumb(self.image.path, thumb_path)
-
         # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
         thumb_path = os.path.join(
             './Competition/thumbs/', os.path.basename(self.image.path))

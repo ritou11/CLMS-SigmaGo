@@ -4,10 +4,6 @@ from Main.models import *
 from django.http import Http404, HttpResponseRedirect
 from django.utils.datastructures import MultiValueDictKeyError
 from django import forms
-from django.db import models
-from PIL import Image
-import hashlib
-import os
 from datetime import datetime
 from Main.recommend import recommend_list
 
