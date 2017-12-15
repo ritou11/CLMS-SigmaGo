@@ -182,13 +182,14 @@ class User(models.Model):
             super(User, self).save()
             return
         # base, ext = os.path.splitext(os.path.basename(self.image.path))
+        print(self)
         thumb_path = os.path.join(
-            './media/Users/thumbs/', os.path.basename(self.usericon.path))
-        make_thumb(self.userImage.path, thumb_path,size=(100,100)),
+            './media/Users/thumbs/', os.path.basename(self.userImage.path))
+        make_thumb(self.userImage.path, thumb_path,size=(640,640)),
 
         # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
         thumb_path = os.path.join(
-            './Users/thumbs/', os.path.basename(self.usericon.path))
+            './Users/thumbs/', os.path.basename(self.userImage.path))
         self.usericon = ImageFieldFile(self, self.usericon, thumb_path)
         super(User, self).save()
 

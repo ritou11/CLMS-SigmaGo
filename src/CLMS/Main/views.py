@@ -9,8 +9,8 @@ from django import forms
 from django.db import models
 from PIL import Image
 import hashlib
+import os
 import time
-import datetime
 from Main.recommend import recommend_list
 # from django.views.decorators.csrf import csrf_exempt
 # from Main.wxapp import WxApp
@@ -58,13 +58,16 @@ def home(request):
     if len(LectureList) > 5:
         LectureList = LectureList[0:5]
     for i in range(len(CompetitionList)):
-        if CompetitionList[i].hold_time > CompetitionList[i].date_time:
+        h_time = CompetitionList[i].hold_time.replace(tzinfo=None)
+        print(h_time)
+        if h_time > datetime.now():
             CompetitionList[i].finished = False
         else:
             CompetitionList[i].finished = True
         print(CompetitionList[i].finished)
     for i in range(len(LectureList)):
-        if LectureList[i].hold_time > datetime[i].date_time:
+        h_time = LectureList[i].hold_time.replace(tzinfo=None)
+        if h_time > datetime.now():
             LectureList[i].finished = False
         else:
             LectureList[i].finished = True
@@ -355,6 +358,10 @@ def userInfoSearch(request):
         #    return HttpResponse("Please login again.")                                              # HTTP response: session-id invalid.
         #request.session['login_time'] = time.time()
         userinfo = User.objects.get(username=request.session['user_id'])
+        #print(userinfo.usericon == '')
+        #if userinfo.usericon == '':
+        #    userinfo.usericon = os.getcwd()+"/static/images/leader_HWF.jpeg"                        # need to fix bug here
+        #    print( userinfo.usericon)
         return render(request, 'personInfo.html', {'user': userinfo})
 
 
@@ -378,6 +385,7 @@ def userInfoAlter(request):
             userinfo.grade = request.POST.get('grade')
             #lecture = Lecture.objects.get(id=lectureId,adminUser=request.session['user_id'])
             userinfo.userImage = request.FILES.get('image')
+            print(request.FILES.get('image'))
             if not userinfo.userImage:
                 return HttpResponse("Image cannot be null.")
             userinfo.save_with_photo()
@@ -392,7 +400,7 @@ def userInfoAlter(request):
                 else:
                     p = find_i[0]
                 userinfo.interestTag.add(p)
-            userinfo.save_with_photo()
+            userinfo.save()
             return HttpResponse("Your information has been saved.")                     # HTTP response: info saved successfully
         else:
             return render_to_response('inforenew.html', {'userinfo': userinfo})

@@ -72,7 +72,12 @@
                     <div class="team-leader-shadow">
                         <a href="#"></a>
                     </div>
-                    <img src={{user.usericon.url}} alt="">
+                    {% if user.usericon == '' %}
+                    <!-- bug here -->
+                        <img src={% static "images/leader_HWF.jpeg" %} alt="img not found">
+                    {% else %}
+                        <img src={{user.usericon.url}}  alt= "">
+                    {% endif %}
                 </div>
             </div>
             <div class="team-leader-box2" style="padding-top:60px;">
