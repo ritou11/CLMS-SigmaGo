@@ -4,6 +4,7 @@ from Main.models import *
 from django.http import Http404, HttpResponseRedirect
 from django.utils.datastructures import MultiValueDictKeyError
 from django import forms
+from datetime import datetime
 from Main.recommend import recommend_list
 
 
@@ -47,6 +48,20 @@ def home(request):
     LectureList = Lecture.objects.all()
     if len(LectureList) > 5:
         LectureList = LectureList[0:5]
+    for i in range(len(CompetitionList)):
+        h_time = CompetitionList[i].hold_time.replace(tzinfo=None)
+        print(h_time)
+        if h_time > datetime.now():
+            CompetitionList[i].finished = False
+        else:
+            CompetitionList[i].finished = True
+        print(CompetitionList[i].finished)
+    for i in range(len(LectureList)):
+        h_time = LectureList[i].hold_time.replace(tzinfo=None)
+        if h_time > datetime.now():
+            LectureList[i].finished = False
+        else:
+            LectureList[i].finished = True
     CompetitionCnt = 0
     LectureCnt = 0
     SlideList = []
@@ -334,6 +349,10 @@ def userInfoSearch(request):
         #    return HttpResponse("Please login again.")                                              # HTTP response: session-id invalid.
         #request.session['login_time'] = time.time()
         userinfo = User.objects.get(username=request.session['user_id'])
+        #print(userinfo.usericon == '')
+        #if userinfo.usericon == '':
+        #    userinfo.usericon = os.getcwd()+"/static/images/leader_HWF.jpeg"                        # need to fix bug here
+        #    print( userinfo.usericon)
         return render(request, 'personInfo.html', {'user': userinfo})
 
 
@@ -355,7 +374,12 @@ def userInfoAlter(request):
             userinfo.infoUser = request.POST.get('infoUser')
             userinfo.infoPasswd = request.POST.get('infoPasswd')
             userinfo.grade = request.POST.get('grade')
-            userinfo.save()
+            #lecture = Lecture.objects.get(id=lectureId,adminUser=request.session['user_id'])
+            userinfo.userImage = request.FILES.get('image')
+            print(request.FILES.get('image'))
+            if not userinfo.userImage:
+                return HttpResponse("Image cannot be null.")
+            userinfo.save_with_photo()
             previousInterest = Tag.objects.all()
             for i in previousInterest:
                 userinfo.interestTag.remove(i)
