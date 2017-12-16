@@ -20,9 +20,8 @@
   <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
   <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
   <link href={% static "css/list.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
   <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/icons.css" %} rel="stylesheet" type="text/css">
 
   <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
   <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
@@ -34,12 +33,21 @@
   <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
   <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
   <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
-  <!--<script src={% static "contactform/contactform.js" %}></script>-->
-
+   
 </head>
 
 <body>  
   <!--nav-start-->
+
+  <!--like-icon-->
+    <ol class="grid" style="list-style: none; width:100px;position:fixed;top:150px;left:0px;z-index:100">
+       <li class="grid__item">
+       <button class="icobutton icobutton--heart"><span class="fa fa-heart" style="font-size:30px;"></span>
+       <span class="icobutton__text icobutton__text--side" style="font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';font-size:27px;position:absolute;top:36px;left:-1px">13</span></button>  
+       </li>
+    </ol>
+  <!--like-icon-end-->
+
   <nav class="main-nav-outer" id="test" >
     <div class="container">
       <ul class="main-nav">
@@ -67,7 +75,7 @@
     </div>
   </nav>
   <!--nav-end-->
-  <div class="container IntroPart">
+ <div class="container IntroPart">
  <!--Title-->
   <div class="col-md-1">&nbsp;</div>
   <div class="col-md-7">
@@ -193,6 +201,8 @@
 </script>
 
 <!-- --------------------------------------------------------------------- -->
+  <script src={% static "js/mo.min.js" %}></script>
+  <script src={% static "js/icon.js" %}></script>
 
   <script type="text/javascript">
     $(document).ready(function (e) {
@@ -283,6 +293,5 @@
     });
   </script>
 
-
-</body>
+  </body>
 </html>
