@@ -10,15 +10,7 @@ from wechat_sdk.messages import TextMessage, VoiceMessage, ImageMessage, \
 from secret import Secret
 import os
 
-# HOME_URL = "******"
-# WECHAT_TOKEN = "SigmaGo"
-# WECHAT_APPID = "******"
-# WECHAT_APPSECRET = "*******"
-# wechat_instance = WechatBasic(
-#     token=WECHAT_TOKEN,
-#     appid=WECHAT_APPID,
-#     appsecret=WECHAT_APPSECRET)
-# home_url = HOME_URL
+
 
 wechat_instance = WechatBasic(
     token=Secret.SECRET_TOKEN,
@@ -44,6 +36,7 @@ def wechat(request):
         return HttpResponseBadRequest('Invalid XML Data')
 
     message = wechat_instance.get_message()
+    user_info = wechat_instance.get_user_info(message.source)
 
     if isinstance(message, TextMessage):
         content = message.content.strip()
@@ -62,15 +55,27 @@ def wechat(request):
             return HttpResponse(response, content_type="application/xml")
         elif content[:4] == 'tag:':
             tag = content[4:]
-            return tagProcess(tag)
+            return HttpResponse(wechat_instance.response_news(tagProcess(tag)), content_type="application/xml")
+
+        elif content == '查看微信订阅':
+            pass
+        elif content == '添加微信订阅':
+            pass
+
+
 
         elif content == 'function' or '功能':
             reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
                           '回复Lecture或‘讲座’查看最新讲座信息\n')
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
-        elif content:
-            pass
+        # elif content:
+        #     pass
+        else:
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
+                          '回复Lecture或‘讲座’查看最新讲座信息\n')
+            response = wechat_instance.response_text(content=reply_text)
+            return HttpResponse(response, content_type="application/xml")
     else:
         if isinstance(message, VoiceMessage) or isinstance(message, ImageMessage):
             reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
@@ -84,6 +89,10 @@ def wechat(request):
         elif isinstance(message, EventMessage):
             if message.type == 'subscribe':
                 reply_text = '感谢您的到来!回复“功能”返回使用指南'
+                open_id = user_info['openid']
+                isRegist = wechat_new_user(open_id)
+                if isRegist:
+                    reply_text += 'Welcome' + open_id
             elif message.type == 'unsubscribe':
                 reply_text = '取消关注事件'
             elif message.type == 'scan':
@@ -212,5 +221,13 @@ def tagProcess(tag):
             'description': "home",
             'url': home_url
         })
-    return HttpResponse(wechat_instance.response_news(response), content_type="application/xml")
+    return response
+    # return HttpResponse(wechat_instance.response_news(response), content_type="application/xml")
 
+
+def wechat_new_user(open_id):
+    registAdd = User.objects.create(
+                    username=open_id)
+    if registAdd:
+        return True
+    return False
