@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
+from django.http import JsonResponse
 from Main.models import *
 from django.http import Http404, HttpResponseRedirect
 from django.utils.datastructures import MultiValueDictKeyError
@@ -300,20 +301,23 @@ def login(request):
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
             if 'user_id' in request.session:
-                return HttpResponse("You've logged in, please do not loggin twice.")             # HTTP response: have login before
+                # HTTP response: have login before
+                return HttpResponse("You've logged in, please do not loggin twice.")
             userPassJudge = User.objects.filter(
                 username__exact=username, password__exact=password)
             print(username)
             print(password)
             if userPassJudge:
-                response = HttpResponse('Success')                                               # HTTP response: success log in.
+                # HTTP response: success log in.
+                response = HttpResponse('Success')
                 response.set_cookie('cookie_username', username, 3600)
                 request.session['user_id'] = username
                 #request.session['login_time'] = time.time()
                 request.session.set_expiry(1500)
                 return response
             else:
-                return HttpResponse('No username or valid one')                                  # HTTP response: invalid username.
+                # HTTP response: invalid username.
+                return HttpResponse('No username or valid one')
     return HttpResponse('Not valid')
 
 
@@ -326,31 +330,35 @@ def register(request):
             password1 = uf.cleaned_data['password1']
             password2 = uf.cleaned_data['password2']
             if(len(password1) != 32):
-                return HttpResponse('Not valid')                # HTTP respose: not valid password
+                # HTTP respose: not valid password
+                return HttpResponse('Not valid')
             try:
                 registJudge = User.objects.filter(
                     username=username).get().username
-                return HttpResponse('User existed')             # HTTP response: username existed
+                # HTTP response: username existed
+                return HttpResponse('User existed')
             except:
                 registAdd = User.objects.create(
                     username=username, password=password1)
                 if registAdd:
-                    return HttpResponse('Success')              # HTTP response: register success
+                    # HTTP response: register success
+                    return HttpResponse('Success')
     return HttpResponse('Not valid')
 # test login and logout
 
 
 def userInfoSearch(request):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you search for personal info.")             # HTTP response: need login auth.
+        # HTTP response: need login auth.
+        return HttpResponse("Error! Please login before you search for personal info.")
     else:
-        #if time.time()-request.session['login_time']>3600:
+        # if time.time()-request.session['login_time']>3600:
         #    logout(request)
         #    return HttpResponse("Please login again.")                                              # HTTP response: session-id invalid.
         #request.session['login_time'] = time.time()
         userinfo = User.objects.get(username=request.session['user_id'])
         #print(userinfo.usericon == '')
-        #if userinfo.usericon == '':
+        # if userinfo.usericon == '':
         #    userinfo.usericon = os.getcwd()+"/static/images/leader_HWF.jpeg"                        # need to fix bug here
         #    print( userinfo.usericon)
         return render(request, 'personInfo.html', {'user': userinfo})
@@ -358,9 +366,10 @@ def userInfoSearch(request):
 
 def userInfoAlter(request):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you alter your personal info.")             # HTTP response: need login auth.
+        # HTTP response: need login auth.
+        return HttpResponse("Error! Please login before you alter your personal info.")
     else:
-        #if time.time()-request.session['login_time']>3600:
+        # if time.time()-request.session['login_time']>3600:
         #    logout(request)
         #    return HttpResponse("Please login again.")
         #request.session['login_time'] = time.time()
@@ -392,7 +401,8 @@ def userInfoAlter(request):
                     p = find_i[0]
                 userinfo.interestTag.add(p)
             userinfo.save()
-            return HttpResponse("Your information has been saved.")                     # HTTP response: info saved successfully
+            # HTTP response: info saved successfully
+            return HttpResponse("Your information has been saved.")
         else:
             return render_to_response('inforenew.html', {'userinfo': userinfo})
 
@@ -401,9 +411,10 @@ def userInfoAlter(request):
 
 def contestAdd(request):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you add a contest.")             # HTTP response: need login auth.
+        # HTTP response: need login auth.
+        return HttpResponse("Error! Please login before you add a contest.")
     else:
-        #if time.time()-request.session['login_time']>3600:
+        # if time.time()-request.session['login_time']>3600:
         #    logout(request)
         #    return HttpResponse("Please login again.")
         #request.session['login_time'] = time.time()
@@ -427,7 +438,8 @@ def contestAdd(request):
             #contestInfo.thumb = request.FILES.get('thumb')
             contestInfo.adminUser = request.session['user_id']
             if contestInfo.title == '':
-                return HttpResponse("contest NAME CANNOT BE NULL!")                         # HTTP response: error info adding as follows
+                # HTTP response: error info adding as follows
+                return HttpResponse("contest NAME CANNOT BE NULL!")
             if contestInfo.hold_time == '':
                 return HttpResponse("contest HOLD TIME CANNOT BE NULL!")
             if contestInfo.holder == '':
@@ -436,13 +448,14 @@ def contestAdd(request):
                 return HttpResponse("contest INTRO TIME CANNOT BE NULL!")
             if contestInfo.image == '':
                 return HttpResponse("contest image TIME CANNOT BE NULL!")
-            #if contestInfo.thumb == '':
+            # if contestInfo.thumb == '':
             #    return HttpResponse("contest thumb TIME CANNOT BE NULL!")
             conCheck = Lecture.objects.filter(title=contestInfo.title,
                                               hold_time=contestInfo.hold_time
                                               )
             if len(conCheck) > 0:
-                return HttpResponse("Lecture Already exists.")                              # HTTP response: lecture already have
+                # HTTP response: lecture already have
+                return HttpResponse("Lecture Already exists.")
             contestInfo.save()
             for i in request.POST.getlist('interestTag'):
                 find_i = Tag.objects.filter(name__exact=i)
@@ -463,9 +476,10 @@ def contestAdd(request):
 
 def lectureAdd(request):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you add a contest.")             # HTTP response: need login auth.
+        # HTTP response: need login auth.
+        return HttpResponse("Error! Please login before you add a contest.")
     else:
-        #if time.time()-request.session['login_time']>3600:
+        # if time.time()-request.session['login_time']>3600:
         #    logout(request)
         #    return HttpResponse("Please login again.")
         #request.session['login_time'] = time.time()
@@ -496,7 +510,7 @@ def lectureAdd(request):
                 return HttpResponse("LECTURE INTRO TIME CANNOT BE NULL!")
             if lectureInfo.image == '':
                 return HttpResponse("LECTURE image TIME CANNOT BE NULL!")
-            #if lectureInfo.thumb == '':
+            # if lectureInfo.thumb == '':
             #    return HttpResponse("LECTURE thumb TIME CANNOT BE NULL!")
             lecCheck = Lecture.objects.filter(title=lectureInfo.title,
                                               hold_time=lectureInfo.hold_time
@@ -521,8 +535,9 @@ def lectureAdd(request):
 
 def lecConManagement(request):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you add a contest.")             # HTTP response: need login auth.
-    #else:
+        # HTTP response: need login auth.
+        return HttpResponse("Error! Please login before you add a contest.")
+    # else:
     #    if time.time()-request.session['login_time']>3600:
     #        logout(request)
     #        return HttpResponse("Please login again.")
@@ -539,8 +554,9 @@ def lecConManagement(request):
 
 def lectureManagement(request, lectureId):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you add a contest.")            # HTTP response: need login auth.
-    #if time.time()-request.session['login_time']>3600:
+        # HTTP response: need login auth.
+        return HttpResponse("Error! Please login before you add a contest.")
+    # if time.time()-request.session['login_time']>3600:
     #    logout(request)
     #    return HttpResponse("Please login again.")
     #request.session['login_time'] = time.time()
@@ -555,11 +571,13 @@ def lectureManagement(request, lectureId):
         return render_to_response('lectureInfoRenew.html', {'lecture': lecture})
     else:
         print(str(request.FILES.get('image')))
-        thumb_path = os.path.join('./media/Lecture/thumbs/', os.path.basename(str(request.FILES.get('image'))))
+        thumb_path = os.path.join(
+            './media/Lecture/thumbs/', os.path.basename(str(request.FILES.get('image'))))
         thumb = make_thumb(request.FILES.get('image'), thumb_path)
 
         # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
-        thumb_path = os.path.join('./Lecture/thumbs/', os.path.basename(str(request.FILES.get('image'))))
+        thumb_path = os.path.join(
+            './Lecture/thumbs/', os.path.basename(str(request.FILES.get('image'))))
         #thumb = ImageFieldFile(thumb, thumb_path)
         Lecture.objects.filter(id__exact=lectureId,
                                adminUser__exact=request.session['user_id']).update(
@@ -572,7 +590,8 @@ def lectureManagement(request, lectureId):
             content=request.POST.get('content'),
         )
         # To do: many to many tag
-        lecture = Lecture.objects.get(id=lectureId,adminUser=request.session['user_id'])
+        lecture = Lecture.objects.get(
+            id=lectureId, adminUser=request.session['user_id'])
         lecture.image = request.FILES.get('image')
         lecture.save()
         return HttpResponse("Success.")
@@ -580,8 +599,9 @@ def lectureManagement(request, lectureId):
 
 def competitionManagement(request, conId):
     if 'user_id' not in request.session:
-        return HttpResponse("Error! Please login before you add a contest.")             # HTTP response: need login auth.
-    #if time.time()-request.session['login_time']>3600:
+        # HTTP response: need login auth.
+        return HttpResponse("Error! Please login before you add a contest.")
+    # if time.time()-request.session['login_time']>3600:
     #    logout(request)
     #    return HttpResponse("Please login again.")
     #request.session['login_time'] = time.time()
@@ -595,7 +615,7 @@ def competitionManagement(request, conId):
     #    return HttpResponse("Nothing found here.....")
     if request.method != 'POST':
         return render_to_response('contestInfoRenew.html', {'contest': contest})
-    else:   
+    else:
         thumb_path = os.path.join(
             './media/Competition/thumbs/', os.path.basename(request.FILES.get('image')))
         make_thumb(request.FILES.get('image'), thumb_path)
@@ -615,11 +635,12 @@ def competitionManagement(request, conId):
             award=request.POST.get('award'),
             content=request.POST.get('content'),
             method=request.POST.get('method'),
-            #image=request.FILES.get('image'),
-            #thumb=self.thumb
+            # image=request.FILES.get('image'),
+            # thumb=self.thumb
         )
         # To do: many to many tag
-        complist = Competition.objects.get(id=conId,adminUser=request.session['user_id'])
+        complist = Competition.objects.get(
+            id=conId, adminUser=request.session['user_id'])
         complist.image = request.FILES.get('image')
         complist.save()
         return HttpResponse("Success.")
@@ -642,17 +663,23 @@ def logout(request):
 
 
 def likeCompetition(request, id):
-    pwd = request.get_full_path().replace('competition-like', 'competition')
+    try:
+        user = User.objects.get(username=request.session['user_id'])
+    except User.DoesNotExist:
+        return JsonResponse({
+            'state': -1,
+            'message': 'User Does Not Exist'
+        })
+
     try:
         competition = Competition.objects.get(id=str(id))
         competition.views -= 1
         competition.save()
-    except:
-        raise Http404
-    try:
-        user = User.objects.get(username=request.session['user_id'])
-    except:
-        return HttpResponseRedirect(pwd)
+    except Competition.DoesNotExist:
+        return JsonResponse({
+            'state': -1,
+            'message': 'Competition Does Not Exist.'
+        })
 
     exist = user.CompetitionList.filter(id=str(id))
 
@@ -693,3 +720,58 @@ def likeLecture(request, id):
         lecture.save()
         user.LectureList.remove(lecture)
     return HttpResponseRedirect(pwd)
+
+
+def like(request):
+    if request.method != 'GET':
+        return JsonResponse({
+            'state': -1,
+            'message': 'Unsupport method'
+        })
+    if not ('type' in request.GET and 'id' in request.GET):
+        return JsonResponse({
+            'state': -2,
+            'message': 'Not enough params'
+        })
+    if 'user_id' not in request.session:
+        return JsonResponse({
+            'state': -3,
+            'message': 'Please login first'
+        })
+    try:
+        user = User.objects.get(username=request.session['user_id'])
+    except User.DoesNotExist:
+        return JsonResponse({
+            'state': -3,
+            'message': 'Please login first'
+        })
+    try:
+        print(request.GET['id'])
+        competition = Competition.objects.get(id=str(request.GET['id']))
+        competition.views -= 1
+    except Competition.DoesNotExist:
+        return JsonResponse({
+            'state': -4,
+            'message': 'Competition Does Not Exist.'
+        })
+    if request.GET['type'] == 'competition':
+        exist = user.CompetitionList.filter(id=str(request.GET['id']))
+        if len(exist) <= 0:
+            curr = True
+            competition.likes += 1
+            competition.save()
+            user.CompetitionList.add(competition)
+        else:
+            curr = False
+            competition.likes -= 1
+            competition.save()
+            user.CompetitionList.remove(competition)
+        user.save()
+        return JsonResponse({
+            'state': 0,
+            'curr': curr
+        })
+    elif request.GET['type'] == 'lecture':
+        pass
+    else:
+        pass

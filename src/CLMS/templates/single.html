@@ -33,20 +33,20 @@
   <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
   <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
   <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
-   
 </head>
 
 <body>  
-  <!--nav-start-->
 
   <!--like-icon-->
     <ol class="grid" style="list-style: none; width:100px;position:fixed;top:150px;left:0px;z-index:100">
        <li class="grid__item">
        <button class="icobutton icobutton--heart"><span class="fa fa-heart" style="font-size:30px;"></span>
-       <span class="icobutton__text icobutton__text--side" style="font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';font-size:27px;position:absolute;top:36px;left:-1px">13</span></button>  
+       <span class="icobutton__text icobutton__text--side" style="font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';font-size:27px;position:absolute;top:36px;left:-1px">{{item.likes}}</span></button>  
        </li>
     </ol>
   <!--like-icon-end-->
+
+  <!--nav-start-->
 
   <nav class="main-nav-outer" id="test" >
     <div class="container">
@@ -200,17 +200,31 @@
 	$('#bootstrap-touch-slider').bsTouchSlider();
 </script>
 
-<!-- --------------------------------------------------------------------- -->
+<!-- Script -->
   <script src={% static "js/mo.min.js" %}></script>
   <script src={% static "js/icon.js" %}></script>
-
+  <script type="text/javascript">
+    window.animocon_obj.options.onCheck_page = ()=>{
+      $.get('/like',{'type':'competition', 'id':{{item.id}}},function(response){
+          if(response.state == -3){
+            alert('Please login first!');
+            window.location.href = '/';
+            return false;
+          }else if(response.state >= 0){
+            return true;
+          }else{
+            alert(response.state+response.message)
+            window.location.reload();
+          }
+      });
+    };
+  </script>
   <script type="text/javascript">
     $(document).ready(function (e) {
       $('#test').scrollToFixed();
       $('.res-nav_click').click(function () {
         $('.main-nav').slideToggle();
         return false
-
       });
 
     });

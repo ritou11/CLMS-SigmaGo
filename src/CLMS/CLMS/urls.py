@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^tag/(?P<tag>\w+)/(?P<page>\d*)$', views.search_tag, name='search_tag'),
     url(r'^search/$', views.search, name='search'),
     url(r'^recom/(?P<page>\d*)$', views.recommend, name='recommend'),
-
+    url(r'^like$', views.like, name='like'),
     url(r'^index$', views.home, name='home'),
     url(r'^login/$', views.login, name='Login'),
     url(r'^logout/$', views.logout, name='Logout'),

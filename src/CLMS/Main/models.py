@@ -62,7 +62,7 @@ class Competition(models.Model):
             './Competition/thumbs/', os.path.basename(self.image.path))
         self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
         super(Competition, self).save()
-        
+
     '''def update(self):
         super(Competition, self).update()
         # base, ext = os.path.splitext(os.path.basename(self.image.path))
@@ -75,7 +75,6 @@ class Competition(models.Model):
         self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
         super(Competition, self).save()'''
 
-        
     def __str__(self):
         return self.title
 
@@ -149,11 +148,13 @@ class User(models.Model):
             )
         ),
     )'''
-    usericon = models.ImageField(upload_to='./Users/images', blank=True, null=True)
-    userImage = models.ImageField(upload_to='./Users/thumbs', blank=True, null=True)
+    usericon = models.ImageField(
+        upload_to='./Users/images', blank=True, null=True)
+    userImage = models.ImageField(
+        upload_to='./Users/thumbs', blank=True, null=True)
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=50)
-   
+
     # Undergraduate or graduate student
     stuType = models.CharField(max_length=30, blank=True)
     infoUser = models.CharField(max_length=30, blank=True)
@@ -169,10 +170,11 @@ class User(models.Model):
     adminAuth = models.BooleanField(default=True)
 
     # The competitons and lectures user like
-    CompetitionList = models.ManyToManyField(Competition, blank=True,null=True)
-    LectureList = models.ManyToManyField(Lecture,blank=True,null=True)
-    #adminAuth = models.BooleanField(default=False)
-    
+    CompetitionList = models.ManyToManyField(
+        Competition, blank=True, null=True)
+    LectureList = models.ManyToManyField(Lecture, blank=True, null=True)
+    # adminAuth = models.BooleanField(default=False)
+
     def save_with_photo(self):
         super(User, self).save()
         if self.usericon is None:
@@ -182,7 +184,7 @@ class User(models.Model):
         print(self)
         thumb_path = os.path.join(
             './media/Users/thumbs/', os.path.basename(self.userImage.path))
-        make_thumb(self.userImage.path, thumb_path,size=(640,640)),
+        make_thumb(self.userImage.path, thumb_path, size=(640, 640)),
 
         # thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
         thumb_path = os.path.join(
@@ -190,7 +192,6 @@ class User(models.Model):
         self.usericon = ImageFieldFile(self, self.usericon, thumb_path)
         super(User, self).save()
 
-    
     '''def save(self):
         super(User, self).save()
         print(self.usericon.avatar())

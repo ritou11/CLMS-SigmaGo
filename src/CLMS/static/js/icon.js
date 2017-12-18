@@ -82,7 +82,7 @@
 		
 		/* Icon Animation*/
 		var el14 = items[0].querySelector('button.icobutton'), el14span = el14.querySelector('span'), el14counter = el14.querySelector('span.icobutton__text');
-		new Animocon(el14, {
+		window.animocon_obj = new Animocon(el14, {
 			tweens : [
 				// ring animation
 				new mojs.Shape({
@@ -197,11 +197,15 @@
 					}
 				})
 			],
+			onCheck_page: function() { return false; },
+			onUnCheck_page: function() { return false; },
 			onCheck : function() {
+				this.onCheck_page();
 				el14.style.color = '#F35186';
 				el14counter.innerHTML = Number(el14counter.innerHTML) + 1;
 			},
 			onUnCheck : function() {
+				this.onUnCheck_page();
 				el14.style.color = '#C0C1C3';
 				var current = Number(el14counter.innerHTML);
 				el14counter.innerHTML = current > 1 ? Number(el14counter.innerHTML) - 1 : '';
