@@ -54,14 +54,25 @@
 
 		var self = this;
 		this.el.addEventListener(clickHandler, function() {
+			self.checked = el.classList.contains('ico-checked');
 			if( self.checked ) {
-				self.options.onUnCheck();
+				if(self.options.onUnCheck())
+				{
+					el.classList.remove('ico-checked');
+					var el14counter = el.querySelector('span.icobutton__text');
+					el14counter.innerHTML = Number(el14counter.innerHTML) - 1;
+					self.checked = false;
+				}
 			}
 			else {
-				self.options.onCheck();
-				self.timeline.replay();
+				if(self.options.onCheck()){
+					el.classList.add('ico-checked');
+					var el14counter = el.querySelector('span.icobutton__text');
+					el14counter.innerHTML = Number(el14counter.innerHTML) + 1;
+					self.timeline.replay();
+					self.checked = true;
+				}
 			}
-			self.checked = !self.checked;
 		});
 	}
 
@@ -197,18 +208,12 @@
 					}
 				})
 			],
-			onCheck_page: function() { return false; },
-			onUnCheck_page: function() { return false; },
 			onCheck : function() {
-				this.onCheck_page();
-				el14.style.color = '#F35186';
-				el14counter.innerHTML = Number(el14counter.innerHTML) + 1;
+				return false;
+				
 			},
 			onUnCheck : function() {
-				this.onUnCheck_page();
-				el14.style.color = '#C0C1C3';
-				var current = Number(el14counter.innerHTML);
-				el14counter.innerHTML = current > 1 ? Number(el14counter.innerHTML) - 1 : '';
+				return false;
 			}
 		});
 		/* Icon Animation*/

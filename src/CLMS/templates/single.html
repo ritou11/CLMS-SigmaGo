@@ -40,7 +40,7 @@
   <!--like-icon-->
     <ol class="grid" style="list-style: none; width:100px;position:fixed;top:150px;left:0px;z-index:100">
        <li class="grid__item">
-       <button class="icobutton icobutton--heart"><span class="fa fa-heart" style="font-size:30px;"></span>
+       <button class="icobutton icobutton--heart{% if liked %} ico-checked{% endif %}"><span class="fa fa-heart" style="font-size:30px;"></span>
        <span class="icobutton__text icobutton__text--side" style="font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';font-size:27px;position:absolute;top:36px;left:-1px">{{item.likes}}</span></button>  
        </li>
     </ol>
@@ -204,8 +204,8 @@
   <script src={% static "js/mo.min.js" %}></script>
   <script src={% static "js/icon.js" %}></script>
   <script type="text/javascript">
-    window.animocon_obj.options.onCheck_page = ()=>{
-      $.get('/like',{'type':'competition', 'id':{{item.id}}},function(response){
+    window.animocon_obj.options.onCheck = ()=>{
+      $.get('/like',{'type':'{{type}}', 'id':{{item.id}}, 'action':'like'},function(response){
           if(response.state == -3){
             alert('Please login first!');
             window.location.href = '/';
@@ -213,10 +213,28 @@
           }else if(response.state >= 0){
             return true;
           }else{
-            alert(response.state+response.message)
+            alert(response.message)
             window.location.reload();
+            return false;
           }
       });
+      return true;
+    };
+    window.animocon_obj.options.onUnCheck = ()=>{
+      $.get('/like',{'type':'{{type}}', 'id':{{item.id}}, 'action':'unlike'},function(response){
+          if(response.state == -3){
+            alert('Please login first!');
+            window.location.href = '/';
+            return false;
+          }else if(response.state >= 0){
+            return true;
+          }else{
+            alert(response.message)
+            window.location.reload();
+            return false;
+          }
+      });
+      return true;
     };
   </script>
   <script type="text/javascript">

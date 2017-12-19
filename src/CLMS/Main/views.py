@@ -116,14 +116,36 @@ def competition(request, id):
     competition = Competition.objects.get(id=str(id))
     competition.views += 1
     competition.save()
-    return render(request, 'single.html', {'item': competition})
+    liked = False
+    try:
+        user = User.objects.get(username=request.session['user_id'])
+        exist = user.CompetitionList.filter(id=str(id))
+        liked = len(exist) > 0
+    except:
+        pass
+    return render(request, 'single.html', {
+        'item': competition,
+        'type': 'competition',
+        'liked': liked
+    })
 
 
 def lecture(request, id):
     lecture = Lecture.objects.get(id=str(id))
     lecture.views += 1
     lecture.save()
-    return render(request, 'single.html', {'item': lecture})
+    liked = False
+    try:
+        user = User.objects.get(username=request.session['user_id'])
+        exist = user.LectureList.filter(id=str(id))
+        liked = len(exist) > 0
+    except:
+        pass
+    return render(request, 'single.html', {
+        'item': lecture,
+        'type': 'lecture',
+        'liked': liked
+    })
 
 
 def competitionList(request, page):
@@ -728,7 +750,9 @@ def like(request):
             'state': -1,
             'message': 'Unsupport method'
         })
-    if not ('type' in request.GET and 'id' in request.GET):
+    if not ('type' in request.GET and
+            'id' in request.GET and
+            'action' in request.GET):
         return JsonResponse({
             'state': -2,
             'message': 'Not enough params'
@@ -745,33 +769,50 @@ def like(request):
             'state': -3,
             'message': 'Please login first'
         })
-    try:
-        print(request.GET['id'])
-        competition = Competition.objects.get(id=str(request.GET['id']))
-        competition.views -= 1
-    except Competition.DoesNotExist:
-        return JsonResponse({
-            'state': -4,
-            'message': 'Competition Does Not Exist.'
-        })
     if request.GET['type'] == 'competition':
         exist = user.CompetitionList.filter(id=str(request.GET['id']))
-        if len(exist) <= 0:
-            curr = True
-            competition.likes += 1
-            competition.save()
-            user.CompetitionList.add(competition)
-        else:
-            curr = False
-            competition.likes -= 1
-            competition.save()
-            user.CompetitionList.remove(competition)
-        user.save()
-        return JsonResponse({
-            'state': 0,
-            'curr': curr
-        })
+        itemlist = user.CompetitionList
+        try:
+            item = Competition.objects.get(id=str(request.GET['id']))
+        except Competition.DoesNotExist:
+            return JsonResponse({
+                'state': -4,
+                'message': 'Competition Does Not Exist.'
+            })
     elif request.GET['type'] == 'lecture':
-        pass
+        exist = user.LectureList.filter(id=str(request.GET['id']))
+        itemlist = user.LectureList
+        try:
+            item = Lecture.objects.get(id=str(request.GET['id']))
+        except Lecture.DoesNotExist:
+            return JsonResponse({
+                'state': -4,
+                'message': 'Lecture Does Not Exist.'
+            })
     else:
-        pass
+        return JsonResponse({
+            'state': -5,
+            'message': 'Action error!'
+        })
+
+    if len(exist) <= 0 and request.GET['action'] == 'like':
+        curr = True
+        item.likes += 1
+        item.save()
+        itemlist.add(item)
+        user.save()
+    elif len(exist) > 0 and request.GET['action'] == 'unlike':
+        curr = False
+        item.likes -= 1
+        item.save()
+        itemlist.remove(item)
+        user.save()
+    else:
+        return JsonResponse({
+            'state': -5,
+            'message': 'Action error!'
+        })
+    return JsonResponse({
+        'state': 0,
+        'curr': curr
+    })
