@@ -52,6 +52,7 @@ class Competition(models.Model):
 
     def save(self):
         super(Competition, self).save()
+        return
         # base, ext = os.path.splitext(os.path.basename(self.image.path))
         thumb_path = os.path.join(
             './media/Competition/thumbs/', os.path.basename(self.image.path))
@@ -92,7 +93,7 @@ class Lecture(models.Model):
     state = models.CharField(max_length=100)
 
     # admin info
-    adminUser = models.CharField(max_length=30)
+    adminUser = models.CharField(max_length=50, blank=True)
 
     # text
     intro = models.TextField(blank=True, null=True)
@@ -114,6 +115,7 @@ class Lecture(models.Model):
 
     def save(self):
         super(Lecture, self).save()
+        return
         # base, ext = os.path.splitext(os.path.basename(self.image.path))
         thumb_path = os.path.join(
             './media/Lecture/thumbs/', os.path.basename(self.image.path))
