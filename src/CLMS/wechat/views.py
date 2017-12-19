@@ -48,7 +48,7 @@ def wechat(request):
             TagList = Tag.objects.all()
             reply_text = ''
             for tag in TagList:
-                reply_text += '回复“tag:' + tag + '“查看该标签下最新动态\n'
+                reply_text += '回复“tag:' + tag.name + '“查看该标签下最新动态\n'
             if not reply_text:
                 reply_text += ':(sorry,no tag'
             response = wechat_instance.response_text(content=reply_text)
@@ -59,8 +59,8 @@ def wechat(request):
         # wechat 查看基于订阅的推荐   
         elif content == '查看':
             open_id = user_info['openid']
-            recommend(open_id=open_id)
-            return 
+            return recommend(open_id=open_id)
+            
         # wechat 订阅
         elif content[:4] == 'add:':
             tag = content[4:]
@@ -68,24 +68,25 @@ def wechat(request):
             reply_text = add_interest(open_id=open_id, tag=tag)
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
+        
         elif content == '添加':
             reply_text = '回复‘add:’和以下任意个标签订阅该标签相关信息\n'
             TagList = Tag.objects.all()
             for tag in TagList:
-                reply_text += tag + '\n'
+                reply_text += tag.name + '\n'
             if not TagList:
                 reply_text = ':(Sorry,no tag'
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
         
         elif content == 'function' or '功能':
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息\n'
                           '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
                           '回复‘查看’查看微信订阅')
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
         else:
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息\n'
                           '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
                           '回复‘查看’查看微信订阅')
             response = wechat_instance.response_text(content=reply_text)
@@ -99,11 +100,11 @@ def wechat(request):
                 if isRegist:
                     reply_text += 'Welcome ' + open_id
             else:
-                reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
+                reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息\n'
                           '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
                           '回复‘查看’查看微信订阅')
         else:
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息\n'
                           '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
                           '回复‘查看’查看微信订阅')
 
@@ -267,6 +268,13 @@ def recommend(open_id):
         response += tagProcess(tag=tag)
     if len(response) >= 5:
         response = response[:5]
+    if not response:
+        response.append({
+            'title': "home",
+            'picurl': "",
+            'description': "home",
+            'url': home_url
+        })
     return HttpResponse(wechat_instance.response_news(response), content_type="application/xml")
 
     
