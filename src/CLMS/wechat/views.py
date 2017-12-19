@@ -50,64 +50,64 @@ def wechat(request):
             for tag in TagList:
                 reply_text += '回复“tag:' + tag + '“查看该标签下最新动态\n'
             if not reply_text:
-                reply_text += 'no tag'
+                reply_text += ':(sorry,no tag'
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
         elif content[:4] == 'tag:':
             tag = content[4:]
             return HttpResponse(wechat_instance.response_news(tagProcess(tag)), content_type="application/xml")
 
-        elif content == '查看微信订阅':
+        elif content == '查看':
+            open_id = user_info['openid']
+            reply_text = ''
+            try:
+                user = User.objects.get(username=open_id)
+            except User.DoesNotExist:
+                return None, 0
+            isRegist = wechat_new_user(open_id)
+            if isRegist:
+                reply_text += 'Welcome' + open_id + '请先添加微信订阅'
+            else:
+                pass
+        # wechat 订阅
+        elif content[:4] == 'add:':
+            tag = content[4:]
             pass
-        elif content == '添加微信订阅':
-            pass
 
-
-
-        elif content == 'function' or '功能':
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
-                          '回复Lecture或‘讲座’查看最新讲座信息\n')
+        elif content == '添加':
+            reply_text = '回复‘add:’和以下任意个标签订阅该标签相关信息\n'
+            TagList = Tag.objects.all()
+            for tag in TagList:
+                reply_text += tag + '\n'
+            if not TagList:
+                reply_text = ':(Sorry,no tag'
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
-        # elif content:
-        #     pass
+        
+        elif content == 'function' or '功能':
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
+                          '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
+                          '回复‘查看’查看微信订阅')
+            response = wechat_instance.response_text(content=reply_text)
+            return HttpResponse(response, content_type="application/xml")
         else:
             reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
-                          '回复Lecture或‘讲座’查看最新讲座信息\n')
+                          '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
+                          '回复‘查看’查看微信订阅')
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
     else:
-        if isinstance(message, VoiceMessage) or isinstance(message, ImageMessage):
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
-                          '回复Lecture或‘讲座’查看最新讲座信息\n')
-        elif isinstance(message, VideoMessage) or isinstance(message, LinkMessage):
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
-                          '回复Lecture或‘讲座’查看最新讲座信息\n')
-        elif isinstance(message, LocationMessage):
-            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
-                          '回复Lecture或‘讲座’查看最新讲座信息\n')
-        elif isinstance(message, EventMessage):
+        if isinstance(message, EventMessage):
             if message.type == 'subscribe':
                 reply_text = '感谢您的到来!回复“功能”返回使用指南'
                 open_id = user_info['openid']
                 isRegist = wechat_new_user(open_id)
                 if isRegist:
                     reply_text += 'Welcome' + open_id
-            elif message.type == 'unsubscribe':
-                reply_text = '取消关注事件'
-            elif message.type == 'scan':
-                reply_text = '已关注用户扫描二维码！'
-            elif message.type == 'location':
-                reply_text = '上报地理位置'
-            elif message.type == 'click':
-                reply_text = '自定义菜单点击'
-            elif message.type == 'view':
-                reply_text = '自定义菜单跳转链接'
-            elif message.type == 'templatesendjobfinish':
-                reply_text = '模板消息'
             else:
                 reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
-                          '回复Lecture或‘讲座’查看最新讲座信息\n')
+                          '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
+                          '回复‘查看’查看微信订阅')
 
         response = wechat_instance.response_text(content=reply_text)
         return HttpResponse(response, content_type="application/xml")
@@ -171,15 +171,11 @@ def tagProcess(tag):
     try:
         CompetitionList = Competition.objects.filter(tag__name=tag)
     except Competition.DoesNotExist:
-        reply_text = "Content does not exit, try again please!"
-        response = wechat_instance.response_text(content=reply_text)
-        return HttpResponse(response, content_type="application/xml")
+        pass
     try:
         LectureList = Lecture.objects.filter(tag__name=tag)
     except Lecture.DoesNotExist:
-        reply_text = "Content does not exit, try again please!"
-        response = wechat_instance.response_text(content=reply_text)
-        return HttpResponse(response, content_type="application/xml")
+        pass
     listLen = 2
     response = []
     if len(CompetitionList) <= listLen:
