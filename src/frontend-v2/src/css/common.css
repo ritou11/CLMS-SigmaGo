@@ -376,11 +376,11 @@ main {
 /* title that appears on hover */
 
 .title {
-	font-size: 3.25vw;
+	font-size: 5.25vw;
 	font-weight: 700;
 	position: absolute;
-	right: 3vw;
-	bottom: 3vw;
+	right: 56vw;
+	top: 16vh;
 	margin: 0;
 	white-space: nowrap;
 	pointer-events: none;
@@ -394,7 +394,7 @@ main {
 	content: attr(data-number);
 	display: inline-block;
 	margin-right: 0.5em;
-	color: white;
+	color: black;
 }
 
 

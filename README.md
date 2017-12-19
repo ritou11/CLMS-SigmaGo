@@ -31,6 +31,18 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+Create ```secert.py``` in ```src/CLMS/``` , and add the following content.
+
+```python
+class Secret():
+
+    SECRET_TOKEN = 'YOUR_TOKEN'
+    APP_ID = 'YOUR_ID'
+    ENCODING_AES_KEY = 'YOUR_KEY'
+    HOME_URL = 'http://YOUR_URL'
+
+```
+
 ### Launch
 
 ```bash

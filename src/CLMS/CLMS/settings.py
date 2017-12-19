@@ -149,3 +149,6 @@ WECHAT_TOKEN = "SigmaGo"
 WECHAT_APPID = "******"
 WECHAT_APPSECRET = "*******"
 
+# #wechat auth
+# AUTH_USER_MODEL = 'wechat.Users'
+

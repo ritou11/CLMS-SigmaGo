@@ -17,13 +17,17 @@
   <link href="src/css/response.css" rel="stylesheet" type="text/css">
   <link href="src/css/animate.css" rel="stylesheet" type="text/css">
   <link href="src/css/bootstrap-touch-slider.css" rel="stylesheet" type="text/css">
+  <link href="src/css/bootstrap-tagsinput.css" rel="stylesheet" type="text/css">
   <link href="src/css/dialog.css" rel="stylesheet" type="text/css">
   <link href="src/css/magic.min.css" rel="stylesheet" type="text/css">
   <link href="src/css/jdialog.min.css" rel="stylesheet" type="text/css">
+  <link href="src/css/info.css" rel="stylesheet" type="text/css">
   
   <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
   <script type="text/javascript" src="src/js/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="src/js/bootstrap.js"></script>
+  <script type="text/javascript" src="src/js/bootstrap-tagsinput-angular.js"></script>
+  <script type="text/javascript" src="src/js/bootstrap-tagsinput.js"></script>
   <script type="text/javascript" src="src/js/ScrollingFixed.js"></script>
   <script type="text/javascript" src="src/js/wow.min.js"></script>
   <script type="text/javascript" src="src/js/main.js"></script>
@@ -31,12 +35,21 @@
   <script type="text/javascript" src="src/js/bootstrap-touch-slider.js"></script>
   <script type="text/javascript" src="src/js/jdialog.min.js"></script>
   <script type="text/javascript" src="src/js/viewport-units-buggyfill.js"></script>
+  <script type="text/javascript" src="src/js/jquery.label_better.js"></script>
   <script src="contactform/contactform.js"></script>
+
+  	<script>
+	  $(document).ready( function() {
+	    $(".label_better").label_better({
+	      easing: "bounce"
+	    });
+	  });	
+	</script>
 
 </head>
 <body style="background:url(src/images/BG1.png);background-position:fixed">
   <!--________________________________nav-start________________________________-->
-  <nav class="main-nav-outer" id="test" >
+  <!--nav class="main-nav-outer" id="test" >
     <div class="container">
       <ul class="main-nav">
         <li class="small-logo">
@@ -63,9 +76,10 @@
         <i class="fa-bars"></i>
       </a>
     </div>
-  </nav>
-  <!--________________________________nav-end________________________________-->
-  <!--_______________________________banner__________________________________-->
+  </nav-->
+  <!--________________________________nav-end_______________________________-->
+  <!--_______________________________banner________________________________-->
+  <!--_______________________________icon__________________________________-->
   <div class="container"style="padding-top:100px;">
      <div style="width:50%;margin-left:23%">
         <div class="team-leader-box2" style="padding-top:60px;">
@@ -83,96 +97,71 @@
    
         <div class="team-leader-box2" style="padding-top:60px;">
             <img src="src/images/user.png" alt="">
-        </div>
-       
-	  </div>
-	  
+        </div>     
+	  </div>  
   </div>
-   <div class="container" style="padding:20px;background-color: white;opacity:0.7;border-radius: 10px;min-height:120px;z-index: -1;background-clip:padding-box;text-align: center">
+  <!-- __________________________________TAGS_______________________________-->
+   <div class="container">
 	  <h2 style="font-size: 20px;">my tags</h2>
 	  <br>
 	  <br>
-	   <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:100px;height:40px;padding:1.2%;margin:20px;display: inline;">
-	     <span style="color:white">xxxxx<span></div>
-	   <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:150px;height:40px;padding:1.2%;margin:20px;display: inline;">
-	     <span style="color:white">xxxxx<span></div>
-	      <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:150px;height:40px;padding:1.2%;margin:20px;display: inline;">
-	     <span style="color:white">xxxxx<span></div>
-	      <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:150px;height:40px;padding:1.2%;margin:20px;display: inline;">
-	     <span style="color:white">xxxxx<span></div>
+    <select multiple data-role="tagsinput">
+      <option value="Amsterdam">Amsterdam</option>
+      <option value="Washington">Washington</option>
+      <option value="Sydney">Sydney</option>
+      <option value="Beijing">Beijing</option>
+      <option value="Cairo">Cairo</option>
+    </select>
   </div>
-  <!--_______________________________banner__________________________________-->
+  <!--_______________________________banner end________________________________-->
   <br>
   <br>
-  <div class="container" style="padding-right:17%;background-color:black;opacity:0.6;border-radius: 10px;min-height:800px;z-index: -1;background-clip:padding-box">
-        <ul style="list-style: none;">
-           <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;"> 用户名</span> <br> <span style="font-size:16px;opacity:0.6">user name </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
-            </div>
-             
-            <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;"> 邮箱</span> <br> <span style="font-size:16px;opacity:0.6">e-mail </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
-            </div>
-             
-             <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;"> 真实姓名</span> <br> <span style="font-size:16px;opacity:0.6">real name </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
-            </div>
-             
-             
-            <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;"> 年级</span> <br> <span style="font-size:16px;opacity:0.6">grade </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
-            </div>
-             
-             <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;"> 学号</span> <br> <span style="font-size:16px;opacity:0.6">student ID </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
-            </div>
-             
-             <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-				  <span style="font-size:27px;">Info 账户</span> <br> <span style="font-size:16px;opacity:0.6">Info account </span></h2>
-              </div>
-             <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">xxxxxxx</p>
-             </div>
-            </div>
-              
+  <div class="infocontainer">
+     <div class="infowrapper">
+         <div class="wrapper">
+              <form class="bl_form">
+                <div class= "inputbox">
+                  <h2 style="display: inline"> User Name </h2>
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Please input Username" placeholder="xxxxxxx" >
+                </div>
+                <div class= "inputbox">
+                  <h2 style=" display: inline"> E-mail </h2>
+                  <input type="e-mail" value=""  class="label_better innerbox" data-new-placeholder="Please input your e-mail" placeholder="xxxxxxx" >
+                </div>
+                <div class= "inputbox">
+                  <h2 style="display: inline"> Real Name </h2>
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Please input your real name" placeholder="xxxxxxx" >
+                </div>
+                <div class= "inputbox">
+                  <h2 style="display: inline"> Grade </h2>
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Which grade are you in?" placeholder="xxxxxxx" >
+                </div>
+                <div class= "inputbox">
+                  <h2 style="display: inline"> Student account </h2>
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Your student account?" placeholder="xxxxxxx" >
+                </div>
+                <div class= "inputbox">
+                  <h2 style="display: inline"> Info name </h2>
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Please input your Info name" placeholder="xxxxxxx" >
+                </div>
+                <div class= "inputbox">
+                  <h2 style="display: inline"> Info password </h2>
+                  <input type="password" value=""  class="label_better innerbox" data-new-placeholder="Tell us your info password" placeholder="Password">
+                </div>
+                <br>
+                 <div class="switch-box is-info">
+		          <input id="info" class="switch-box-input" type="checkbox" />
+		          <label for="info" class="switch-box-slider"></label>
+		          <div class= "gap">
+		            <label for="info" class="switch-box-label">Edit</label>
+		          </div>
+		        </div>
+                 <div>&nbsp;</div>
+                <br>
+                <br>
+              </form>
+       </div>
+     </div>
   </div>
 
 </body>
