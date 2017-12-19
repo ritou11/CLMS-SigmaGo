@@ -15,7 +15,7 @@ import os
 wechat_instance = WechatBasic(
     token=Secret.SECRET_TOKEN,
     appid=Secret.APP_ID,
-    appsecret=Secret.ENCODING_AES_KEY)
+    appsecret=Secret.APP_SECRET)
 home_url = Secret.HOME_URL
 
 
