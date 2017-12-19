@@ -56,24 +56,18 @@ def wechat(request):
         elif content[:4] == 'tag:':
             tag = content[4:]
             return HttpResponse(wechat_instance.response_news(tagProcess(tag)), content_type="application/xml")
-
+        # wechat 查看基于订阅的推荐   
         elif content == '查看':
             open_id = user_info['openid']
-            reply_text = ''
-            try:
-                user = User.objects.get(username=open_id)
-            except User.DoesNotExist:
-                return None, 0
-            isRegist = wechat_new_user(open_id)
-            if isRegist:
-                reply_text += 'Welcome' + open_id + '请先添加微信订阅'
-            else:
-                pass
+            recommend(open_id=open_id)
+            return 
         # wechat 订阅
         elif content[:4] == 'add:':
             tag = content[4:]
-            pass
-
+            open_id = user_info['openid']
+            reply_text = add_interest(open_id=open_id, tag=tag)
+            response = wechat_instance.response_text(content=reply_text)
+            return HttpResponse(response, content_type="application/xml")
         elif content == '添加':
             reply_text = '回复‘add:’和以下任意个标签订阅该标签相关信息\n'
             TagList = Tag.objects.all()
@@ -103,9 +97,13 @@ def wechat(request):
                 open_id = user_info['openid']
                 isRegist = wechat_new_user(open_id)
                 if isRegist:
-                    reply_text += 'Welcome' + open_id
+                    reply_text += 'Welcome ' + open_id
             else:
                 reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
+                          '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
+                          '回复‘查看’查看微信订阅')
+        else:
+            reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息'
                           '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
                           '回复‘查看’查看微信订阅')
 
@@ -227,3 +225,51 @@ def wechat_new_user(open_id):
     if registAdd:
         return True
     return False
+
+
+def add_interest(open_id, tag):
+    try:
+        user = User.objects.get(username=open_id)
+    except User.DoesNotExist:
+        isRegist = wechat_new_user(open_id)
+        if not isRegist:
+            return 'try again'
+    userinfo = User.objects.get(username=open_id)
+    find_tag = Tag.objects.filter(name__exact=tag)
+    if len(find_tag) == 0:
+        p = Tag(name=tag)
+        p.save()
+    else:
+        p = find_tag[0]
+    userinfo.interestTag.add(p)
+    userinfo.save()
+    return 'successful'
+
+
+def recommend(open_id):
+    reply_text = ''
+    CompetitionList_by_interest = Competition.objects.filter(tag__name='a tag you will never use')
+    LectureList_by_interest = Lecture.objects.filter(tag__name='a tag you will never use')
+    response = []
+    try:
+        user = User.objects.get(username=open_id)
+    except User.DoesNotExist:
+        isRegist = wechat_new_user(open_id)
+        if isRegist:
+            reply_text += 'Welcome ' + open_id + '请先添加微信订阅'
+            response = wechat_instance.response_text(content=reply_text)
+            return HttpResponse(response, content_type="application/xml")
+        else:
+            reply_text += '自动注册失败，稍后重试！'
+            response = wechat_instance.response_text(content=reply_text)
+            return HttpResponse(response, content_type="application/xml")
+    for tag in user.interestTag.all():              # 按interestTag搜
+        response += tagProcess(tag=tag)
+    if len(response) >= 5:
+        response = response[:5]
+    return HttpResponse(wechat_instance.response_news(response), content_type="application/xml")
+
+    
+
+
+
