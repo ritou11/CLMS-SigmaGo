@@ -35,9 +35,6 @@
 	padding: 0 0 0 0.25em;
 }
 
-.icobutton.ico-checked {
-	color: #F35186;
-}
 /* fix for mo.js */
 .icobutton svg {
 	left: 0;
