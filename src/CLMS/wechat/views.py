@@ -125,7 +125,7 @@ def comp_to_array(comp_list):
     for comp in comp_list:
         response.append({
             'title': comp.title,
-            'picurl': os.path.join(home_url, comp.thumb_path),
+            'picurl': os.path.join(home_url, comp.thumb.url),
             'description': comp.intro,
             'url': home_url + '/' + 'competition' + '/' + str(comp.id) + '/'
         })
@@ -152,7 +152,7 @@ def lec_to_array(lecs_list):
     for lec in lecs_list:
         response.append({
             'title': lec.title,
-            'picurl': os.path.join(home_url, lec.thumb_path),
+            'picurl': os.path.join(home_url, lec.thumb.url),
             'description': lec.intro,
             'url': home_url + '/' + 'lecture' + '/' + str(lec.id) + '/'
         })
@@ -181,7 +181,7 @@ def tagProcess(tag):
         for comp in CompetitionList:
             response.append({
                 'title' : comp.title,
-                'picurl' : os.path.join(home_url, comp.thumb_path),
+                'picurl' : os.path.join(home_url, comp.thumb.url),
                 'description' : comp.intro,
                 'url' : home_url + '/' + 'competition' + '/' + str(comp.id) + '/'
             })
@@ -189,7 +189,7 @@ def tagProcess(tag):
         for comp in CompetitionList[:listLen]:
             response.append({
                 'title' : comp.title,
-                'picurl' : os.path.join(home_url, comp.thumb_path),
+                'picurl' : os.path.join(home_url, comp.thumb.url),
                 'description' : comp.intro,
                 'url' : home_url + '/' + 'competition' + '/' + str(comp.id) + '/'
             })
@@ -197,7 +197,7 @@ def tagProcess(tag):
         for lec in LectureList:
             response.append({
                 'title' : lec.title,
-                'picurl' : os.path.join(home_url, lec.thumb_path),
+                'picurl' : os.path.join(home_url, lec.thumb.url),
                 'description' : lec.intro,
                 'url' : home_url + '/' + 'competition' + '/' + str(lec.id) + '/'
                 })
@@ -205,7 +205,7 @@ def tagProcess(tag):
         for lec in LectureList[:listLen]:
             response.append({
                 'title' : lec.title,
-                'picurl' : os.path.join(home_url, lec.thumb_path),
+                'picurl' : os.path.join(home_url, lec.thumb.url),
                 'description' : lec.intro,
                 'url' : home_url + '/' + 'competition' + '/' + str(lec.id) + '/'
                 })
