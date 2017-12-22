@@ -35,11 +35,12 @@ class Competition(models.Model):
     image = models.ImageField(
         upload_to='./Competition/images/', null=True, blank=True)
     thumb = models.ImageField(upload_to='./Competition/thumbs', blank=True)
+    havethumb = models.BooleanField(default=False)
     cropping = ImageRatioField('image', '640x480')
 
     tag = models.ManyToManyField(Tag, blank=True)
 
-    # what is this?
+    
     likes = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
 
@@ -52,7 +53,9 @@ class Competition(models.Model):
 
     def save(self):
         super(Competition, self).save()
-        return
+        if self.havethumb:
+            return
+        self.havethumb = True
         # base, ext = os.path.splitext(os.path.basename(self.image.path))
         thumb_path = os.path.join(
             './media/Competition/thumbs/', os.path.basename(self.image.path))
@@ -107,6 +110,7 @@ class Lecture(models.Model):
     image = models.ImageField(
         upload_to='./Lecture/images/', null=True, blank=True)
     thumb = models.ImageField(upload_to='./Lecture/thumbs', blank=True)
+    havethumb = models.BooleanField(default=False)
     cropping = ImageRatioField('image', '640x480')
 
     tag = models.ManyToManyField(Tag, blank=True)
@@ -115,7 +119,9 @@ class Lecture(models.Model):
 
     def save(self):
         super(Lecture, self).save()
-        return
+        if self.havethumb:
+            return
+        self.havethumb = True
         # base, ext = os.path.splitext(os.path.basename(self.image.path))
         thumb_path = os.path.join(
             './media/Lecture/thumbs/', os.path.basename(self.image.path))
