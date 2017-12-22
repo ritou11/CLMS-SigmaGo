@@ -93,7 +93,7 @@ def wechat(request):
             return HttpResponse(response, content_type="application/xml")
     else:
         if isinstance(message, EventMessage):
-            if message.type == 'subscribe':
+            if message.type == 'subscribe':  ###
                 reply_text = '感谢您的到来!回复“功能”返回使用指南'
                 open_id = user_info['openid']
                 isRegist = wechat_new_user(open_id)
