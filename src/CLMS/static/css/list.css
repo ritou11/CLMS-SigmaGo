@@ -392,23 +392,40 @@
 	word-wrap:break-word;  
     word-break:break-all;
 	display: inline;
-	position:relative;
-	top:-50px;
+	position:absolute;
+	top:50px;
 	padding-left:50px;
 	font-size:20px;
-	width:30px;
+	width:64vw;
 	color:white;
+	text-indent: 10px;
+	padding-right:10vw;
 	
 }
 .content-box2{
 	word-wrap:break-word;  
     word-break:break-all;
 	display: inline;
-	position:relative;
-	top:0px;
+	position:absolute;
+	top:460px;
 	padding-left:50px;
 	font-size:20px;
-	width:30px;
+	width:64vw;
 	color:white;
+	text-indent: 10px;
+	padding-right:10vw;
+}
+.content-box3{
+	word-wrap:break-word;  
+    word-break:break-all;
+	display: inline;
+	position:absolute;
+	top:860px;
+	padding-left:50px;
+	font-size:20px;
+	width:64vw;
+	color:white;
+	text-indent: 10px;
+	padding-right:10vw;
 }
 
