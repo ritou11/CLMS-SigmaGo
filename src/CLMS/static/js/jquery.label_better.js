@@ -18,7 +18,7 @@
     animationTime: 500,
     easing: "ease-in-out",
     offset: 4,
-    hidePlaceholderOnFocus: true
+    hidePlaceholderOnFocus: false
 	};
 	
   $.fn.animateLabel = function(settings, btn) {
@@ -79,14 +79,13 @@
     el.each(function( index, value ) {
       var btn = $(this),
           position = btn.data("position")  || settings.position;
-      btn.wrapAll("<div class='lb_wrap' style=' position:absolute; right:400px; display:inline;'></div>")
+      btn.wrapAll("<div class='lb_wrap' style=' position:absolute; right:26vw; display:inline;'></div>")
       
       if( btn.val().length > 0) {
         var text = btn.data("new-placeholder")  || btn.attr("placeholder");
         $("<div class='lb_label " + position + "'>"+ text + "</div>").css("opacity", "0").insertAfter(btn).animateLabel(settings, btn);
       }
-      
-      btn.bind(triggerIn, function() {
+      btn.triggerInFunc = function() {
         if(btn.val().length < 1) {
           var text = btn.data("new-placeholder")  || btn.attr("placeholder"),
            position = btn.data("position")  || settings.position;
@@ -97,8 +96,8 @@
           btn.attr("placeholder", "") 
         }
         btn.parent().find(".lb_label").addClass("active");
-      }).bind(triggerOut, function() {
-        
+      };
+      btn.triggerOutFunc = function() {
         if(btn.val().length < 1) {
           btn.parent().find(".lb_label").bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){ $(this).remove(); }).removeAnimate(settings, btn)
         }
@@ -107,9 +106,9 @@
           btn.data("default-placeholder", "")
         }
         btn.parent().find(".lb_label").removeClass("active");
-      });
+      };
+      btn.bind(triggerIn, btn.triggerInFunc).bind(triggerOut, btn.triggerOutFunc);
     });
-    
   }
 }(window.jQuery);
 

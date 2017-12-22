@@ -105,6 +105,7 @@
       {% for tag in user.interestTag.all %}
       <option value="{{tag.name}}">{{tag.name}}</option>
       {% endfor %}
+      <option value="hhh">hhh</option>
     </select>
   </div>
   <div class= "mytags" style="padding-top:30px;">
@@ -180,22 +181,7 @@
   <!--Footer-end-->
 
 
-  <script type="text/javascript">
-  $(document).ready(function(){
-     $(".innerbox").attr("disabled","disabled");
-     $(".innerbox").removeClass("label-better");
-     $(".innerbox").addClass("demon")
-      });
-  $("#info").change(function() { //为checkbox添加状态改变事件
-      if($(this).is(':checked')){//判断checkbox是否选中
-        //选中状态
-        $(".innerbox").removeAttr("disabled");
-    }else{
-        //未选中状态
-        $(".innerbox").attr("disabled","disabled");
-    }
-     });
-  </script>
+  <script type="text/javascript" src={% static "js/info.js" %}></script>
   <style>
      .demon{
        background:rgba(0,0,0,0);
