@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from Main.models import *
+from Main.views import LogUserForm,linkMainUser
 # Create your views here.
 from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
@@ -8,9 +9,18 @@ from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import TextMessage, VoiceMessage, ImageMessage, \
     VideoMessage, LinkMessage, LocationMessage, EventMessage
 from secret import Secret
+import hashlib
 import os
 
-
+### wechat open_id to user_id has been linked. 
+### if the user has linked before, we can use the following two statements to find whatever things in user.
+''' openid_check = wechatUser.objects.filter(openid=openid,userLink=True)
+    if openid_check:
+        user = openid_check[0].mainUser
+    else:
+        return Failure.'''
+### to fetch whatever things in User type 'user'      
+### and what you only need to change is openid.    :-)                Luka.
 
 wechat_instance = WechatBasic(
     token=Secret.SECRET_TOKEN,
@@ -85,6 +95,16 @@ def wechat(request):
                           '回复‘查看’查看微信订阅')
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
+        ### add new part to handle link.     Luka
+        elif content == 'link':
+            pageLink(openid,request)    #well, we try to open a new page here or sth to fetch user password and username.
+                                        # for we need openid, we add request to fetch it through website form. NOT COMPLETED.
+        elif content == 'unlink':
+            if unlinkMainUser(openid):
+                reply_text = ('Unlinked successfully.')
+            else:
+                reply_text = ('well, you might have not linked before :-)')
+        ### finished.
         else:
             reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息\n'
                           '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
@@ -95,14 +115,16 @@ def wechat(request):
         if isinstance(message, EventMessage):
             if message.type == 'subscribe':  ###
                 reply_text = '感谢您的到来!回复“功能”返回使用指南'
-                open_id = user_info['openid']
-                isRegist = wechat_new_user(open_id)
+                open_checkWechatUserid = user_info['openid']
+                #isRegist = wechat_new_user(open_id)
+                #changed on Dec.22nd                     Luka.
+                isRegist = checkWechatUser(openid)
                 if isRegist:
-                    reply_text += 'Welcome ' + open_id
+                    reply_text += 'Welcome ' + isRegist.mainUser.username +'return \'unlink \' to unlink your present account.'
             else:
                 reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息\n'
                           '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
-                          '回复‘查看’查看微信订阅')
+                          '回复‘查看’查看微信订阅'+'return \'link \' to link your wechat account to the main database..')
         else:
             reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息\n'
                           '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
@@ -277,7 +299,55 @@ def recommend(open_id):
         })
     return HttpResponse(wechat_instance.response_news(response), content_type="application/xml")
 
+### wechat information add on Dec.22nd    
+# First, wechat user login and check if its in database and whether have linked to a main_user
+# Second, if openid exists and linked, user openid as a pointer
+# else, as the user to link it through a website or sth....
+# Luka.
+
+# Function to check whether wechat open_id in database
+def checkWechatUser(openid):
+    openid_check = wechatUser.objects.filter(openid=openid,userLink=True)
+    if openid_check:
+        return True
+    else:
+        return False
+    
+# Function to check whether openid has linked to a correct userid when linking
+def linkUser(request,username,password):
+    userPassJudge = User.objects.filter(
+        username__exact=username, password__exact=password)
+    if len(userPassJudge) == 0:
+        return False
+    else:
+        user = userPassJudge[0]
+        openid = request['openid']
+        openid_check = wechatUser.objects.filter(openid=openid)
+        wechat_user = openid_check[0]
+        wechat_user.mainUser = user             #link user
+        wechat_user.userLink = True             #set flag as linked.
+        wechat_user.save()
+    return wechat_user     
+
+
+    
     
 
+# Function to unlink
+def unlinkMainUser(openid):
+    openid_check = wechatUser.objects.filter(openid=openid,userLink=True)
+    if openid_check:
+        wechatUser = openid_check[0]
+        wechatUser.userLink = False
+        return True
+    return False
 
-
+#TODO: Finish this page as well as functions.
+# we need an empty html.......
+def pageLink(openid,request):
+    request['openid']=openid
+    pass
+    #bugs may appears here... 
+    # TODO: i dont know what to do here to fetch user openid and attach it to website
+    # Just suppose I can have one and can direct the link to localhost/wechatLink with request contains openid :-)  Luka
+    # return render(request,'wechatLink.html',{'uf':uf})

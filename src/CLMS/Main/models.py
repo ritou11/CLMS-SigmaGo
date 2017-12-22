@@ -174,3 +174,12 @@ class User(models.Model):
 
     def __unicode__(self):
         return self.username
+
+# for wechat user
+class wechatUser(models.Model):
+    openid = models.CharField(max_length=50)
+    
+    #link wechat user to the main user and check whether the account is valid
+    #in case we need to link it to another account :-)
+    mainUser = models.OneToOneField(User, primary_key=True)
+    userLink = models.BooleanField(default=False)

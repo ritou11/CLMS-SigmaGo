@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    {{uf.as_p}}
+    <input type="submit" value="link">
+    <br>
+    <a href="wechatLink">link</a>
+</form>
+</body>
+</html>

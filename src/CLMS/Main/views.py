@@ -669,3 +669,15 @@ def likeLecture(request, id):
         lecture.save()
         user.LectureList.remove(lecture)
     return HttpResponseRedirect(pwd)
+
+def linkMainUser(request):    #with openid, username and password in request.
+    if request.method == 'POST':
+        uf = LogUserForm(request.POST)
+        if uf.is_valid():
+            username = uf.cleaned_data['username']
+            password = hashlib.md5(uf.cleaned_data['password'].encode('utf-8')).hexdigest()
+            return linkUser(request,username,password)
+        #userPassJudge = User.objects.filter(username__exact=username,password__exact=password)
+    else:
+        uf = LogUserForm()
+        return render(request,'wechatLink.html',{'uf':uf})
