@@ -22,9 +22,6 @@
     <link href={% static "css/bootstrap-tagsinput.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/info.css" %} rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src={% static "js/bootstrap-tagsinput.js" %}></script>
-    <script type="text/javascript" src={% static "js/bootstrap-tagsinput-angular.js" %}></script>
-    <script type="text/javascript" src={% static "js/ScrollingFixed.js" %}></script>
     <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
     <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
@@ -35,6 +32,8 @@
     <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
     <script type="text/javascript" src={% static "js/jquery.form.js" %}></script>
     <script type="text/javascript" src={% static "js/jquery.label_better.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap-tagsinput.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap-tagsinput-angular.js" %}></script>
     <script type="text/javascript" src={% static "js/md5.js" %}></script>
     <script type="text/javascript" src={% static "js/user.js" %}></script>
 
@@ -47,29 +46,27 @@
 	</script>
 
 </head>
-<body style="background:url(src/images/BG1.png);background-position:fixed">
-  <!--________________________________nav-start________________________________-->
+<body style="background:url({% static "images/BG1.png" %});background-position:fixed">
+  <!--nav-start-->
   <nav class="main-nav-outer" id="test" >
     <div class="container">
       <ul class="main-nav">
+        <li>
+          <a href="/#recom">RECOMMEND</a>
+        </li>
+        <li>
+          <a href="/competition-list/1">COMPETITION</a>
+        </li>
         <li class="small-logo">
-          <a href="#header">
+          <a href="/">
             <img class="navLogo" src={% static "images/LOGO.png" %} alt="">
           </a>
         </li>
-       
         <li>
-          <a href="#recom">RECOMMEND</a>
+          <a href="/lecture-list/1">LECTURE</a>
         </li>
         <li>
-          <a href="#competition">COMPETITION</a>
-        </li>
-        
-        <li>
-          <a href="#lecture">LECTURE</a>
-        </li>
-        <li>
-          <a href="#team">ABOUT US</a>
+          <a href="/#team">ABOUT US</a>
         </li>
       </ul>
       <a class="res-nav_click" href="#">
@@ -77,11 +74,11 @@
       </a>
     </div>
   </nav>
-  <!--________________________________nav-end_______________________________-->
+  <!--nav-end-->
   <!--_______________________________banner________________________________-->
   <!--_______________________________icon__________________________________-->
   <div class="container"style="padding-top:100px;">
-     <div style="width:50%;margin-left:23%">
+     <div style="width:50%;margin-left:25%">
         <div class="team-leader-box2" style="padding-top:60px;">
             <img src={% static "images/user.png" %} alt="">
         </div>
@@ -91,7 +88,7 @@
             <div class="team-leader-shadow">
               <a href="#"></a>
             </div>
-            <img src={% static "images/leader_HWF.jpeg" %} alt="">
+            <img src={{user.usericon.url}} alt="">
           </div>
         </div>
    
@@ -105,21 +102,17 @@
   <div class="mytags">
 	  <h2 style="font-size: 20px;">my tags</h2>
     <select multiple data-role="tagsinput">
-      <option value="Amsterdam">Amsterdam</option>
-      <option value="Washington">Washington</option>
-      <option value="Sydney">Sydney</option>
-      <option value="Beijing">Beijing</option>
-      <option value="Cairo">Cairo</option>
+      {% for tag in user.interestTag.all %}
+      <option value="{{tag.name}}">{{tag.name}}</option>
+      {% endfor %}
     </select>
   </div>
   <div class= "mytags" style="padding-top:30px;">
     <h3 style="display:inline;font-size:10px;"> Select More</h3>
     <select>
-      <option >Amsterdam</option>
-      <option >Washington</option>
-      <option >Sydney</option>
-      <option >Beijing</option>
-      <option >Cairo</option>
+      {% for tag in tagList %}
+      <option>{{tag.name}}</option>
+      {% endfor %}
     </select>
   </div>
   </div>
@@ -132,31 +125,31 @@
               <form class="bl_form">
                 <div class= "inputbox">
                   <h2 style="display: inline"> User Name </h2>
-                  <input type="text" value="" class="label_better innerbox demon"  data-new-placeholder="Please input Username" placeholder="xxxxxxx" >
+                  <input type="text" value="" class="label_better innerbox demon"  data-new-placeholder="Please input Username" placeholder="{{user.username}}" >
                 </div>
                 <div class= "inputbox">
                   <h2 style=" display: inline"> E-mail </h2>
-                  <input type="e-mail" value=""  class="label_better innerbox" data-new-placeholder="Please input your e-mail" placeholder="xxxxxxx" >
+                  <input type="e-mail" value=""  class="label_better innerbox" data-new-placeholder="Please input your e-mail" placeholder="{{user.email}}" >
                 </div>
                 <div class= "inputbox">
                   <h2 style="display: inline"> Real Name </h2>
-                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Please input your real name" placeholder="xxxxxxx" >
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Please input your real name" placeholder="{{user.stuName}}" >
                 </div>
                 <div class= "inputbox">
                   <h2 style="display: inline"> Grade </h2>
-                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Which grade are you in?" placeholder="xxxxxxx" >
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Which grade are you in?" placeholder="{{user.grade}}" >
                 </div>
                 <div class= "inputbox">
-                  <h2 style="display: inline"> Student account </h2>
-                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Your student account?" placeholder="xxxxxxx" >
+                  <h2 style="display: inline"> Student Number </h2>
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Your student account?" placeholder="{{user.stuNo}}" >
                 </div>
                 <div class= "inputbox">
                   <h2 style="display: inline"> Info name </h2>
-                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Please input your Info name" placeholder="xxxxxxx" >
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Please input your Info name" placeholder="{{user.infoUser}}" >
                 </div>
                 <div class= "inputbox">
                   <h2 style="display: inline"> Info password </h2>
-                  <input type="password" value=""  class="label_better innerbox" data-new-placeholder="Tell us your info password" placeholder="Password">
+                  <input type="password" value=""  class="label_better innerbox" data-new-placeholder="Tell us your info password" placeholder="{{info.passwd}}">
                 </div>
                 <br>
             <div class="switch-box is-info">
@@ -173,6 +166,19 @@
        </div>
      </div>
   </div>
+    <!--Footer-begin-->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">
+        <a href="#">
+          <img src={% static "images/LOGO2.png" %} alt="">
+        </a>
+      </div>
+      <span class="copyright">Copyright &copy; 2017 SIGMAGO. All Rights Reserved.</span>
+    </div>
+  </footer>
+  <!--Footer-end-->
+
 
   <script type="text/javascript">
   $(document).ready(function(){

@@ -6,6 +6,7 @@
 	opacity:0.7;
 	border-radius: 10px;
 	min-height:120px;
+  margin-bottom: 50px;
 	z-index: -1;
 	background-clip:padding-box;
 	text-align: center

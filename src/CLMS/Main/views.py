@@ -379,11 +379,15 @@ def userInfoSearch(request):
         #    return HttpResponse("Please login again.")                                              # HTTP response: session-id invalid.
         #request.session['login_time'] = time.time()
         userinfo = User.objects.get(username=request.session['user_id'])
+        tagList = Tag.objects.all()
         #print(userinfo.usericon == '')
         # if userinfo.usericon == '':
         #    userinfo.usericon = os.getcwd()+"/static/images/leader_HWF.jpeg"                        # need to fix bug here
         #    print( userinfo.usericon)
-        return render(request, 'personInfo.html', {'user': userinfo})
+        return render(request, 'personInfo.html', {
+            'user': userinfo,
+            'tagList': tagList
+        })
 
 
 def userInfoAlter(request):
