@@ -688,66 +688,6 @@ def logout(request):
     return response
 
 
-def likeCompetition(request, id):
-    try:
-        user = User.objects.get(username=request.session['user_id'])
-    except User.DoesNotExist:
-        return JsonResponse({
-            'state': -1,
-            'message': 'User Does Not Exist'
-        })
-
-    try:
-        competition = Competition.objects.get(id=str(id))
-        competition.views -= 1
-        competition.save()
-    except Competition.DoesNotExist:
-        return JsonResponse({
-            'state': -1,
-            'message': 'Competition Does Not Exist.'
-        })
-
-    exist = user.CompetitionList.filter(id=str(id))
-
-    if len(exist) == 0:
-
-        competition.likes += 1
-        competition.save()
-        user.CompetitionList.add(competition)
-    else:
-        competition.likes -= 1
-        competition.save()
-        user.CompetitionList.remove(competition)
-    return HttpResponseRedirect(pwd)
-
-
-def likeLecture(request, id):
-    pwd = request.get_full_path().replace('lecture-like', 'lecture')
-    try:
-        lecture = Lecture.objects.get(id=str(id))
-        lecture.views -= 1
-        lecture.save()
-    except:
-        raise Http404
-    try:
-        user = User.objects.get(username=request.session['user_id'])
-    except:
-        return HttpResponseRedirect(pwd)
-
-    exist = user.LectureList.filter(id=str(id))
-
-    if len(exist) == 0:
-
-        lecture.likes += 1
-        lecture.save()
-        user.LectureList.add(lecture)
-    else:
-        lecture.likes -= 1
-        lecture.save()
-        user.LectureList.remove(lecture)
-    return HttpResponseRedirect(pwd)
-
-
 def like(request):
     if request.method != 'GET':
         return JsonResponse({
