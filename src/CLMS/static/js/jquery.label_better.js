@@ -14,10 +14,10 @@
 !function($){
   
   var defaults = {
-    position: "top",
+    position: 'top',
     animationTime: 500,
     easing: "ease-in-out",
-    offset: 20,
+    offset: 4,
     hidePlaceholderOnFocus: true
 	};
 	
@@ -29,7 +29,6 @@
     
     $(this).css({
       "left": "auto",
-      "right": "auto",
       "position": "absolute",
       "-webkit-transition": "all " + settings.animationTime + "ms " + settings.easing,
       "-moz-transition": "all " + settings.animationTime + "ms " + settings.easing,
@@ -49,50 +48,6 @@
           "-moz-transform": "translate3d(" + posx + ", " + posy + "px, 0)", 
           "-ms-transform": "translate3d(" + posx + ", " + posy + "px, 0)", 
           "transform": "translate3d(" + posx + ", " + posy + "px, 0)"
-        });
-      break;
-      
-      case 'bottom':
-        posx = 0;
-        posy = ($(this).height() + settings.offset);
-        
-        $(this).css({
-          "bottom": "0",
-          "opacity": "1",
-          "-webkit-transform": "translate3d(" + posx + ", " + posy + "px, 0)", 
-          "-moz-transform": "translate3d(" + posx + ", " + posy + "px, 0)", 
-          "-ms-transform": "translate3d(" + posx + ", " + posy + "px, 0)", 
-          "transform": "translate3d(" + posx + ", " + posy + "px, 0)"
-        });
-      break;
-      
-      case 'left':
-        posx = ($(this).width() + settings.offset) * -1;
-        posy = 0;
-        
-        $(this).css({
-          "left": 0,
-          "top": 0,
-          "opacity": "1",
-          "-webkit-transform": "translate3d(" + posx + "px, " + posy + "px, 0)", 
-          "-moz-transform": "translate3d(" + posx + "px, " + posy + "px, 0)", 
-          "-ms-transform": "translate3d(" + posx + "px, " + posy + "px, 0)", 
-          "transform": "translate3d(" + posx + "px, " + posy + "px, 0)"
-        });
-      break;
-      
-      case 'right':
-        posx = $(this).width() + settings.offset;
-        posy = 0;
-        
-        $(this).css({
-          "right": 0,
-          "top": 0,
-          "opacity": "1",
-          "-webkit-transform": "translate3d(" + posx + "px, " + posy + "px, 0)", 
-          "-moz-transform": "translate3d(" + posx + "px, " + posy + "px, 0)", 
-          "-ms-transform": "translate3d(" + posx + "px, " + posy + "px, 0)", 
-          "transform": "translate3d(" + posx + "px, " + posy + "px, 0)"
         });
       break;
     }
@@ -124,7 +79,7 @@
     el.each(function( index, value ) {
       var btn = $(this),
           position = btn.data("position")  || settings.position;
-      btn.wrapAll("<div class='lb_wrap' style='position:relative; display: inline;'></div>")
+      btn.wrapAll("<div class='lb_wrap' style=' position:absolute; right:400px; display:inline;'></div>")
       
       if( btn.val().length > 0) {
         var text = btn.data("new-placeholder")  || btn.attr("placeholder");

@@ -132,7 +132,7 @@
               <form class="bl_form">
                 <div class= "inputbox">
                   <h2 style="display: inline"> User Name </h2>
-                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Please input Username" placeholder="xxxxxxx" >
+                  <input type="text" value="" class="label_better innerbox demon"  data-new-placeholder="Please input Username" placeholder="xxxxxxx" >
                 </div>
                 <div class= "inputbox">
                   <h2 style=" display: inline"> E-mail </h2>
@@ -160,12 +160,12 @@
                 </div>
                 <br>
             <div class="switch-box is-info">
-		          <input id="info" class="switch-box-input" type="checkbox" diabled/>
-		          <label for="info" class="switch-box-slider"></label>
-		          <div class= "gap">
-		            <label for="info" class="switch-box-label">Edit</label>
-		          </div>
-		        </div>
+              <input id="info" class="switch-box-input" type="checkbox"/>
+              <label for="info" class="switch-box-slider"></label>
+              <div class= "gap">
+                <label for="info" class="switch-box-label">Edit</label>
+              </div>
+            </div>
                  <div>&nbsp;</div>
                 <br>
                 <br>
@@ -173,6 +173,29 @@
        </div>
      </div>
   </div>
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+     $(".innerbox").attr("disabled","disabled");
+     $(".innerbox").removeClass("label-better");
+     $(".innerbox").addClass("demon")
+      });
+  $("#info").change(function() { //为checkbox添加状态改变事件
+      if($(this).is(':checked')){//判断checkbox是否选中
+        //选中状态
+        $(".innerbox").removeAttr("disabled");
+    }else{
+        //未选中状态
+        $(".innerbox").attr("disabled","disabled");
+    }
+     });
+  </script>
+  <style>
+     .demon{
+       background:rgba(0,0,0,0);
+       color:black;
+     }
+  </style>
 
 </body>
 </html>
