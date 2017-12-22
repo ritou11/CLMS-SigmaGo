@@ -15,7 +15,6 @@
     <link href={% static "css/response.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
-    <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/common-searchbar.css" %} rel="stylesheet" type="text/css">
@@ -101,20 +100,20 @@
    <div class="container">
   <div class="mytags">
 	  <h2 style="font-size: 20px;">my tags</h2>
-    <select multiple data-role="tagsinput">
+    <select id="tagsbox" multiple data-role="tagsinput">
       {% for tag in user.interestTag.all %}
       <option value="{{tag.name}}">{{tag.name}}</option>
       {% endfor %}
-      <option value="hhh">hhh</option>
     </select>
   </div>
   <div class= "mytags" style="padding-top:30px;">
     <h3 style="display:inline;font-size:10px;"> Select More</h3>
-    <select>
+    <select id='select-tags'>
       {% for tag in tagList %}
-      <option>{{tag.name}}</option>
+      <option value="{{forloop.counter}}">{{tag.name}}</option>
       {% endfor %}
     </select>
+    <button class="add-tags">Add</button>
   </div>
   </div>
   <!--_______________________________banner end________________________________-->

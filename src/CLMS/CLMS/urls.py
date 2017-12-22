@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^search/$', views.search, name='search'),
     url(r'^recom/(?P<page>\d*)$', views.recommend, name='recommend'),
     url(r'^like$', views.like, name='like'),
+    url(r'^tag-api$', views.tag_api, name='tag_api'),
     url(r'^index$', views.home, name='home'),
     url(r'^login/$', views.login, name='Login'),
     url(r'^logout/$', views.logout, name='Logout'),

@@ -820,3 +820,57 @@ def like(request):
         'state': 0,
         'curr': curr
     })
+
+
+def tag_api(request):
+    if request.method != 'GET':
+        return JsonResponse({
+            'state': -1,
+            'message': 'Unsupported method'
+        })
+    if not ('tag' in request.GET and
+            'action' in request.GET):
+        return JsonResponse({
+            'state': -2,
+            'message': 'Not enough params'
+        })
+    if 'user_id' not in request.session:
+        return JsonResponse({
+            'state': -3,
+            'message': 'Please login first'
+        })
+    try:
+        user = User.objects.get(username=request.session['user_id'])
+    except User.DoesNotExist:
+        return JsonResponse({
+            'state': -3,
+            'message': 'Please login first'
+        })
+    if request.GET['action'] == 'add':
+        try:
+            user.interestTag.add(request.GET['tag'])
+            user.save()
+        except Exception as e:
+            print(e)
+            return JsonResponse({
+                'state': -4,
+                'message': 'Error!'
+            })
+        return JsonResponse({'state': 0})
+    elif request.GET['action'] == 'remove':
+        try:
+            tag = Tag.objects.get(name=request.GET['tag'])
+            user.interestTag.remove(tag.id)
+            user.save()
+        except Exception as e:
+            print(e)
+            return JsonResponse({
+                'state': -4,
+                'message': 'Error!'
+            })
+        return JsonResponse({'state': 0})
+    else:
+        return JsonResponse({
+            'state': -5,
+            'message': 'Unsupported action'
+        })
