@@ -67,6 +67,20 @@ python manage.py migrate --run-syncdb
 Regex replace ```src=((?!.*http)".+?")``` to ```src={% static $1 %}```.
 Regex replace ```href=((?!.*(\#|http))".+?")``` to ```href={% static $1 %}```.
 
+### Create docker machine
+
+```bash
+docker-machine create --driver=generic --generic-ip-address=YOUR_IP qcloud(your name)
+eval $(docker-machine env qcloud)
+```
+
+### Deploy
+
+```bash
+cd src/CLMS/
+docker-compose up -d --build
+```
+
 ## License
 
 GPLv3
