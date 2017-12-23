@@ -101,7 +101,7 @@ def wechat(request):
         ### add new part to handle link.     Luka
         elif content == 'link':
             open_id = user_info['openid']
-            reply_text = pageLink(openid,request)    
+            return pageLink(open_id=open_id) 
 
         elif content == 'unlink':
             open_id = user_info['openid']
