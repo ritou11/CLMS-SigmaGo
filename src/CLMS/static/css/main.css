@@ -6,6 +6,9 @@
 
 /* Clear Floated Elements
 ---------------------------------*/
+a:hover{
+  text-decoration:none;
+}
 .clear {
   clear: both;
   display: block;
@@ -102,10 +105,13 @@ p{
 
 /******LOG AND SIGN AND CONTACT *********/
 
+li.h5{
+    font-size:14px;
+}
 .log{
 	position:relative;
 	top:14px;
-	font-size:18px;
+	font-size:14px !important;
 	color:white;
 	opacity:1;
 	display:inline;
@@ -114,7 +120,7 @@ p{
 .sign{
 	position:relative;
 	top:14px;
-	font-size:18px;
+	font-size:15px;
 	color:white;
 	opacity:1;
 	display:inline;
@@ -139,9 +145,10 @@ p{
 	padding:4px;
 	border-radius: 6px;
 	background-clip:padding-box;
-	font-size:15px;
+	font-size:12px;
 	color:white;
 	opacity:0.8;
+        cursor:pointer;
 	-webkit-transition:0.3s ease;
     -moz-transition:0.3s ease;
     -o-transition:0.3s ease;

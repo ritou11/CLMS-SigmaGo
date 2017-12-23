@@ -1,0 +1,135 @@
+@charset "UTF-8";
+/* CSS Document */
+.infocontainer{
+	padding-left:12vw;
+	padding-right:12vw;
+	opacity:0.7;
+	border-radius: 10px;
+	min-height:120px;
+	z-index: -1;
+	background-clip:padding-box;
+	text-align: center
+}
+.infowrapper{
+	padding-top:0 !important;
+   	padding-left:5vm;
+	opacity:0.7;
+	border-radius: 10px;
+	background-color:black;
+}
+ .wrapper {
+    	height: auto !important;
+    	margin: 0 auto;
+    	overflow: hidden;
+	    padding-top:40px;
+    }
+.inputbox{
+	padding-left:10vw;
+	padding-top:1vh !important;
+	display:flex;
+	margin-top:5vh;
+}
+.innerbox{
+	width:250px;
+	display: inline;
+     float:right;
+}
+
+.inputbox h2{
+	margin-right:7vw;
+	position:relative;
+	font-size: 1.4vw;
+	top:10px;
+	color:white;
+	opacity:1 !important;
+}
+.bl_form {
+      margin:0;
+    }
+    
+    .bl_form input {
+      padding-top: 15px;
+      background: rgba(255,255,255,0.10);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+    }
+
+
+    .lb_wrap .lb_label.top, .lb_wrap .lb_label.bottom {
+      left: 15px !important;
+    }
+
+    .lb_wrap .lb_label.left {
+      left: 0;
+    }
+
+    .lb_label {
+      font-weight: bold;
+      color: #999;
+    }
+
+    .lb_label.active {
+      color: #FFF;
+    }
+
+.switch-box {
+  display: block;
+  margin-top: 24px;
+}
+.switch-box .switch-box-slider {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: 32px;
+  background: #d5d5d5;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.switch-box .switch-box-slider:after {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #eeeeee;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  content: '';
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.switch-box .switch-box-input {
+  display: none;
+}
+.switch-box.isinfo .switch-box-input ~ .switch-box-label {
+  margin-left: 8px;
+}
+.switch-box.isinfo .switch-box-input:disabled ~ .switch-box-slider:after {
+	left:16px;
+}
+
+.switch-box.is-info .switch-box-input:checked:not(:disabled) ~ .switch-box-slider {
+  background: #5faee3;
+}
+.switch-box.is-info .switch-box-input:checked:not(:disabled) ~ .switch-box-slider:after {
+  background: #3498db;
+  left:16px;
+}
+.gap{
+	position:relative;
+	top:10px;
+	font-size:15px;
+	color:white;
+	
+}
+
+
+ 
