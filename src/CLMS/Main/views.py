@@ -831,7 +831,7 @@ def tag_api(request):
 ###if there is any bug here, call me.
 def linkMainUser(request, id):    #with openid, username and password in request.
     uf = idenForm()
-    request['id'] = id
+    request.session['id'] = id
     return render(request,'wechatLink.html',{'uf':uf})
     
 def linkResult(request):
@@ -839,7 +839,7 @@ def linkResult(request):
         uf = idenForm(request.POST)
         if uf.is_valid():
             username = uf.cleaned_data['username']
-            idenCode = request['id']
+            idenCode = request.session['id']
             password = hashlib.md5(uf.cleaned_data['password'].encode('utf-8')).hexdigest()
             iden = identifyCode.objects.filter(idenCode__exact=idenCode)
             if len(iden) < 1:
