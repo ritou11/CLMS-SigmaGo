@@ -317,11 +317,6 @@ def checkWechatUser(openid):
     
 # Function to check whether openid has linked to a correct userid when linking
 
-
-
-    
-    
-
 # Function to unlink
 def unlinkMainUser(openid):
     openid_check = wechatUser.objects.filter(openid=openid,userLink=True)
@@ -352,6 +347,7 @@ def pageLink(open_id):
         'description': "linkPage",
         'url': webpage
         })
+    return HttpResponse(wechat_instance.response_news(response), content_type="application/xml")
 #TODO: Finish this page as well as functions.
 # we need an empty html.......
 # def pageLink(openid,request):
