@@ -98,7 +98,8 @@ def wechat(request):
             return HttpResponse(response, content_type="application/xml")
         ### add new part to handle link.     Luka
         elif content == 'link':
-            reply_text = pageLink(openid,request)    
+            ### Todo : reply this page through url.
+            webpage = pageLink(openid,request)    
         elif content == 'unlink':
             if unlinkMainUser(openid):
                 reply_text = ('Unlinked successfully.')
@@ -332,7 +333,7 @@ def unlinkMainUser(openid):
 
 def generateRandomIden(openid):
     randomInt = ''
-    for _ in range(6):
+    for _ in range(15):
         randomInt += str(numpy.random.randint(0,10))
     Identity = identifyCode()
     Identity.idenCode = randomInt
@@ -340,14 +341,12 @@ def generateRandomIden(openid):
     Identity.save()
     return randomInt
 
-#TODO: Finish this page as well as functions.
 # we need an empty html.......
 def pageLink(openid,request):
     identity = generateRandomIden(openid)
-    webpage = home_url+'/wechatLink'
-    reply_text = ('your identity code is '+identity+'. Please link it through the following website'+webpage)  
-    return reply_text
+    webpage = home_url+'/wechatLink/'+str(identity)
+    #reply_text = ('your identity code is '+identity+'. Please link it through the following website'+webpage) 
+    return webpage
     #bugs may appears here... 
-    # TODO: i dont know what to do here to fetch user openid and attach it to website
     # Just suppose I can have one and can direct the link to localhost/wechatLink with request contains openid :-)  Luka
     # return render(request,'wechatLink.html',{'uf':uf})

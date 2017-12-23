@@ -51,13 +51,6 @@ class idenForm(forms.Form):
                                    'placeholder': 'password',
                                    'id': 'idenForm_password'
                                }))
-    idencode = forms.CharField(label='identitycode',
-                               max_length=100,
-                               widget=forms.TextInput(attrs={
-                                   'placeholder': 'username or email',
-                                   'id': 'idenForm_identity'
-       }))
-
 
 def home(request):
     CompetitionList = Competition.objects.all()
@@ -689,22 +682,28 @@ def likeLecture(request, id):
         user.LectureList.remove(lecture)
     return HttpResponseRedirect(pwd)
 
-def linkMainUser(request):    #with openid, username and password in request.
+
+###if there is any bug here, call me.
+def linkMainUser(request, id):    #with openid, username and password in request.
+    uf = idenForm()
+    request['id'] = id
+    return render(request,'wechatLink.html',{'uf':uf})
+    
+def linkResult(request):
     if request.method == 'POST':
         uf = idenForm(request.POST)
         if uf.is_valid():
             username = uf.cleaned_data['username']
-            idenCode = uf.cleaned_data['idencode']
+            idenCode = request['id']
             password = hashlib.md5(uf.cleaned_data['password'].encode('utf-8')).hexdigest()
             iden = identifyCode.objects.filter(idenCode__exact=idenCode)
             if len(iden) < 1:
-                return HttpResponse("Invalid idencode!!!")
+                return HttpResponse("This webpage has been invalid....")
             
             return linkUser(idenCode,username,password)
         #userPassJudge = User.objects.filter(username__exact=username,password__exact=password)
     else:
-        uf = idenForm()
-        return render(request,'wechatLink.html',{'uf':uf})
+        return HttpResponse("error here. Invalid message type")
     
 def linkUser(idenCode,username,password):
     userPassJudge = User.objects.filter(
