@@ -11,6 +11,7 @@ from wechat_sdk.messages import TextMessage, VoiceMessage, ImageMessage, \
 from secret import Secret
 import hashlib
 import os
+import numpy
 
 ### wechat open_id to user_id has been linked. 
 ### if the user has linked before, we can use the following two statements to find whatever things in user.
@@ -97,8 +98,7 @@ def wechat(request):
             return HttpResponse(response, content_type="application/xml")
         ### add new part to handle link.     Luka
         elif content == 'link':
-            pageLink(openid,request)    #well, we try to open a new page here or sth to fetch user password and username.
-                                        # for we need openid, we add request to fetch it through website form. NOT COMPLETED.
+            reply_text = pageLink(openid,request)    
         elif content == 'unlink':
             if unlinkMainUser(openid):
                 reply_text = ('Unlinked successfully.')
@@ -314,20 +314,7 @@ def checkWechatUser(openid):
         return False
     
 # Function to check whether openid has linked to a correct userid when linking
-def linkUser(request,username,password):
-    userPassJudge = User.objects.filter(
-        username__exact=username, password__exact=password)
-    if len(userPassJudge) == 0:
-        return False
-    else:
-        user = userPassJudge[0]
-        openid = request['openid']
-        openid_check = wechatUser.objects.filter(openid=openid)
-        wechat_user = openid_check[0]
-        wechat_user.mainUser = user             #link user
-        wechat_user.userLink = True             #set flag as linked.
-        wechat_user.save()
-    return wechat_user     
+
 
 
     
@@ -339,14 +326,27 @@ def unlinkMainUser(openid):
     if openid_check:
         wechatUser = openid_check[0]
         wechatUser.userLink = False
+        wechatUser.save()
         return True
     return False
+
+def generateRandomIden(openid):
+    randomInt = ''
+    for _ in range(6):
+        randomInt += str(numpy.random.randint(0,10))
+    Identity = identifyCode()
+    Identity.idenCode = randomInt
+    Identity.openid = openid
+    Identity.save()
+    return randomInt
 
 #TODO: Finish this page as well as functions.
 # we need an empty html.......
 def pageLink(openid,request):
-    request['openid']=openid
-    pass
+    identity = generateRandomIden(openid)
+    webpage = home_url+'/wechatLink'
+    reply_text = ('your identity code is '+identity+'. Please link it through the following website'+webpage)  
+    return reply_text
     #bugs may appears here... 
     # TODO: i dont know what to do here to fetch user openid and attach it to website
     # Just suppose I can have one and can direct the link to localhost/wechatLink with request contains openid :-)  Luka

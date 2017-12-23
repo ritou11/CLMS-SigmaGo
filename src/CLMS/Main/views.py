@@ -38,6 +38,25 @@ class LogUserForm(forms.Form):
                                    'placeholder': 'password',
                                    'id': 'login_password'
                                }))
+    
+class idenForm(forms.Form):
+    username = forms.CharField(label='用户名',
+                               max_length=100,
+                               widget=forms.TextInput(attrs={
+                                   'placeholder': 'username or email',
+                                   'id': 'idenForm_username'
+                               }))
+    password = forms.CharField(label='密码',
+                               widget=forms.PasswordInput(attrs={
+                                   'placeholder': 'password',
+                                   'id': 'idenForm_password'
+                               }))
+    idencode = forms.CharField(label='identitycode',
+                               max_length=100,
+                               widget=forms.TextInput(attrs={
+                                   'placeholder': 'username or email',
+                                   'id': 'idenForm_identity'
+       }))
 
 
 def home(request):
@@ -672,12 +691,37 @@ def likeLecture(request, id):
 
 def linkMainUser(request):    #with openid, username and password in request.
     if request.method == 'POST':
-        uf = LogUserForm(request.POST)
+        uf = idenForm(request.POST)
         if uf.is_valid():
             username = uf.cleaned_data['username']
+            idenCode = uf.cleaned_data['idencode']
             password = hashlib.md5(uf.cleaned_data['password'].encode('utf-8')).hexdigest()
-            return linkUser(request,username,password)
+            iden = identifyCode.objects.filter(idenCode__exact=idenCode)
+            if len(iden) < 1:
+                return HttpResponse("Invalid idencode!!!")
+            
+            return linkUser(idenCode,username,password)
         #userPassJudge = User.objects.filter(username__exact=username,password__exact=password)
     else:
-        uf = LogUserForm()
+        uf = idenForm()
         return render(request,'wechatLink.html',{'uf':uf})
+    
+def linkUser(idenCode,username,password):
+    userPassJudge = User.objects.filter(
+        username__exact=username, password__exact=password)
+    if len(userPassJudge) == 0:
+        return HttpResponse("Invalid username or password.")    
+    else:
+        user = userPassJudge[0]
+        openid = identifyCode.objects.filter(idenCode__exact=idenCode)
+        openid = openid[0].openid
+        openid_check = wechatUser.objects.filter(openid=openid,userLink=True)
+        if len(openid_check):
+            return HttpResponse("You've already linked one before. Please unlink your present wechat account.") 
+        openid_check = wechatUser.objects.filter(openid=openid)  
+        wechat_user = openid_check[0]
+        wechat_user.mainUser = user             #link user
+        wechat_user.userLink = True             #set flag as linked.
+        wechat_user.save()
+        identifyCode.objects.filter(idenCode__exact=idenCode).delete()
+    return HttpResponse("Success.")    

@@ -183,3 +183,8 @@ class wechatUser(models.Model):
     #in case we need to link it to another account :-)
     mainUser = models.OneToOneField(User, primary_key=True)
     userLink = models.BooleanField(default=False)
+    
+class identifyCode(models.Model):
+    idenCode = models.CharField(max_length=10)
+    openid = models.CharField(max_length=50)
+    
