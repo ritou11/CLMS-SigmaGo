@@ -368,31 +368,38 @@ def userInfoAlter(request):
         userinfo = User.objects.get(username=request.session['user_id'])
         print('success')
         if Method == 'POST':
-            userinfo.email = request.POST.get('email')
-            userinfo.stuNo = request.POST.get('stuNo')
-            userinfo.stuName = request.POST.get('stuName')
-            userinfo.infoUser = request.POST.get('infoUser')
-            userinfo.infoPasswd = request.POST.get('infoPasswd')
-            userinfo.grade = request.POST.get('grade')
-            #lecture = Lecture.objects.get(id=lectureId,adminUser=request.session['user_id'])
-            userinfo.userImage = request.FILES.get('image')
-            print(request.FILES.get('image'))
-            if not userinfo.userImage:
-                return HttpResponse("Image cannot be null.")
-            userinfo.save_with_photo()
-            previousInterest = Tag.objects.all()
-            for i in previousInterest:
-                userinfo.interestTag.remove(i)
-            for i in request.POST.getlist('interestTag'):
-                find_i = Tag.objects.filter(name__exact=i)
-                if len(find_i) == 0:
-                    p = Tag(name=i)
-                    p.save()
-                else:
-                    p = find_i[0]
-                userinfo.interestTag.add(p)
-            userinfo.save()
+            if 'email' in request.POST:
+                userinfo.email = request.POST.get('email')
+            if 'stuNo' in request.POST:
+                userinfo.stuNo = request.POST.get('stuNo')
+            if 'stuName' in request.POST:
+                userinfo.stuName = request.POST.get('stuName')
+            if 'infoUser' in request.POST:
+                userinfo.infoUser = request.POST.get('infoUser')
+            if 'infoPasswd' in request.POST:
+                userinfo.infoPasswd = request.POST.get('infoPasswd')
+            if 'grade' in request.POST:
+                userinfo.grade = request.POST.get('grade')
+            userinfo.save()            
             return HttpResponse("Your information has been saved.")                     # HTTP response: info saved successfully
+            #lecture = Lecture.objects.get(id=lectureId,adminUser=request.session['user_id'])
+            #userinfo.userImage = request.FILES.get('image')
+            #print(request.FILES.get('image'))
+            #if not userinfo.userImage:
+            #    return HttpResponse("Image cannot be null.")
+            #userinfo.save_with_photo()
+            #previousInterest = Tag.objects.all()
+            #for i in previousInterest:
+            #    userinfo.interestTag.remove(i)
+            #for i in request.POST.getlist('interestTag'):
+            #    find_i = Tag.objects.filter(name__exact=i)
+            #    if len(find_i) == 0:
+            #        p = Tag(name=i)
+            #        p.save()
+            #    else:
+            #        p = find_i[0]
+            #    userinfo.interestTag.add(p)
+            #userinfo.save()
         else:
             return render_to_response('inforenew.html', {'userinfo': userinfo})
 
