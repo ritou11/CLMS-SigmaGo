@@ -96,15 +96,20 @@ def wechat(request):
                           '回复‘查看’查看微信订阅')
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
+        
+
         ### add new part to handle link.     Luka
         elif content == 'link':
-            ### Todo : reply this page through url.
-            webpage = pageLink(openid,request)    
+            open_id = user_info['openid']
+            return pageLink(open_id=open_id) 
         elif content == 'unlink':
+            open_id = user_info['openid']
             if unlinkMainUser(openid):
                 reply_text = ('Unlinked successfully.')
             else:
                 reply_text = ('well, you might have not linked before :-)')
+            response = wechat_instance.response_text(content=reply_text)
+            return HttpResponse(response, content_type="application/xml")
         ### finished.
         else:
             reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息\n'
@@ -116,16 +121,20 @@ def wechat(request):
         if isinstance(message, EventMessage):
             if message.type == 'subscribe':  ###
                 reply_text = '感谢您的到来!回复“功能”返回使用指南'
-                open_checkWechatUserid = user_info['openid']
+                open_id = user_info['openid']
+                # open_checkWechatUserid = user_info['openid']
                 #isRegist = wechat_new_user(open_id)
                 #changed on Dec.22nd                     Luka.
-                isRegist = checkWechatUser(openid)
+                isRegist = checkWechatUser(open_id)
                 if isRegist:
                     reply_text += 'Welcome ' + isRegist.mainUser.username +'return \'unlink \' to unlink your present account.'
+                else:
+                    wechat_new_user(open_id=open_id)
+                    reply_text += 'return \'link \' to link your wechat account to the main database..'
             else:
                 reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息\n'
                           '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
-                          '回复‘查看’查看微信订阅'+'return \'link \' to link your wechat account to the main database..')
+                          '回复‘查看’查看微信订阅\n'+'return \'link \' to link your wechat account to the main database..')
         else:
             reply_text = ('回复Competition或‘竞赛’查看最新竞赛信息\n' + '回复Tags或‘订阅标签’查看可订阅标签信息\n'
                           '回复Lecture或‘讲座’查看最新讲座信息\n' + '回复‘添加’添加微信订阅\n' + 
@@ -252,21 +261,19 @@ def wechat_new_user(open_id):
 
 
 def add_interest(open_id, tag):
-    try:
-        user = User.objects.get(username=open_id)
-    except User.DoesNotExist:
-        isRegist = wechat_new_user(open_id)
-        if not isRegist:
-            return 'try again'
-    userinfo = User.objects.get(username=open_id)
+    openid_check = wechatUser.objects.filter(openid=openid,userLink=True)
+    if openid_check:
+        user = openid_check[0].mainUser
+    else:
+        return 'please link with main database first\n' + 'return \'link \' to link your wechat account to the main database..'
     find_tag = Tag.objects.filter(name__exact=tag)
     if len(find_tag) == 0:
         p = Tag(name=tag)
         p.save()
     else:
         p = find_tag[0]
-    userinfo.interestTag.add(p)
-    userinfo.save()
+    user.interestTag.add(p)
+    user.save()
     return 'successful'
 
 
@@ -275,18 +282,11 @@ def recommend(open_id):
     CompetitionList_by_interest = Competition.objects.filter(tag__name='a tag you will never use')
     LectureList_by_interest = Lecture.objects.filter(tag__name='a tag you will never use')
     response = []
-    try:
-        user = User.objects.get(username=open_id)
-    except User.DoesNotExist:
-        isRegist = wechat_new_user(open_id)
-        if isRegist:
-            reply_text += 'Welcome ' + open_id + '请先添加微信订阅'
-            response = wechat_instance.response_text(content=reply_text)
-            return HttpResponse(response, content_type="application/xml")
-        else:
-            reply_text += '自动注册失败，稍后重试！'
-            response = wechat_instance.response_text(content=reply_text)
-            return HttpResponse(response, content_type="application/xml")
+    openid_check = wechatUser.objects.filter(openid=openid,userLink=True)
+    if openid_check:
+        user = openid_check[0].mainUser
+    else:
+        return 'please link with main database first\n' + 'return \'link \' to link your wechat account to the main database..'
     for tag in user.interestTag.all():              # 按interestTag搜
         response += tagProcess(tag=tag)
     if len(response) >= 5:
@@ -341,12 +341,25 @@ def generateRandomIden(openid):
     Identity.save()
     return randomInt
 
-# we need an empty html.......
-def pageLink(openid,request):
+
+def pageLink(open_id):
     identity = generateRandomIden(openid)
     webpage = home_url+'/wechatLink/'+str(identity)
-    #reply_text = ('your identity code is '+identity+'. Please link it through the following website'+webpage) 
-    return webpage
+    #webpage = home_url + '/wechatLink/' + 'openid=' + open_id
+    response = []
+    response.append({
+        'title': "linkPage",
+        'picurl': "",
+        'description': "linkPage",
+        'url': webpage
+        })
+#TODO: Finish this page as well as functions.
+# we need an empty html.......
+# def pageLink(openid,request):
+#     identity = generateRandomIden(openid)
+#     webpage = home_url+'/wechatLink'
+#     reply_text = ('your identity code is '+identity+'. Please link it through the following website'+webpage)  
+#     return reply_text
     #bugs may appears here... 
     # Just suppose I can have one and can direct the link to localhost/wechatLink with request contains openid :-)  Luka
     # return render(request,'wechatLink.html',{'uf':uf})
