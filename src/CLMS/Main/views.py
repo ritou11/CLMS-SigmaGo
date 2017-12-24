@@ -266,54 +266,56 @@ def recommend(request, page):
 
 
 def search(request):
-    if 's' in request.GET:
-        try:
-            s = request.GET['s']
-        except MultiValueDictKeyError:
-            return home(request)
-        try:
-            page = request.GET['page']
-            page = int(page)
-        except (ValueError, MultiValueDictKeyError):
-            page = 1
-        CompetitionList = Competition.objects.filter(title__icontains=s) | Competition.objects.filter(subtitle__icontains=s) | \
-            Competition.objects.filter(intro__icontains=s) | Competition.objects.filter(content__icontains=s) | \
-            Competition.objects.filter(holder__icontains=s)
-        LectureList = Lecture.objects.filter(title__icontains=s) | Lecture.objects.filter(subtitle__icontains=s) | \
-            Lecture.objects.filter(intro__icontains=s) | Lecture.objects.filter(content__icontains=s) | \
-            Lecture.objects.filter(holder__icontains=s)
-        CompetitionList.distinct()
-        LectureList.distinct()
-        total = len(CompetitionList) + len(LectureList)
-        listLen = 4
-        result_list = []
-        CompetitionCnt = 0
-        LectureCnt = 0
-        for cnt in range(listLen * page):
-            if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
-                break
-            if (CompetitionCnt >= len(CompetitionList)):
-                result_list.append(LectureList[LectureCnt])
-                LectureCnt += 1
-                continue
-            if (LectureCnt >= len(LectureList)):
-                result_list.append(CompetitionList[CompetitionCnt])
-                CompetitionCnt += 1
-                continue
-            if (CompetitionList[CompetitionCnt].date_time > LectureList[LectureCnt].date_time):
-                result_list.append(CompetitionList[CompetitionCnt])
-                CompetitionCnt += 1
-            else:
-                result_list.append(LectureList[LectureCnt])
-                LectureCnt += 1
-        result_list = result_list[listLen * (page - 1):]
-        TagList = Tag.objects.all()
-        return render(request, 'List.html',
-                      {'list': result_list,
-                       'taglist': TagList,
-                       'pagelist': range(1, (total - 1) // listLen + 2),
-                       'page': page,
-                       'total': total})
+    try:
+        s = request.GET['s']
+    except MultiValueDictKeyError:
+        return home(request)
+    try:
+        page = request.GET['page']
+        page = int(page)
+    except (ValueError, MultiValueDictKeyError):
+        page = 1
+
+    CompetitionList = Competition.objects.filter(title__icontains=s) | Competition.objects.filter(subtitle__icontains=s) | \
+        Competition.objects.filter(intro__icontains=s) | Competition.objects.filter(content__icontains=s) | \
+        Competition.objects.filter(holder__icontains=s)
+    LectureList = Lecture.objects.filter(title__icontains=s) | Lecture.objects.filter(subtitle__icontains=s) | \
+        Lecture.objects.filter(intro__icontains=s) | Lecture.objects.filter(content__icontains=s) | \
+        Lecture.objects.filter(holder__icontains=s)
+    CompetitionList.distinct()
+    LectureList.distinct()
+    total = len(CompetitionList) + len(LectureList)
+    listLen = 4
+    result_list = []
+    CompetitionCnt = 0
+    LectureCnt = 0
+    for cnt in range(listLen * page):
+        if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
+            break
+        if (CompetitionCnt >= len(CompetitionList)):
+            result_list.append(LectureList[LectureCnt])
+            LectureCnt += 1
+            continue
+        if (LectureCnt >= len(LectureList)):
+            result_list.append(CompetitionList[CompetitionCnt])
+            CompetitionCnt += 1
+            continue
+        if (CompetitionList[CompetitionCnt].date_time > LectureList[LectureCnt].date_time):
+            result_list.append(CompetitionList[CompetitionCnt])
+            CompetitionCnt += 1
+        else:
+            result_list.append(LectureList[LectureCnt])
+            LectureCnt += 1
+    result_list = result_list[listLen * (page - 1):]
+    TagList = Tag.objects.all()
+
+    return render(request, 'List.html',
+                  {'list': result_list,
+                   'taglist': TagList,
+                   'pagelist': range(1, (total - 1) // listLen + 2),
+                   'page': page,
+                   'total': total,
+                   's':s})
 
 
 def login(request):
