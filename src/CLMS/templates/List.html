@@ -101,7 +101,8 @@
     {% endfor %}
     <li>{% if page < pagelist|length %}<a href='{{page|add:1}}'>NEXT</a>{% else %}NEXT{% endif %}</li>
     <li><a href='javascript:history.back()'>BACK</a></li>
-    <li><select name='sldd' style='width:42px height:10px;' onchange='location.href=this.options[this.selectedIndex].value;'>
+    <li><!--select name='sldd' style='width:42px height:10px;' onchange='location.href = this.options[this.selectedIndex].value;'-->
+      <select name='sldd' style='width:42px height:10px;' onchange="javascript:window.location=this.options[this.selectedIndex].value;">
       {% for p in pagelist %}
         {% if forloop.counter == page %}
           <option value='{{forloop.counter}}' selected>{{page}}</option>

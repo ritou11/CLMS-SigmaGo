@@ -476,6 +476,12 @@ color: #fff;
 	border-radius:3%;
 	max-height: 170px;
 }
+.thtile{
+	font-size:17px;
+	text-decoration: none;
+	position:relative;
+	left:-30px;
+}
 
 
 /* Portfolio
