@@ -432,4 +432,8 @@
 	padding-top:20px;
 
 }
+.pagelist{
+	display: flex;
+	margin-bottom:20px;
 
+}
