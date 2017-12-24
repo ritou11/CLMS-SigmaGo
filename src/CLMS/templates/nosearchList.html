@@ -1,0 +1,289 @@
+{% load static %}
+{% load cropping %}
+{% load clms_extras %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>List</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,800italic,700italic,600italic,400italic,300italic,800,700,600"
+    rel="stylesheet" type="text/css">
+
+  <link href={% static "css/bootstrap.css" %} rel="stylesheet" type="text/css">
+  <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
+  <link href={% static "css/main.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/font-awesome.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/response.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/list.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
+  
+  <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+  <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
+  <script type="text/javascript" src={% static "js/ScrollingFixed.js" %}></script>
+  <script type="text/javascript" src={% static "js/wow.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/main.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap-touch-slider-min.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
+  <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
+  <!--<script src={% static "contactform/contactform.js" %}></script>-->
+
+</head>
+
+<body>  
+  <!--nav-start-->
+  <nav class="main-nav-outer" id="test" >
+    <div class="container">
+      <ul class="main-nav">
+        <li>
+          <a href="/#recom">RECOMMEND</a>
+        </li>
+        <li>
+          <a href="/competition-list/1">COMPETITION</a>
+        </li>
+        <li class="small-logo">
+          <a href="/">
+            <img class="navLogo" src={% static "images/LOGO.png" %} alt="">
+          </a>
+        </li>
+        <li>
+          <a href="/lecture-list/1">LECTURE</a>
+        </li>
+        <li>
+          <a href="/#team">ABOUT US</a>
+        </li>
+      </ul>
+      <a class="res-nav_click" href="#">
+        <i class="fa-bars"></i>
+      </a>
+    </div>
+  </nav>
+  <!--nav-end-->
+  
+<div class="container"style="padding-top:30px;">
+
+<div class="col-md-1">&nbsp;</div>
+<div class="col-md-10">
+<div class="keybox">
+   <img src={% static "images/SelectIdc.png" %} class="wow fadeInLeft" width="300">
+   <div style="margin-top: 20px">
+    {% for tag in taglist %}
+      <a href="/tag/{{tag.name}}">
+        <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:100px;height:40px;padding:1.2%;margin:20px;display: inline;">
+            <span style="color:white">{{tag.name}}</span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+</div>
+<div class="col-md-12">&nbsp;</div>
+
+<div class="col-md-12 Pagenav">
+  <div class="dede_pages ">
+  <ul class="pagelist">
+    <li>{% if page > 1 %}<a href='{{page|add:-1}}'>FRONT</a>{% else %}FRONT{% endif %}</li>
+    {% for p in pagelist %}
+      {% if forloop.counter == page %}
+        <li class="thisclass">{{page}}</li>
+      {% else %}
+        <li><a href='{{forloop.counter}}'>{{p}}</a></li>
+      {% endif %}
+    {% endfor %}
+    <li>{% if page < pagelist|length %}<a href='{{page|add:1}}'>NEXT</a>{% else %}NEXT{% endif %}</li>
+    <li><a href='javascript:history.back()'>BACK</a></li>
+    <li><select name='sldd' style='width:42px height:10px;' onchange='location.href=this.options[this.selectedIndex].value;'>
+      {% for p in pagelist %}
+        {% if forloop.counter == page %}
+          <option value='{{forloop.counter}}' selected>{{page}}</option>
+        {% else %}
+          <option value='{{forloop.counter}}'>{{p}}</option>
+        {% endif %}
+      {% endfor %}
+    </select></li>
+    <li><span class="pageinfo">Total <strong>{{pagelist|length}}</strong> Pages <strong>{{total}}</strong> Records</span></li>
+  </ul>
+</div>
+</div>
+
+<div class="col-md-12 Pagenav">&nbsp;</div>
+<div class="container">
+  {% for comp in list %}
+  <div class="col-md-12 EventGroupContainer">
+     <div class="col-md-1"></div>
+     <div class="col-md-10">
+             <div class="ImgContainer">
+                 <a href="/{% if comp|to_class_name == 'Competition'%}competition{% else %}lecture{% endif %}/{{comp.id}}"><img src={% cropped_thumbnail comp "cropping" scale=0.5 %} class="ImgInclude wow fadeIn"></a>
+                 <img src={% static "images/Line.png" %} class="divider2 wow fadeInUpBig">
+                 <div class="SectionBox">
+                  <p>名称：{{comp.title}}</p>
+                  <p>简介：{{comp.intro}}</p>
+                  <p>主办方：{{comp.holder}}</p>
+                  <p>启动时间：{{comp.hold_time}}</p>
+                  <p>状态：{{comp.state}}</p>
+                  <p><a href="/{% if comp|to_class_name == 'Competition'%}competition{% else %}lecture{% endif %}/{{comp.id}}">More Info</a></p>
+                 </div>
+           </div>
+     </div>   
+  </div>
+  {% endfor %}
+</div>
+
+  <!--Footer-begin-->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">
+        <a href="#">
+          <img src={% static "images/LOGO2.png" %} alt="">
+        </a>
+      </div>
+      <span class="copyright">Copyright &copy; 2017 SIGMAGO. All Rights Reserved.</span>
+    </div>
+  </footer>
+  <!--Footer-end-->
+</div>
+<script>
+	$(function() {
+	$( "#Tabs1" ).tabs(); 
+});
+    
+
+		$("#dialog-1").jDialog({
+	        skinClassName: 'demo',
+			allowOverlay:true,
+	        animationType: 'fade-in',
+	    });
+		$("#dialog-2").jDialog({
+	        skinClassName: 'demo',
+			allowOverlay:true,
+	        animationType:'fade-in',
+	    });
+</script>
+
+<script>
+	$(document).ready(function(){
+      // vh fix
+      viewportUnitsBuggyfill.init();
+      $(window).resize(function(){
+        viewportUnitsBuggyfill.refresh();
+      });
+      // Start wow.js
+      new WOW().init();
+      var windowHeight = $(window).height();
+      $(window).trigger('resize');
+      });
+</script>
+
+<script>
+$(function() {
+	$( "#Tabs1" ).tabs(); 
+});
+</script>
+
+<script>
+	$('#bootstrap-touch-slider').bsTouchSlider();
+</script>
+
+<!-- --------------------------------------------------------------------- -->
+
+  <script type="text/javascript">
+    $(document).ready(function (e) {
+      $('#test').scrollToFixed();
+      $('.res-nav_click').click(function () {
+        $('.main-nav').slideToggle();
+        return false
+
+      });
+
+    });
+  </script>
+
+  <script>
+    wow = new WOW({
+      animateClass: 'animated',
+      offset: 100
+    });
+    wow.init();
+  </script>
+
+
+  <script type="text/javascript">
+    $(window).load(function () {
+
+      $('.main-nav li a, .servicelink').bind('click', function (event) {
+        var $anchor = $(this);
+
+        $('html, body').stop().animate({
+          scrollTop: $($anchor.attr('href')).offset().top - 102
+        }, 1500, 'easeInOutExpo');
+				/*
+				if you don't want to use the easing effects:
+				$('html, body').stop().animate({
+					scrollTop: $($anchor.attr('href')).offset().top
+				}, 1000);
+				*/
+        if ($(window).width() < 768) {
+          $('.main-nav').hide();
+        }
+        event.preventDefault();
+      });
+    })
+  </script>
+
+  <script type="text/javascript">
+    $(window).load(function () {
+
+
+      var $container = $('.portfolioContainer'),
+        $body = $('body'),
+        colW = 375,
+        columns = null;
+
+
+      $container.isotope({
+        // disable window resizing
+        resizable: true,
+        masonry: {
+          columnWidth: colW
+        }
+      });
+
+      $(window).smartresize(function () {
+        // check if columns has changed
+        var currentColumns = Math.floor(($body.width() - 30) / colW);
+        if (currentColumns !== columns) {
+          // set new column count
+          columns = currentColumns;
+          // apply width to container manually, then trigger relayout
+          $container.width(columns * colW)
+            .isotope('reLayout');
+        }
+
+      }).smartresize(); // trigger resize to set container width
+      $('.portfolioFilter a').click(function () {
+        $('.portfolioFilter .current').removeClass('current');
+        $(this).addClass('current');
+
+        var selector = $(this).attr('data-filter');
+        $container.isotope({
+
+          filter: selector,
+        });
+        return false;
+      });
+
+    });
+  </script>
+
+
+</body>
+</html>
