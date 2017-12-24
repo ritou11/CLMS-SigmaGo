@@ -269,7 +269,7 @@ def search(request):
     try:
         s = request.GET['s']
     except MultiValueDictKeyError:
-        return home(request)
+        return HttpResponseRedirect('/')
     try:
         page = request.GET['page']
         page = int(page)
