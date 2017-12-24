@@ -76,6 +76,7 @@
   <!--nav-end-->
   <!--_______________________________banner________________________________-->
   <!--_______________________________icon__________________________________-->
+<!--
   <div class="container"style="padding-top:100px;">
      <div style="width:50%;margin-left:25%">
         <div class="team-leader-box2" style="padding-top:60px;">
@@ -96,10 +97,11 @@
         </div>     
 	  </div>  
   </div>
+-->
   <!-- __________________________________TAGS_______________________________-->
    <div class="container">
   <div class="mytags">
-	  <h2 style="font-size: 20px;">my tags</h2>
+	  <h2 style="font-size: 20px;margin-top: 50px">my tags</h2>
     <select id="tagsbox" multiple data-role="tagsinput">
       {% for tag in user.interestTag.all %}
       <option value="{{tag.name}}">{{tag.name}}</option>
