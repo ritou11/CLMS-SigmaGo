@@ -64,7 +64,7 @@ def wechat(request):
                 reply_text += ':(sorry,no tag'
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
-        elif content[:4] == 'tag:':
+        elif content[:3] == 'tag':
             tag = content[4:]
             return HttpResponse(wechat_instance.response_news(tagProcess(tag)), content_type="application/xml")
         # wechat 查看基于订阅的推荐   
@@ -311,9 +311,9 @@ def checkWechatUser(openid):
 def unlinkMainUser(openid):
     openid_check = wechatUser.objects.filter(openid=openid,userLink=True)
     if openid_check:
-        wechatUser = openid_check[0]
-        wechatUser.userLink = False
-        wechatUser.save()
+        wechat_user = openid_check[0]
+        wechat_user.userLink = False
+        wechat_user.save()
         return True
     return False
 
