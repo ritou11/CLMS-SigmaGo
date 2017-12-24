@@ -457,7 +457,13 @@ color: #fff;
 	margin-bottom:12px;
 	display:block;
 	color:gray;
+	max-height:80px;
 	font-size:10px;
+	overflow: hidden; 
+    text-overflow: ellipsis; 
+    -o-text-overflow: ellipsis;
+    white-space:nowrap;
+
 }
 .event-box:nth-of-type(3n+0){ margin:0;}
 .event{
