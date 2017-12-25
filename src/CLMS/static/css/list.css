@@ -428,4 +428,12 @@
 	text-indent: 10px;
 	padding-right:10vw;
 }
+.tagbox{
+	padding-top:20px;
 
+}
+.pagelist{
+	display: flex;
+	margin-bottom:20px;
+
+}

@@ -43,6 +43,7 @@
 .icobutton:hover,
 .icobutton:focus {
 	outline: none;
+	color:#F35186;
 }
 
 /* Unicorn */
