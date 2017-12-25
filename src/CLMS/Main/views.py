@@ -844,7 +844,6 @@ def linkMainUser(request,id):    #with openid, username and password in request.
             username = request.POST.get('username')
             idenCode = request.session['id']
             password = hashlib.md5(request.POST.get('password').encode('utf-8')).hexdigest()# uf.cleaned_data['password']
-            print(password)
             iden = identifyCode.objects.filter(idenCode__exact=idenCode)
             #print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
             print(len(iden))
