@@ -1,15 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
+<head>
+    
+    <script type="text/javascript" src={% static "js/user.js" %}></script>
+</head>
 <head>
     <title>Login</title>
 </head>
 <body>
 <form method="post">
-    {% csrf_token %}
+    {% csrf_token %}{{login.user}}{{login.password}}
     {{uf.as_p}}
-    <!--input type="submit" value="link"-->
+    <!--input type="button" onclick="doLogin()" value="login"-->
+    <input type="submit" value="login">
     <br>
-    <a href="linkResult">link</a>
+    <!--<a href="/wechatLink/1">link</a>-->
 </form>
 </body>
 </html>
+

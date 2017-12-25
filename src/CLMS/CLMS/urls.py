@@ -47,6 +47,6 @@ urlpatterns = [
     url(r'^lectureManage/(\d+)/$', views.lectureManagement, name='adminmanage'),
     url(r'^weixin', wechat, name='weixin'),
     url(r'^wechatLink/(\d+)/',views.linkMainUser,name='link'),
-    url(r'^linkResult',views.linkResult,name='linkresult'),
+    #url(r'^linkResult',views.linkResult,name='linkresult'),
     # url(r'^wechat$', views.wechat, name='Wechat')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
