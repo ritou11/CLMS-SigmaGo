@@ -850,10 +850,11 @@ def linkMainUser(request,id):    #with openid, username and password in request.
             if len(iden) < 1:
                 return HttpResponse("This webpage has been invalid....")
             else:
-                userPassJudge = User.objects.filter(username__exact=username, password__exact=password)
+                return linkUser(idenCode,username,password)
+                '''userPassJudge = User.objects.filter(username__exact=username, password__exact=password)
                 if len(userPassJudge) < 1:
                     return HttpResponse("Incorrect password or username.")
-                return HttpResponse("Success")
+                return HttpResponse("Success")'''
 
     else:
         return HttpResponse("error here. Invalid message type")
