@@ -90,7 +90,10 @@ def wechat(request):
             return HttpResponse(response, content_type="application/xml")
         elif content == 'link':
             open_id = user_info['openid']
-            return pageLink(open_id=open_id) 
+            if checkWechatUser(open_id):
+                reply_text = "already registed"
+            else:
+                return pageLink(open_id=open_id) 
         elif content == 'unlink':
             open_id = user_info['openid']
             if unlinkMainUser(open_id):
