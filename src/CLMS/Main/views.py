@@ -164,7 +164,7 @@ def competitionList(request, page):
         competitionList = competitionList[
             (page - 1) * listLen: min(len(competitionList), page * listLen)]
     TagList = Tag.objects.all()
-    return render(request, 'List.html',
+    return render(request, 'nosearchList.html',
                   {'list': competitionList,
                    'taglist': TagList,
                    'pagelist': range(1, pagecount + 1),
@@ -187,7 +187,7 @@ def lectureList(request, page):
         lectureList = lectureList[
             (page - 1) * listLen: min(len(lectureList), page * listLen)]
     TagList = Tag.objects.all()
-    return render(request, 'List.html',
+    return render(request, 'nosearchList.html',
                   {'list': lectureList,
                    'taglist': TagList,
                    'pagelist': range(1, pagecount + 1),
@@ -237,7 +237,7 @@ def search_tag(request, tag, page):
     total = len(CompetitionList) + len(LectureList)
     result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
-    return render(request, 'List.html',
+    return render(request, 'nosearchList.html',
                   {'list': result_list,
                    'taglist': TagList,
                    'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
@@ -258,7 +258,7 @@ def recommend(request, page):
         raise Http404
     result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
-    return render(request, 'List.html',
+    return render(request, 'nosearchList.html',
                   {'list': result_list,
                    'taglist': TagList,
                    'pagelist': range(1, (totalLen - 1) // listLen + 2),
