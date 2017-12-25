@@ -850,6 +850,10 @@ def linkMainUser(request,id):    #with openid, username and password in request.
             if len(iden) < 1:
                 return HttpResponse("This webpage has been invalid....")
             else:
+                userPassJudge = User.objects.filter(username__exact=username, password__exact=password)
+                if len(userPassJudge) < 1:
+                    return HttpResponse("Incorrect password or username.")
+                # return HttpResponse("Success")
                 return linkUser(idenCode,username,password)
                 '''userPassJudge = User.objects.filter(username__exact=username, password__exact=password)
                 if len(userPassJudge) < 1:
@@ -874,6 +878,7 @@ def linkUser(idenCode,username,password):
         openid_check = wechatUser.objects.filter(openid=openid,userLink=True)
         if len(openid_check):
             return HttpResponse("You've already linked one before. Please unlink your present wechat account.") 
+        wechatUser.objects.create(openid=openid)
         openid_check = wechatUser.objects.filter(openid=openid)  
         wechat_user = openid_check[0]
         wechat_user.mainUser = user             #link user

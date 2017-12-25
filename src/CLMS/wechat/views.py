@@ -66,7 +66,12 @@ def wechat(request):
             return HttpResponse(response, content_type="application/xml")
         elif content[:3] == 'tag':
             tag = content[4:]
-            return HttpResponse(wechat_instance.response_news(tagProcess(tag)), content_type="application/xml")
+            if not tag:
+                reply_text = "请输入一个tag"
+                response = wechat_instance.response_text(content=reply_text)
+                return HttpResponse(response, content_type="application/xml")
+            else:
+                return HttpResponse(wechat_instance.response_news(tagProcess(tag)), content_type="application/xml")
         # wechat 查看基于订阅的推荐   
         elif content == '查看':
             open_id = user_info['openid']
@@ -76,7 +81,10 @@ def wechat(request):
         elif content[:3] == 'add':
             tag = content[4:]
             open_id = user_info['openid']
-            reply_text = add_interest(open_id=open_id, tag=tag)
+            if not tag:
+                reply_text = "请输入一个tag"
+            else:
+                reply_text = add_interest(open_id=open_id, tag=tag)
             response = wechat_instance.response_text(content=reply_text)
             return HttpResponse(response, content_type="application/xml")
         elif content == '添加':
