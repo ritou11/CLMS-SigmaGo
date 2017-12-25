@@ -7,7 +7,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django import forms
 from datetime import datetime
 from Main.recommend import recommend_list
-
+import hashlib
 
 class RegUserForm(forms.Form):
     username = forms.CharField(label='用户名',
@@ -800,37 +800,7 @@ def tag_api(request):
         })
     if request.GET['action'] == 'add':
         try:
-            user.interestTag.add(request.GET['tag'])def linkMainUser(request,id):    #with openid, username and password in request.
-    uf = idenForm()
-    if request.method != 'POST':
-        request.method='POST'
-    print(id)
-    print(type(id))
-    request.session['id']=id
-    print(request.POST)
-    if request.method == 'POST':
-        uf = idenForm(request.POST)
-        print('PSTPSPT',request.POST)
-        if 'username' in request.POST:#uf.is_valid():
-            username = request.POST.get('username')
-            idenCode = request.session['id']
-            password = hashlib.md5(request.POST.get('password').encode('utf-8')).hexdigest()# uf.cleaned_data['password']
-            print(password)
-            iden = identifyCode.objects.filter(idenCode__exact=idenCode)
-            #print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-            print(len(iden))
-            if len(iden) < 1:
-                return HttpResponse("This webpage has been invalid....")
-            else:
-                userPassJudge = User.objects.filter(username__exact=username, password__exact=password)
-                if len(userPassJudge) < 1:
-                    return HttpResponse("Incorrect password or username.")
-                return HttpResponse("Success")
-
-    else:
-        return HttpResponse("error here. Invalid message type")
-    return render(request,'wechatLink.html',{'uf':uf})
-
+            user.interestTag.add(request.GET['tag'])
             user.save()
         except Exception as e:
             print(e)
@@ -863,14 +833,21 @@ def linkMainUser(request,id):    #with openid, username and password in request.
     uf = idenForm()
     if request.method != 'POST':
         request.method='POST'
+    print(id)
+    print(type(id))
     request.session['id']=id
+    print(request.POST)
     if request.method == 'POST':
         uf = idenForm(request.POST)
+        print('PSTPSPT',request.POST)
         if 'username' in request.POST:#uf.is_valid():
             username = request.POST.get('username')
             idenCode = request.session['id']
-            password = hashlib.md5(request.POST.get('password').encode('utf-8')).hexdigest()
+            password = hashlib.md5(request.POST.get('password').encode('utf-8')).hexdigest()# uf.cleaned_data['password']
+            print(password)
             iden = identifyCode.objects.filter(idenCode__exact=idenCode)
+            #print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            print(len(iden))
             if len(iden) < 1:
                 return HttpResponse("This webpage has been invalid....")
             else:
@@ -882,6 +859,7 @@ def linkMainUser(request,id):    #with openid, username and password in request.
     else:
         return HttpResponse("error here. Invalid message type")
     return render(request,'wechatLink.html',{'uf':uf})
+    
 
     
 def linkUser(idenCode,username,password):
