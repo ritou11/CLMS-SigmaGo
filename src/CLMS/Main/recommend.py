@@ -4,7 +4,7 @@ from Main.models import User, Competition, Lecture
 def recommend_list(request, maxlen):
     try:
         user = User.objects.get(username=request.session['user_id'])
-    except User.DoesNotExist:
+    except :
         return None, 0
 
     CompetitionList_by_grade = Competition.objects.filter(tag__name='a tag you will never use')
