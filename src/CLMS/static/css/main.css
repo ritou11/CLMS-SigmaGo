@@ -18,6 +18,15 @@ a:hover{
   height: 0;
 }
 
+.ellip_text{
+	word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp:2; /** 显示的行数 **/
+    overflow: hidden; 
+}
+
 .clearfix:before,
 .clearfix:after {
   content: '\0020';
@@ -457,7 +466,13 @@ color: #fff;
 	margin-bottom:12px;
 	display:block;
 	color:gray;
+	max-height:80px;
 	font-size:10px;
+	overflow: hidden; 
+    text-overflow: ellipsis; 
+    -o-text-overflow: ellipsis;
+    white-space:nowrap;
+
 }
 .event-box:nth-of-type(3n+0){ margin:0;}
 .event{
@@ -475,6 +490,12 @@ color: #fff;
 	display:block;
 	border-radius:3%;
 	max-height: 170px;
+}
+.thtile{
+	font-size:17px;
+	text-decoration: none;
+	position:relative;
+	left:-30px;
 }
 
 

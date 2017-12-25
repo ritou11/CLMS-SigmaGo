@@ -175,7 +175,7 @@ def competitionList(request, page):
         competitionList = competitionList[
             (page - 1) * listLen: min(len(competitionList), page * listLen)]
     TagList = Tag.objects.all()
-    return render(request, 'List.html',
+    return render(request, 'nosearchList.html',
                   {'list': competitionList,
                    'taglist': TagList,
                    'pagelist': range(1, pagecount + 1),
@@ -198,7 +198,7 @@ def lectureList(request, page):
         lectureList = lectureList[
             (page - 1) * listLen: min(len(lectureList), page * listLen)]
     TagList = Tag.objects.all()
-    return render(request, 'List.html',
+    return render(request, 'nosearchList.html',
                   {'list': lectureList,
                    'taglist': TagList,
                    'pagelist': range(1, pagecount + 1),
@@ -248,7 +248,7 @@ def search_tag(request, tag, page):
     total = len(CompetitionList) + len(LectureList)
     result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
-    return render(request, 'List.html',
+    return render(request, 'nosearchList.html',
                   {'list': result_list,
                    'taglist': TagList,
                    'pagelist': range(1, (len(CompetitionList) + len(LectureList) - 1) // listLen + 2),
@@ -269,7 +269,7 @@ def recommend(request, page):
         raise Http404
     result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
-    return render(request, 'List.html',
+    return render(request, 'nosearchList.html',
                   {'list': result_list,
                    'taglist': TagList,
                    'pagelist': range(1, (totalLen - 1) // listLen + 2),
@@ -278,54 +278,56 @@ def recommend(request, page):
 
 
 def search(request):
-    if 's' in request.GET:
-        try:
-            s = request.GET['s']
-        except MultiValueDictKeyError:
-            return home(request)
-        try:
-            page = request.GET['page']
-            page = int(page)
-        except (ValueError, MultiValueDictKeyError):
-            page = 1
-        CompetitionList = Competition.objects.filter(title__icontains=s) | Competition.objects.filter(subtitle__icontains=s) | \
-            Competition.objects.filter(intro__icontains=s) | Competition.objects.filter(content__icontains=s) | \
-            Competition.objects.filter(holder__icontains=s)
-        LectureList = Lecture.objects.filter(title__icontains=s) | Lecture.objects.filter(subtitle__icontains=s) | \
-            Lecture.objects.filter(intro__icontains=s) | Lecture.objects.filter(content__icontains=s) | \
-            Lecture.objects.filter(holder__icontains=s)
-        CompetitionList.distinct()
-        LectureList.distinct()
-        total = len(CompetitionList) + len(LectureList)
-        listLen = 4
-        result_list = []
-        CompetitionCnt = 0
-        LectureCnt = 0
-        for cnt in range(listLen * page):
-            if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
-                break
-            if (CompetitionCnt >= len(CompetitionList)):
-                result_list.append(LectureList[LectureCnt])
-                LectureCnt += 1
-                continue
-            if (LectureCnt >= len(LectureList)):
-                result_list.append(CompetitionList[CompetitionCnt])
-                CompetitionCnt += 1
-                continue
-            if (CompetitionList[CompetitionCnt].date_time > LectureList[LectureCnt].date_time):
-                result_list.append(CompetitionList[CompetitionCnt])
-                CompetitionCnt += 1
-            else:
-                result_list.append(LectureList[LectureCnt])
-                LectureCnt += 1
-        result_list = result_list[listLen * (page - 1):]
-        TagList = Tag.objects.all()
-        return render(request, 'List.html',
-                      {'list': result_list,
-                       'taglist': TagList,
-                       'pagelist': range(1, (total - 1) // listLen + 2),
-                       'page': page,
-                       'total': total})
+    try:
+        s = request.GET['s']
+    except MultiValueDictKeyError:
+        return HttpResponseRedirect('/')
+    try:
+        page = request.GET['page']
+        page = int(page)
+    except (ValueError, MultiValueDictKeyError):
+        page = 1
+
+    CompetitionList = Competition.objects.filter(title__icontains=s) | Competition.objects.filter(subtitle__icontains=s) | \
+        Competition.objects.filter(intro__icontains=s) | Competition.objects.filter(content__icontains=s) | \
+        Competition.objects.filter(holder__icontains=s)
+    LectureList = Lecture.objects.filter(title__icontains=s) | Lecture.objects.filter(subtitle__icontains=s) | \
+        Lecture.objects.filter(intro__icontains=s) | Lecture.objects.filter(content__icontains=s) | \
+        Lecture.objects.filter(holder__icontains=s)
+    CompetitionList.distinct()
+    LectureList.distinct()
+    total = len(CompetitionList) + len(LectureList)
+    listLen = 4
+    result_list = []
+    CompetitionCnt = 0
+    LectureCnt = 0
+    for cnt in range(listLen * page):
+        if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
+            break
+        if (CompetitionCnt >= len(CompetitionList)):
+            result_list.append(LectureList[LectureCnt])
+            LectureCnt += 1
+            continue
+        if (LectureCnt >= len(LectureList)):
+            result_list.append(CompetitionList[CompetitionCnt])
+            CompetitionCnt += 1
+            continue
+        if (CompetitionList[CompetitionCnt].date_time > LectureList[LectureCnt].date_time):
+            result_list.append(CompetitionList[CompetitionCnt])
+            CompetitionCnt += 1
+        else:
+            result_list.append(LectureList[LectureCnt])
+            LectureCnt += 1
+    result_list = result_list[listLen * (page - 1):]
+    TagList = Tag.objects.all()
+
+    return render(request, 'List.html',
+                  {'list': result_list,
+                   'taglist': TagList,
+                   'pagelist': range(1, (total - 1) // listLen + 2),
+                   'page': page,
+                   'total': total,
+                   's':s})
 
 
 def login(request):
@@ -403,46 +405,44 @@ def userInfoSearch(request):
 
 
 def userInfoAlter(request):
+    if request.method != 'POST':
+        return JsonResponse({
+            'state': -1,
+            'message': 'Unsupported method'
+        })
     if 'user_id' not in request.session:
-        # HTTP response: need login auth.
-        return HttpResponse("Error! Please login before you alter your personal info.")
-    else:
-        # if time.time()-request.session['login_time']>3600:
-        #    logout(request)
-        #    return HttpResponse("Please login again.")
-        #request.session['login_time'] = time.time()
-        Method = request.method
-        userinfo = User.objects.get(username=request.session['user_id'])
-        print('success')
-        if Method == 'POST':
-            userinfo.email = request.POST.get('email')
-            userinfo.stuNo = request.POST.get('stuNo')
-            userinfo.stuName = request.POST.get('stuName')
-            userinfo.infoUser = request.POST.get('infoUser')
-            userinfo.infoPasswd = request.POST.get('infoPasswd')
-            userinfo.grade = request.POST.get('grade')
-            #lecture = Lecture.objects.get(id=lectureId,adminUser=request.session['user_id'])
-            userinfo.userImage = request.FILES.get('image')
-            print(request.FILES.get('image'))
-            if not userinfo.userImage:
-                return HttpResponse("Image cannot be null.")
-            userinfo.save_with_photo()
-            previousInterest = Tag.objects.all()
-            for i in previousInterest:
-                userinfo.interestTag.remove(i)
-            for i in request.POST.getlist('interestTag'):
-                find_i = Tag.objects.filter(name__exact=i)
-                if len(find_i) == 0:
-                    p = Tag(name=i)
-                    p.save()
-                else:
-                    p = find_i[0]
-                userinfo.interestTag.add(p)
-            userinfo.save()
-            # HTTP response: info saved successfully
-            return HttpResponse("Your information has been saved.")
-        else:
-            return render_to_response('inforenew.html', {'userinfo': userinfo})
+        return JsonResponse({
+            'state': -3,
+            'message': 'Please login before action.'
+        })
+    try:
+        user = User.objects.get(username=request.session['user_id'])
+    except User.DoesNotExist:
+        return JsonResponse({
+            'state': -3,
+            'message': 'Please login first'
+        })
+    try:
+        if 'email' in request.POST:
+            user.email = request.POST.get('email')
+        if 'stuNo' in request.POST:
+            user.stuNo = request.POST.get('stuNo')
+        if 'stuName' in request.POST:
+            user.stuName = request.POST.get('stuName')
+        if 'infoUser' in request.POST:
+            user.infoUser = request.POST.get('infoUser')
+        if 'infoPasswd' in request.POST:
+            user.infoPasswd = request.POST.get('infoPasswd')
+        if 'grade' in request.POST:
+            user.grade = request.POST.get('grade')
+        user.save()
+    except Exception as e:
+        print(e)
+        return JsonResponse({
+            'state': -4,
+            'message': 'Error!'
+        })
+    return JsonResponse({'state': 0})
 
 # add new contest
 
