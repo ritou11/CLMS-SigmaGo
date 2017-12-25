@@ -123,7 +123,7 @@ def wechat(request):
                 if isRegist:
                     reply_text += 'Welcome ' + isRegist.mainUser.username +'return \'unlink \' to unlink your present account.'
                 else:
-                    wechat_new_user(open_id=open_id)
+                    # wechat_new_user(open_id=open_id)
                     reply_text += 'return \'link \' to link your wechat account to the main database..'
             else:
                 reply_text = ('功能尚未实现')
