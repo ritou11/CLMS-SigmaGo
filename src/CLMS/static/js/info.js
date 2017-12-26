@@ -10,10 +10,10 @@ function clear_all() {
     let el = $('.label_better');
     el.each(function(index, value) {
         let btn = $(this);
-        btn.val('');
-        btn.parent().find(".lb_label")
+        //btn.val('');
+       btn.parent().find(".lb_label")
             .bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function() { $(this).remove(); })
-            .removeAnimate(settings, btn);
+            //.removeAnimate(settings, btn);
         btn.parent().find(".lb_label").removeClass("active");
     });
 }
@@ -43,8 +43,6 @@ function addTag(tagid, tagname) {
 
 $(document).ready(function() {
     $(".innerbox").attr("disabled", "disabled");
-    $(".innerbox").removeClass("label-better");
-    $(".innerbox").addClass("demon");
 });
 
 $("#info").change(function() { //为checkbox添加状态改变事件
