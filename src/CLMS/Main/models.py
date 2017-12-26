@@ -83,7 +83,7 @@ class Competition(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['-date_time']
+        ordering = ['-hold_time']
 
 
 class Lecture(models.Model):
@@ -138,7 +138,7 @@ class Lecture(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['-date_time']
+        ordering = ['-hold_time']
 
 
 class User(models.Model):
