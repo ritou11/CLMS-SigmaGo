@@ -193,6 +193,7 @@ li.h5{
 ---------------------------------*/
 
 .header{
+	height: 100vh;
 	text-align:center;
 	background:url(../images/BG2.png) left top;
 	background-color: black;
