@@ -20,9 +20,8 @@
   <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
   <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
   <link href={% static "css/list.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
   <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
-  <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/icons.css" %} rel="stylesheet" type="text/css">
 
   <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
   <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
@@ -34,12 +33,21 @@
   <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
   <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
   <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
-  <!--<script src={% static "contactform/contactform.js" %}></script>-->
-
 </head>
 
 <body>  
+
+  <!--like-icon-->
+    <ol class="grid" style="list-style: none; width:100px;position:fixed;top:150px;left:0px;z-index:100">
+       <li class="grid__item">
+       <button class="icobutton icobutton--heart{% if liked %} ico-checked{% endif %}"><span class="fa fa-heart" style="font-size:30px;"></span>
+       <span class="icobutton__text icobutton__text--side" style="font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';font-size:27px;position:absolute;top:36px;left:-1px">{{item.likes}}</span></button>  
+       </li>
+    </ol>
+  <!--like-icon-end-->
+
   <!--nav-start-->
+
   <nav class="main-nav-outer" id="test" >
     <div class="container">
       <ul class="main-nav">
@@ -67,7 +75,7 @@
     </div>
   </nav>
   <!--nav-end-->
-  <div class="container IntroPart">
+ <div class="container IntroPart">
  <!--Title-->
   <div class="col-md-1">&nbsp;</div>
   <div class="col-md-7">
@@ -79,15 +87,15 @@
  <!--Basic Info-->
   <div class="col-md-3">
   	<div class="BasicInfo">
-  	   <h1 id="BasicInfo">BASIC INFO</H1>
+  	   <h1 id="BasicInfo">BASIC INFO</h1>
   	   <div class="Label">
-  	     <h4 class="Content">主办方：{{item.holder}}</h4>
+  	     主办方：<br> {{item.holder}}
   	   </div>
   	   <div class="Label">
-  	     <h4 class="Content">比赛时间：{{item.hold_time}}</h4>
+  	     比赛时间：<br> {{item.hold_time}}
   	   </div>
-  	   <div class="Label">
-  	     <h4 class="Content">状态：{{item.state}}</h4>
+  	   <div class="Label" style = "padding-top:10px; font-size:16px">
+  	     状态: {{item.state}}
   	   </div>
   	</div>
   </div>
@@ -121,6 +129,8 @@
         <img src={% static "images/divider.png" %} class="divider3 wow fadeInUp">
         <div class="content-box">
             &nbsp;&nbsp;{{item.intro}}
+            TEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGT
+            EXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTING
            
         </div>
      </div>
@@ -129,6 +139,8 @@
        <a name="method">
        <div class="content-box2">
             &nbsp;&nbsp;{{item.method}}
+            TEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGT
+            EXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTING
         </div>
         <img class="rightTitle wow fadeInUp" src={% static "images/method.png" %}>
         </a>
@@ -141,8 +153,10 @@
         <img class="leftTitle2 wow fadeInUp" src={% static "images/award.png" %}>
         </a>
         <img src={% static "images/divider.png" %} class="divider3 wow fadeInUp">
-        <div class="content-box">
+        <div class="content-box3">
             &nbsp;&nbsp;{{item.award}}
+             TEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGT
+            EXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTINGTEXTING
         </div>
     </div>
   </div>
@@ -192,15 +206,49 @@
 	$('#bootstrap-touch-slider').bsTouchSlider();
 </script>
 
-<!-- --------------------------------------------------------------------- -->
-
+<!-- Script -->
+  <script src={% static "js/mo.min.js" %}></script>
+  <script src={% static "js/icon.js" %}></script>
+  <script type="text/javascript">
+    window.animocon_obj.options.onCheck = ()=>{
+      $.get('/like',{'type':'{{type}}', 'id':{{item.id}}, 'action':'like'},function(response){
+          if(response.state == -3){
+            alert('Please login first!');
+            window.location.href = '/';
+            return false;
+          }else if(response.state >= 0){
+            return true;
+          }else{
+            alert(response.message)
+            window.location.reload();
+            return false;
+          }
+      });
+      return true;
+    };
+    window.animocon_obj.options.onUnCheck = ()=>{
+      $.get('/like',{'type':'{{type}}', 'id':{{item.id}}, 'action':'unlike'},function(response){
+          if(response.state == -3){
+            alert('Please login first!');
+            window.location.href = '/';
+            return false;
+          }else if(response.state >= 0){
+            return true;
+          }else{
+            alert(response.message)
+            window.location.reload();
+            return false;
+          }
+      });
+      return true;
+    };
+  </script>
   <script type="text/javascript">
     $(document).ready(function (e) {
       $('#test').scrollToFixed();
       $('.res-nav_click').click(function () {
         $('.main-nav').slideToggle();
         return false
-
       });
 
     });
@@ -283,6 +331,5 @@
     });
   </script>
 
-
-</body>
+  </body>
 </html>

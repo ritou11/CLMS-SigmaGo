@@ -38,10 +38,13 @@ class Secret():
 
     SECRET_TOKEN = 'YOUR_TOKEN'
     APP_ID = 'YOUR_ID'
+    APP_SECRET = 'YOUR_SECRET'
     ENCODING_AES_KEY = 'YOUR_KEY'
     HOME_URL = 'http://YOUR_URL'
 
 ```
+
+If you want to deploy it online, you should add your server ip in WEIXIN's IP whitelist.
 
 ### Launch
 

@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="http://hellofont.cn/resource/js/jquery.hywebfont.min.js"></script>
 
 <title>HOME PAGE</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,800italic,700italic,600italic,400italic,300italic,800,700,600"
     rel="stylesheet" type="text/css">
 
-  <link href="src/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="src/css/bootstrap.css" rel="stylesheet" type="text/css"-->
   <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
   <link href="src/css/main.css" rel="stylesheet" type="text/css">
   <link href="src/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -18,10 +19,13 @@
   <link href="src/css/animate.css" rel="stylesheet" type="text/css">
   <link href="src/css/bootstrap-touch-slider.css" rel="stylesheet" type="text/css">
   <link href="src/css/list.css" rel="stylesheet" type="text/css">
-  <link href="src/css/dialog.css" rel="stylesheet" type="text/css">
+  <!--link href="src/css/dialog.css" rel="stylesheet" type="text/css"-->
   <link href="src/css/magic.min.css" rel="stylesheet" type="text/css">
   <link href="src/css/jdialog.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="src/css/icons.css" />
+ 
   
+
   <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
   <script type="text/javascript" src="src/js/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="src/js/bootstrap.js"></script>
@@ -32,12 +36,18 @@
   <script type="text/javascript" src="src/js/bootstrap-touch-slider.js"></script>
   <script type="text/javascript" src="src/js/jdialog.min.js"></script>
   <script type="text/javascript" src="src/js/viewport-units-buggyfill.js"></script>
-  <script src="contactform/contactform.js"></script>
-
 </head>
 
 <body>  
   <!--nav-start-->
+  <!--like-icon-->
+   <ol class="grid" style="list-style: none; width:100px;position:fixed;top:200px;left:20px;z-index:100">
+       <li class="grid__item">
+       <button class="icobutton icobutton--heart"><span class="fa fa-heart" style="font-size:30px;"></span>
+       <span class="icobutton__text icobutton__text--side" style="font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';font-size:27px;position:absolute;top:36px;left:-1px">13</span></button>  
+       </li>
+    </ol>
+  <!--like-icon-end-->
   <nav class="main-nav-outer" id="test" >
     <div class="container">
       <ul class="main-nav">
@@ -65,12 +75,15 @@
     </div>
   </nav>
   <!--nav-end-->
+  
+  
+
   <div class="container IntroPart">
  <!--Title-->
   <div class="col-md-1">&nbsp;</div>
   <div class="col-md-7">
 	<div class="TitleContainer">
-	  <h1 class="MainTitle wow fadeInDown"> This is A Title</h1>
+	  <h1 class="MainTitle wow fadeInDown" webfont="true" fontid="534" style="font-family: "66D90341EAE7AB9F", Arial;">电子系智能小车比赛</h1>
 	  <h2 class="SubTitle wow fadeInUp"> This is the subtitle This is the subtitle</h2>
 	</div>
   </div>
@@ -212,7 +225,8 @@ $(function() {
 </script>
 
 <!-- --------------------------------------------------------------------- -->
-
+  <script src="src/js/mo.min.js"></script>
+  <script src="src/js/icon.js"></script>
   <script type="text/javascript">
     $(document).ready(function (e) {
       $('#test').scrollToFixed();

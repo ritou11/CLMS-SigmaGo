@@ -69,7 +69,8 @@
                 </li>
                 <li>&nbsp;</li>
                 <li>
-                    <h5 class="log"><a href="/recom">DISCOVER</a></h5></li>
+                   <a href="/recom"> <h5 class="log">DISCOVER</h5></a>
+                </li>
             </ul>
         </div>
     </header>
@@ -226,9 +227,9 @@
                     <tr>
                         <!--BOX FOR ONE EVENT-->
                         {% for competition in CompetitionList|slice:":3" %}
-                        <th style="margin-left:5%;height:200px">
-                            <h3 style="font-size:17px;text-decoration: none">
-                            {% if competition.state == "进行中"%}
+                        <th style="margin-left:5%;height:200px;min-width:260px">
+                            <h3  class="thtile">
+                            {% if competition.finished == True%}
                             <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
                             {% else %}
                             <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
@@ -252,8 +253,8 @@
                         </th>
                         {% endfor %}
                         {% if CompetitionList|length < 3 %} <!-- ______________________BOX FOR MORE ___________________________ -->
-                            <th style="margin-left:5%;height:200px">
-                                <div class="event-box">
+                            <th style="margin-left:5%;height:200px;min-width:260px">
+                            <h3  class="thtile">
                                     <div class="event">
                                         <div class="box">
                                             <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
@@ -268,9 +269,9 @@
                     </tr>
                     <tr style="position:relative;top:-20px;">
                         {% for competition in CompetitionList|slice:"3:5" %}
-                        <th style="margin-left:5%;height:200px">
-                            <h3 style="font-size:17px;text-decoration: none">
-                            {% if competition.state == "进行中"%}
+                        <th style="margin-left:5%;height:200px;min-width:260px">
+                            <h3 class="thtile">
+                            {% if competition.finished == True%}
                             <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
                             {% else %}
                             <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
@@ -325,9 +326,9 @@
                     <tr>
                         <!--BOX FOR ONE EVENT-->
                         {% for lecture in LectureList|slice:":3" %}
-                        <th style="margin-left:5%;height:200px">
-                            <h3 style="font-size:17px;text-decoration: none">
-                            {% if lecture.state == "进行中"%}
+                         <th style="margin-left:5%;height:200px;min-width:260px">
+                            <h3  class="thtile">
+                            {% if lecture.finished == True%}
                             <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
                             {% else %}
                             <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
@@ -337,7 +338,7 @@
                                 <div class="event">
                                     <a href="#"></a>
                                     <div class="box">
-                                        <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                        <div class="box-overlay magictime" data-hover="rotateUp" data-return="">
                                             <img src={% cropped_thumbnail lecture "cropping" scale=0.5 %} alt="" />
                                         </div>
                                         <div class="box-content">
@@ -357,7 +358,7 @@
                                     <div class="event">
                                         <a href="#"></a>
                                         <div class="box">
-                                            <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                            <div class="box-overlay magictime" data-hover="rotateUp" data-return="">
                                                 <img src={% static "images/more.jpg" %} alt="" />
                                             </div>
                                             <a class="inlink" href="lecture-list/1" target="_blank"></a>
@@ -369,9 +370,9 @@
                     </tr>
                     <tr style="position:relative;top:-20px;">
                         {% for lecture in LectureList|slice:"3:5" %}
-                        <th style="margin-left:5%;height:200px">
-                            <h3 style="font-size:17px;text-decoration: none">
-                            {% if lecture.state == "进行中"%}
+                         <th style="margin-left:5%;height:200px;min-width:260px">
+                            <h3  class="thtile">
+                            {% if lecture.finished == True%}
                             <i class="fa fa-circle-o-notch" style="text-decoration:none;margin-right:6px;color:#F18A8C"></i>
                             {% else %}
                             <i class="fa fa-circle-o" style="text-decoration:none;margin-right:6px;color:darkseagreen"></i>
@@ -381,7 +382,7 @@
                                 <div class="event">
                                     <a href="#"></a>
                                     <div class="box">
-                                        <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                        <div class="box-overlay magictime" data-hover="rotateDown" data-return="">
                                             <img src={% cropped_thumbnail lecture "cropping" scale=0.5 %} alt="" />
                                         </div>
                                         <div class="box-content">
@@ -402,7 +403,7 @@
                                 <div class="event">
                                     <a href="#"></a>
                                     <div class="box">
-                                        <div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+                                        <div class="box-overlay magictime" data-hover="rotateDown" data-return="">
                                             <img src={% static "images/more.jpg" %} alt="" />
                                         </div>
                                         <a class="inlink" href="lecture-list/1" target="_blank"></a>

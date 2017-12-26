@@ -1,12 +1,11 @@
-{% load static %}
+{% load static %} {% load cropping %} {% load clms_extras %}
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HOME PAGE</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOME PAGE</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,800italic,700italic,600italic,400italic,300italic,800,700,600" rel="stylesheet" type="text/css">
     <link href={% static "css/bootstrap.css" %} rel="stylesheet" type="text/css">
@@ -16,149 +15,174 @@
     <link href={% static "css/response.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
-    <link href={% static "css/dialog.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
     <link href={% static "css/jdialog.min.css" %} rel="stylesheet" type="text/css">
-    <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+    <link href={% static "css/common-searchbar.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/bootstrap-tagsinput.css" %} rel="stylesheet" type="text/css">
+    <link href={% static "css/info.css" %} rel="stylesheet" type="text/css">
+
     <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
+    <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
     <script type="text/javascript" src={% static "js/ScrollingFixed.js" %}></script>
     <script type="text/javascript" src={% static "js/wow.min.js" %}></script>
     <script type="text/javascript" src={% static "js/main.js" %}></script>
-    <script type="text/javascript" src={% static "js/bootstrap-touch-slider-min.js" %}></script>
-    <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
     <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
     <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
-    <script src={% static "contactform/contactform.js" %}></script>
-</head>
+    <script type="text/javascript" src={% static "js/jquery.form.js" %}></script>
+    <script type="text/javascript" src={% static "js/jquery.label_better.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap-tagsinput.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap-tagsinput-angular.js" %}></script>
+    <script type="text/javascript" src={% static "js/md5.js" %}></script>
+    <script type="text/javascript" src={% static "js/user.js" %}></script>
 
-<body style="background:url({% static "/images/BG1.png" %});background-position:fixed">
-    <!--nav-start-->
-    <nav class="main-nav-outer" id="test">
-        <div class="container">
-            <ul class="main-nav">
-                <li>
-                    <a href="/#recom">RECOMMEND</a>
-                </li>
-                <li>
-                    <a href="/competition-list/1">COMPETITION</a>
-                </li>
-                <li class="small-logo">
-                    <a href="/">
+  	<script>
+	  $(document).ready( function() {
+	    $(".label_better").label_better({
+	      easing: "bounce"
+	    });
+	  });	
+	</script>
+
+</head>
+<body style="background:url({% static "images/BG1.png" %});background-position:fixed">
+  <!--nav-start-->
+  <nav class="main-nav-outer" id="test" >
+    <div class="container">
+      <ul class="main-nav">
+        <li>
+          <a href="/#recom">RECOMMEND</a>
+        </li>
+        <li>
+          <a href="/competition-list/1">COMPETITION</a>
+        </li>
+        <li class="small-logo">
+          <a href="/">
             <img class="navLogo" src={% static "images/LOGO.png" %} alt="">
           </a>
-                </li>
-                <li>
-                    <a href="/lecture-list/1">LECTURE</a>
-                </li>
-                <li>
-                    <a href="/#team">ABOUT US</a>
-                </li>
-            </ul>
-            <a class="res-nav_click" href="#">
+        </li>
+        <li>
+          <a href="/lecture-list/1">LECTURE</a>
+        </li>
+        <li>
+          <a href="/#team">ABOUT US</a>
+        </li>
+      </ul>
+      <a class="res-nav_click" href="#">
         <i class="fa-bars"></i>
       </a>
-        </div>
-    </nav>
-    <!--nav-end-->
-    <!--_______________________________banner__________________________________-->
-    <div class="container" style="padding-top:100px;">
-        <div style="width:50%;margin-left:25%">
-            <div class="team-leader-box2" style="padding-top:60px;">
-                <img src={% static "images/user.png" %} alt="">
-            </div>
-            <div class="team-leader-box2">
-                <div class="team-leader  wow fadeInDown delay-06s">
-                    <div class="team-leader-shadow">
-                        <a href="#"></a>
-                    </div>
-                    <img src={% static "images/leader_HWF.jpeg" %} alt="">
-                </div>
-            </div>
-            <div class="team-leader-box2" style="padding-top:60px;">
-                <img src={% static "images/user.png" %} alt="">
-            </div>
-        </div>
     </div>
-    <div class="container" style="padding:20px;background-color: white;opacity:0.7;border-radius: 10px;min-height:120px;z-index: -1;background-clip:padding-box;text-align: center">
-        <h2 style="font-size: 20px;">my tags</h2>
-        <br>
-        <br>
-        {% for tag in user.interestTag.all %}
-        <a href="/tag/{{tag.name}}">
-        <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:100px;height:40px;padding:1.2%;margin:20px;display: inline;">
-            <span style="color:white">{{tag.name}}</span>
+  </nav>
+  <!--nav-end-->
+  <!--_______________________________banner________________________________-->
+  <!--_______________________________icon__________________________________-->
+<!--
+  <div class="container"style="padding-top:100px;">
+     <div style="width:50%;margin-left:25%">
+        <div class="team-leader-box2" style="padding-top:60px;">
+            <img src={% static "images/user.png" %} alt="">
         </div>
-        </a>
-        {% endfor %}
+        
+        <div class="team-leader-box2">
+          <div class="team-leader  wow fadeInDown delay-06s">
+            <div class="team-leader-shadow">
+              <a href="#"></a>
+            </div>
+            <img src={% static "images/leader_HWF.jpeg" %} alt="">
+          </div>
+        </div>
+   
+        <div class="team-leader-box2" style="padding-top:60px;">
+            <img src={% static "images/user.png" %} alt="">
+        </div>     
+	  </div>  
   </div>
-  <!--_______________________________banner__________________________________-->
+-->
+  <!-- __________________________________TAGS_______________________________-->
+   <div class="container">
+  <div class="mytags">
+	  <h2 style="font-size: 20px;margin-top: 50px">my tags</h2>
+    <select id="tagsbox" multiple data-role="tagsinput">
+      {% for tag in user.interestTag.all %}
+      <option value="{{tag.name}}">{{tag.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class= "mytags" style="padding-top:30px;">
+    <h3 style="display:inline;font-size:10px;"> Select More</h3>
+    <select id='select-tags'>
+      {% for tag in tagList %}
+      <option value="{{forloop.counter}}">{{tag.name}}</option>
+      {% endfor %}
+    </select>
+    <button class="add-tags">Add</button>
+  </div>
+  </div>
+  <!--_______________________________banner end________________________________-->
   <br>
   <br>
-  <div class="container" style="padding-right:17%;background-color:black;opacity:0.6;border-radius: 10px;min-height:800px;z-index: -1;background-clip:padding-box">
-        <ul style="list-style: none;">
-           <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;" >
-            <div class="col-md-10">
-             <div class="col-md-3" style="padding-top:5px;">
-              <h2 style="color:white;font-size: 20px;"> 
-          <span style="font-size:27px;"> 用户名</span>
-            <br> <span style="font-size:16px;opacity:0.6">user name </span></h2>
-        </div>
-        <div class="col-md-3" style="margin-left:150px;padding:20px;">
-            <p style="color:#F8EE97;font-size:20px;">{{user.username}}</p>
-        </div>
+  <div class="infocontainer">
+     <div class="infowrapper">
+         <div class="wrapper">
+              <form class="bl_form">
+                <div class= "inputbox">
+                  <h2 style="display: inline"> User Name </h2>
+                  <input type="text" value="" class="label_better innerbox demon"  data-new-placeholder="Please input Username" placeholder="{{user.username}}" >
+                </div>
+                <div class= "inputbox">
+                  <h2 style=" display: inline"> E-mail </h2>
+                  <input type="e-mail" value=""  class="label_better innerbox" data-new-placeholder="Please input your e-mail" placeholder="{{user.email}}" field="email">
+                </div>
+                <div class= "inputbox">
+                  <h2 style="display: inline"> Real Name </h2>
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Please input your real name" placeholder="{{user.stuName}}" field="stuName">
+                </div>
+                <div class= "inputbox">
+                  <h2 style="display: inline"> Grade </h2>
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Which grade are you in?" placeholder="{{user.grade}}" field="grade">
+                </div>
+                <div class= "inputbox">
+                  <h2 style="display: inline"> Student Number </h2>
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Your student account?" placeholder="{{user.stuNo}}" field="stuNo">
+                </div>
+                <div class= "inputbox">
+                  <h2 style="display: inline"> Info name </h2>
+                  <input type="text" value=""  class="label_better innerbox" data-new-placeholder="Please input your Info name" placeholder="{{user.infoUser}}" field="infoUser">
+                </div>
+                <div class= "inputbox">
+                  <h2 style="display: inline"> Info password </h2>
+                  <input type="password" value=""  class="label_better innerbox" id="key" data-new-placeholder="Tell us your info password" placeholder="{{info.passwd}}" field="infoPasswd">
+                </div>
+                <br>
+            <div class="switch-box is-info">
+              <input id="info" class="switch-box-input" type="checkbox"/>
+              <label for="info" class="switch-box-slider"></label>
+              <div class= "gap">
+                <label for="info" class="switch-box-label">Edit</label>
+              </div>
+            </div>
+                 <div>&nbsp;</div>
+                <br>
+                <br>
+              </form>
+       </div>
+     </div>
+  </div>
+    <!--Footer-begin-->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">
+        <a href="#">
+          <img src={% static "images/LOGO2.png" %} alt="">
+        </a>
+      </div>
+      <span class="copyright">Copyright &copy; 2017 SIGMAGO. All Rights Reserved.</span>
     </div>
-    <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;">
-        <div class="col-md-10">
-            <div class="col-md-3" style="padding-top:5px;">
-                <h2 style="color:white;font-size: 20px;"> 
-          <span style="font-size:27px;"> 邮箱</span> <br> <span style="font-size:16px;opacity:0.6">e-mail </span></h2>
-            </div>
-            <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                <p style="color:#F8EE97;font-size:20px;">{{user.email}}</p>
-            </div>
-        </div>
-        <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;">
-            <div class="col-md-10">
-                <div class="col-md-3" style="padding-top:5px;">
-                    <h2 style="color:white;font-size: 20px;"> 
-          <span style="font-size:27px;"> 真实姓名</span> <br> <span style="font-size:16px;opacity:0.6">real name </span></h2>
-                </div>
-                <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                    <p style="color:#F8EE97;font-size:20px;">{{user.stuName}}</p>
-                </div>
-            </div>
-            <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;">
-                <div class="col-md-10">
-                    <div class="col-md-3" style="padding-top:5px;">
-                        <h2 style="color:white;font-size: 20px;"> 
-          <span style="font-size:27px;"> 年级</span> <br> <span style="font-size:16px;opacity:0.6">grade </span></h2>
-                    </div>
-                    <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                        <p style="color:#F8EE97;font-size:20px;">{{user.grade}}</p>
-                    </div>
-                </div>
-                <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;">
-                    <div class="col-md-10">
-                        <div class="col-md-3" style="padding-top:5px;">
-                            <h2 style="color:white;font-size: 20px;"> 
-          <span style="font-size:27px;"> 学号</span> <br> <span style="font-size:16px;opacity:0.6">student ID </span></h2>
-                        </div>
-                        <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                            <p style="color:#F8EE97;font-size:20px;">{{user.stuNo}}</p>
-                        </div>
-                    </div>
-                    <li style="list-style: none; padding-top:70px;padding-left:30px;margin:30px;">
-                        <div class="col-md-10">
-                            <div class="col-md-3" style="padding-top:5px;">
-                                <h2 style="color:white;font-size: 20px;"> 
-          <span style="font-size:27px;">Info 账户</span> <br> <span style="font-size:16px;opacity:0.6">Info account </span></h2>
-                            </div>
-                            <div class="col-md-3" style="margin-left:150px;padding:20px;">
-                                <p style="color:#F8EE97;font-size:20px;">{{user.infoUser}}</p>
-                            </div>
-                        </div>
-                        </div>
-</body>
+  </footer>
+  <!--Footer-end-->
 
+
+  <script type="text/javascript" src={% static "js/info.js" %}></script>
+
+</body>
 </html>
