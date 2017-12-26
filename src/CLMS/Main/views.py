@@ -7,7 +7,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django import forms
 from datetime import datetime
 from Main.recommend import recommend_list
-
+import hashlib
 
 class RegUserForm(forms.Form):
     username = forms.CharField(label='用户名',
@@ -40,7 +40,19 @@ class LogUserForm(forms.Form):
                                    'placeholder': 'password',
                                    'id': 'login_password'
                                }))
-
+    
+class idenForm(forms.Form):
+    username = forms.CharField(label='用户名',
+                               max_length=100,
+                               widget=forms.TextInput(attrs={
+                                   'placeholder': 'username or email',
+                                   'id': 'idenForm_username'
+                               }))
+    password = forms.CharField(label='密码',
+                               widget=forms.PasswordInput(attrs={
+                                   'placeholder': 'password',
+                                   'id': 'idenForm_password'
+                               }))
 
 def home(request):
     CompetitionList = Competition.objects.all()
@@ -814,3 +826,64 @@ def tag_api(request):
             'state': -5,
             'message': 'Unsupported action'
         })
+
+
+###if there is any bug here, call me.
+def linkMainUser(request,id):    #with openid, username and password in request.
+    uf = idenForm()
+    if request.method != 'POST':
+        request.method='POST'
+    print(id)
+    print(type(id))
+    request.session['id']=id
+    print(request.POST)
+    if request.method == 'POST':
+        uf = idenForm(request.POST)
+        print('PSTPSPT',request.POST)
+        if 'username' in request.POST:#uf.is_valid():
+            username = request.POST.get('username')
+            idenCode = request.session['id']
+            password = hashlib.md5(request.POST.get('password').encode('utf-8')).hexdigest()# uf.cleaned_data['password']
+            iden = identifyCode.objects.filter(idenCode__exact=idenCode)
+            #print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            print(len(iden))
+            if len(iden) < 1:
+                return HttpResponse("This webpage has been invalid....")
+            else:
+                userPassJudge = User.objects.filter(username__exact=username, password__exact=password)
+                if len(userPassJudge) < 1:
+                    return HttpResponse("Incorrect password or username.")
+                # return HttpResponse("Success")
+                return linkUser(idenCode,username,password)
+                '''userPassJudge = User.objects.filter(username__exact=username, password__exact=password)
+                if len(userPassJudge) < 1:
+                    return HttpResponse("Incorrect password or username.")
+                return HttpResponse("Success")'''
+
+    else:
+        return HttpResponse("error here. Invalid message type")
+    return render(request,'wechatLink.html',{'uf':uf})
+    
+
+    
+def linkUser(idenCode,username,password):
+    userPassJudge = User.objects.filter(
+        username__exact=username, password__exact=password)
+    if len(userPassJudge) == 0:
+        return HttpResponse("Invalid username or password.")    
+    else:
+        user = userPassJudge[0]
+        openid = identifyCode.objects.filter(idenCode__exact=idenCode)
+        openid = openid[0].openid
+        openid_check = wechatUser.objects.filter(openid=openid,userLink=True)
+        if len(openid_check):
+            return HttpResponse("You've already linked one before. Please unlink your present wechat account.") 
+        wechatUser.objects.create(openid=openid)
+        openid_check = wechatUser.objects.filter(openid=openid)  
+        wechat_user = openid_check[0]
+        wechat_user.mainUser = user             #link user
+        wechat_user.userLink = True             #set flag as linked.
+        wechat_user.save()
+        identifyCode.objects.filter(idenCode__exact=idenCode).delete()
+    return HttpResponse("Success.")    
+
