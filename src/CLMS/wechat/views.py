@@ -100,6 +100,8 @@ def wechat(request):
             open_id = user_info['openid']
             if checkWechatUser(open_id):
                 reply_text = "already registed"
+                response = wechat_instance.response_text(content=reply_text)
+                return HttpResponse(response, content_type="application/xml")
             else:
                 return pageLink(open_id=open_id) 
         elif content == 'unlink':
