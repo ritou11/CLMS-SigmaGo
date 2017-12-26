@@ -40,7 +40,6 @@ class Competition(models.Model):
 
     tag = models.ManyToManyField(Tag, blank=True)
 
-    
     likes = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
 
@@ -222,15 +221,17 @@ class User(models.Model):
         return self.username
 
 # for wechat user
+
+
 class wechatUser(models.Model):
     openid = models.CharField(max_length=50)
-    
-    #link wechat user to the main user and check whether the account is valid
-    #in case we need to link it to another account :-)
-    mainUser = models.OneToOneField(User, primary_key=True)
+
+    # link wechat user to the main user and check whether the account is valid
+    # in case we need to link it to another account :-)
+    mainUser = models.OneToOneField(User, primary_key=True, on_delete=models.DO_NOTHING)
     userLink = models.BooleanField(default=False)
-    
+
+
 class identifyCode(models.Model):
-    idenCode = models.CharField(max_length=10)
+    idenCode = models.CharField(max_length=12)
     openid = models.CharField(max_length=50)
-    
