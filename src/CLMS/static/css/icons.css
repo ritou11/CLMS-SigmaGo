@@ -10,7 +10,9 @@
 	overflow: visible;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-
+.iconbutton.ico-checked{
+	color:#F35186;
+}
 .icobutton .fa {
 	display: block;
 	padding: 0 0.1em;
