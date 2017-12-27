@@ -198,7 +198,7 @@
 
 .slide-text {
     left: 0;
-    top: 25%;
+    top: 15%;
     right: 0;
     margin: auto;
     padding: 10px;
@@ -212,7 +212,7 @@
     
     padding: 0;
     color: #ffffff;
-    font-size: 70px;
+    font-size: 50px;
     font-style: normal;
     line-height: 84px;
     margin-bottom: 30px;
@@ -259,7 +259,7 @@
     line-height: 15px;
     margin-left: 10px;
     text-align: center;
-    padding: 17px 30px;
+    padding: 10px 10px;
     white-space: nowrap;
     letter-spacing: 1px;
     background: #00bfff;
