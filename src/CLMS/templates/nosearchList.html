@@ -75,11 +75,11 @@
 <div class="col-md-10">
 <div class="keybox">
    <img src={% static "images/SelectIdc.png" %} class="wow fadeInLeft" width="300">
-   <div style="margin-top: 20px">
+   <div class="tagbox">
     {% for tag in taglist %}
       <a href="/tag/{{tag.name}}">
-        <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:100px;height:40px;padding:1.2%;margin:20px;display: inline;">
-            <span style="color:white">{{tag.name}}</span>
+        <div style="background-color:coral;opacity:0.7;border-radius: 5px;z-index:-1;width:auto;min-height:27px;padding:1.2%;margin:4px;display:inline-block;margin-left:10px;">
+            <span style="color:white;">{{tag.name}}</span>
         </div>
       </a>
     {% endfor %}
@@ -91,17 +91,18 @@
 <div class="col-md-12 Pagenav">
   <div class="dede_pages ">
   <ul class="pagelist">
-    <li>{% if page > 1 %}<a href='{{page|add:-1}}'>FRONT</a>{% else %}FRONT{% endif %}</li>
+    <li>{% if page > 1 %}<a href='{{page|add:1}}'>FRONT</a>{% else %}FRONT{% endif %}</li>
     {% for p in pagelist %}
       {% if forloop.counter == page %}
         <li class="thisclass">{{page}}</li>
       {% else %}
-        <li><a href='{{forloop.counter}}'>{{p}}</a></li>
+        <li><a href='?s={{s}}&page={{forloop.counter}}'>{{p}}</a></li>
       {% endif %}
     {% endfor %}
     <li>{% if page < pagelist|length %}<a href='{{page|add:1}}'>NEXT</a>{% else %}NEXT{% endif %}</li>
     <li><a href='javascript:history.back()'>BACK</a></li>
-    <li><select name='sldd' style='width:42px height:10px;' onchange='location.href=this.options[this.selectedIndex].value;'>
+    <li><!--select name='sldd' style='width:42px height:10px;' onchange='location.href = this.options[this.selectedIndex].value;'-->
+      <select name='sldd' style='width:42px height:10px;' onchange="javascript:window.location=this.options[this.selectedIndex].value;">
       {% for p in pagelist %}
         {% if forloop.counter == page %}
           <option value='{{forloop.counter}}' selected>{{page}}</option>
@@ -126,7 +127,7 @@
                  <img src={% static "images/Line.png" %} class="divider2 wow fadeInUpBig">
                  <div class="SectionBox">
                   <p>名称：{{comp.title}}</p>
-                  <p>简介：{{comp.intro}}</p>
+                  <p class="ellip_text">简介：{{comp.intro}}</p>
                   <p>主办方：{{comp.holder}}</p>
                   <p>启动时间：{{comp.hold_time}}</p>
                   <p>状态：{{comp.state}}</p>

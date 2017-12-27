@@ -72,6 +72,43 @@ def recommend_list(request, maxlen):
         else:
             result_list.append(LectureList[LectureCnt])
             LectureCnt += 1
-    return result_list, len(CompetitionList) + len(LectureList)
+
+    result_list_len = len(CompetitionList) + len(LectureList)
+
+    if result_list_len < maxlen:
+	    CompetitionList_extra = Competition.objects.all()
+	    if len(CompetitionList_extra) > 5:
+	        CompetitionList_extra = CompetitionList_extra[0:5]
+
+	    LectureList_extra = Lecture.objects.all()
+	    if len(LectureList_extra) > 5:
+	        LectureList_extra = LectureList_extra[0:5]
+
+	    CompetitionCnt_extra = 0
+	    LectureCnt_extra = 0
+	    SlideList_extra = list()
+	    for cnt in range(maxlen):
+	        if (CompetitionCnt_extra >= len(CompetitionList_extra)) and (LectureCnt_extra >= len(LectureList_extra)):
+	            break
+	        if (CompetitionCnt_extra >= len(CompetitionList_extra)):
+	            SlideList_extra.append(LectureList_extra[LectureCnt_extra])
+	            LectureCnt_extra += 1
+	            continue
+	        if (LectureCnt_extra >= len(LectureList_extra)):
+	            SlideList_extra.append(CompetitionList_extra[CompetitionCnt_extra])
+	            CompetitionCnt_extra += 1
+	            continue
+	        if (CompetitionList_extra[CompetitionCnt_extra].date_time > LectureList_extra[LectureCnt_extra].date_time):
+	            SlideList_extra.append(CompetitionList_extra[CompetitionCnt_extra])
+	            CompetitionCnt_extra += 1
+	        else:
+	            SlideList_extra.append(LectureList_extra[LectureCnt_extra])
+	            LectureCnt_extra += 1
+	    l1 = result_list + SlideList_extra
+	    result_list = sorted(set(l1),key=l1.index) 
+	    if(len(result_list) > maxlen):
+	        result_list = result_list[0:maxlen]
+
+    return result_list, len(result_list)
 
 

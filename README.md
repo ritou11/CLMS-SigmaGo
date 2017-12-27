@@ -10,7 +10,7 @@ This is a task in the course Software Engineering 2017, Tsinghua University.
 * Zhixing Zhang, MSE, THU, 2015;
 
 ## Introduction
-(TODO: Translation) 针对于校园中讲座和竞赛资源的流通性不足、同学们获取信息和资源的方式过于分散等问题，我们小组希望能够设计一个竞赛讲座管理系统，通过对于竞赛、讲座等信息进行统一整理和总结，并且设计一种算法对于特定同学进行合适的讲座和竞赛的推荐，增加同学们对于自己所需要的讲座、感兴趣的竞赛的认知，从而实现信息的最大化利用。
+In response to the lack of liquidity in lecture and competition information on campus and the students' excessive access to information and resources, our team hopes to design a competition management system to organize and summarize information on competitions and lectures. And an algorithm is designed to recommend appropriate lectures and competitions for specific students, so as to increase the students' awareness of the lectures they are interested in and the competitions they are interested in, so as to maximize the use of information.
 
 ## Environment
 * Python: v3.6.2

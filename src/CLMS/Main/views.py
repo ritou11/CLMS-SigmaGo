@@ -77,7 +77,7 @@ def home(request):
             LectureList[i].finished = True
     CompetitionCnt = 0
     LectureCnt = 0
-    SlideList = []
+    SlideList = list()
     for cnt in range(3):
         if (CompetitionCnt >= len(CompetitionList)) and (LectureCnt >= len(LectureList)):
             break
@@ -106,6 +106,7 @@ def home(request):
         recommendList, recommendLen = recommend_list(request, 3)
         if not recommendList:
             recommendList = SlideList
+
     else:
         recommendList = SlideList
 
