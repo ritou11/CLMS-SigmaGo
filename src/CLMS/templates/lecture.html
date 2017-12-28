@@ -1,0 +1,331 @@
+{% load static %}
+{% load cropping %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{item.title}}</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,800italic,700italic,600italic,400italic,300italic,800,700,600"
+    rel="stylesheet" type="text/css">
+
+  <link href={% static "css/bootstrap.css" %} rel="stylesheet" type="text/css">
+  <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" media="all">
+  <link href={% static "css/main.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/font-awesome.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/response.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/animate.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/bootstrap-touch-slider.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/list.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/magic.min.css" %} rel="stylesheet" type="text/css">
+  <link href={% static "css/icons.css" %} rel="stylesheet" type="text/css">
+
+  <script type="text/javascript" src={% static "js/jquery-1.11.3.min.js" %}></script>
+  <script src="http://cdn.bootcss.com/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+  <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
+  <script type="text/javascript" src={% static "js/ScrollingFixed.js" %}></script>
+  <script type="text/javascript" src={% static "js/wow.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/main.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap-touch-slider-min.js" %}></script>
+  <script type="text/javascript" src={% static "js/bootstrap-touch-slider.js" %}></script>
+  <script type="text/javascript" src={% static "js/jdialog.min.js" %}></script>
+  <script type="text/javascript" src={% static "js/viewport-units-buggyfill.js" %}></script>
+</head>
+
+<body>  
+
+  <!--like-icon-->
+    <ol class="grid" style="list-style: none; width:100px;position:fixed;top:150px;left:0px;z-index:100">
+       <li class="grid__item">
+       <button class="icobutton icobutton--heart{% if liked %} ico-checked{% endif %}"><span class="fa fa-heart" style="font-size:30px;"></span>
+       <span class="icobutton__text icobutton__text--side" style="font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';font-size:27px;position:absolute;top:36px;left:-1px">{{item.likes}}</span></button>  
+       </li>
+    </ol>
+  <!--like-icon-end-->
+
+  <!--nav-start-->
+
+  <nav class="main-nav-outer" id="test" >
+    <div class="container">
+      <ul class="main-nav">
+        <li>
+          <a href="/#recom">RECOMMEND</a>
+        </li>
+        <li>
+          <a href="/competition-list/1">COMPETITION</a>
+        </li>
+        <li class="small-logo">
+          <a href="/">
+            <img class="navLogo" src={% static "images/LOGO.png" %} alt="">
+          </a>
+        </li>
+        <li>
+          <a href="/lecture-list/1">LECTURE</a>
+        </li>
+        <li>
+          <a href="/#team">ABOUT US</a>
+        </li>
+      </ul>
+      <a class="res-nav_click" href="#">
+        <i class="fa-bars"></i>
+      </a>
+    </div>
+  </nav>
+  <!--nav-end-->
+ <div class="container IntroPart">
+ <!--Title-->
+  <div class="col-md-1">&nbsp;</div>
+  <div class="col-md-7">
+	<div class="TitleContainer">
+	  <h1 class="MainTitle wow fadeInDown">{{item.title}}</h1>
+	  <!--h2 class="SubTitle wow fadeInUp">{{item.subtitle}}</h2-->
+	</div>
+  </div>
+ <!--Basic Info-->
+  <div class="col-md-3">
+  	<div class="BasicInfo">
+  	   <h1 id="BasicInfo">BASIC INFO</h1>
+  	   <div class="Label">
+  	     主办方：<br> {{item.holder}}
+  	   </div>
+  	   <div class="Label">
+  	     讲座时间：<br> {{item.hold_time}}
+  	   </div>
+  	   <div class="Label" style = "padding-top:10px; font-size:16px">
+  	     状态: {{item.state}}
+  	   </div>
+  	</div>
+  </div>
+ <!--Intro Details-->
+  <div class="col-md-12"> 
+    <div class="col-md-1">&nbsp;</div>
+     <div class="col-md-5 WordContainer">
+        <p class="Introp wow fadeInUp">
+           {{item.intro}}
+        </p>
+     </div>
+     <div class="col-md-5 PicContainer">
+       <img src={% cropped_thumbnail item "cropping" width=520 %} width="520" class="wow fadeIn">
+     </div>
+  </div>
+</div>
+<div class="container" style="padding-bottom: 100px;">
+<div class="col-md-12 detail">
+  <div class="col-md-12 tag">
+     <div class = "col-md-6">
+        <a href="#intro"> <h1 class="tagu">简介</h1></a>
+        <a href="#method"><h1 class="tagu"> 讲座内容 </h1></a>
+        <a href="#award"><h1 class="tagu">新闻</h1></a>
+     </div>
+  </div>
+  <div class="col-md-12 ">
+    <div class="intro">
+     <a name="intro">
+        <img class="leftTitle wow fadeInUp" src={% static "images/intro.png" %}>
+      </a>
+        <img src={% static "images/divider.png" %} class="divider3 wow fadeInUp">
+        <div class="content-box">
+            &nbsp;&nbsp;{{item.intro}}
+           
+        </div>
+     </div>
+    
+    <div class="method">
+       <a name="method">
+       <div class="content-box2">
+            &nbsp;&nbsp;{{item.content}}
+
+        </div>
+        <img class="rightTitle wow fadeInUp" src={% static "images/method.png" %}>
+        </a>
+        <img src={% static "images/divider.png" %} class="divider4 wow fadeInUp">
+    </div>
+  
+    <div class="award">
+      
+       <a name="award">
+        <img class="leftTitle2 wow fadeInUp" src={% static "images/award.png" %}>
+        </a>
+        <img src={% static "images/divider.png" %} class="divider3 wow fadeInUp">
+        <div class="content-box3">
+            &nbsp;&nbsp;{{item.news}}
+
+        </div>
+    </div>
+  </div>
+</div>
+	</div>
+
+  <!--Footer-begin-->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">
+        <a href="#">
+          <img src={% static "images/LOGO2.png" %} alt="">
+        </a>
+      </div>
+      <span class="copyright">Copyright &copy; 2017 SIGMAGO. All Rights Reserved.</span>
+    </div>
+  </footer>
+  <!--Footer-end-->
+<script>
+		$("#dialog-1").jDialog({
+	        skinClassName: 'demo',
+			allowOverlay:true,
+	        animationType: 'fade-in',
+	    });
+		$("#dialog-2").jDialog({
+	        skinClassName: 'demo',
+			allowOverlay:true,
+	        animationType:'fade-in',
+	    });
+</script>
+
+<script>
+	$(document).ready(function(){
+      // vh fix
+      viewportUnitsBuggyfill.init();
+      $(window).resize(function(){
+        viewportUnitsBuggyfill.refresh();
+      });
+      // Start wow.js
+      new WOW().init();
+      var windowHeight = $(window).height();
+      $(window).trigger('resize');
+      });
+</script>
+
+<script>
+	$('#bootstrap-touch-slider').bsTouchSlider();
+</script>
+
+<!-- Script -->
+  <script src={% static "js/mo.min.js" %}></script>
+  <script src={% static "js/icon.js" %}></script>
+  <script type="text/javascript">
+    window.animocon_obj.options.onCheck = ()=>{
+      $.get('/like',{'type':'{{type}}', 'id':{{item.id}}, 'action':'like'},function(response){
+          if(response.state == -3){
+            alert('Please login first!');
+            window.location.href = '/';
+            return false;
+          }else if(response.state >= 0){
+            return true;
+          }else{
+            alert(response.message)
+            window.location.reload();
+            return false;
+          }
+      });
+      return true;
+    };
+    window.animocon_obj.options.onUnCheck = ()=>{
+      $.get('/like',{'type':'{{type}}', 'id':{{item.id}}, 'action':'unlike'},function(response){
+          if(response.state == -3){
+            alert('Please login first!');
+            window.location.href = '/';
+            return false;
+          }else if(response.state >= 0){
+            return true;
+          }else{
+            alert(response.message)
+            window.location.reload();
+            return false;
+          }
+      });
+      return true;
+    };
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function (e) {
+      $('#test').scrollToFixed();
+      $('.res-nav_click').click(function () {
+        $('.main-nav').slideToggle();
+        return false
+      });
+
+    });
+  </script>
+
+  <script>
+    wow = new WOW({
+      animateClass: 'animated',
+      offset: 100
+    });
+    wow.init();
+  </script>
+
+
+  <script type="text/javascript">
+    $(window).load(function () {
+
+      $('.main-nav li a, .servicelink').bind('click', function (event) {
+        var $anchor = $(this);
+
+        $('html, body').stop().animate({
+          scrollTop: $($anchor.attr('href')).offset().top - 102
+        }, 1500, 'easeInOutExpo');
+				/*
+				if you don't want to use the easing effects:
+				$('html, body').stop().animate({
+					scrollTop: $($anchor.attr('href')).offset().top
+				}, 1000);
+				*/
+        if ($(window).width() < 768) {
+          $('.main-nav').hide();
+        }
+        event.preventDefault();
+      });
+    })
+  </script>
+
+  <script type="text/javascript">
+    $(window).load(function () {
+
+
+      var $container = $('.portfolioContainer'),
+        $body = $('body'),
+        colW = 375,
+        columns = null;
+
+
+      $container.isotope({
+        // disable window resizing
+        resizable: true,
+        masonry: {
+          columnWidth: colW
+        }
+      });
+
+      $(window).smartresize(function () {
+        // check if columns has changed
+        var currentColumns = Math.floor(($body.width() - 30) / colW);
+        if (currentColumns !== columns) {
+          // set new column count
+          columns = currentColumns;
+          // apply width to container manually, then trigger relayout
+          $container.width(columns * colW)
+            .isotope('reLayout');
+        }
+
+      }).smartresize(); // trigger resize to set container width
+      $('.portfolioFilter a').click(function () {
+        $('.portfolioFilter .current').removeClass('current');
+        $(this).addClass('current');
+
+        var selector = $(this).attr('data-filter');
+        $container.isotope({
+
+          filter: selector,
+        });
+        return false;
+      });
+
+    });
+  </script>
+
+  </body>
+</html>

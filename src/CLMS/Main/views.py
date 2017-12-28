@@ -136,7 +136,7 @@ def competition(request, id):
         liked = len(exist) > 0
     except:
         pass
-    return render(request, 'single.html', {
+    return render(request, 'competition.html', {
         'item': competition,
         'type': 'competition',
         'liked': liked
@@ -154,7 +154,7 @@ def lecture(request, id):
         liked = len(exist) > 0
     except:
         pass
-    return render(request, 'single.html', {
+    return render(request, 'lecture.html', {
         'item': lecture,
         'type': 'lecture',
         'liked': liked
