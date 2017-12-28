@@ -96,8 +96,14 @@
 }
 .WordContainer{
 	padding-top:30px;
-	padding-left:50px;
-	height:300px
+	padding-left:0px;
+	height:300px;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp:8; /** 显示的行数 **/
+    overflow: scroll; 
+    text-indent: 10px;
 }
 .PicContainer{
 	padding:20px;
@@ -391,12 +397,13 @@
 .content-box{
 	word-wrap:break-word;  
     word-break:break-all;
-	display: inline;
+	display: inline-block;
 	position:absolute;
+	overflow: scroll;
 	top:50px;
 	padding-left:50px;
 	font-size:20px;
-	width:64vw;
+	width:68vw;
 	color:white;
 	text-indent: 10px;
 	padding-right:10vw;
@@ -405,12 +412,12 @@
 .content-box2{
 	word-wrap:break-word;  
     word-break:break-all;
-	display: inline;
+	display: inline-block;
 	position:absolute;
 	top:460px;
 	padding-left:50px;
 	font-size:20px;
-	width:64vw;
+	width:68vw;
 	color:white;
 	text-indent: 10px;
 	padding-right:10vw;
@@ -418,12 +425,12 @@
 .content-box3{
 	word-wrap:break-word;  
     word-break:break-all;
-	display: inline;
+	display: inline-block;
 	position:absolute;
 	top:860px;
 	padding-left:50px;
 	font-size:20px;
-	width:64vw;
+	width:68vw;
 	color:white;
 	text-indent: 10px;
 	padding-right:10vw;
