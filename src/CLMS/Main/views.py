@@ -270,12 +270,13 @@ def recommend(request, page):
         page = 1
     result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
+    print(totalLen)
     return render(request, 'nosearchList.html',
                   {'list': result_list,
                    'taglist': TagList,
                    'pagelist': range(1, (totalLen - 1) // listLen + 2),
                    'page': page,
-                   'total': len(result_list)})
+                   'total': totalLen})
 
 
 def search(request):

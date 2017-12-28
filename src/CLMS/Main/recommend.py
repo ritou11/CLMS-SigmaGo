@@ -77,8 +77,7 @@ def recommend_list(request, maxlen):
 
     if result_list_len > maxlen:
         result_list = result_list[0:maxlen]
-
-    if result_list_len < maxlen:
+    elif result_list_len < maxlen:
         CompetitionList_extra = Competition.objects.all()
         if len(CompetitionList_extra) > 5:
             CompetitionList_extra = CompetitionList_extra[0:5]
@@ -110,5 +109,6 @@ def recommend_list(request, maxlen):
         result_list = sorted(set(l1),key=l1.index) 
         if(len(result_list) > maxlen):
             result_list = result_list[0:maxlen]
+        result_list_len = len(result_list)
 
     return result_list, result_list_len
