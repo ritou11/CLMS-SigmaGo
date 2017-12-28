@@ -264,10 +264,10 @@ def recommend(request, page):
     except ValueError:
         page = 1
     result_list, totalLen = recommend_list(request, listLen * page)
-    if not result_list:
-        raise Http404
+    if not result_list or len(result_list) == 0:
+        return HttpResponseRedirect('/#recom')
     if len(result_list) <= listLen * (page - 1):
-        raise Http404
+        page = 1
     result_list = result_list[listLen * (page - 1):]
     TagList = Tag.objects.all()
     return render(request, 'nosearchList.html',
