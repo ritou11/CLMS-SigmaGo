@@ -50,7 +50,7 @@ class Competition(models.Model):
 
     adminUser = models.CharField(max_length=30)
 
-    def save(self):
+    '''def save(self):
         super(Competition, self).save()
         if self.havethumb:
             return
@@ -64,7 +64,7 @@ class Competition(models.Model):
         thumb_path = os.path.join(
             './Competition/thumbs/', os.path.basename(self.image.path))
         self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
-        super(Competition, self).save()
+        super(Competition, self).save()'''
 
     '''def update(self):
         super(Competition, self).update()
@@ -116,7 +116,7 @@ class Lecture(models.Model):
 
     date_time = models.DateTimeField(auto_now_add=True)
 
-    def save(self):
+    '''def save(self):
         super(Lecture, self).save()
         if self.havethumb:
             return
@@ -131,7 +131,7 @@ class Lecture(models.Model):
         thumb_path = os.path.join(
             './Lecture/thumbs/', os.path.basename(self.image.path))
         self.thumb = ImageFieldFile(self, self.thumb, thumb_path)
-        super(Lecture, self).save()
+        super(Lecture, self).save()'''
 
     def __str__(self):
         return self.title

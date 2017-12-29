@@ -128,7 +128,7 @@ def home(request):
 def competition(request, id):
     competition = Competition.objects.get(id=str(id))
     competition.views += 1
-    # competition.save()
+    competition.save()
     liked = False
     try:
         user = User.objects.get(username=request.session['user_id'])
@@ -146,7 +146,7 @@ def competition(request, id):
 def lecture(request, id):
     lecture = Lecture.objects.get(id=str(id))
     lecture.views += 1
-    # lecture.save()
+    lecture.save()
     liked = False
     try:
         user = User.objects.get(username=request.session['user_id'])
