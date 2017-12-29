@@ -91,7 +91,7 @@
 <div class="col-md-12 Pagenav">
   <div class="dede_pages ">
   <ul class="pagelist">
-    <li>{% if page > 1 %}<a href='{{page|add:1}}'>FRONT</a>{% else %}FRONT{% endif %}</li>
+    <li>{% if page > 1 %}<a href='{{page|add:-1}}'>FRONT</a>{% else %}FRONT{% endif %}</li>
     {% for p in pagelist %}
       {% if forloop.counter == page %}
         <li class="thisclass">{{page}}</li>
