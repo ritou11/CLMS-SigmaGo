@@ -1,0 +1,86 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[notoc,noabs,nosheet]{HaotianReport}
+
+\title{个人课程总结}
+\author{SigmaGo 刘昊天}
+\authorinfo{电41班, 2014010942}
+\runninghead{2017年秋季学期软件工程}
+\studytime{2018年1月}
+
+\begin{document}
+    \maketitle
+    \section{学期回顾} % (fold)
+    \label{sec:学期回顾}
+    本学期我们以团队的形式进行了一次软件工程实战训练。从SigmaGo组队之日起，我们则一直围绕着核心项目即最终的大作业开展工作。我们的项目是一个赛事和讲座资源整合的平台，旨在为校园里的同学提供赛事、讲座的相关信息，增加大家对活动的了解，降低主办方宣传成本。项目的具体表现形式是一个包含微信公众号服务在内的网站，从需求分析到功能设计，从迭代开发到部署测试，我们终于在第15周完成了最终的展示。回顾本学期的学习经历，我认为我们组无论是产品质量，还是开发过程流畅度，都不弱于其他的同学。
+
+    从架构设计的角度来阐述，我们的网站主要分为前端和后端两部分。前端负责的工作是将信息展示给用户，并与用户良好互动。网页我们采用了HTML+CSS+JS的传统解决方案，由设计能力较强的同学负责设计。微信公众号我们直接采用官方所提供的API，设置合理的交互逻辑。后端，负责的工作是信息的管理，我们采用Django作为网站框架，在其下实现后端功能。实际上，由于我们使用了Django提供点一个后端渲染网站架构，所以前端与后端并不十分独立，耦合度很强，这也为我们我们后续的工作带来了麻烦。
+
+    在项目开展过程中，我所主要承担的工作包括以下几项：
+    \begin{itemize}[noitemsep,topsep=0pt]
+        \item 前后端的衔接。\\
+        Django提供的后端渲染工具，是基于一套独立的Template语言。我们需要将设计好的前端网页，通过这个渲染器渲染出来，也就是将原有的静态html文件，改写成模板文件。这其中设计到一些细致的工作，我们应用正则表达式替换的方式，解决大部分的静态文件迁移，然后手工进行迁移工作。
+        \begin{lstlisting}
+Regex replace src=((?!.*http)".+?") to src={% static $1 %}.
+Regex replace href=((?!.*(\#|http))".+?") to href={% static $1 %}.
+        \end{lstlisting}
+        \item 项目部署。\\
+        我们采用基于Docker的部署方案，以避免环境带来的影响。这同时促使我们科学地管理项目的依赖，所有需要的python包都写在requiremets.txt中，部署流程写在Dockerfile中。
+        \begin{lstlisting}
+FROM python:3.6
+WORKDIR /usr/src/app
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+        \end{lstlisting}
+        \item 代码管理。\\
+        我们采用基于Git的代码管理方案，并把仓库托管在Github上(\url{https://github.com/ritou11/CLMS-SigmaGo})。我负责对大家的代码进行管理、审查和迁移。
+    \end{itemize}
+    % section 学期回顾 (end)
+    \section{主要收获} % (fold)
+    \label{sec:主要收获}
+    \subsection{多人协作训练} % (fold)
+    \label{sub:多人协作训练}
+    
+    % subsection 多人协作训练 (end)
+    \subsection{编程技巧及知识学习} % (fold)
+    \label{sub:编程技巧及知识学习}
+    
+    % subsection 编程技巧及知识学习 (end)
+    \subsection{前端架构的重要性} % (fold)
+    \label{sub:前端架构的重要性}
+    
+    % subsection 前端架构的重要性 (end)
+    \subsection{风险管理} % (fold)
+    \label{sub:风险管理}
+    
+    % subsection 风险管理 (end)
+    % section 主要收获 (end)
+    \section{未来展望} % (fold)
+    \label{sec:未来展望}
+    \subsection{更科学合理的前后端结构} % (fold)
+    \label{sub:更科学合理的前后端结构}
+    
+    % subsection 更科学合理的前后端结构 (end)
+    \subsection{自动化测试} % (fold)
+    \label{sub:自动化测试}
+    
+    % subsection 自动化测试 (end)
+    % section 未来展望 (end)
+    \label{applastpage}
+    \newpage
+    \bibliography{report}
+    \bibliographystyle{unsrt}
+\iffalse
+\begin{itemize}[noitemsep,topsep=0pt]
+%no white space
+\end{itemize}
+\begin{enumerate}[label=\Roman{*}.,noitemsep,topsep=0pt]
+%use upper case roman
+\end{enumerate}
+\begin{multicols}{2}
+%two columns
+\end{multicols}
+\fi
+\end{document}
