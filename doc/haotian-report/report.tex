@@ -1,0 +1,94 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[notoc,noabs,nosheet]{HaotianReport}
+
+\title{个人课程总结}
+\author{SigmaGo 刘昊天}
+\authorinfo{电41班, 2014010942}
+\runninghead{2017年秋季学期软件工程}
+\studytime{2018年1月}
+
+\begin{document}
+    \maketitle
+    \section{学期回顾} % (fold)
+    \label{sec:学期回顾}
+    本学期我们以团队的形式进行了一次软件工程实战训练。从SigmaGo组队之日起，我们则一直围绕着核心项目即最终的大作业开展工作。我们的项目是一个赛事和讲座资源整合的平台，旨在为校园里的同学提供赛事、讲座的相关信息，增加大家对活动的了解，降低主办方宣传成本。项目的具体表现形式是一个包含微信公众号服务在内的网站，从需求分析到功能设计，从迭代开发到部署测试，我们终于在第15周完成了最终的展示。回顾本学期的学习经历，我认为我们组无论是产品质量，还是开发过程流畅度，都不弱于其他的同学。
+
+    从架构设计的角度来阐述，我们的网站主要分为前端和后端两部分。前端负责的工作是将信息展示给用户，并与用户良好互动。网页我们采用了HTML+CSS+JS的传统解决方案，由设计能力较强的同学负责设计。微信公众号我们直接采用官方所提供的API，设置合理的交互逻辑。后端，负责的工作是信息的管理，我们采用Django作为网站框架，在其下实现后端功能。实际上，由于我们使用了Django提供点一个后端渲染网站架构，所以前端与后端并不十分独立，耦合度很强，这也为我们我们后续的工作带来了麻烦。
+
+    在项目开展过程中，我所主要承担的工作包括以下几项：
+    \begin{itemize}[noitemsep,topsep=0pt]
+        \item 前后端的衔接。\\
+        Django提供的后端渲染工具，是基于一套独立的Template语言。我们需要将设计好的前端网页，通过这个渲染器渲染出来，也就是将原有的静态html文件，改写成模板文件。这其中设计到一些细致的工作，我们应用正则表达式替换的方式，解决大部分的静态文件迁移，然后手工进行迁移工作。
+        \begin{lstlisting}
+Regex replace src=((?!.*http)".+?") to src={% static $1 %}.
+Regex replace href=((?!.*(\#|http))".+?") to href={% static $1 %}.
+        \end{lstlisting}
+        \item 项目部署。\\
+        我们采用基于Docker的部署方案，以避免环境带来的影响。这同时促使我们科学地管理项目的依赖，所有需要的python包都写在requiremets.txt中，部署流程写在Dockerfile中。
+        \begin{lstlisting}
+FROM python:3.6
+WORKDIR /usr/src/app
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+        \end{lstlisting}
+        \item 代码管理。\\
+        我们采用基于Git的代码管理方案，并把仓库托管在Github上(\url{https://github.com/ritou11/CLMS-SigmaGo})。我负责对大家的代码进行管理、审查和迁移。
+    \end{itemize}
+    % section 学期回顾 (end)
+    \section{主要收获} % (fold)
+    \label{sec:主要收获}
+    \subsection{多人协作训练} % (fold)
+    \label{sub:多人协作训练}
+    本学期的软工开发，让我收获最大的，是第一次以6人团队的规模开发同一个程序的经历。在这个过程中，我们取得了良好的分工，所有队员各司其职，没有恶意划水的情况发生。实际上，我们的整个系统并不复杂，即便以2人队伍，也可以完成基本功能。但是，6人队伍的意义在于，作品的质量可以得到保证，每个人可以做自己擅长的工作，而非生搬硬凑。
+
+    如果一项工作的任务量是120，如果两个人完成，需要60的工作量。如果6个人完成，则每人肯定不只20的工作量，因为衔接、沟通、合作需要很高的成本。幸运的是，我们采用了Git作为协作工具，大大降低了合作成本。
+
+    这种多人协作的工作模式，是在学校内不常接触到的。正常课程的大作业，一般的模式是，4人组队，3人干活，2人汇报，1人承担主要工作。然而，实际的工作中，的确需要多人协作。无论一个人能力多强，他不可能将所有人的工作都做一遍，即便可以，这也是很难成功的表现。所有人都为自己的工作负责，并集中成为一个整体，这才是科学的合作方式。
+
+    在本学期的工作中，我们的任务量相对均衡，队员们对自己任务的完成度较高，我认为这是这次课程最成功的地方之一。
+    % subsection 多人协作训练 (end)
+    \subsection{编程技巧及知识学习} % (fold)
+    \label{sub:编程技巧及知识学习}
+    本学期我学习了前端的很多设计技巧、调试技巧，学习了Django框架，复习了包括js、python、html在内的多种语言。
+    % subsection 编程技巧及知识学习 (end)
+    \subsection{前端架构的重要性} % (fold)
+    \label{sub:前端架构的重要性}
+    在实际调试中，我们发现，由于我们没有采用一个成熟的前端框架，有很多包括适配、交互在内的问题很难解决。最终我们放弃了适配多种设备，不得不说是一个遗憾。这让我认识到，在前端开发中，应该选用一个成熟的开发框架，避免“造轮子”式的重复工作。
+    % subsection 前端架构的重要性 (end)
+    % section 主要收获 (end)
+    \section{未来展望} % (fold)
+    \label{sec:未来展望}
+    \subsection{更科学合理的前后端结构} % (fold)
+    \label{sub:更科学合理的前后端结构}
+    由于本次采用后端渲染的架构，给交互带来了很多困难。在今后的工作中，如果要制作带有一定量交互的网页，最好选择前端渲染的架构，如React。
+    % subsection 更科学合理的前后端结构 (end)
+    \subsection{自动化测试} % (fold)
+    \label{sub:自动化测试}
+    在本学期中，我们的网站都是手动测试的。虽然对于结构简单的系统来说，手工测试也不是不可以。但在多人协作的过程中，缺少自动化测试的我们多次发生了“互相写Bug”的惨痛事件。在未来的开发工作中，对于大型项目，最好编写自动化测试的程序，避免开发过程中不断引入bug。
+    % subsection 自动化测试 (end)
+    % section 未来展望 (end)
+    \section{致谢} % (fold)
+    \label{sec:致谢}
+    感谢董渊老师本学期的悉心指导！
+
+    感谢家宝助教、新宁助教的倾力帮助！
+
+    感谢五位队友的通力配合与耐心包容！
+    % section 致谢 (end)
+    \label{applastpage}
+    \newpage
+\iffalse
+\begin{itemize}[noitemsep,topsep=0pt]
+%no white space
+\end{itemize}
+\begin{enumerate}[label=\Roman{*}.,noitemsep,topsep=0pt]
+%use upper case roman
+\end{enumerate}
+\begin{multicols}{2}
+%two columns
+\end{multicols}
+\fi
+\end{document}

@@ -1,0 +1,205 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{booktabs}  % professionally typeset tables
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{textcomp}  % better copyright sign, among other things
+\usepackage{xcolor}
+\usepackage{lipsum}    % filler text
+\usepackage{subfig}   
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{titletoc}
+\usepackage{sectsty}
+\titlecontents{section}[0pt]{\addvspace{18pt}\filright\Large}
+              {\contentspush{\thecontentslabel\ }}
+              {}{\titlerule*[8pt]{.}\contentspage}
+\titlecontents{subsection}[10pt]{\addvspace{15pt}\filright\large}
+              {\contentspush{\thecontentslabel\ }}
+              {}{\titlerule*[8pt]{.}\contentspage}
+\sectionfont{\center\Huge}
+\subsectionfont{\Large}
+\linespread{1.5}
+
+\geometry{left=2.54cm,right=2.54cm,top=2.18cm,bottom=3.18cm}
+\hypersetup{
+colorlinks=true,
+linkcolor=black
+}
+\date{}
+\title{}
+\author{}
+
+
+\begin{document}
+\begin{titlepage} 
+    \centering     
+    \rule{\textwidth}{1pt} 
+    \vspace{2pt}\vspace{-\baselineskip} 
+    \rule{\textwidth}{0.4pt} 
+    \vspace{0.1\textheight} 
+    
+        {\Huge 赛事\&讲座信息}\\[0.5\baselineskip] 
+        {\Huge 管理系统} 
+    
+    \vspace{0.025\textheight} 
+    \rule{0.3\textwidth}{0.4pt} 
+    \vspace{0.1\textheight}
+
+        {\huge 《用户手册》} 
+    
+    \vspace{0.1\textheight}
+    
+        {\Large SigmaGo}
+
+    \vfill 
+    \rule{\textwidth}{0.4pt} 
+    \vspace{2pt}\vspace{-\baselineskip} 
+    \rule{\textwidth}{1pt}    
+\end{titlepage}
+
+\newpage
+\tableofcontents
+
+
+\newpage
+\section{系统简介}
+
+\subsection{系统概况}
+\vspace{0.05\textheight}
+
+\large
+本赛事\&讲座信息管理系统，前端基于Bootstrap，后端基于Django，数据库使用SQLite，部署于Docker上。本系统旨在为广大同学提供最新最全的赛事及讲座信息，现网站已发布于{\bfseries sigmago.nogeek.cn}。
+
+\vspace{0.15\textheight}
+\subsection{系统功能}
+\vspace{0.05\textheight}
+
+赛事\&讲座信息系统提供注册功能，并可记录用户喜好，根据喜好进行信息推荐。可根据兴趣推荐顺序或时间顺序查看赛事与讲座信息列表，并提供了赛事和讲座的举办时间、举办方、简介、具体内容、相关新闻等相关详细信息。并提供微信订阅功能，可在微信端进行查看，信息获取更方便、更及时，让使用者不必再因为学业、工作繁忙而错失任何关键信息。
+
+\newpage
+\section{使用说明}
+\subsection{注册}
+在登陆网站后，可以点击{\bfseries SING UP}进行注册，要求用户密码大于六位
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+\newpage
+\subsection{登陆}
+本系统可以选择游客身份访问，但登陆后更有利于获得定制化的推荐内容，优化用户体验。点击{\bfseries LOG IN}登陆。登陆成功后可看到{\bfseries LOG IN}转换为您的用户名，可随时点击{\bfseries LOG OUT}注销。
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+\newpage
+\subsection{主页}
+
+主页包括导航栏、推荐信息滚动条、赛事列表、讲座列表和开发者信息。
+
+导航栏中可通过选择相应按钮快速跳转到主页中对应的位置。
+
+推荐信息滚动条中将滚动显示三个活动信息，这是通过针对用户的推荐算法提供了三条最优信息，点击即可查看详细信息。
+
+赛事列表和讲座列表根据时间顺序，分别显示最新的五个赛事和讲座。每个信息块的左上角有一个圆圈，红色表示活动已经结束，绿色表示活动还在举办中。将鼠标移至图片上可查看上此赛事或讲座的简介，点击即可查看详细信息。点击{\bfseries MORE}可查看赛事列表和讲座列表
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+\newpage
+\subsection{用户信息}
+
+登陆后会自动进入用户信息界面，也可以通过在主页点击用户名进入用户信息界面。
+
+在用户信息界面，可以选择、添加自己感兴趣的标签，也可以删除标签，系统将根据用户选择的标签来推荐最适合用户的活动信息。
+
+在页面下方，点击按钮进入编辑状态后，即可修改用户名、邮箱、密码等个人信息，再点击同一按钮进入保存状态即可保存修改
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+\newpage
+\subsection{赛事\&讲座列表}
+
+进入赛事或讲座列表，可以看到按时间顺序排序的赛事或讲座，每页显示四个内容，列表中显示名称、简介和状态，点击{\bfseries More Info}可查看活动详细信息。
+
+在页面最上方是标签列表，点击即可按标签筛选活动，看到按时间顺序排列的此标签下的活动列表。
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+\newpage
+\subsection{赛事\&讲座内容}
+
+进入单个赛事或讲座的详细信息页面，可以看到活动的主办方、举办时间、活动状态以及简介
+
+对于赛事页面，还可以查看到参赛方式、比赛奖励。
+
+对于讲座页面，还可以查看到讲座内容、讲座相关新闻。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+\newpage
+\subsection{推荐}
+
+在主页中有显示推荐信息的滚动条，也可以随时点击导航栏中的{\bfseries RECOMMEND}来跳转到此处。
+
+我们会在用户信息页面收集用户感兴趣的标签，以及年级、课程等个人信息，而每个赛事、讲座也会有对应的标签，我们会利用标签进行筛选，得到对应的推荐列表，并将推荐列表中最新的三个活动在推荐滚动条中显示给用户。除此之外，如果点击主页中的{\bfseries DISCOVER}即可查看完整的推荐列表。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+\newpage
+\subsection{标签使用}
+
+通过{\bfseries DISCOVER}进行推荐列表或者进行赛事、讲座信息的列表时，在页面上方会有标签列表，通过点击对应的标签，即可通过标签筛选出对应的活动。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+\newpage
+\subsection{搜索}
+
+在使用网站时，右上方会有一个“放大镜按钮”，点击后即可出现文字输入框，输出需要搜索的文字，系统便会有各活动的标题、简介、具体介绍等有文字的内容中进行匹配，筛选出与搜索关键词相对应的活动。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+\newpage
+\subsection{微信端赛事\&讲座查看}
+
+在微信端，通过回复竞赛或讲座可以返回推送列表，列表与主页的赛事或讲座列表相对应。点击进行推送可以查看活动详细信息，内容与官网所提供的信息相同。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+\newpage
+\subsection{微信端标签使用}
+
+在微信端回复订阅标签即可看到目前已有的标签，根据提示回复所想查询的标签，即可查看到此标签下对应的活动信息
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{manual_images//temp.png}
+\end{figure}
+
+
+\end{document}
